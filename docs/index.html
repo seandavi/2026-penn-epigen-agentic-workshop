@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic AI Workshop</title>
+<meta name="description" content="Agentic AI workshop at the Penn Epigenetics Institute with Sean Davis — schedule, setup instructions, and materials.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#f6f7f6;
+  --surface:#ffffff;
+  --ink:#1e2a2b;
+  --muted:#5b6a6b;
+  --line:#dde3e2;
+  --track-a:#0e7c74;
+  --track-a-soft:#e3f1ef;
+  --track-b:#5b4fb5;
+  --track-b-soft:#ebe8f7;
+  --amber:#9a6b1f;
+  --amber-soft:#f6eedd;
+  --red:#a33a2e;
+  --red-soft:#f7e6e3;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+}
+:root:not([data-theme="light"]){
+  @media (prefers-color-scheme: dark){
+    --bg:#141a1a; --surface:#1d2424; --ink:#e8ecec; --muted:#9fb0b0;
+    --line:#323c3c; --track-a:#4cc2b8; --track-a-soft:#173432;
+    --track-b:#a49bf0; --track-b-soft:#28244a; --amber:#d9a84e; --amber-soft:#37301e;
+    --red:#e8897c; --red-soft:#3a201c;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141a1a; --surface:#1d2424; --ink:#e8ecec; --muted:#9fb0b0;
+  --line:#323c3c; --track-a:#4cc2b8; --track-a-soft:#173432;
+  --track-b:#a49bf0; --track-b-soft:#28244a; --amber:#d9a84e; --amber-soft:#37301e;
+  --red:#e8897c; --red-soft:#3a201c;
+}
+body{
+  background:var(--bg); color:var(--ink);
+  font:16px/1.6 'IBM Plex Sans',system-ui,sans-serif;
+  padding-inline:16px; margin:0;
+}
+a{color:inherit; text-decoration-color:var(--muted);}
+a:hover{text-decoration-color:currentColor;}
+.wrap{max-width:780px; margin:0 auto; padding-block:48px 72px;}
+h1,h2,h3{font-family:'IBM Plex Serif',Georgia,serif; text-wrap:balance; line-height:1.2;}
+h1{font-size:2.1rem; margin:0 0 10px;}
+h2{font-size:1.45rem; margin:0 0 4px;}
+h3{font-size:1.05rem; margin:28px 0 8px;}
+p{margin:0 0 14px; max-width:66ch;}
+.eyebrow{font-family:var(--mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:14px;}
+.lede{font-size:1.05rem; color:var(--muted); max-width:62ch;}
+.meta{display:flex; flex-wrap:wrap; gap:10px 28px; margin:26px 0 0; padding:18px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+.meta div{min-width:150px;}
+.meta dt{font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:0;}
+.meta dd{margin:2px 0 0; font-weight:500; font-size:.92rem;}
+section{margin-top:56px;}
+.sechead{padding-bottom:12px; border-bottom:3px solid var(--tc,var(--line)); margin-bottom:18px;}
+.sechead .pill{font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; padding:3px 10px; border-radius:99px; background:var(--tcs,var(--line)); color:var(--tc,var(--ink)); font-weight:500; white-space:nowrap; display:inline-block; margin-bottom:10px;}
+.setup{--tc:var(--red); --tcs:var(--red-soft);}
+.day{--tc:var(--track-a); --tcs:var(--track-a-soft);}
+.leave{--tc:var(--track-b); --tcs:var(--track-b-soft);}
+.rules{--tc:var(--amber); --tcs:var(--amber-soft);}
+.flow{list-style:none; margin:18px 0 0; padding:0; counter-reset:step;}
+.flow li{display:grid; grid-template-columns:44px 1fr; gap:16px; padding:16px 0; border-top:1px solid var(--line); counter-increment:step;}
+.flow li::before{content:counter(step); font-family:var(--mono); font-size:.9rem; color:var(--tc,var(--muted)); font-weight:500; border:1px solid var(--tc,var(--line)); border-radius:99px; width:28px; height:28px; display:flex; align-items:center; justify-content:center; margin-top:2px;}
+.flow li > div > b:first-child{display:block; margin-bottom:2px;}
+.flow strong{font-weight:600;}
+.flow p{margin:6px 0 0; font-size:.93rem; color:var(--muted);}
+pre{background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:12px 14px; overflow-x:auto; font-family:var(--mono); font-size:.82rem; line-height:1.55; margin:10px 0;}
+code{font-family:var(--mono); font-size:.85em;}
+.note{background:var(--amber-soft); border-left:3px solid var(--amber); border-radius:0 6px 6px 0; padding:12px 18px; margin:18px 0; font-size:.93rem;}
+.note b{color:var(--amber);}
+.note p:last-child{margin-bottom:0;}
+.check{background:var(--red-soft); border-left:3px solid var(--red); border-radius:0 6px 6px 0; padding:14px 18px; margin:18px 0; font-size:.93rem;}
+.check b{color:var(--red);}
+.check p:last-child{margin-bottom:0;}
+.todo{background:var(--amber); color:#fff; font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; padding:1px 7px; border-radius:4px; white-space:nowrap; font-weight:500;}
+table{width:100%; border-collapse:collapse; margin:14px 0 6px; font-size:.92rem;}
+th{font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); text-align:left; font-weight:500; padding:0 10px 8px 0; border-bottom:1px solid var(--line);}
+td{padding:9px 10px 9px 0; border-bottom:1px solid var(--line); vertical-align:top;}
+td:first-child{font-family:var(--mono); font-size:.82rem; color:var(--muted); white-space:nowrap; width:1%;}
+tr.lab td:nth-child(2){font-weight:600;}
+tr.lab td:nth-child(2)::before{content:"▶"; color:var(--track-a); margin-right:7px; font-size:.75em;}
+tr.brk td{color:var(--muted); font-style:italic;}
+ul.plain{padding-left:20px; margin:8px 0 14px;}
+ul.plain li{margin-bottom:8px; font-size:.95rem;}
+ul.plain li::marker{color:var(--muted);}
+.chain{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin:18px 0 6px;}
+.chain div{background:var(--surface); border:1px solid var(--line); border-top:3px solid var(--track-b); border-radius:6px; padding:12px 14px;}
+.chain .tag{font-family:var(--mono); font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:var(--track-b); display:block; margin-bottom:5px;}
+.chain b{font-size:.92rem; display:block;}
+.chain p{font-size:.84rem; color:var(--muted); margin:5px 0 0;}
+footer{margin-top:64px; padding-top:16px; border-top:1px solid var(--line); font-size:.82rem; color:var(--muted); font-family:var(--mono);}
+footer a{text-decoration-color:var(--line);}
+@media (max-width:520px){
+  .flow li{grid-template-columns:1fr; gap:6px;}
+  .flow li::before{margin-bottom:4px;}
+  h1{font-size:1.7rem;}
+  .meta{gap:10px 18px;}
+  td:first-child{white-space:normal;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="eyebrow">Penn Epigenetics Institute</p>
+<h1>Agentic AI Workshop</h1>
+<p class="lede">What changes when AI can act on your files, your data, and your analyses — not just
+answer questions about them. A taught session with hands-on exercises until 2pm, then a
+self-directed afternoon with the Vahedi lab.</p>
+
+<dl class="meta">
+  <div><dt>Date</dt><dd>Thursday, September 24, 2026</dd></div>
+  <div><dt>Time</dt><dd>10:00 – 14:00 taught<br><span style="font-weight:400;color:var(--muted)">afternoon self-directed</span></dd></div>
+  <div><dt>Location</dt><dd><span class="todo">ADD ROOM</span></dd></div>
+  <div><dt>Instructor</dt><dd>Sean Davis, MD, PhD</dd></div>
+</dl>
+
+<section class="setup">
+  <div class="sechead"><span class="pill">Do this before Thursday</span>
+  <h2>Setup — one real step, then let the agent do the rest</h2></div>
+
+  <p>This is the single biggest predictor of whether the day works for you. An hour of setup
+  trouble at 10am is an hour of the workshop you don't get back. The good news: only the first
+  step is genuinely yours. Once you have an agent installed, it can do the rest of the setup
+  for you — which is also your first taste of what these tools are for.</p>
+
+  <ol class="flow">
+    <li>
+      <div><b>Install a coding agent and sign in</b>
+      <p>We'll be using <a href="https://claude.com/claude-code">Claude Code</a> — it's what
+      gets demonstrated from the front of the room, it's what the TAs can help you debug, and
+      it's on the Institute's Claude Team plan (<span class="todo">CONFIRM SEATS</span>). The
+      desktop app is the gentlest on-ramp; the command-line version works equally well if you
+      live in a terminal.</p>
+      <p>Already productive in <b>Gemini CLI</b>, <b>GitHub Copilot</b> agent mode, or
+      <b>Codex</b>? Bring it. Everything taught that day is tool-neutral and transfers. Your
+      mileage will vary on the exact commands in one mid-afternoon exercise, where the
+      configuration file lives in a different place for each tool — we'll hand you the mapping
+      for all four.</p></div>
+    </li>
+    <li>
+      <div><b>Bring a laptop and a charger</b>
+      <p>Outlets are not guaranteed to be within reach of every seat. If your setup dies on the
+      day, pair with a neighbor — pairing is a feature, not a fallback.</p></div>
+    </li>
+    <li>
+      <div><b>Hand the rest to the agent</b>
+      <p>Open it and paste this in. It will check for <code>git</code>, install it if needed,
+      download the workshop materials, and confirm it can read them:</p>
+<pre>I'm attending a workshop on Thursday and need to get set up.
+Check whether git is installed and help me install it if not.
+Then clone https://github.com/golnazvahedi/epigenetics-agentic-workshop.git
+into a sensible folder, and read track-a/data/README.md from it
+and tell me in one sentence what differential_peaks.csv is.</pre>
+      <p>Expect it to ask permission before running commands. That's the sandbox working as
+      designed, and saying yes here is fine — we'll talk on Thursday about when it isn't.</p></div>
+    </li>
+  </ol>
+
+  <div class="check">
+    <p><b>You're done when</b> it comes back with a sensible answer about H3K27ac ChIP-seq
+    peaks. That one reply proves the whole chain: the tool is installed, you're signed in, it
+    can run commands, and you have the materials.</p>
+    <p>If it stalls, don't fight it — that's what the <b>setup clinic at lunch</b> is for. You
+    can also just tell the agent what went wrong and let it troubleshoot; it is surprisingly
+    good at diagnosing its own environment.</p>
+  </div>
+
+  <div class="note">
+    <p><b>Never used a tool like this?</b> That's the expected case, and the day is built for
+    it. You do not need to know how to code. You do not need to have used a coding agent
+    before. If you've ever typed a question into ChatGPT or Claude, you already have the skill
+    that matters most.</p>
+  </div>
+</section>
+
+<section class="day">
+  <div class="sechead"><span class="pill">The day</span>
+  <h2>Schedule</h2></div>
+
+  <p>Short teaching blocks alternate with hands-on exercises, so every idea gets used within
+  twenty minutes of being introduced. Exercises are marked <b>▶</b>. Each one produces
+  something you keep.</p>
+
+  <table>
+    <thead><tr><th>Time</th><th>Session</th></tr></thead>
+    <tbody>
+      <tr><td>10:00</td><td>From chatbot to agent</td></tr>
+      <tr class="lab"><td>10:25</td><td>Exercise 1 — first contact, and open your ledger</td></tr>
+      <tr><td>10:55</td><td>Under the hood: tokens, context, and cost</td></tr>
+      <tr class="brk"><td>11:15</td><td>Break</td></tr>
+      <tr><td>11:25</td><td>Working well: memory, context hygiene, and verifying</td></tr>
+      <tr class="lab"><td>11:45</td><td>Exercise 2 — teach the agent your project</td></tr>
+      <tr class="brk"><td>12:15</td><td>Lunch</td></tr>
+      <tr><td>13:00</td><td>Reaching outside your files: skills and MCP, with a live demo</td></tr>
+      <tr class="lab"><td>13:25</td><td>Exercise 3 — write one skill</td></tr>
+      <tr><td>13:50</td><td>Takeaways, and handing over to the afternoon</td></tr>
+      <tr class="brk"><td>14:00</td><td>Afternoon — self-directed, with the Vahedi lab</td></tr>
+    </tbody>
+  </table>
+
+  <p>The taught session ends at 2pm. <b>The afternoon is yours</b> — the workshop repository
+  has a set of self-paced exercises built around real Vahedi lab datasets, and TAs will be on
+  hand. Work through those, or bring one real, safe task from your own work and try the
+  morning's pattern on it. That second option is the better one if you have something in mind.</p>
+</section>
+
+<section class="leave">
+  <div class="sechead"><span class="pill">What you take home</span>
+  <h2>A working setup, not a memory</h2></div>
+
+  <p>Each exercise builds something the next one uses. By 2pm you have a small working setup
+  of your own — not notes about one.</p>
+
+  <div class="chain">
+    <div><span class="tag">Exercise 1</span><b>Your ledger</b><p>A plain-text log of what you asked, what the agent did, and how you checked it.</p></div>
+    <div><span class="tag">Exercise 2</span><b>A context file</b><p>What your agent should know about your project, written once instead of re-typed forever.</p></div>
+    <div><span class="tag">Exercise 3</span><b>A skill</b><p>A procedure you write once and your agent runs on demand — in any project, on any tool.</p></div>
+  </div>
+
+  <p>The exercise briefs are at
+  <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/tree/main/exercises">the
+  workshop repository</a> — you don't need them before Thursday.</p>
+
+  <p>The ledger is the thread, and it carries into the afternoon: whatever you pick after 2pm,
+  log it the same way. It's how the day's one non-negotiable habit — <i>verify before you
+  trust</i> — becomes something you do rather than something you were told.</p>
+</section>
+
+<section class="rules">
+  <div class="sechead"><span class="pill">Ground rules</span>
+  <h2>Three rules for the day</h2></div>
+
+  <ul class="plain">
+    <li><b>Privacy.</b> Do not put PHI, your own unpublished data, or grant drafts into any AI
+    tool during the workshop. Every exercise ships with its own materials — real mouse datasets
+    shared by the Vahedi lab for teaching, a simulated sample sheet, and an open-access paper —
+    so you never need your own data. We'll cover what <i>is</i> safe, and how to find out,
+    during the morning.</li>
+    <li><b>Verify.</b> The recurring habit of the day. Whenever the agent produces a result, ask
+    it <i>"how do I know this is right?"</i> and make it show its work. The datasets you'll be
+    working with contain real traps, and that is deliberate.</li>
+    <li><b>Pair up.</b> If your setup dies, share a laptop. Two people talking to one agent is
+    often better than two people talking to two agents.</li>
+  </ul>
+</section>
+
+<footer>
+  Datasets and afternoon exercises: <a href="https://github.com/golnazvahedi/epigenetics-agentic-workshop">golnazvahedi/epigenetics-agentic-workshop</a><br>
+  Morning exercises: <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop">seandavi/2026-penn-epigen-agentic-workshop</a><br>
+  Slides and notes: <a href="https://talks.seandavis.net">talks.seandavis.net</a><br>
+  Questions before Thursday: <span class="todo">ADD CONTACT</span>
+</footer>
+
+</div>
+</body>
+</html>
