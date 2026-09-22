@@ -63,13 +63,43 @@ knockout and a log2FC of −1.13, confirming positive = higher in WT for that fi
 **Conclusion: the datasets and their documentation are sound.** Exercise 1 can rely on
 them. Whoever wrote that README checked their numbers, or got lucky twelve times.
 
+## `make_qc_report.py` — all four planted bugs verified
+
+Run with dependencies present, it crashes exactly as Card 5 promises. All four bugs are
+real and match the card's hints one for one:
+
+| | Line | Bug | Card 5's hint |
+|---|---|---|---|
+| 1 | 27 | `peaks["fdr"]` — the column is `padj` | the crash |
+| 2 | 22 | `start - end` → every width is negative | "can a peak have a *negative* width?" |
+| 3 | 27 | `> padj_cutoff` → selects the non-significant peaks | "does 'significant' mean padj *above* the cutoff?" |
+| 4 | 32 | `np.log10(pvalue)` — missing the minus sign | "which way should a volcano plot point?" |
+
+The stated correct output — 49,781 peaks and 15,653 significant — matches the values
+verified independently above. **Card 5 is sound.**
+
+## Repository churn — where the risk sits
+
+From the file-level timeline: `track-a/data/` is the *most recently rewritten* part of the
+repo. The real datasets landed wholesale at 17:12 (+99,205/−2,441), replacing simulated
+ones, and were touched again at 17:36. `track-b/` has been untouched since 16:47 —
+**meaning all four pod briefs were written against the simulated data and never re-read
+after the real data replaced it.**
+
+I checked, and Track B survives the swap: its only references into `track-a/data/` are
+`make_qc_report.py` (Pod 4) and the folder as a stand-in for "your lab's output" (Pod 1),
+both of which still hold and arguably read better against real data. Worth a glance from
+her trainees all the same, since nobody has looked at those files since the ground moved
+under them.
+
 ## Three operational risks worth passing to Golnaz
 
 **1. `make_qc_report.py` needs `pandas` and `matplotlib`.** Card 5 opens with "first, see it
 fail yourself: `python3 make_qc_report.py differential_peaks.csv`". On a machine without
 those installed — which is most fresh laptops — it fails with `ModuleNotFoundError`, not the
-intended planted crash. The teaching beat lands as a setup error instead. Either the card
-should say to let the agent handle the dependencies, or setup should install them.
+intended `KeyError: 'fdr'`. The teaching beat lands as a setup error instead. Either the card
+should say to let the agent handle the dependencies, or setup should install them. **This is
+the only real defect found.**
 
 **2. Pod 3 requires a 111 MB download per laptop**, on conference wifi, late in the
 afternoon. Worth pre-staging on a USB stick or shared drive, or having TAs pull it in the
