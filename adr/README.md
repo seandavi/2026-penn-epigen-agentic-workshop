@@ -21,6 +21,7 @@ their reconstruction: see the dates in each file.
 | [0003](0003-slides-live-in-the-talks-repo.md) | Slides live in the talks repo, not here | 2026-09-22 |
 | [0004](0004-tool-neutral-claude-code-supported.md) | Tool choice stays open; Claude Code is supported | 2026-09-22 |
 | [0005](0005-the-ledger-is-the-spine.md) | The ledger is the spine of the day | 2026-09-22 |
+| [0006](0006-advanced-material-ships-as-appendix.md) | Advanced material ships as a non-presented appendix | 2026-09-22 |
 
 ## Why `adr/` and not `docs/adr/`
 

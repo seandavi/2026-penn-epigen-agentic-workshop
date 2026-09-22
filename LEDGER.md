@@ -4,6 +4,11 @@ This repository keeps the ledger it teaches. Same five fields as
 [`exercises/LEDGER-template.md`](exercises/LEDGER-template.md), because material that
 asks attendees to record their verification should be able to show its own.
 
+Each entry names **who did what**: *SD* for Sean Davis, who sets direction and makes
+the calls, and *agent* for work carried out under that direction. Verification is
+attributed the same way, because who checked something is part of how much it is
+worth.
+
 Entries 1–5 were written on 2026-09-23 and backdated to 2026-09-22, the day the work
 was done. They are reconstructed from the session rather than recorded as it happened,
 which is itself worth noting in a ledger: the *Checked how* fields describe checks that
@@ -124,3 +129,46 @@ convention without noticing that `docs/` means something different here.
 
 **Keep** — A convention borrowed from another repository carries that repository's
 assumptions with it.
+
+---
+
+## Entry 6 — Six proposed topics, triaged into stage and appendix
+
+**Asked** — *SD* proposed six additions to the deck: pointers to Claude Science and
+that these are skills, harness-versus-model performance, benchmarks and how to read
+them, higher-order workflows with skills, specifying goals for autonomous work, and
+git/GitHub coordination including worktrees.
+
+**Agent did** — Researched Claude Science against Anthropic's own announcement rather
+than the secondary coverage that surfaced first. Costed the six against the schedule
+and pushed back: 100 minutes of teaching against 85 of exercises in a four-hour window
+leaves no slack, so six topics would have cost an exercise. Proposed a split — three on
+stage, benchmarks folded into speaker notes, developer material as a non-presented
+appendix.
+
+*SD* chose the tiered option, confirmed the developer material should be appendix-only,
+then asked for that section expanded as reference for afternoon questions.
+
+*Agent* then wrote three on-stage slides (specifying goals, harness versus model,
+Claude Science), demoted `A server is three decisions` into the appendix to pay for
+them, and built an eight-slide appendix: four primitives, the specify/implement/review
+loop, reviewing the diff, sub-agents, the relocated server slide, version control and
+worktrees, and decisions an agent will obey. 33 slides to 43.
+
+**Checked how** — *Agent*: `talks build` (0 failed) and `talks doctor` (10 checks,
+all passed); confirmed 43 rendered sections and grepped the built HTML for each new
+slide's heading. Claude Science figures — 60+ skills, the named databases, the
+platforms and plans — were taken from Anthropic's own page, after a search summary
+had already offered plausible-looking numbers from third-party write-ups.
+*SD*: direction and scope calls throughout; content not yet reviewed.
+
+**Confidently wrong** — *Agent* edited the deck while still on the
+`agents-md-consolidation` branch, which would have mixed an unrelated documentation
+refactor into the deck commit. Caught before committing, only because of a habit of
+checking `git rev-parse --abbrev-ref HEAD` before a commit, not because anything
+warned.
+
+**Keep** — Check the branch before editing, not before committing. And when a search
+summary hands over numbers, go to the primary source before putting them on a slide —
+the secondary write-ups here disagreed with each other, which is the same failure the
+deck spends a slide warning about.
