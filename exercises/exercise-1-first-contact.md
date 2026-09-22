@@ -16,11 +16,27 @@ to do and haven't. Nothing here needs you to write code.
 | **Slides from a paper** | Yours or any open-access one. "Turn this into a 12-slide talk with speaker notes, for a lab-meeting audience." |
 | **A messy spreadsheet** | Any sample sheet, submission manifest, or collaborator's file. "Make this tidy, and give me a list of every change you made." |
 | **A data file** | Something you already have. "Tell me what's in it, flag anything suspicious, and plot it." |
+| **An app or dashboard** | "Fetch ENCODE's histone ChIP-seq experiments and build me a page I can filter by cell type, assay, and lab." Public metadata, no key, no server. |
 | **Find something** | "Find me candidate journals for this manuscript, with scope, turnaround, and fees." Or public datasets matching criteria you specify. |
 
 **Nothing to hand?** Use `track-a/data/differential_peaks.csv` from the workshop repository
 — a real DESeq2 table of differential H3K27ac peaks, straight out of a pipeline with
 nothing tidied up.
+
+### If you pick the app
+
+These are public, keyless, and were confirmed responding the day before the workshop.
+Hand your agent the URL and describe the page you want — it will work out the rest.
+
+| Resource | Endpoint | Holds |
+|---|---|---|
+| **ENCODE** | `https://www.encodeproject.org/search/?type=Experiment&format=json` | 28,642 experiments — 3,992 of them histone ChIP-seq. Cell type, assay, lab, file lists. Add `&assay_title=Histone+ChIP-seq` to narrow |
+| **4D Nucleome** | `https://data.4dnucleome.org/search/?type=ExperimentSetReplicate&format=json` | 3,392 chromatin-architecture experiment sets — Hi-C and friends |
+| **GEO** | `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=gds&term=...&retmode=json` | everything, if you can phrase the query |
+
+Roadmap Epigenomics is also a fine target, but its metadata has moved around — asking
+your agent to *find* the current table is a decent test in itself. Watch whether it
+verifies that what it found actually loads, or just asserts a URL.
 
 ## Do this
 

@@ -31,6 +31,7 @@ Either carry on with what you started in Exercise 1, or take something new:
 | **Something you do repeatedly** | The report you rebuild monthly, the figure you remake for every talk. Do it once, properly, with the agent. |
 | **A piece of writing that matters** | A grant aims page, a talk outline, a response to reviewers. Draft, then have it argue against you. |
 | **A pile of documents** | A folder of PDFs, applications, or notes → a structured table you can sort and filter. |
+| **Build and ship a small app** | A dashboard over a public resource — ENCODE, 4D Nucleome, GEO — or over your own lab's datasets. Then actually deploy it somewhere with a URL. |
 
 ## Do this
 
