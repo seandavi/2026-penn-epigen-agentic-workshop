@@ -1,67 +1,77 @@
-# Exercise 2 — Teach the Agent Your Project
+# Exercise 2 — Go Further, and Stop Repeating Yourself
 
-**About 30 minutes.** An agent starts every session knowing nothing about you. A context
-file is how you stop re-typing the same things forever — and this exercise measures whether
-it actually helped, rather than assuming it did.
+**About 30 minutes.** Take something real a good distance, and let the friction tell you
+what belongs in a memory file. Not the other way around.
 
-## Pick your project
+## First, a correction
 
-**Your own**, ideally: an analysis folder, a repository, a manuscript directory, even a
-folder of notes. It should be something you return to.
+You may have heard that the first thing to do with an agent is write it a big context file
+describing your project. Mostly you shouldn't. **Agents are very good at working out what a
+project is** — they read the files, the README, the code, the data. A file that restates
+what's already discoverable costs context on every turn and earns nothing.
 
-**Or the fallback**: use the workshop repository itself, and pretend `track-a/data/` is your
-lab's standard output format.
+What an agent genuinely cannot work out is what's only in your head:
+
+- how you like things done, and what "finished" means to you
+- which of the four scripts in that folder is the real one
+- the constraint that looks like a mistake and isn't
+- the thing you'd correct in review, every time, forever
+
+Those are worth writing down. Nothing else is. This exercise finds yours by working until
+you hit them.
+
+## Pick something with more than one step
+
+Either carry on with what you started in Exercise 1, or take something new:
+
+| | Try this |
+|---|---|
+| **Finish and publish** | Take the site, review, or deck from Exercise 1 and get it actually done — deployed, exported, sent. |
+| **A real multi-step job** | Find data → analyze it → write up what you found. Three stages, checked between each. |
+| **Something you do repeatedly** | The report you rebuild monthly, the figure you remake for every talk. Do it once, properly, with the agent. |
+| **A piece of writing that matters** | A grant aims page, a talk outline, a response to reviewers. Draft, then have it argue against you. |
+| **A pile of documents** | A folder of PDFs, applications, or notes → a structured table you can sort and filter. |
 
 ## Do this
 
-**1. Have the agent interview you.** Don't write the file yourself — you'll forget the
-things that are obvious to you, which are exactly the things it needs.
+**1. Work for about twenty minutes.** Properly — get somewhere. Keep interrogating results
+the way you did in Exercise 1.
 
-> I want to write a context file for this project so that you — and any agent I use in
-> future — start each session already knowing how it works. Interview me. Ask one question
-> at a time, and look around the repository first so you don't ask me things you can work
-> out yourself. When you've got enough, write `AGENTS.md`.
+**2. Keep a running note of the friction.** This is the actual instrument of the exercise.
+Every time one of these happens, jot a line:
 
-The "one question at a time" and "look first" instructions both matter. A list of eight
-questions gets eight careless answers, and an agent that asks you what's in a folder it
-could have opened is wasting the thing you're actually short of.
+- you explained something **twice**
+- it did something in a style you had to correct
+- it asked you a question you'd already answered
+- it made a reasonable choice that was **wrong for you specifically**
+- you thought *"it should have known that"*
 
-**2. Read what it wrote, and cut it.** This is the real skill. For every line, ask:
+**3. Now write the file — only from that list.** Create `AGENTS.md` in the folder:
 
-> Would removing this line cause a mistake?
+> Here's what I had to tell you or correct during this session: [your list]. Write an
+> `AGENTS.md` capturing just those, as instructions for a future session. Keep it short,
+> and leave out anything you could work out by reading the project yourself.
 
-If not, delete it. **Keep**: the commands it can't guess, the genome build, where data
-actually lives, naming conventions, which script is canonical and which is abandoned, the
-thing that looks like a bug and isn't. **Cut**: anything true of everyone's project,
-anything discoverable from the code, and aspirational style rules nobody enforces — those
-teach the agent that the file can be ignored.
+If your list is empty, **write no file**. That is a real and useful outcome, and it's the
+honest answer more often than the internet suggests.
 
-Most first drafts lose half their lines here and get better.
+**4. Use it.** Start a fresh session, point it at the folder, and give it the next piece of
+the task. Did the things you wrote down stay fixed without you saying them again?
 
-**3. Measure it.** Start a **fresh session** — this matters, the old one already knows
-everything you just discussed — and run one realistic task twice: once with the context
-file present, once with it renamed out of the way.
-
-Where did it differ? Fewer wrong guesses? Right conventions without being told? Fewer
-questions back at you? Sometimes the answer is *no difference*, and that is a genuinely
-useful result: it means the file is restating what the agent could already see.
-
-**4. Ledger entry 2.** What changed between the two runs. If nothing did, write that.
+**5. Ledger entry two.** What you had to repeat, and whether writing it down stopped it.
 
 ## A note on file names
 
-`CLAUDE.md`, `GEMINI.md`, `AGENTS.md` — same idea, different tools. `AGENTS.md` is the
-one most tools now read, so prefer it unless you know you're staying on one. Some tools
-read several; a one-line `CLAUDE.md` saying "see AGENTS.md" costs nothing.
+`AGENTS.md`, `CLAUDE.md`, `GEMINI.md` — same idea, different tools. `AGENTS.md` is the one
+most tools now read, so prefer it unless you know you're staying on one.
 
 ## Success looks like
 
-A context file short enough that you'd actually keep it current, and an opinion —
-supported by two transcripts — about whether it earned its place.
+A short file you'd actually keep current, every line of which traces to a moment you
+watched happen — or a considered decision that you don't need one yet.
 
 ## Where this goes wrong later
 
-Context files rot. The conventions change and the file doesn't, and six months on it is
-confidently instructing your agent to do something you stopped doing in March. If you take
-one of these back to your lab, give it an owner and a review date, the way you would a
-protocol.
+Memory files rot. Conventions change and the file doesn't, and six months on it's
+confidently instructing your agent to do something you stopped doing in March. If you keep
+one, give it an owner and a review date, the way you would a protocol.

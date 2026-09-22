@@ -6,88 +6,96 @@ need it.
 
 ## Pick a procedure
 
-Something you repeat and currently re-explain every time. Good candidates:
+Something you repeat and currently re-explain every time. Pick from here or bring your own:
 
-- "Generate our standard QC report from a differential peaks file" — the checks to run, the
-  plots to make, the format to write it in
-- "Set up a new analysis folder the way our lab does it"
-- "Check a manuscript's figure callouts against the figures that exist"
-
-**Or the fallback, which is guaranteed to work and which you'll use this afternoon:** a
-skill that writes your ledger entries for you. Small, complete, and it makes the rest of
-the day faster.
+| | The skill |
+|---|---|
+| **Ledger summary** | Read `LEDGER.md` and report **who did what**: what the agent did, what you actually verified, and — the interesting part — which entries have an empty *Checked how*. A skill that audits your own discipline. |
+| **Ledger entry** | The companion: append a properly-formatted entry for whatever just happened. Small, guaranteed to work, and it makes writing the ledger cost nothing. |
+| **Results-table triage** | The standard checks for any results file you're handed: chromosome naming, missing adjusted p-values, impossible widths, underflowed p-values, whether the fold-change direction is stated anywhere. Encode the traps you know about once. |
+| **Reference check** | Walk a draft and verify every citation resolves *and* says what the sentence claims it says. The single highest-value check in scientific writing. |
+| **Paper → lab meeting** | A PDF in, ten bullets out, pitched at a named audience, plus the three questions you'd get asked. |
+| **Reviewer 2** | A persona with your field's standards that attacks a paragraph before a real reviewer does. Then drafts the response. |
+| **New project folder** | Scaffold an analysis directory the way *you* do it — naming, structure, where figures go, what a finished analysis looks like. |
+| **Figure legend** | Bullets in, a legend out, in the style your usual journal wants. |
+| **Methods paragraph** | Draft from what actually happened, marking every unknown `[PLACEHOLDER]` rather than inventing it. |
 
 ## Do this
 
-**1. Make the folder.** A skill is a directory containing `SKILL.md`. The directory name
-and the `name` field must match, lowercase with hyphens.
+**1. Make the folder.** A skill is a directory containing `SKILL.md`. The directory name and
+the `name` field must match, lowercase with hyphens.
 
 ```
-.claude/skills/lab-ledger/SKILL.md      # this project only, commit it
-~/.claude/skills/lab-ledger/SKILL.md    # every project you work on
+.claude/skills/ledger-summary/SKILL.md      # this project only, commit it
+~/.claude/skills/ledger-summary/SKILL.md    # every project you work on
 ```
 
 **2. Write it.** Only two fields are required:
 
 ```markdown
 ---
-name: lab-ledger
-description: Appends an entry to the LEDGER.md work log recording what was
-  asked, what the agent did, how it was verified, and anything it got wrong.
-  Use when the user says to log this, write it up, record what we just did,
-  add to my ledger, or asks for a note of the work so far.
+name: ledger-summary
+description: Summarizes the LEDGER.md work log — what the agent did, what
+  the human verified, and which entries were never checked. Use when the
+  user asks to summarize the ledger, review the log, see what we did, or
+  asks who did what or what still needs checking.
 ---
 
 ## Instructions
 
-1. Read `LEDGER.md` in the project root. If it does not exist, create it from
-   `LEDGER-template.md`.
-2. Append a new numbered entry with these headings: Asked, Agent did,
-   Checked how, Confidently wrong, Keep.
-3. Fill **Asked** with the user's prompt verbatim — do not tidy or paraphrase it.
-4. Fill **Agent did** with the actual files read or written and commands run.
-5. Leave **Checked how** blank and tell the user to complete it themselves.
-   **Do not fill this in on their behalf.**
-6. Show the user the entry and stop. Do not commit anything.
+1. Read `LEDGER.md`. If it does not exist, say so and stop.
+2. For each entry, extract: what was asked, what the agent did, and what
+   the human verified.
+3. Produce a table of entries with a one-line summary of each.
+4. Then report separately:
+   - entries where **Checked how** is empty or vague — list these first
+   - everything recorded under **Confidently wrong**, gathered together
+5. Do not fill in any missing verification yourself, and do not judge
+   whether a check was sufficient. Report what is there.
 ```
 
-Three choices worth stealing from that. `description` says **what it does, then when to use
-it**, and contains the words you'd actually say. Step 5 refuses to do the one thing the
-skill must never do — the verification has to be yours or the ledger is worthless. And it
-says *stop*, because left unconstrained an agent will helpfully keep going.
+Three choices worth stealing. The `description` says **what it does, then when to use it**,
+and contains the words you'd actually say. Step 5 forbids the tempting adjacent action —
+an agent that helpfully fills in your missing verification has destroyed the only thing the
+ledger was for. And it says *stop*, because left unconstrained it will keep going.
 
 **3. Test the description, not the body.** This is the step everyone skips and the reason
 most skills quietly never fire. Write two lists:
 
 | Should fire | Should **not** fire |
 |---|---|
-| "log this" | "what's in my ledger so far?" |
-| "write up what we just did" | "explain how skills work" |
-| "add that to my ledger" | "commit my changes" |
+| "summarize my ledger" | "add an entry to my ledger" |
+| "what did we actually check today?" | "explain how skills work" |
+| "who did what in this log?" | "delete my ledger" |
 
 Now start a fresh session and try them. Did the right ones trigger it? Did the wrong ones
-leave it alone? If a phrasing you'd genuinely use didn't fire, add those words to the
+leave it alone? If a phrasing you'd genuinely use didn't fire, put those words in the
 description and try again.
-
-**4. Ledger entry 3** — written by the skill, if it works.
 
 ## The failure you will not notice
 
-A skill that never triggers is indistinguishable from a skill you never wrote. There's no
-error and no warning; you just get the answer you'd have got anyway. That's why the
-description gets tested and the body mostly doesn't — the description is the entire
-triggering signal, and the agent never sees the body until it has already decided to load it.
+A skill that never triggers is indistinguishable from a skill you never wrote. No error, no
+warning — you just get the answer you'd have got anyway. That's why the description gets
+tested and the body mostly doesn't: **the agent never sees the body until it has already
+decided to load it.**
 
 Lean pushy. The common failure is under-triggering, not over-triggering.
 
 ## It isn't tool-specific
 
-`SKILL.md` is an open standard now, read by Claude Code, Codex CLI, Gemini CLI, Copilot and
-others without translation. The file you just wrote works across the ones you're likely to
-switch to, which is the main argument for encoding a procedure this way rather than keeping
-it in your head.
+`SKILL.md` is an open standard, read by Claude Code, Codex CLI, Gemini CLI, Copilot and
+others without translation. The file you just wrote works across whichever you switch to,
+which is the main argument for encoding a procedure this way rather than keeping it in your
+head.
 
 ## Success looks like
 
 A skill that fires on a phrase you didn't put in the description verbatim, and doesn't fire
 on a neighbouring question. That's a working interface, not a hopeful Markdown file.
+
+## If you finish early
+
+Commit it into a shared lab repository. That's the highest-leverage version of this whole
+mechanism: one person writes the procedure once, and everyone who clones the repo gets it.
+For a lab with shared conventions and rotating trainees, that's worth more than anything
+else here.

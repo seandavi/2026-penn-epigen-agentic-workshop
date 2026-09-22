@@ -1,77 +1,74 @@
 # Exercise 1 — First Contact
 
 **About 30 minutes.** The point is not the output. The point is watching an agent work on
-real material, and then refusing to take its word for anything.
+real material — yours — and then refusing to take its word for anything.
 
-## Pick your material
+## Pick something you actually want
 
-**Your own**, if you have something safe and small: a public dataset, a folder of PDFs, a
-messy spreadsheet, a script that doesn't work.
+Pick from this list, or bring your own. The best choice is something you've been meaning
+to do and haven't. Nothing here needs you to write code.
 
-**Or the fallback** — in the workshop repository:
+| | Try this |
+|---|---|
+| **A website** | Build a personal or lab site from scratch, or refresh the one you've been ignoring. "Here's my CV and three paper PDFs — make me a site." |
+| **A literature review** | "Find recent work on X, read the top sources, and write me a two-page synthesis — note where they disagree with each other." |
+| **Your CV** | Hand it over. "What's missing, what's stale, what reads badly?" Then have it fold in your last two years and reformat the whole thing. |
+| **Slides from a paper** | Yours or any open-access one. "Turn this into a 12-slide talk with speaker notes, for a lab-meeting audience." |
+| **A messy spreadsheet** | Any sample sheet, submission manifest, or collaborator's file. "Make this tidy, and give me a list of every change you made." |
+| **A data file** | Something you already have. "Tell me what's in it, flag anything suspicious, and plot it." |
+| **Find something** | "Find me candidate journals for this manuscript, with scope, turnaround, and fees." Or public datasets matching criteria you specify. |
 
-```
-track-a/data/differential_peaks.csv
-```
-
-A real DESeq2 table of differential H3K27ac ChIP-seq peaks from the Vahedi lab. It came
-straight out of a pipeline and nothing about it was tidied up for teaching, which is
-exactly why it's useful.
+**Nothing to hand?** Use `track-a/data/differential_peaks.csv` from the workshop repository
+— a real DESeq2 table of differential H3K27ac peaks, straight out of a pipeline with
+nothing tidied up.
 
 ## Do this
 
-**1. Open your agent in the folder and describe the goal, not the steps.**
+**1. Describe the goal, not the steps.**
 
-> Explore `track-a/data/differential_peaks.csv`. Tell me what's in it, flag anything
-> suspicious about the data, then make a volcano plot and a ranked table of the top 20
-> peaks by adjusted p-value.
+One sentence about what you want to end up with. Resist the urge to specify *how* — that's
+the habit you're here to break, and a long specified prompt turns an agent back into a
+chatbot.
 
-Then *watch it*. It will inspect the file, write code, run the code, hit an error, and fix
-the error. Three things worth noticing while it does:
+Then *watch it*. It will look at your files, write something, run it, hit an error, and fix
+the error. Three things to notice while it does:
 
-- **You described an outcome.** No copying code back and forth. That's the whole difference
-  between a chatbot and an agent.
+- **You described an outcome.** No copying code or text back and forth.
 - **The loop:** plan → act → check → adjust. You can interrupt at any point.
-- **It asks permission** before doing things that touch your machine. Notice what it asks
-  about and what it doesn't.
+- **It asks permission** before touching things. Notice what it asks about and what it doesn't.
 
-**2. Now interrogate it.** This is the part people skip, and it's the part that matters.
+**2. Iterate by talking.** Don't like it? Say so in plain English — "too long", "wrong
+tone", "make the labels readable", "drop the third section". Directing by conversation is
+half the value of these tools and most people underuse it.
 
-> How do I know this plot is right? Show me your checks.
+**3. Now interrogate it.**
 
-And then the question it genuinely cannot answer from this file:
+> How do I know this is right? Show me your checks.
 
-> When log2FoldChange is positive, which group has more signal — and how do you know?
+And the sharper version, which is where the real failures live:
 
-**3. Open your ledger.** Copy `LEDGER-template.md` to `LEDGER.md` and fill in entry 1.
-Takes three minutes. Be honest in the **Confidently wrong** field.
+> What did you assert here that I didn't tell you and you couldn't have checked?
 
-## What it should have caught
+**4. Open your ledger.** Copy `LEDGER-template.md` to `LEDGER.md` and fill in entry one.
+Three minutes. Be honest in the **Confidently wrong** field.
 
-If you used the fallback file, there is a lot here to find, and none of it was planted:
+## What to watch for
 
-- chromosome names have **no `chr` prefix** (`12`, `X`, `Y`) — which will break the first
-  thing you try to join it against
-- four peaks have a p-value of **exactly 0**, so `-log10` gives infinity, and a volcano plot
-  has to do *something* about that
-- peak widths run from 180 bp to **93,567 bp**
-- there is **no gene annotation** at all
-- **nothing in the file says which direction the fold change points**
+The failure mode is never that it refuses or produces nonsense. It's that it produces
+something **fluent, plausible, and wrong in one specific place** — an invented citation, a
+date it couldn't have known, a fold-change direction it guessed, a confident claim about
+what a file contains.
 
-That last one is the real lesson. A confident answer to the direction question is a
-fabricated answer — the information is not in the file. If your agent gave you one anyway,
-you have just watched the single most important failure mode in these tools, on real data,
-in the first half hour. Write it in the ledger.
+Every task on that list has a version of this:
+
+- the literature review with a DOI that doesn't resolve
+- the CV that quietly upgrades a submitted paper to published
+- the data file where it assumed which group was the reference
+- the journal list with a fabricated turnaround time
+
+Find yours. That's the exercise.
 
 ## Success looks like
 
-A plot you can explain, a list of things wrong with the data that you found *with* the
-agent rather than *from* it, and a ledger entry whose **Checked how** field describes
-something you actually did.
-
-## If you finish early
-
-Ask it to write the checks down:
-
-> Write a few sanity checks for this file so these problems get caught automatically next
-> time — then show me them failing on something.
+Something you'd actually keep, and a ledger entry whose **Checked how** field describes
+something you personally did.
