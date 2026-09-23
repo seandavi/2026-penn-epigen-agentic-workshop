@@ -66,8 +66,8 @@ sequenceDiagram
 
 ::: {.column-margin}
 **Protocol**: an agreed way for two programs to talk. Because MCP is shared, the same
-PubMed server works with Claude Code, Claude's desktop app, Gemini CLI, Codex and
-Copilot. Only the place you configure it differs.
+PubMed server works with Claude Code, Claude's desktop app, Google Antigravity,
+Codex and Copilot. Only the place you configure it differs.
 :::
 
 Two things follow from this picture. First, **the agent writes the query**. You asked
@@ -167,8 +167,8 @@ You'll need about 20 minutes. Inside your `agents-workshop` folder in Documents 
 Ask "what folder are you in?" to be sure. Everything in this chapter happens in
 `agents-workshop/mcp`, and its `LEDGER.md` lives there too (@sec-ledger).
 
-::: {.callout-warning}
-## What leaves your machine
+::: {.callout-important}
+## Privacy: what leaves your machine
 
 Every tool call sends the agent's query to the server's operator. For PubMed that means
 your search terms: a topic, gene names, a disease. That is usually fine. Don't put
@@ -189,8 +189,9 @@ don't use any PubMed or other database tools.
 
 The last sentence matters: Claude Code can search the web, and your account may already
 have a PubMed connection (see "Two PubMed servers?" below). Today you want to see what
-the agent knows **without** a database. Start a `LEDGER.md` entry in this folder: the
-prompt goes under *Asked*, and the agent's answer under *Agent did*.
+the agent knows **without** a database. Ask the agent to start `LEDGER.md` in this
+folder with an entry for this question: the prompt under *Asked*, its answer under
+*Agent did*.
 
 No topic in mind? Use ours: the question in the worked example. Or use genes from the
 Vahedi lab's RNA-seq data: the top hits in `differential_genes.tsv`, from their
@@ -272,12 +273,12 @@ We haven't confirmed that you can add a *new* marketplace from there, so if you 
 the desktop app, route A is the safer choice.
 
 ::: {.callout-tip}
-## Using Gemini CLI, Codex or Copilot?
+## Using Antigravity, Codex or Copilot?
 
 The server is the same; only the configuration file differs. Ask your agent: "Add a
 remote HTTP MCP server called pubmed, at https://pubmed.mcp.claude.com/mcp, to your own
 MCP configuration for this folder, and tell me which file you changed." Then check the
-file it names.
+file it names. (In Antigravity it's `.agents/mcp_config.json`.)
 :::
 
 ::: {.callout-note collapse="true"}
@@ -349,12 +350,13 @@ This is the step that counts. For three of the papers, open
 3. **Does the abstract support what the agent said about it?** Read it. This is the
    check no tool can do for you.
 
-Then write a second ledger entry. *Asked* is the step 4 prompt; *Agent did* is how you
-connected PubMed and what the agent answered; *Checked how* is the three PMIDs and what
-you found; *Confidently wrong* is anything that didn't hold up; *Keep* is what you'd do
+Then have the agent add a second ledger entry, and correct it (@sec-ledger). *Asked* is
+the step 4 prompt; *Agent did* is how you connected PubMed and what the agent answered;
+*Checked how* is the three PMIDs and what you found, in your words; *Confidently wrong* is anything that didn't hold up; *Keep* is what you'd do
 the same way next time.
 
-### If it goes wrong
+::: {.callout-tip}
+## If it goes wrong
 
 | What you see | What to try |
 |---|---|
@@ -365,6 +367,7 @@ the same way next time.
 | A plugin command is "unknown" | Update Claude Code, or use route A. |
 
 : Common problems when connecting a server. {#tbl-mcp-troubleshoot}
+:::
 
 ## What to notice
 
@@ -383,13 +386,15 @@ the same way next time.
 
 ## Check yourself
 
-You're done when:
+::: {.callout-tip}
+## You're done when
 
-- [ ] the agent lists the PubMed server and its tools;
-- [ ] you have two answers to the same question, one from memory and one from PubMed;
-- [ ] you have opened three PMIDs on the PubMed website and checked them against what
-  the agent said;
-- [ ] your ledger has an entry saying what you checked and what you found.
+- [ ] The agent lists the PubMed server and its tools.
+- [ ] You have two answers to the same question, one from memory and one from PubMed.
+- [ ] You have opened three PMIDs on the PubMed website and checked them against what
+      the agent said.
+- [ ] Your ledger has an entry saying what you checked and what you found.
+:::
 
 ::: {.callout-warning}
 ## Which servers to trust

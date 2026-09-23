@@ -297,6 +297,7 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#the-desktop-app-recommended" id="toc-the-desktop-app-recommended" class="nav-link" data-scroll-target="#the-desktop-app-recommended">The desktop app (recommended)</a></li>
   <li><a href="#the-command-line-optional" id="toc-the-command-line-optional" class="nav-link" data-scroll-target="#the-command-line-optional">The command line (optional)</a></li>
+  <li><a href="#google-antigravity-an-alternative" id="toc-google-antigravity-an-alternative" class="nav-link" data-scroll-target="#google-antigravity-an-alternative">Google Antigravity (an alternative)</a></li>
   </ul></li>
   <li><a href="#make-a-workshop-folder" id="toc-make-a-workshop-folder" class="nav-link" data-scroll-target="#make-a-workshop-folder">Make a workshop folder</a></li>
   <li><a href="#setup-start-session" id="toc-setup-start-session" class="nav-link" data-scroll-target="#setup-start-session">Start a session in the folder</a></li>
@@ -381,9 +382,9 @@ Figure&nbsp;1: You talk to a session; the session works in one folder. Reading i
 <thead>
 <tr class="header">
 <th></th>
-<th>Claude desktop app, <strong>Code</strong> tab</th>
+<th>Claude desktop app, <strong>Code</strong></th>
 <th><code>claude</code> on the command line</th>
-<th>Another agent</th>
+<th>Google Antigravity 2.0</th>
 </tr>
 </thead>
 <tbody>
@@ -391,19 +392,19 @@ Figure&nbsp;1: You talk to a session; the session works in one folder. Reading i
 <td>Who it suits</td>
 <td>Most people. No terminal needed.</td>
 <td>People who already live in a terminal.</td>
-<td>People already using Gemini CLI, Codex or Copilot.</td>
+<td>People who’d rather use Google’s agent, with a personal Google account.</td>
 </tr>
 <tr class="even">
 <td>How you pick the folder</td>
 <td><strong>Local</strong>, then <strong>Select folder</strong>, when starting a session</td>
 <td><code>cd</code> into the folder, then run <code>claude</code></td>
-<td>Start it in the folder</td>
+<td>A <strong>Project</strong>: the folder icon with a “+” in the left sidebar, <strong>New Project</strong>, <strong>Add Folder</strong>, <strong>Create</strong></td>
 </tr>
 <tr class="odd">
 <td>How you change permissions</td>
 <td>The mode selector next to the send button</td>
 <td><strong>Shift+Tab</strong> cycles the modes</td>
-<td>See that tool’s documentation</td>
+<td>The project’s security preset, in its settings</td>
 </tr>
 <tr class="even">
 <td>Supported in the room</td>
@@ -428,12 +429,10 @@ Table&nbsp;1: Ways to run an agent for this book. Everything in later chapters w
 <ol type="1">
 <li>Download the installer for your computer from <a href="https://claude.com/download">claude.com/download</a> and run it. Windows on ARM (some Surface laptops) has a separate installer, linked from the <a href="https://code.claude.com/docs/en/desktop-quickstart">desktop quickstart</a>.</li>
 <li>Open Claude from Applications (macOS) or the Start menu (Windows) and sign in.</li>
-<li>Click the <strong>Code</strong> tab at the top centre.</li>
+<li>Click <strong>Code</strong> at the top of the window.</li>
 </ol>
-<p>The app has three tabs, and only one of them is for this book <span class="citation" data-cites="url:https://code.claude.com/docs/en/desktop-quickstart">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/desktop-quickstart" role="doc-biblioref"><span>“Get Started with the Desktop App,”</span> n.d.</a>)</span>:</p>
-<div class="no-row-height column-margin column-container"><div id="ref-url:https://code.claude.com/docs/en/desktop-quickstart" class="csl-entry" role="listitem">
-<span>“Get Started with the Desktop App.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/desktop-quickstart">https://code.claude.com/docs/en/desktop-quickstart</a>.
-</div></div><div id="tbl-setup-tabs" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<p>The app has two places to work, and only one of them is for this book:</p>
+<div id="tbl-setup-tabs" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-setup-tabs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
@@ -444,23 +443,18 @@ Table&nbsp;1: Ways to run an agent for this book. Everything in later chapters w
 </colgroup>
 <thead>
 <tr class="header">
-<th>Tab</th>
+<th>Where</th>
 <th>What it is</th>
 <th>For this book?</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Chat</strong></td>
-<td>Conversation, like claude.ai. It can’t see your files.</td>
+<td><strong>Home</strong></td>
+<td>Chat and Cowork. A <strong>Chat / Cowork</strong> switch at the bottom left of the message box picks between a conversation (it can’t see your files) and Cowork, a background agent that works in its own sandbox. On some accounts there’s no switch: Claude picks for you.</td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><strong>Cowork</strong></td>
-<td>A background agent that works in its own sandboxed virtual machine.</td>
-<td>No</td>
-</tr>
-<tr class="odd">
 <td><strong>Code</strong></td>
 <td>An agent working directly on files in a folder you choose.</td>
 <td><strong>Yes</strong></td>
@@ -469,11 +463,18 @@ Table&nbsp;1: Ways to run an agent for this book. Everything in later chapters w
 </table>
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-setup-tabs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: The desktop app’s three tabs.
+Table&nbsp;2: The desktop app, as of September 2026.
 </figcaption>
 </figure>
 </div>
-<p>The desktop app includes Claude Code. You don’t need to install anything else.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The app changes often. Older versions, and some of the documentation, show three tabs instead: <strong>Chat</strong>, <strong>Cowork</strong> and <strong>Code</strong> <span class="citation" data-cites="url:https://code.claude.com/docs/en/desktop-quickstart">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/desktop-quickstart" role="doc-biblioref"><span>“Get Started with the Desktop App,”</span> n.d.</a>)</span>. Chat and Cowork now “share one home” <span class="citation" data-cites="url:https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile">(<a href="../appendices/references.html#ref-url:https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile" role="doc-biblioref"><span>“Use <span>Claude</span> <span>Cowork</span> on Web, Desktop, and Mobile <span>Claude</span> <span>Help</span> <span>Center</span>”</span> 2026</a>)</span>. Whatever yours shows, you want <strong>Code</strong>.</p>
+<div id="ref-url:https://code.claude.com/docs/en/desktop-quickstart" class="csl-entry" role="listitem">
+<span>“Get Started with the Desktop App.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/desktop-quickstart">https://code.claude.com/docs/en/desktop-quickstart</a>.
+</div><div id="ref-url:https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile" class="csl-entry" role="listitem">
+<span>“Use <span>Claude</span> <span>Cowork</span> on Web, Desktop, and Mobile <span>Claude</span> <span>Help</span> <span>Center</span>.”</span> 2026. September 16. <a href="https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile">https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile</a>.
+</div></div></div><p>The desktop app includes Claude Code. You don’t need to install anything else.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -517,13 +518,31 @@ Table&nbsp;2: The desktop app’s three tabs.
 </div>
 </div>
 </div>
+</section>
+<section id="google-antigravity-an-alternative" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="google-antigravity-an-alternative">Google Antigravity (an alternative)</h3>
+<p>Google’s agent, <a href="https://antigravity.google/download">Antigravity 2.0</a>, is a desktop app that works much like Claude’s Code pane <span class="citation" data-cites="url:https://antigravity.google/docs/getting-started">(<a href="../appendices/references.html#ref-url:https://antigravity.google/docs/getting-started" role="doc-biblioref"><span>“Getting <span>Started</span>,”</span> n.d.</a>)</span>. Download it for macOS, Windows or Linux, open it, and sign in with a Google account.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://antigravity.google/docs/getting-started" class="csl-entry" role="listitem">
+<span>“Getting <span>Started</span>.”</span> n.d. Accessed September 23, 2026. <a href="https://antigravity.google/docs/getting-started/">https://antigravity.google/docs/getting-started/</a>.
+</div></div><ul>
+<li><strong>Use a personal Google account</strong> (an <code>@gmail.com</code> address). Antigravity’s FAQ says institutional Google Workspace accounts may not be able to sign in <span class="citation" data-cites="url:https://antigravity.google/docs/faq">(<a href="../appendices/references.html#ref-url:https://antigravity.google/docs/faq" role="doc-biblioref"><span>“FAQ,”</span> n.d.</a>)</span>.</li>
+<li>Its agent works in a <strong>Project</strong>: one or more folders you add. By default it can only read and write inside those folders, and it asks before running terminal commands <span class="citation" data-cites="url:https://antigravity.google/docs/features">(<a href="../appendices/references.html#ref-url:https://antigravity.google/docs/features" role="doc-biblioref"><span>“Feature <span>Overview</span>,”</span> n.d.</a>)</span>.</li>
+<li>Where this book says <code>CLAUDE.md</code>, Antigravity reads <code>AGENTS.md</code> (and <code>GEMINI.md</code>); its project skills go in <code>.agents/skills/</code> and its MCP servers in <code>.agents/mcp_config.json</code> <span class="citation" data-cites="url:https://antigravity.google/docs/cli/gcli-migration">(<a href="../appendices/references.html#ref-url:https://antigravity.google/docs/cli/gcli-migration" role="doc-biblioref"><span>“Migration,”</span> n.d.</a>)</span>.</li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://antigravity.google/docs/faq" class="csl-entry" role="listitem">
+<span>“FAQ.”</span> n.d. Accessed September 23, 2026. <a href="https://antigravity.google/docs/faq/">https://antigravity.google/docs/faq/</a>.
+</div><div id="ref-url:https://antigravity.google/docs/features" class="csl-entry" role="listitem">
+<span>“Feature <span>Overview</span>.”</span> n.d. Accessed September 23, 2026. <a href="https://antigravity.google/docs/features/">https://antigravity.google/docs/features/</a>.
+</div><div id="ref-url:https://antigravity.google/docs/cli/gcli-migration" class="csl-entry" role="listitem">
+<span>“Migration.”</span> n.d. Accessed September 23, 2026. <a href="https://antigravity.google/docs/cli/gcli-migration/">https://antigravity.google/docs/cli/gcli-migration/</a>.
+</div></div><p>Gemini CLI, which earlier versions of this workshop mentioned, has been replaced by Antigravity’s CLI.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Using Gemini CLI, Codex or GitHub Copilot?
+<span class="screen-reader-only">Tip</span>Using Codex or GitHub Copilot?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -534,7 +553,8 @@ Table&nbsp;2: The desktop app’s three tabs.
 </section>
 <section id="make-a-workshop-folder" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="make-a-workshop-folder">Make a workshop folder</h2>
-<p>Make a new, empty folder called <code>agents-workshop</code> inside your <strong>Documents</strong> folder:</p>
+<p>Make a new, empty folder called <code>agents-workshop</code> inside your <strong>Documents</strong> folder. The easiest place to do it is the agent app itself, as you start your first session (next section): the folder picker in Claude’s Code pane, and in Antigravity, opens on your files, and you can make a new folder there before selecting it.</p>
+<p>If you’d rather make it first:</p>
 <ul>
 <li><strong>macOS:</strong> in Finder, open Documents, then <strong>File → New Folder</strong>.</li>
 <li><strong>Windows:</strong> in File Explorer, open Documents, then right-click an empty space and choose <strong>New → Folder</strong>.</li>
@@ -563,7 +583,8 @@ Table&nbsp;2: The desktop app’s three tabs.
 <section id="setup-start-session" class="level2">
 <h2 class="anchored" data-anchor-id="setup-start-session">Start a session in the folder</h2>
 <p>This is the one place the book explains how to start a session. Every later chapter says “start a new session in <folder>” and links back here; the steps are always these.</folder></p>
-<p><strong>Desktop app.</strong> In the Code tab, choose <strong>Local</strong> as the environment, click <strong>Select folder</strong>, and pick the folder (here, <code>agents-workshop</code>). Leave the model on its default. Then type your first prompt and press <strong>Enter</strong>.</p>
+<p><strong>Desktop app.</strong> In <strong>Code</strong>, choose <strong>Local</strong> as the environment and click <strong>Select folder</strong>. Go to Documents, make the <code>agents-workshop</code> folder there if you haven’t yet, and select it. Leave the model on its default. Then type your first prompt and press <strong>Enter</strong>.</p>
+<p><strong>Antigravity.</strong> Click the folder icon with a “+” in the left sidebar, then <strong>New Project</strong>. Click <strong>Add Folder</strong>, go to Documents, make <code>agents-workshop</code> there if you haven’t yet, and select it. Click <strong>Create</strong>, then type your first prompt in the project.</p>
 <p><strong>Command line.</strong> Open a terminal, move into the folder, and start the agent:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Documents/agents-workshop</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -691,7 +712,7 @@ Figure&nbsp;2: Deciding on a permission prompt. When in doubt, say no and ask th
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Privacy
+<span class="screen-reader-only">Important</span>Privacy: what not to give the agent
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -701,7 +722,10 @@ Figure&nbsp;2: Deciding on a permission prompt. When in doubt, say no and ask th
 </section>
 <section id="what-to-notice" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-notice">What to notice</h2>
-<p>The agent answered a question about your computer, not about the world, and made a real file you could open without it. A chatbot couldn’t do either.</p>
+<ul>
+<li><strong>It answered a question about your computer</strong>, not about the world. A chatbot can’t tell you what’s in your Documents folder.</li>
+<li><strong>It made a real file you could open without it.</strong> That’s the difference the rest of the book builds on, and the reason for the folder.</li>
+</ul>
 </section>
 <section id="check-yourself" class="level2">
 <h2 class="anchored" data-anchor-id="check-yourself">Check yourself</h2>
@@ -716,23 +740,35 @@ Figure&nbsp;2: Deciding on a permission prompt. When in doubt, say no and ask th
 </div>
 <div class="callout-body-container callout-body">
 <ul class="task-list">
-<li><label><input type="checkbox">Claude (the Code tab) or <code>claude</code> opens and you’re signed in.</label></li>
+<li><label><input type="checkbox">Claude (<strong>Code</strong>), <code>claude</code>, or Antigravity opens and you’re signed in.</label></li>
 <li><label><input type="checkbox">Asked “What folder are you in, and what’s in it?”, the agent names your <code>agents-workshop</code> folder.</label></li>
 <li><label><input type="checkbox">You found and opened <code>hello.txt</code> yourself, outside the agent.</label></li>
 <li><label><input type="checkbox">You know where the permission mode is, and have set it to <strong>Manual</strong> or <strong>Accept edits</strong>.</label></li>
 <li><label><input type="checkbox">You can start a new session.</label></li>
 </ul>
-<p><strong>If it goes wrong:</strong> paste the exact error message into a session and ask the agent what it means (it is surprisingly good at diagnosing its own setup), or pair with a neighbour. Two people at one laptop is a fine way to do this book.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>If it goes wrong
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Paste the exact error message into a session and ask the agent what it means (it is surprisingly good at diagnosing its own setup), or pair with a neighbour. Two people at one laptop is a fine way to do this book.</p>
 </div>
 </div>
 </section>
 <section id="going-further" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="going-further">Going further</h2>
 <ul>
-<li><a href="https://code.claude.com/docs/en/desktop-quickstart">Get started with the desktop app</a> and the fuller <a href="https://code.claude.com/docs/en/desktop">desktop guide</a>.</li>
-<li><a href="https://code.claude.com/docs/en/permission-modes">Choose a permission mode</a>: every mode, and what none of them will do without asking.</li>
-<li><a href="https://code.claude.com/docs/en/terminal-guide">Claude Code for first-time terminal users</a> <span class="citation" data-cites="url:https://code.claude.com/docs/en/terminal-guide">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/terminal-guide" role="doc-biblioref"><span>“Terminal Guide for New Users,”</span> n.d.</a>)</span>.</li>
-<li>On Windows: <a href="../appendices/windows.html" class="quarto-xref"><span>Appendix A — Windows notes</span></a>.</li>
+<li><strong>The desktop app in full:</strong> the <a href="https://code.claude.com/docs/en/desktop-quickstart">quickstart</a> and the <a href="https://code.claude.com/docs/en/desktop">desktop guide</a>.</li>
+<li><strong>Every permission mode</strong>, and what none of them will do without asking: <a href="https://code.claude.com/docs/en/permission-modes">Choose a permission mode</a>.</li>
+<li><strong>New to the terminal?</strong> <a href="https://code.claude.com/docs/en/terminal-guide">Claude Code for first-time terminal users</a> <span class="citation" data-cites="url:https://code.claude.com/docs/en/terminal-guide">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/terminal-guide" role="doc-biblioref"><span>“Terminal Guide for New Users,”</span> n.d.</a>)</span>.</li>
+<li><strong>On Windows:</strong> <a href="../appendices/windows.html" class="quarto-xref"><span>Appendix A — Windows notes</span></a>.</li>
 </ul>
 
 

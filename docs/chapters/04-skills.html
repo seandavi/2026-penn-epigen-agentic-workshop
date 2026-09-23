@@ -400,7 +400,7 @@ Figure&nbsp;4.2: How a skill gets loaded. The agent sees only the description un
 <h3 data-number="4.2.2" class="anchored" data-anchor-id="where-skills-live"><span class="header-section-number">4.2.2</span> Where skills live</h3>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><strong>An open format.</strong> <code>SKILL.md</code> follows the Agent Skills standard <span class="citation" data-cites="url:https://agentskills.io">(<a href="../appendices/references.html#ref-url:https://agentskills.io" role="doc-biblioref"><span>“Agent <span>Skills</span> <span>Overview</span>,”</span> n.d.</a>)</span>, so the same folder works in Codex CLI, Gemini CLI and GitHub Copilot as well as Claude Code. Where each tool looks for skills differs; check its documentation.</p>
+<p><strong>An open format.</strong> <code>SKILL.md</code> follows the Agent Skills standard <span class="citation" data-cites="url:https://agentskills.io">(<a href="../appendices/references.html#ref-url:https://agentskills.io" role="doc-biblioref"><span>“Agent <span>Skills</span> <span>Overview</span>,”</span> n.d.</a>)</span>, so the same folder works in Codex CLI, Google Antigravity and GitHub Copilot as well as Claude Code. Where each tool looks for skills differs (Antigravity: <code>.agents/skills/</code> in the project); check its documentation.</p>
 <div id="ref-url:https://agentskills.io" class="csl-entry" role="listitem">
 <span>“Agent <span>Skills</span> <span>Overview</span>.”</span> n.d. Accessed September 23, 2026. <a href="https://agentskills.io/home">https://agentskills.io/home</a>.
 </div></div></div><div id="tbl-skills-where" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
@@ -734,13 +734,13 @@ Table&nbsp;4.4: Candidate files for a checking skill.
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Invoke-WebRequest on Windows), not by retyping it:</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/sample_sheet_messy.csv</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>Then tell me how many rows and columns it has.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>What you show the agent leaves your computer
+<span class="screen-reader-only">Important</span>Privacy: what you show the agent leaves your computer
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -855,14 +855,25 @@ Table&nbsp;4.5: An example should/shouldn’t pair for a sample-sheet checker.
 </section>
 <section id="check-yourself" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="check-yourself"><span class="header-section-number">4.6</span> Check yourself</h2>
-<p>You’re done when:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>You’re done when
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul class="task-list">
-<li><label><input type="checkbox">your skill is at <code>.claude/skills/&lt;name&gt;/SKILL.md</code> in your project folder;</label></li>
-<li><label><input type="checkbox">on your good file, it reported nothing false;</label></li>
-<li><label><input type="checkbox">on your broken file, it found everything you planted, or you’ve changed it so it does;</label></li>
-<li><label><input type="checkbox">it loaded for a phrasing that isn’t copied from its description, and didn’t load for a neighbouring request;</label></li>
-<li><label><input type="checkbox">you’ve added a ledger entry (<a href="02-ledger.html" class="quarto-xref"><span>Chapter 2</span></a>) saying what you tested it on and what it missed.</label></li>
+<li><label><input type="checkbox">Your skill is at <code>.claude/skills/&lt;name&gt;/SKILL.md</code> in your project folder.</label></li>
+<li><label><input type="checkbox">On your good file, it reported nothing false.</label></li>
+<li><label><input type="checkbox">On your broken file, it found everything you planted, or you’ve changed it so it does.</label></li>
+<li><label><input type="checkbox">It loaded for a phrasing that isn’t copied from its description, and didn’t load for a neighbouring request.</label></li>
+<li><label><input type="checkbox">You’ve added a ledger entry (<a href="02-ledger.html" class="quarto-xref"><span>Chapter 2</span></a>) saying what you tested it on and what it missed.</label></li>
 </ul>
+</div>
+</div>
 </section>
 <section id="going-further" class="level2 page-columns page-full" data-number="4.7">
 <h2 data-number="4.7" class="anchored" data-anchor-id="going-further"><span class="header-section-number">4.7</span> Going further</h2>

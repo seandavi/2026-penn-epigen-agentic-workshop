@@ -498,3 +498,73 @@ file names and chapter numbers disagreed.
 **Keep** — A shared brief made eight parallel chapters read as one book; a reviewer
 reading the whole thing in order found what no chapter writer could: folders that
 drifted, a ledger model that changed between chapters, and a timetable that didn't fit.
+
+---
+
+## Entry 15 — Antigravity replaces Gemini CLI; the desktop app's Home and Code
+
+**Asked** — *SD*: Gemini CLI is no more; use Antigravity. Read the Claude desktop docs:
+the UI may now be "Home" and "Code", with a chat/cowork switch. In both apps, the folder
+picker can make a new folder.
+
+**Agent did** — Setup: the surfaces table's third column is now Antigravity 2.0 (Projects,
+personal Google account, where it reads instructions, skills and MCP config); the
+desktop table is Home and Code, with the old three-tab layout in a margin note; the
+folder is made from the app's folder picker. Gemini CLI replaced in the preface and
+chapters 3–5; a Correction note on ADR-0004.
+
+**Checked how** — *Agent*: the Claude Code docs (desktop-quickstart.md) still say three
+tabs, Chat, Cowork and Code; the Help Center (release notes of 7 July 2026, and "Use
+Claude Cowork on web, desktop, and mobile") says Chat and Cowork "share one home", with a
+Chat/Cowork switch in the message box, or none on accounts with the newer merged
+experience. Antigravity facts from its docs: getting-started, features, faq and the
+Gemini CLI migration page. Render clean; Setup checked in Chrome. **Not checked:** the
+top-level labels "Home" and "Code" are SD's observation, not from a doc; the folder
+picker's new-folder button, in either app.
+
+**Confidently wrong** — *Agent*: the book followed the Claude Code docs' three-tab
+description, which is out of date.
+
+**Keep** — For UI, the Help Center and release notes move faster than the product docs.
+
+---
+
+## Entry 16 — The ledger: the agent writes it, and it records what matters
+
+**Asked** (SD)
+
+> I'd make it clear in Chapter 2 that the ledger is something that the agent writes,
+> sometimes at our behest, but often on its own. I'd also stress that the ledger is not
+> about everything we did; it is a record of the important things we did.
+
+**Agent did**
+
+Reframed chapter 2. The opening now says the agent writes the ledger and that it isn't a
+record of everything. New sections: *Who writes it*, with a table of the three ways an
+entry gets written, and *What earns an entry*, with a table of what's worth one. The
+loop diagram was redrawn so the agent writes the entry and the person corrects *Checked
+how*. It also fixes a Mermaid `accDescr` that had been cut off mid-sentence. *Your
+turn* was rewritten: the agent writes entry 1 and the attendee corrects it; then a
+standing instruction, one change that matters and one that doesn't, to see whether it
+records the first and skips the second. Follow-on edits: `exercises/LEDGER-template.md`,
+chapter 3 step 6, chapter 5's two ledger steps, chapter 7's table ("for each piece of
+work worth recording"). ADR-0005 gets a Correction section.
+
+**Checked how**
+
+*Agent:* full render with no warnings. In Chrome: no unresolved `?@` references in
+chapters 2, 3, 5 and 7, the diagrams render, and the new tables and diagram in chapter 2
+were looked at in a screenshot. "Sixteen entries for about forty commits" was counted
+from this file and `git log`. Not checked: the new *Your turn* prompts have not been
+run with an agent. Nobody has checked whether an agent given the standing instruction
+actually records the real change and skips the colour change. Not checked either: what
+a new session writes when it can't see chapter 1.
+
+**Confidently wrong**
+
+Nothing caught.
+
+**Keep**
+
+The honest version of "the agent does it on its own" is "it does it because a standing
+instruction tells it to". The book says so.

@@ -304,7 +304,6 @@ div.csl-indent {
   <li><a href="#check-what-the-agent-can-now-do" id="toc-check-what-the-agent-can-now-do" class="nav-link" data-scroll-target="#check-what-the-agent-can-now-do"><span class="header-section-number">5.4.3</span> 3. Check what the agent can now do</a></li>
   <li><a href="#ask-again-with-the-database" id="toc-ask-again-with-the-database" class="nav-link" data-scroll-target="#ask-again-with-the-database"><span class="header-section-number">5.4.4</span> 4. Ask again, with the database</a></li>
   <li><a href="#check-three-pmids-by-hand" id="toc-check-three-pmids-by-hand" class="nav-link" data-scroll-target="#check-three-pmids-by-hand"><span class="header-section-number">5.4.5</span> 5. Check three PMIDs by hand</a></li>
-  <li><a href="#if-it-goes-wrong" id="toc-if-it-goes-wrong" class="nav-link" data-scroll-target="#if-it-goes-wrong"><span class="header-section-number">5.4.6</span> If it goes wrong</a></li>
   </ul></li>
   <li><a href="#what-to-notice" id="toc-what-to-notice" class="nav-link" data-scroll-target="#what-to-notice"><span class="header-section-number">5.5</span> What to notice</a></li>
   <li><a href="#check-yourself" id="toc-check-yourself" class="nav-link" data-scroll-target="#check-yourself"><span class="header-section-number">5.6</span> Check yourself</a></li>
@@ -386,7 +385,7 @@ Figure&nbsp;5.1: One question, answered through the PubMed MCP server. The agent
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><strong>Protocol</strong>: an agreed way for two programs to talk. Because MCP is shared, the same PubMed server works with Claude Code, Claude’s desktop app, Gemini CLI, Codex and Copilot. Only the place you configure it differs.</p>
+<p><strong>Protocol</strong>: an agreed way for two programs to talk. Because MCP is shared, the same PubMed server works with Claude Code, Claude’s desktop app, Google Antigravity, Codex and Copilot. Only the place you configure it differs.</p>
 </div></div><p>Two things follow from this picture. First, <strong>the agent writes the query</strong>. You asked in plain English; the agent turned that into search terms, and a search can match the wrong organism, the wrong assay or the wrong TCF (there are several). Second, <strong>the server sees your question</strong>, or at least the parts of it the agent sends. Both come back later in this chapter.</p>
 <p><a href="#tbl-mcp-vs-skill" class="quarto-xref">Table&nbsp;<span>5.1</span></a> sets MCP beside the skill you wrote in <a href="04-skills.html" class="quarto-xref"><span>Chapter 4</span></a>.</p>
 <div id="tbl-mcp-vs-skill" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
@@ -531,13 +530,13 @@ Shan, Qiang, Xiang Li, Xia Chen, et al. 2021. <span>“Tcf1 and <span>Lef1</span
 <section id="your-turn" class="level2 page-columns page-full" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">5.4</span> Your turn</h2>
 <p>You’ll need about 20 minutes. Inside your <code>agents-workshop</code> folder in Documents (from <a href="../chapters/00-setup.html">Setup</a>), make a new folder called <code>mcp</code>, and start a <strong>new</strong> session on it. Ask “what folder are you in?” to be sure. Everything in this chapter happens in <code>agents-workshop/mcp</code>, and its <code>LEDGER.md</code> lives there too (<a href="02-ledger.html" class="quarto-xref"><span>Chapter 2</span></a>).</p>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>What leaves your machine
+<span class="screen-reader-only">Important</span>Privacy: what leaves your machine
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -550,7 +549,7 @@ Shan, Qiang, Xiang Li, Xia Chen, et al. 2021. <span>“Tcf1 and <span>Lef1</span
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Find three recent papers on &lt;your topic&gt;. For each give the first author, year,</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>journal, title and PMID. Say where each fact came from. Don't search the web, and</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>don't use any PubMed or other database tools.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The last sentence matters: Claude Code can search the web, and your account may already have a PubMed connection (see “Two PubMed servers?” below). Today you want to see what the agent knows <strong>without</strong> a database. Start a <code>LEDGER.md</code> entry in this folder: the prompt goes under <em>Asked</em>, and the agent’s answer under <em>Agent did</em>.</p>
+<p>The last sentence matters: Claude Code can search the web, and your account may already have a PubMed connection (see “Two PubMed servers?” below). Today you want to see what the agent knows <strong>without</strong> a database. Ask the agent to start <code>LEDGER.md</code> in this folder with an entry for this question: the prompt under <em>Asked</em>, its answer under <em>Agent did</em>.</p>
 <p>No topic in mind? Use ours: the question in the worked example. Or use genes from the Vahedi lab’s RNA-seq data: the top hits in <code>differential_genes.tsv</code>, from their repository’s <code>track-a/data/README.md</code>, are Jun, Myc, Irf4 and Ccr7, in B cells lacking a CTCF binding site (<a href="https://github.com/golnazvahedi/epigenetics-agentic-workshop">Vahedi lab repository</a>).</p>
 </section>
 <section id="connect-pubmed" class="level3 page-columns page-full" data-number="5.4.2">
@@ -637,11 +636,11 @@ Table&nbsp;5.3: Three ways to connect the same server. A and B only affect this 
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Using Gemini CLI, Codex or Copilot?
+<span class="screen-reader-only">Tip</span>Using Antigravity, Codex or Copilot?
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The server is the same; only the configuration file differs. Ask your agent: “Add a remote HTTP MCP server called pubmed, at https://pubmed.mcp.claude.com/mcp, to your own MCP configuration for this folder, and tell me which file you changed.” Then check the file it names.</p>
+<p>The server is the same; only the configuration file differs. Ask your agent: “Add a remote HTTP MCP server called pubmed, at https://pubmed.mcp.claude.com/mcp, to your own MCP configuration for this folder, and tell me which file you changed.” Then check the file it names. (In Antigravity it’s <code>.agents/mcp_config.json</code>.)</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -704,7 +703,7 @@ Table&nbsp;5.3: Three ways to connect the same server. A and B only affect this 
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>title alone.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Put the two answers side by side. What’s different: the papers, the PMIDs, how sure the agent sounds, what it says about where each fact came from?</p>
 </section>
-<section id="check-three-pmids-by-hand" class="level3" data-number="5.4.5">
+<section id="check-three-pmids-by-hand" class="level3 page-columns page-full" data-number="5.4.5">
 <h3 data-number="5.4.5" class="anchored" data-anchor-id="check-three-pmids-by-hand"><span class="header-section-number">5.4.5</span> 5. Check three PMIDs by hand</h3>
 <p>This is the step that counts. For three of the papers, open <code>https://pubmed.ncbi.nlm.nih.gov/&lt;PMID&gt;/</code> in your browser, putting the PMID in place of <code>&lt;PMID&gt;</code>, and check:</p>
 <ol type="1">
@@ -712,12 +711,19 @@ Table&nbsp;5.3: Three ways to connect the same server. A and B only affect this 
 <li><strong>Is it about what you asked?</strong> Right organism, right assay, right gene? A search for “TCF” can find the wrong TCF.</li>
 <li><strong>Does the abstract support what the agent said about it?</strong> Read it. This is the check no tool can do for you.</li>
 </ol>
-<p>Then write a second ledger entry. <em>Asked</em> is the step 4 prompt; <em>Agent did</em> is how you connected PubMed and what the agent answered; <em>Checked how</em> is the three PMIDs and what you found; <em>Confidently wrong</em> is anything that didn’t hold up; <em>Keep</em> is what you’d do the same way next time.</p>
-</section>
-<section id="if-it-goes-wrong" class="level3 page-columns page-full" data-number="5.4.6">
-<h3 data-number="5.4.6" class="anchored" data-anchor-id="if-it-goes-wrong"><span class="header-section-number">5.4.6</span> If it goes wrong</h3>
-<div id="tbl-mcp-troubleshoot" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<p>Then have the agent add a second ledger entry, and correct it (<a href="02-ledger.html" class="quarto-xref"><span>Chapter 2</span></a>). <em>Asked</em> is the step 4 prompt; <em>Agent did</em> is how you connected PubMed and what the agent answered; <em>Checked how</em> is the three PMIDs and what you found, in your words; <em>Confidently wrong</em> is anything that didn’t hold up; <em>Keep</em> is what you’d do the same way next time.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>If it goes wrong
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div id="tbl-mcp-troubleshoot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure" aria-labelledby="tbl-mcp-troubleshoot-caption">
 <div aria-describedby="tbl-mcp-troubleshoot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <colgroup>
@@ -754,12 +760,14 @@ Table&nbsp;5.3: Three ways to connect the same server. A and B only affect this 
 </tbody>
 </table>
 </div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-mcp-troubleshoot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5.4: Common problems when connecting a server.
-</figcaption>
+
 </figure>
 </div>
-</section>
+</div>
+</div>
+<div id="tbl-mcp-troubleshoot-caption" class="margin-figure-caption column-margin callout-margin-content">
+Table&nbsp;5.4: Common problems when connecting a server.
+</div></section>
 </section>
 <section id="what-to-notice" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="what-to-notice"><span class="header-section-number">5.5</span> What to notice</h2>
@@ -772,13 +780,24 @@ Table&nbsp;5.4: Common problems when connecting a server.
 </section>
 <section id="check-yourself" class="level2 page-columns page-full" data-number="5.6">
 <h2 data-number="5.6" class="anchored" data-anchor-id="check-yourself"><span class="header-section-number">5.6</span> Check yourself</h2>
-<p>You’re done when:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>You’re done when
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul class="task-list">
-<li><label><input type="checkbox">the agent lists the PubMed server and its tools;</label></li>
-<li><label><input type="checkbox">you have two answers to the same question, one from memory and one from PubMed;</label></li>
-<li><label><input type="checkbox">you have opened three PMIDs on the PubMed website and checked them against what the agent said;</label></li>
-<li><label><input type="checkbox">your ledger has an entry saying what you checked and what you found.</label></li>
+<li><label><input type="checkbox">The agent lists the PubMed server and its tools.</label></li>
+<li><label><input type="checkbox">You have two answers to the same question, one from memory and one from PubMed.</label></li>
+<li><label><input type="checkbox">You have opened three PMIDs on the PubMed website and checked them against what the agent said.</label></li>
+<li><label><input type="checkbox">Your ledger has an entry saying what you checked and what you found.</label></li>
 </ul>
+</div>
+</div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

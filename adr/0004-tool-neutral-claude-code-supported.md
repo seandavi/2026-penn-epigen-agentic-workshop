@@ -36,3 +36,9 @@ different file for each tool. The deck carries the mapping.
 
 We must not describe the workshop as requiring Claude Code in any attendee-facing
 material.
+
+## Correction
+
+2026-09-23: Gemini CLI has been replaced by Google Antigravity
+(<https://antigravity.google/download>). Read "Gemini CLI" above as "Antigravity"; the
+decision is unchanged.

@@ -327,8 +327,10 @@ div.csl-indent {
 </header>
 
 
-<p>Open a real analysis folder, one you’ve worked in for a few months, and look at it as a stranger would. There’s a <code>data/</code> folder, but is everything in it raw, or did someone save a filtered table there too? There are four scripts with names like <code>qc.R</code>, <code>qc_v2.R</code> and <code>qc_final_SD.R</code>: which one is current? A <code>results/</code> folder holds figures from last spring, and nothing says whether they came from the current script. The sample sheet has a column called <code>cond</code>, and only you know that <code>1</code> is the knockout.</p>
-<p>An agent opening that folder is the stranger. It reads quickly and well: files, code, headers, any README it finds. What it can’t read is <strong>what’s only in your head</strong>. Which files it must never touch. Where new output goes. The convention that looks like a mistake and isn’t. What “done” means to you. So it guesses, reasonably, and some of its guesses are wrong <em>for you</em>. You correct it. Next session it has forgotten, and you correct it again.</p>
+<p>An agent works on <strong>files and folders</strong>. It can list what’s in a folder, open and read the files, write new ones and change old ones. That’s what makes it useful, and it’s also why it needs to know how <em>your</em> folder works.</p>
+<p>Imagine a folder you’ve worked in for a few months. <strong>This one is hypothetical</strong>: a made-up composite, not anyone’s real project, though most of us have one like it. Say there’s a <code>data/</code> folder, but is everything in it raw, or did someone save a filtered table there too? Say there are scripts called <code>qc.R</code>, <code>qc_v2.R</code> and <code>qc_final.R</code>: which one is current? A <code>results/</code> folder holds figures from last spring, and nothing says whether they came from the current script. The sample sheet has a column called <code>cond</code>, and only you know that <code>1</code> is the knockout.</p>
+<p>It needn’t be an analysis. A grant folder has three drafts of the aims page and a budget spreadsheet only you know is out of date. A manuscript folder has figure files whose numbering stopped matching the text two revisions ago. A teaching folder has last year’s slides next to this year’s. Every one of them is full of things that are obvious to you and invisible to anyone else.</p>
+<p>An agent opening a folder like that is the stranger. It reads quickly and well: files, code, headers, any README it finds. What it can’t read is <strong>what’s only in your head</strong>. Which files it must never touch. Where new output goes. The convention that looks like a mistake and isn’t. What “done” means to you. So it guesses, reasonably, and some of its guesses are wrong <em>for you</em>. You correct it. Next session it has forgotten, and you correct it again.</p>
 <p>This morning’s talk made the fix sound simple: write it down once, in a file the agent reads at the start of every session. It is simple, but there are two traps. The first is writing too much: a long file that restates what the agent could have read for itself, which costs context on every turn and buries the few lines that matter. The second is copying: pasting the sample-sheet description into the agent’s file as well as the README, so there are now two versions to keep in step, and one of them will drift.</p>
 <p>This chapter is about writing the short file, and pointing to everything else.</p>
 <section id="what-youll-learn" class="level2" data-number="3.1">
@@ -343,7 +345,7 @@ div.csl-indent {
 <section id="two-files-two-readers" class="level2 page-columns page-full" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="two-files-two-readers"><span class="header-section-number">3.2</span> Two files, two readers</h2>
 <p>Most projects that have any documentation have a README. It’s written for a person: someone new to the lab, a collaborator, a reviewer, you in a year. It says what the project is, how to run it and who to ask. It can be friendly and discursive, because people skim.</p>
-<p>An <code>AGENTS.md</code> is written for an agent, and it should contain <strong>only what an agent can’t work out by reading the folder</strong>, written as rules. The agent will read your README and your code anyway; the agent’s file doesn’t need to explain them. What it needs are the things no amount of reading would reveal: <em><code>data/</code> is read-only</em>, <em>new output goes in <code>results/</code></em>, <em>check the direction of a fold change before you state it</em>. Write those as <strong>must</strong> and <strong>must not</strong>. “We generally prefer” reads as advice to a person and as negotiable to an agent.</p>
+<p>An <code>AGENTS.md</code> is written for an agent, and it should contain <strong>only what an agent can’t work out by reading the folder</strong>, written as rules. The agent will read your README and your files anyway; the agent’s file doesn’t need to explain them. What it needs are the things no amount of reading would reveal: <em><code>data/</code> is read-only</em>, <em>new output goes in <code>results/</code></em>, <em>check the direction of a fold change before you state it</em>. Write those as <strong>must</strong> and <strong>must not</strong>. “We generally prefer” reads as advice to a person and as negotiable to an agent.</p>
 <div id="tbl-teach-readme-vs-agents" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-teach-readme-vs-agents-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -401,7 +403,7 @@ Table&nbsp;3.1: A README and an AGENTS.md do different jobs. The agent reads bot
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><strong>Same idea, different names.</strong> <code>AGENTS.md</code> is an open convention that many tools read <span class="citation" data-cites="url:https://agents.md">(<a href="../appendices/references.html#ref-url:https://agents.md" role="doc-biblioref"><span>“AGENTS.md,”</span> n.d.</a>)</span>. Claude Code’s own name is <code>CLAUDE.md</code>; Gemini CLI’s is <code>GEMINI.md</code> by default. Codex reads <code>AGENTS.md</code>. Check your tool’s documentation if you’re not on Claude Code.</p>
+<p><strong>Same idea, different names.</strong> <code>AGENTS.md</code> is an open convention that many tools read <span class="citation" data-cites="url:https://agents.md">(<a href="../appendices/references.html#ref-url:https://agents.md" role="doc-biblioref"><span>“AGENTS.md,”</span> n.d.</a>)</span>. Claude Code’s own name is <code>CLAUDE.md</code>. Google Antigravity reads <code>AGENTS.md</code> (and <code>GEMINI.md</code>), and so does Codex. Check your tool’s documentation if you’re not on Claude Code.</p>
 <div id="ref-url:https://agents.md" class="csl-entry" role="listitem">
 <span>“AGENTS.md.”</span> n.d. Accessed September 23, 2026. <a href="https://agents.md/">https://agents.md/</a>.
 </div></div><div id="ref-doi:10.1371/journal.pcbi.1006561" class="csl-entry" role="listitem">
@@ -626,21 +628,21 @@ Figure&nbsp;3.2: The loop in this chapter. The file is written from your correct
 </div></div></section>
 <section id="your-turn" class="level2 page-columns page-full" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">3.5</span> Your turn</h2>
-<p>About 30 minutes. You need a folder with some history: <strong>several scripts, some data, some results</strong>. A single notebook is too simple to show much.</p>
+<p>About 30 minutes. You need a folder with some history, and <strong>it doesn’t have to be an analysis</strong>. Several scripts, data and results work well. So does a grant folder, a manuscript with its figures, a set of protocols, or a course’s teaching materials: anything with enough files that a newcomer would need telling how it works. A single file is too simple to show much.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Privacy, and a copy
+<span class="screen-reader-only">Important</span>Privacy: work on a copy
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>The agent will read every file in the folder. Use data you’re allowed to share with the tool you’re using: nothing identifiable, no patient data, nothing unpublished you haven’t been cleared to use this way. If the folder matters, <strong>work on a copy</strong> until you trust your rules.</p>
 </div>
 </div>
-<p><strong>Your own folder.</strong> Start a new session with the analysis folder as its project folder, and check with <em>“What folder are you in?”</em></p>
+<p><strong>Your own folder.</strong> Start a new session with that folder as its project folder, and check with <em>“What folder are you in?”</em></p>
 <p><strong>The fallback.</strong> Inside <code>Documents/agents-workshop/</code>, make an empty folder called <code>teach-demo</code>, start a new session there (<a href="../chapters/00-setup.html">Setup</a>), and paste this:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>In this folder, make two subfolders, data and scripts. Download these files from</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/</span>
@@ -652,15 +654,19 @@ Figure&nbsp;3.2: The loop in this chapter. The file is written from your correct
 <p>That’s about 11.5 MB: the peak table is 6.7 MB, the gene table 3.5 MB, the counts 1.3 MB, and the rest a few KB each. These are real data from the Vahedi lab, shared for the workshop: don’t redistribute them.</p>
 <p>Now work through the loop in <a href="#fig-teach-loop" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>.</p>
 <ol type="1">
-<li><strong>Explore.</strong> Paste the explore prompt from the worked example. Read the summary carefully, and keep a list: everything it got wrong, every question it asked, and everything you’d have told a new student on their first day.</li>
-<li><strong>Sort the list.</strong> Not everything belongs in the agent’s file. Use
+<li><p><strong>Explore.</strong> Paste the explore prompt from the worked example. If your folder isn’t an analysis, use this instead:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Explore this folder and summarise it for me in under 250 words: what each file is,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>which look current and which look old or superseded, what this folder is for, and</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>anything you'd need to ask me before doing further work here. Don't change any files.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Read the summary carefully, and keep a list: everything it got wrong, every question it asked, and everything you’d have told a new student on their first day.</p></li>
+<li><p><strong>Sort the list.</strong> Not everything belongs in the agent’s file. Use</p>
 <ol class="example" type="1">
 <li></li>
 </ol></li>
-<li><strong>Write it down.</strong> Give the agent your list, using the worked example’s second prompt as a model. If there’s no README, ask for one too, for people: what this is, how to run it, who to ask.</li>
-<li><strong>Edit what it wrote.</strong> Delete any line the agent could have worked out by reading. Reword any rule that’s stricter or vaguer than you meant.</li>
-<li><strong>Test it.</strong> Start a <strong>new session</strong> in the same folder (<a href="../chapters/00-setup.html">Setup</a>): it begins with an empty conversation and reloads the instruction files. Give it a real next task, without repeating any rule. Watch whether the rules hold.</li>
-<li><strong>Ledger it.</strong> One entry: what you had to tell it, and whether writing it down stopped you having to (<a href="02-ledger.html" class="quarto-xref"><span>Chapter 2</span></a>).</li>
+<li><p><strong>Write it down.</strong> Give the agent your list, using the worked example’s second prompt as a model. If there’s no README, ask for one too, for people: what this is, how to run it, who to ask.</p></li>
+<li><p><strong>Edit what it wrote.</strong> Delete any line the agent could have worked out by reading. Reword any rule that’s stricter or vaguer than you meant.</p></li>
+<li><p><strong>Test it.</strong> Start a <strong>new session</strong> in the same folder (<a href="../chapters/00-setup.html">Setup</a>): it begins with an empty conversation and reloads the instruction files. Give it a real next task, without repeating any rule. Watch whether the rules hold.</p></li>
+<li><p><strong>Ledger it.</strong> Ask the agent for one entry, and correct it (<a href="02-ledger.html" class="quarto-xref"><span>Chapter 2</span></a>): what you had to tell it, and whether writing it down stopped you having to. If you gave <code>AGENTS.md</code> the ledger rule from <a href="02-ledger.html" class="quarto-xref"><span>Chapter 2</span></a>, it may have written one already.</p></li>
 </ol>
 <div id="tbl-teach-where-it-goes" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
@@ -682,7 +688,7 @@ Figure&nbsp;3.2: The loop in this chapter. The file is written from your correct
 <td><code>AGENTS.md</code></td>
 </tr>
 <tr class="even">
-<td>A fact about the project a person would need too: what the data are, how to run it</td>
+<td>A fact about the project a person would need too: what the files are, how to run or use them</td>
 <td><code>README.md</code>, or a doc the README links to</td>
 </tr>
 <tr class="odd">
@@ -715,12 +721,24 @@ Table&nbsp;3.3: Where each correction belongs.
 </section>
 <section id="check-yourself" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="check-yourself"><span class="header-section-number">3.7</span> Check yourself</h2>
-<ul>
-<li>Open a new session and ask <em>“What rules apply in this folder?”</em> Does its answer match your file, and nothing more?</li>
-<li>Is every line in <code>AGENTS.md</code> something the agent couldn’t have discovered by reading?</li>
-<li>Does anything appear in both the README and <code>AGENTS.md</code>? Replace one with a link.</li>
-<li>Did the new session follow the rules without you repeating them? If one slipped, was the rule unclear, or wasn’t the file loaded?</li>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>You’re done when
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul class="task-list">
+<li><label><input type="checkbox">In a new session, <em>“What rules apply in this folder?”</em> gets an answer that matches your file, and nothing more.</label></li>
+<li><label><input type="checkbox">Every line in <code>AGENTS.md</code> is something the agent couldn’t have discovered by reading.</label></li>
+<li><label><input type="checkbox">Nothing appears in both the README and <code>AGENTS.md</code>; where it did, one is now a link.</label></li>
+<li><label><input type="checkbox">The new session followed the rules without you repeating them. (If one slipped: was the rule unclear, or wasn’t the file loaded?)</label></li>
 </ul>
+</div>
+</div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

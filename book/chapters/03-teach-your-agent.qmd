@@ -1,13 +1,24 @@
 # Teach the agent your project {#sec-teach}
 
-Open a real analysis folder, one you've worked in for a few months, and look at it as
-a stranger would. There's a `data/` folder, but is everything in it raw, or did someone
-save a filtered table there too? There are four scripts with names like `qc.R`,
-`qc_v2.R` and `qc_final_SD.R`: which one is current? A `results/` folder holds figures
-from last spring, and nothing says whether they came from the current script. The
-sample sheet has a column called `cond`, and only you know that `1` is the knockout.
+An agent works on **files and folders**. It can list what's in a folder, open and read
+the files, write new ones and change old ones. That's what makes it useful, and it's
+also why it needs to know how *your* folder works.
 
-An agent opening that folder is the stranger. It reads quickly and well: files, code,
+Imagine a folder you've worked in for a few months. **This one is hypothetical**: a
+made-up composite, not anyone's real project, though most of us have one like it. Say
+there's a `data/` folder, but is everything in it raw, or did someone save a filtered
+table there too? Say there are scripts called `qc.R`, `qc_v2.R` and `qc_final.R`: which
+one is current? A `results/` folder holds figures from last spring, and nothing says
+whether they came from the current script. The sample sheet has a column called `cond`,
+and only you know that `1` is the knockout.
+
+It needn't be an analysis. A grant folder has three drafts of the aims page and a
+budget spreadsheet only you know is out of date. A manuscript folder has figure files
+whose numbering stopped matching the text two revisions ago. A teaching folder has last
+year's slides next to this year's. Every one of them is full of things that are obvious
+to you and invisible to anyone else.
+
+An agent opening a folder like that is the stranger. It reads quickly and well: files, code,
 headers, any README it finds. What it can't read is **what's only in your head**. Which
 files it must never touch. Where new output goes. The convention that looks like a
 mistake and isn't. What "done" means to you. So it guesses, reasonably, and some of its
@@ -43,7 +54,7 @@ people skim.
 
 An `AGENTS.md` is written for an agent, and it should contain **only what an agent can't
 work out by reading the folder**, written as rules. The agent will read your README and
-your code anyway; the agent's file doesn't need to explain them. What it needs are the
+your files anyway; the agent's file doesn't need to explain them. What it needs are the
 things no amount of reading would reveal: *`data/` is read-only*, *new output goes in
 `results/`*, *check the direction of a fold change before you state it*. Write those as
 **must** and **must not**. "We generally prefer" reads as advice to a person and as
@@ -63,8 +74,8 @@ loaded into every session. {#tbl-teach-readme-vs-agents}
 
 ::: {.column-margin}
 **Same idea, different names.** `AGENTS.md` is an open convention that many tools read
-[@url:https://agents.md]. Claude Code's own name is `CLAUDE.md`; Gemini CLI's is
-`GEMINI.md` by default. Codex reads `AGENTS.md`. Check your tool's documentation if
+[@url:https://agents.md]. Claude Code's own name is `CLAUDE.md`. Google Antigravity
+reads `AGENTS.md` (and `GEMINI.md`), and so does Codex. Check your tool's documentation if
 you're not on Claude Code.
 :::
 
@@ -307,11 +318,14 @@ supplied by `uv`, and it printed the same counts.
 
 ## Your turn
 
-About 30 minutes. You need a folder with some history: **several scripts, some data,
-some results**. A single notebook is too simple to show much.
+About 30 minutes. You need a folder with some history, and **it doesn't have to be an
+analysis**. Several scripts, data and results work well. So does a grant folder, a
+manuscript with its figures, a set of protocols, or a course's teaching materials:
+anything with enough files that a newcomer would need telling how it works. A single
+file is too simple to show much.
 
 ::: {.callout-important}
-## Privacy, and a copy
+## Privacy: work on a copy
 
 The agent will read every file in the folder. Use data you're allowed to share with the
 tool you're using: nothing identifiable, no patient data, nothing unpublished you
@@ -319,8 +333,8 @@ haven't been cleared to use this way. If the folder matters, **work on a copy** 
 you trust your rules.
 :::
 
-**Your own folder.** Start a new session with the analysis folder as its project folder,
-and check with *"What folder are you in?"*
+**Your own folder.** Start a new session with that folder as its project folder, and
+check with *"What folder are you in?"*
 
 **The fallback.** Inside `Documents/agents-workshop/`, make an empty folder called
 `teach-demo`, start a new session there ([Setup](00-setup.qmd)), and paste this:
@@ -341,8 +355,16 @@ the workshop: don't redistribute them.
 
 Now work through the loop in @fig-teach-loop.
 
-1. **Explore.** Paste the explore prompt from the worked example. Read the summary
-   carefully, and keep a list: everything it got wrong, every question it asked, and
+1. **Explore.** Paste the explore prompt from the worked example. If your folder isn't
+   an analysis, use this instead:
+
+   ```default
+   Explore this folder and summarise it for me in under 250 words: what each file is,
+   which look current and which look old or superseded, what this folder is for, and
+   anything you'd need to ask me before doing further work here. Don't change any files.
+   ```
+
+   Read the summary carefully, and keep a list: everything it got wrong, every question it asked, and
    everything you'd have told a new student on their first day.
 2. **Sort the list.** Not everything belongs in the agent's file. Use
    @tbl-teach-where-it-goes.
@@ -354,13 +376,14 @@ Now work through the loop in @fig-teach-loop.
 5. **Test it.** Start a **new session** in the same folder ([Setup](00-setup.qmd)): it
    begins with an empty conversation and reloads the instruction files. Give it a
    real next task, without repeating any rule. Watch whether the rules hold.
-6. **Ledger it.** One entry: what you had to tell it, and whether writing it down
-   stopped you having to (@sec-ledger).
+6. **Ledger it.** Ask the agent for one entry, and correct it (@sec-ledger): what you
+   had to tell it, and whether writing it down stopped you having to. If you gave
+   `AGENTS.md` the ledger rule from @sec-ledger, it may have written one already.
 
 | If the correction is… | It goes in… |
 |---|---|
 | A rule about how to work here: what not to touch, where output goes, what "done" means | `AGENTS.md` |
-| A fact about the project a person would need too: what the data are, how to run it | `README.md`, or a doc the README links to |
+| A fact about the project a person would need too: what the files are, how to run or use them | `README.md`, or a doc the README links to |
 | A detail of one file, such as the sample sheet's columns | A document next to it, **linked** from `AGENTS.md` |
 | Something the agent got wrong once and could have read | Nowhere. Say it in the chat. |
 
@@ -389,12 +412,18 @@ as a one-line text file. The `@AGENTS.md` import works everywhere.
 
 ## Check yourself
 
-- Open a new session and ask *"What rules apply in this folder?"* Does its answer match
-  your file, and nothing more?
-- Is every line in `AGENTS.md` something the agent couldn't have discovered by reading?
-- Does anything appear in both the README and `AGENTS.md`? Replace one with a link.
-- Did the new session follow the rules without you repeating them? If one slipped,
-  was the rule unclear, or wasn't the file loaded?
+::: {.callout-tip}
+## You're done when
+
+- [ ] In a new session, *"What rules apply in this folder?"* gets an answer that
+      matches your file, and nothing more.
+- [ ] Every line in `AGENTS.md` is something the agent couldn't have discovered by
+      reading.
+- [ ] Nothing appears in both the README and `AGENTS.md`; where it did, one is now a
+      link.
+- [ ] The new session followed the rules without you repeating them. (If one slipped:
+      was the rule unclear, or wasn't the file loaded?)
+:::
 
 ::: {.callout-warning}
 ## Instruction files go stale

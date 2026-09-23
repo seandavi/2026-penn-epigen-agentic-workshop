@@ -295,7 +295,17 @@ summarise it. Then tell me its size.
 
 It should be about 5.7 MB. Then use "the PDF in this folder" as the source in step 3.
 
-::: {.callout-warning}
+**Lost, or the download didn't work?** Download the files yourself and move them from
+your Downloads folder into `website`:
+
+- the scBaseCount paper:
+  [scbasecount_paper.pdf](https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/scbasecount_paper.pdf)
+  (5.7 MB);
+- the DESeq2 paper, if you'd rather work from its PDF than its DOI:
+  [the PDF from Genome Biology](https://genomebiology.biomedcentral.com/counter/pdf/10.1186/s13059-014-0550-8.pdf)
+  (2.4 MB).
+
+::: {.callout-important}
 ## Privacy: only what you'd put on a public page
 
 Anything you give the agent is sent to the model provider. And whatever's in your
@@ -398,13 +408,16 @@ or what you know. Was the agent right to flag it?
 
 ## Check yourself
 
+::: {.callout-tip}
+## You're done when
+
 - [ ] `index.html` is in your `website` folder, and it opens when you double-click it.
 - [ ] You've changed it at least once, by asking, and seen the change in the browser.
 - [ ] You asked what it couldn't have checked, and you checked one item yourself.
 - [ ] You can say one thing on the page that was wrong, invented or unsupported, or
-      you looked hard and found nothing.
-
-"Found nothing" is a real answer. Say how hard you looked.
+      you looked hard and found nothing. ("Found nothing" is a real answer. Say how
+      hard you looked.)
+:::
 
 ::: {.callout-important}
 ## Keep the folder
