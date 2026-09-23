@@ -140,7 +140,11 @@ must:
 
 - normalise names (`1` ↔ `chr1`, `MT` ↔ `chrM`);
 - report how many peaks are on chromosomes absent from the annotation;
-- **refuse to draw** if more than 5% of peaks are unmatched, and show the unmatched names.
+- **refuse to draw** if more than 5% of peaks are unmatched, and show the unmatched names;
+- below that threshold, **exclude unmatched peaks from the denominator**. They are not
+  Intergenic: nothing is known about them. Each file's unmatched count appears in the
+  table and the settings summary, so the bars always sum to 100% of the *matched*
+  peaks, and the reader can see how many that is.
 
 ### Input validation
 
@@ -159,12 +163,25 @@ raising an error.
   5.6 GB on this file. Gzip is decoded with the browser's built-in `DecompressionStream`.
 - Parsing and classification run in a **Web Worker**, with a progress indicator.
 - Only the columns and feature types needed are kept. Attributes are parsed for the
-  handful of keys used (`transcript_id`, `gene_type`, `transcript_type`, `tag`).
+  handful of keys used, and the keys differ by format:
+  - **GFF3** relates features through `ID` and `Parent`. A transcript's identity is its
+    `ID`; an exon, CDS or UTR belongs to the transcript named in its `Parent`, which can
+    list several IDs separated by commas. This is the standard, and it is what the parser
+    relies on.
+  - **GTF** uses `transcript_id` on every line.
+  - Both: `gene_type`, `transcript_type` and `tag`, for the transcript filter (Q4).
+
+  GENCODE's GFF3 also copies `transcript_id` onto every line, so a parser keyed on
+  `transcript_id` alone would pass every test on GENCODE and fail on any other GFF3.
+  The fixture (§7.1) therefore writes its GFF3 **without** `transcript_id`.
+- `##sequence-region` directives in a GFF3 give chromosome lengths, which the genome
+  background needs (Q9). GENCODE M25's GFF3 has one for each of its 22 chromosomes;
+  its GTF has none.
 
 ### Privacy
 
-Nothing leaves the machine: no uploads, no analytics, no CDN calls after page load. The
-page must state this.
+Nothing leaves the machine: no uploads, no analytics, no CDN calls. Libraries are served
+from the same site as the page (§9). The page must state this.
 
 ## 6. Open questions
 
@@ -182,7 +199,7 @@ there is something to disagree with, not because it's right.
 | Q6 | **What coordinate base is a CSV in?** | BED is 0-based by definition; a CSV is whatever its author meant. The reference CSV doesn't say. | | Assume 0-based, show a warning, and let the user flip it |
 | Q7 | **Include a Downstream/TTS category?** If so, how far? | It takes peaks away from Intergenic. | ChIPseeker: "Downstream". HOMER: TTS −100 bp to +1 kb. | Off |
 | Q8 | **Split Exon** into CDS vs non-coding exon? | Biologically meaningful, and costs one more colour. | HOMER separates CDS exons. | No |
-| Q9 | **Show a genome background bar?** This is the genome's own composition under the same rules. | Without it, "30% promoter" has nothing to compare against. | | Yes. It's what makes the chart interpretable. |
+| Q9 | **Show a genome background bar?** This is the genome's own composition under the same rules. It is the answer rule (b) would give for peak centres dropped uniformly at random. | Without it, "30% promoter" has nothing to compare against. It needs chromosome lengths: GFF3 `##sequence-region` lines have them, GTF doesn't, and a chromosome-sizes file can supply them (UCSC's [`mm10.chrom.sizes`](https://hgdownload.soe.ucsc.edu/goldenPath/mm10/bigZips/mm10.chrom.sizes)). | | Yes, when lengths are available: from the GFF3, or from an optional chrom.sizes input. Otherwise the bar is hidden, and the page says why. |
 | Q10 | **Multiple files:** how are they labelled and ordered, and is splitting one file by a column (e.g. `log2FoldChange > 0`) in scope? | Splitting the reference CSV is the natural demo. | | Label from filename, keep input order; splitting is a stretch goal |
 | Q11 | **Annotation formats and parser.** GFF3, GTF, or both? Library, or hand-written? | See §8. `@gmod/gff` needs 5.6 GB on the reference GFF3; `@gmod/gtf` is stale and built on Node streams. Both formats are nine tab-separated columns and differ only in attribute syntax. | | Both formats, one hand-written streaming parser, with tests |
 | Q12 | **Wrong genome build.** mm10 peaks against an mm39 annotation will produce a chart, just a wrong one. | Nothing checks for it. GENCODE M26 onward is mm39. | | Warn if the annotation header names a different assembly from one the user states |
@@ -197,7 +214,9 @@ Each test must exist and pass before the work is called done.
    1 bp, on the exact first and last base of an exon, entirely in an intron, spanning
    exon and intron, beyond the gene, and on a chromosome absent from the annotation.
    **The expected category for every peak is written down by a human before any code
-   runs.** Both annotation formats must give identical results.
+   runs.** Both annotation formats must give identical results. The GFF3 version uses
+   only `ID` and `Parent` to link features, with no `transcript_id`, so it proves the
+   parser handles standard GFF3 and not just GENCODE's.
 2. **Off-by-one test.** A peak at BED `[99, 100)` and an exon at annotation `100..200`
    must overlap. A peak at `[200, 201)` must not.
 3. **Strand test.** The promoter of the `−` strand transcript sits past its `end`, not
@@ -257,11 +276,27 @@ by its centre or by any overlap. Q1 and Q2 are real decisions, not formalities.
 
 ## 9. Architecture and work breakdown
 
-Plain ES modules, with no build step required. A small `package.json` exists only for the
-test runner. Pages serves the repository root.
+Plain ES modules; **running the app needs no build step**. Pages serves the repository
+root.
+
+The page can't `import '@observablehq/plot'` directly, because a browser can't resolve an
+npm package name, and a CDN would break the privacy rule (§5). So third-party libraries
+are bundled once into `vendor/` and **checked in**. `package.json` holds the test runner
+and one script, which is rerun only when a library version changes:
+
+```json
+"vendor": "esbuild vendor-src/plot.js --bundle --format=esm --minify --outfile=vendor/plot.js && esbuild vendor-src/interval-tree.js --bundle --format=esm --minify --outfile=vendor/interval-tree.js"
+```
+
+`vendor-src/plot.js` is one line: `export * from "@observablehq/plot"`. Checked on
+2026-09-23: Plot bundles to 394 KB (133 KB gzipped) with no remote imports, the interval
+tree to 9 KB, and both load and run as ES modules. Source imports them by relative path
+(`import * as Plot from '../vendor/plot.js'`), which works in the page, the worker and
+Node tests alike.
 
 ```
 index.html            page shell, file inputs, settings form
+vendor/               checked-in library bundles; regenerate with npm run vendor
 src/annotation.js     GFF3/GTF line parser → flat features        (issue: annotation parser)
 src/peaks.js          BED/narrowPeak/CSV → validated intervals     (issue: peak parser)
 src/annotate.js       transcript models → category intervals       (issue: annotation model)
@@ -276,10 +311,15 @@ test/*.test.js        node --test
 exports plain functions over plain objects:
 
 ```js
-// annotation.js parseAnnotationLines(asyncIterable<string>, {format}) → AsyncIterable<{chrom, start, end, strand, type, transcriptId, attrs}>
+// annotation.js parseAnnotationLines(asyncIterable<string>, {format}) → AsyncIterable<
+//                 {kind: 'feature', chrom, start, end, strand, type, id, parents: [], transcriptId, attrs}
+//               | {kind: 'sequenceRegion', chrom, length}>
+//               transcriptId is normalised: GTF transcript_id; GFF3 the transcript's own ID,
+//               or its Parent for exons, CDS and UTRs.
 // peaks.js     parsePeaks(text, {format, zeroBased}) → {peaks: [{chrom, start, end, name}], rejected: [{line, reason}]}
 // annotate.js  buildCategoryIntervals(features, settings) → Map<chrom, [{start, end, category}]>
-// classify.js  classify(categoryIntervals, peaks, settings) → {counts: {category: n}, perPeak: [...], unmatchedChroms: [...]}
+// classify.js  classify(categoryIntervals, peaks, settings) → {counts: {category: n}, matched: n, unmatched: n, unmatchedChroms: [...], perPeak: [...]}
+//              counts sum to matched; percentages are counts / matched
 // chart.js     render(el, results[], settings) → void
 ```
 
@@ -295,7 +335,7 @@ every module's tests assert it.
 | Annotation parser (GFF3 and GTF) | interfaces | ✅ |
 | Peak parser and validation | interfaces | ✅ |
 | Chart, table and downloads, using mock counts | interfaces | ✅ |
-| Page shell, file inputs and settings form | interfaces | ✅ |
+| Page shell, file inputs, settings form, and `vendor/` bundles | interfaces | ✅ |
 | Annotation model: derive promoter, UTR, intron and intergenic intervals | annotation parser, fixture | Single owner. This is where the bugs live. |
 | Overlap engine and counting rule | annotation model, fixture | Single owner, same person as above |
 | Worker, streaming and progress | parsers | ✅ once the parsers merge |

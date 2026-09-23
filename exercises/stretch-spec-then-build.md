@@ -6,8 +6,9 @@ project: a specification, recorded decisions, a GitHub repository with issues, a
 agents building different parts at once.
 
 The project is small enough to finish and real enough to be useful: **a web page that takes
-a gene annotation and some peak files and draws a bar chart of where the peaks fall** — promoter, exon,
-intron, intergenic. It runs entirely in the browser. Nothing is uploaded.
+a gene annotation and some peak files and draws a bar chart of where the peaks fall** —
+promoter, UTR, exon, intron, intergenic. It runs entirely in the browser. Nothing is
+uploaded.
 
 The point is not the chart. It's that **the spec is where the work actually happens**, and
 the agent can't do that part for you.
@@ -16,7 +17,9 @@ the agent can't do that part for you.
 
 - Your agent, as in the morning
 - `git`, and the GitHub CLI (`gh`) signed in, if you want the issues step
-- The workshop repository cloned, for the peak data
+- The Vahedi lab repository,
+  [golnazvahedi/epigenetics-agentic-workshop](https://github.com/golnazvahedi/epigenetics-agentic-workshop),
+  cloned as in the morning setup, for one of the peak files
 - A browser. Node is only needed for running tests.
 
 ## 1. Read the spec
@@ -62,7 +65,7 @@ memory? **Before installing anything it names, check the package exists**
 ## 3. Set up the project
 
 A directory, a git repository, and four things in it. Work in a new folder, not inside
-the workshop repository:
+either workshop repository:
 
 ```bash
 mkdir peak-overlap && cd peak-overlap
@@ -184,8 +187,18 @@ cd ..
 ```
 
 The accession numbers are the file names, so keep the table in SPEC.md handy for which
-is which. The Vahedi peaks are `track-a/data/differential_peaks.csv` in the workshop
-repository you already cloned.
+is which.
+
+The Vahedi peaks live in the Vahedi lab's repository, not this one. Copy them in from your
+clone, or fetch the file directly if you don't have one:
+
+```bash
+# from your clone (adjust the path to wherever you cloned it)
+cp ../epigenetics-agentic-workshop/track-a/data/differential_peaks.csv data/
+
+# or directly
+curl -sL https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/differential_peaks.csv -o data/differential_peaks.csv
+```
 
 **Before you load them, predict.** Which bar should be mostly promoter? Which should have
 almost nothing in intergenic space? Write it in the ledger first (SPEC.md §7, test 8).

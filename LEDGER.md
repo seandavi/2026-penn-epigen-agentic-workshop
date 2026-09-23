@@ -263,3 +263,50 @@ by reading the experiment's biosample summary, not the file listing.
 file. And the CTCF file's promoter fraction is high for CTCF and carries ENCODE's
 *extremely low read depth* audit. Kept on purpose, and labelled, because "the code is
 right but is the data?" is the next question the exercise should provoke.
+
+---
+
+## Entry 9 — Copilot review of PR #5: five findings, five fixes
+
+**Asked** — *SD* requested a lite Copilot review of PR #5 and asked the agent to watch
+for it.
+
+**Agent did** — Polled the PR until the review arrived, about ten minutes later. Assessed
+each of the five findings against the spec rather than accepting them wholesale. All five
+held up:
+
+1. **High.** The parser contract keyed transcripts on `transcript_id`, a GTF convention.
+   Standard GFF3 uses `ID` and `Parent`. GENCODE copies `transcript_id` into its GFF3,
+   so the gap would have passed every test on GENCODE and failed on any other GFF3. The
+   contract now normalises from `ID`/`Parent`, and the fixture's GFF3 omits
+   `transcript_id` so the test can catch it.
+2. **High.** The spec recommended Plot, forbade a build step, and forbade CDNs, so a
+   static page couldn't import it. Libraries are now bundled once into a checked-in
+   `vendor/` directory by one `npm run vendor` script.
+3. **Medium.** It never said whether unmatched peaks counted toward the 100%. They are
+   now excluded from the denominator and reported per file.
+4. **Medium.** The genome background needs chromosome lengths, which a GTF lacks. Lengths
+   now come from GFF3 `##sequence-region` lines or an optional chrom.sizes file, and the
+   bar is hidden otherwise.
+5. **Low.** "The workshop repository" was ambiguous with two repositories in play. The
+   exercise now names the Vahedi repository and gives copy and direct-download commands.
+
+**Checked how** — *Agent*: bundled Plot and the interval tree with esbuild, and
+confirmed the bundles have no remote imports and load and run as ES modules (394 KB and
+9 KB). Confirmed that GENCODE M25's GFF3 has `##sequence-region` lines for all 22
+chromosomes and its GTF has none. Confirmed that no GENCODE exon has multiple parents,
+that UCSC's `mm10.chrom.sizes` returns 200, and that the direct Vahedi CSV link returns
+200 with 49,782 lines.
+*SD*: not yet reviewed.
+
+**Confidently wrong** — *Agent* wrote a spec that contradicted itself (a recommended
+library it had also made impossible to load) and a parser contract that only worked
+because GENCODE is unusually generous with attributes. Neither was caught by the agent's
+own checks, which ran the libraries in Node, where bare imports resolve. It took a second
+reviewer reading the spec as a whole. Also, one verification command flooded the output
+by grepping minified code.
+
+**Keep** — A second reviewer, even a lite automated one, reads the document as a whole,
+not piece by piece. Testing in Node is not testing in a browser. And a reference file
+that is unusually complete, like GENCODE's GFF3, hides the bugs a less complete file
+would expose. Write the fixture to the standard, not to the example.
