@@ -55,8 +55,8 @@ take them all.** Save any disagreements for step 4.
 >   packages, no build step.
 > - When you're done, tell me what you checked, how, and what you couldn't check.
 
-Our test run of this prompt took **about 15 minutes** with Claude Opus 5.5, from a folder
-holding only SPEC.md. The page worked first time. Yours may take longer. Expect the agent
+Two test runs of exactly these prompts took **13 and 15 minutes** with Claude Opus 5.5,
+from an empty folder. Both pages worked first time. Yours may take longer. Expect the agent
 to ask permission often: letting it edit files inside `peakpeek` is fine; read anything
 that reaches outside it.
 
@@ -101,7 +101,6 @@ checked it. Ask for a new snapshot when you're happy, so a bad idea costs nothin
   them to the agent* sends them to it, so the morning's rule about private data applies.
 - **The side-by-side histograms look flat** for files with broad peaks. What would you
   rather see?
-- **R writes 15,000,000 as `1.5e+07`**, and the page rejects it. Should it?
 - **A check that doesn't trust the page:** ask for a few lines of R you can run in RStudio
   that read one ENCODE file and print its peak count and median width, without looking at
   PeakPeek's code. Do they agree?

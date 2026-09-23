@@ -429,3 +429,27 @@ from the previous version.
 
 **Keep** — The review's practitioner items mostly became unnecessary once the exercise
 stopped teaching process. Cutting was the fix.
+
+---
+
+## Entry 13 — Dry run of the one-prompt exercise
+
+**Asked** — *Agent*: check the simplified exercise end to end before calling it done.
+
+**Agent did** — Gave a fresh agent, in an empty folder, exactly step 1's and step 2's
+prompts (downloading from this branch). Fixed the seven spec gaps it reported: §4's
+`summarise` and `parsePeaks` now list the fields §2 and §3 need; "main chromosomes"
+covers human as well as mouse; format names agree across §3.2 and §4; scientific
+notation accepts any whole number (`1.5e+07`, as R writes it); the CORS message names
+wrong addresses too; test 5 gives a Zenodo URL; `test.html`'s load order points to §4.
+
+**Checked how** — *Agent*: the build took 13.1 minutes. Its `test.html` shows 56 passed,
+0 failed in Chrome 152 (re-run by me). Its own report says every §2 number matches through
+the page, with Python and `bedtools` agreeing; that part is its claim.
+
+**Confidently wrong** — *Agent*: "accept `1e+03`, reject `1.5e2`" was self-contradictory
+(1.5e2 is 150, a whole number) and would have rejected real R output. Also, applying these
+fixes, one replacement swallowed the sentence after it; caught on re-reading the diff.
+
+**Keep** — Every fresh build finds something. Two builds from the same spec is cheap
+insurance before a room full of people tries it.

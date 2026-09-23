@@ -65,8 +65,10 @@ independently of any app (§7, test 6):
 | H3K27ac, read as 0-based | 49,781 | 180 | 1,385 | 2,512 | 93,567 | 125,028,695 | 125,028,695 | 21 | 0 | 0 |
 | H3K27ac, read as 1-based | 49,781 | 181 | 1,386 | 2,513 | 93,568 | 125,078,476 | 125,078,476 | 21 | 0 | 0 |
 
-"Main chromosomes" means `chr1`–`chr19`, `chrX`, `chrY` and `chrM`, with or without the
-`chr`. Widths are `end − start` on 0-based half-open coordinates. Means are rounded.
+"Main chromosomes" means numbered chromosomes, `X`, `Y` and `M` or `MT`, with or without
+`chr` (`/^(chr)?([0-9]+|X|Y|M|MT)$/i`), so human and mouse both work. Everything else
+(`chrUn_…`, `_random`, `GL…`) is "off the main chromosomes". Widths are `end − start` on
+0-based half-open coordinates. Means are rounded.
 
 Three things in that table are the reason it exists:
 
@@ -90,7 +92,7 @@ Three things in that table are the reason it exists:
 
 | Item | Detail |
 |---|---|
-| Format detected | BED3, BED6, narrowPeak, broadPeak, CSV, TSV, and why the page thinks so |
+| Format detected | One of §4's format names, and why the page thinks so |
 | Chromosome style | `chr1` or `1`, and a warning if a file mixes them |
 | Counts | Peaks accepted; lines skipped (headers, `track`, `browser`, `#`, blank); lines rejected, each with a reason |
 | Widths | Min, median, mean, max; sum of widths; merged coverage in bp |
@@ -180,7 +182,11 @@ name, because a page can't list a folder. Then it runs the tests and shows the r
 //
 // parse.js   PeakPeek.parsePeaks(text: string, {oneBased = false} = {}) →
 //              { format: "bed3" | "bed4" | "bed5" | "bed6" | "narrowPeak" | "broadPeak"
-//                        | "csv" | "tsv",       // from the accepted lines' column count
+//                        | "csv" | "tsv",       // from the most common column count of
+//                                               // accepted lines; 7+ columns that aren't
+//                                               // narrowPeak (10) or broadPeak (9) are
+//                                               // "bed6"; 9 with "r,g,b" in col 9 is "bed6"
+//                formatReason: string,          // e.g. "most lines have 10 columns"
 //                peaks: [{chrom, start, end, name?, score?, signal?, p?, q?}],  // 0-based half-open
 //                skipped: number,
 //                rejected: [{line: number, text: string, reason: string}] }   // line is 1-based
@@ -192,6 +198,8 @@ name, because a page can't list a folder. Then it runs the tests and shows the r
 //              { n, widths: {min, median, mean, max, sum}, mergedBp, duplicates,
 //                chromStyle: "chr" | "bare" | "mixed",
 //                perChrom: [{chrom, n}],            // natural order, then "other"
+//                chromosomes, offMain,              // distinct names; peaks off main (§2)
+//                overlapping, over100kb,            // for Problems (§3.3, Q11)
 //                histogram: [{from, to, n}],        // log-scaled bins
 //                scores?: {signal: [min, max], p: [min, max], q: [min, max]} }
 //            PeakPeek.naturalChromOrder(a, b) → number  // for Array.prototype.sort
@@ -216,7 +224,7 @@ test, a clear error message, or a decision.
 
 | Trap | What happens | What the page should do |
 |---|---|---|
-| **The server doesn't allow it (CORS)** | ENCODE, UCSC, NCBI and raw GitHub send `Access-Control-Allow-Origin: *`, so a page can fetch from them. Zenodo, `example.com` and most lab servers don't, and the fetch fails with a bare `TypeError: Failed to fetch`. JavaScript can't tell this apart from "no internet". | Say so plainly: "That server doesn't allow web pages to read its files. Download it and drop it here instead." |
+| **The server doesn't allow it (CORS)** | ENCODE, UCSC, NCBI and raw GitHub send `Access-Control-Allow-Origin: *`, so a page can fetch from them. Zenodo, `example.com` and most lab servers don't, and the fetch fails with a bare `TypeError: Failed to fetch`. JavaScript can't tell this apart from "no internet", or from a wrong address on such a server. | Say so plainly, naming all three: "That server may not allow web pages to read its files, the address may be wrong, or you're offline. Download it and drop it here instead." |
 | **A share link returns a web page** | Dropbox and Google Drive share links usually return HTML, not the file. Not checked here. | If the text starts with `<`, say "this is a web page, not a peak file". |
 | **Automated tests get blocked** | ENCODE returns **403, with no CORS header**, to any browser whose user agent says `HeadlessChrome`, which is what agents use to test pages. A real browser gets the file. An agent testing its own page will report "ENCODE blocks browsers", and it will be wrong. | Test URL loading against raw GitHub, or set a normal user agent. Try ENCODE by hand, in a real browser. |
 | **Modules from a file** | `<script type="module">` fails from a double-clicked file (§4). The page loads blank, with the error only in the console. | Classic scripts. |
@@ -225,7 +233,7 @@ test, a clear error message, or a decision.
 | **0-based or 1-based** | BED is 0-based half-open. A CSV from R, like Vahedi's, could be either, and doesn't say. | Q2. |
 | **Chromosome names** | ENCODE writes `chr1`; the Vahedi CSV writes `1`. Mouse has `chrM`, Ensembl says `MT`. Unplaced contigs like `chrUn_JH584304` turn up in ENCODE files. | Natural order, aligned across files, others grouped. |
 | **Impossible intervals** | `end ≤ start`, negative starts, non-numbers. | Rejected with a reason (Q1 on `end = start`). |
-| **Scientific notation** | R's `write.csv` can write large round numbers as `1e+05`. Not in the Vahedi file, but in plenty of others. | Accept whole numbers written that way; reject `1.5e2`. |
+| **Scientific notation** | R's `write.csv` can write large round numbers as `1e+05`. Not in the Vahedi file, but in plenty of others. | Accept any that's a whole number (`1e+05`, `1.5e+07`); reject the rest (`1.5e0`, `1e-3`). |
 | **`-1` in narrowPeak** | Means "not given" for `pValue`, `qValue`, `signalValue` or the summit. | Don't include it in ranges. |
 | **Overlaps and duplicates** | CTCF and DNase above. | Q3, Q4. |
 | **Big files** | The largest reference file is 91,474 lines and reads in well under a second. A file of millions of peaks would take a few seconds, and more memory than you'd expect. | Q10. |
@@ -260,8 +268,9 @@ defaults are **suggestions**.
    matches §2's table.
 4. **URL.** Paste the Vahedi CSV URL. It loads, and with the 0-based and 1-based settings
    matches the two rows in §2.
-5. **A failing URL.** Paste a Zenodo file link. The message says the server doesn't allow
-   it, not "something went wrong".
+5. **A failing URL.** Paste
+   `https://zenodo.org/records/7879374/files/README.md?download=1`. The message says the
+   server may not allow it, not "something went wrong".
 6. **Cross-check.** For one file, reproduce the peak count, median width and merged bp
    with a tool that isn't the page: `awk`, R, Python or `bedtools`. Ask an agent to write
    it, then check it doesn't reuse the page's code.
@@ -330,7 +339,7 @@ Spec: §3.1, §4. **Status:** open
 
 - [ ] `index.html` has the drop zone, file picker (several files), URL box and an empty
       results area, and loads every `src/*.js` with classic `<script>` tags
-- [ ] `test.html` loads the same scripts, then every `tests/*.test.js`, and shows each
+- [ ] `test.html` loads the scripts in §4's order, then every `tests/*.test.js`, and shows each
       test's pass/fail on the page, with a total
 - [ ] `tests/assert.js` gives §4's `PeakPeek.test`, `PeakPeek.assert` and
       `PeakPeek.runTests`, with failure messages that show expected and actual
@@ -359,7 +368,7 @@ Spec: §2, §5 (header lines onwards), §6 Q1–Q3, Q5. **Status:** open
 - [ ] Format detected: BED3, BED6, narrowPeak, broadPeak, CSV, TSV
 - [ ] `track`, `browser`, `#` and blank lines are skipped and counted
 - [ ] Rejections carry the 1-based line number and a reason
-- [ ] `1e+03` is accepted and `1.5e2` rejected
+- [ ] `1e+03` and `1.5e+07` are accepted; `1.5e0` and `1e-3` rejected
 - [ ] The CSV `oneBased` setting shifts start by one; the default follows Q2
 - [ ] **The fixture's accepted, skipped and rejected lines match `PeakPeek.EXPECTED`**
 
