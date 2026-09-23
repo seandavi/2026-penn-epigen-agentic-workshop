@@ -5,12 +5,19 @@ project:
   # before render (`uv tool install quartobot`). Commit the resolved .bib, so a render
   # never needs the network.
   pre-render: quartobot resolve --from-scan . --id-mode citation-key
+  # Restores callout titles and cross-references Quarto's llms.txt output drops.
+  post-render: _llms_fix.py
   render:
     - index.qmd
     - chapters/*.qmd
     - appendices/*.qmd
 
 lightbox: true
+
+# llms.txt at the site root, and a .llms.md twin of every page, for agents to read.
+# Quarto reads this from website:, even in a book.
+website:
+  llms-txt: true
 
 book:
   title: "Agents for bench scientists"

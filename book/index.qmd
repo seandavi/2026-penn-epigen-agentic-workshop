@@ -47,7 +47,7 @@ flowchart LR
 | [Setup](chapters/00-setup.qmd) | An agent running in a workshop folder | 15–20 min |
 | @sec-website | A one-page website, from a paper, a CV or a link | 20 min |
 | @sec-ledger | A record of what the agent did and how you checked it | 20 min |
-| @sec-teach | An `AGENTS.md` for a real analysis folder | 30 min |
+| @sec-teach | An `AGENTS.md` for a folder of your own | 30 min |
 | @sec-skills | A skill that checks a file you know well | 40 min |
 | @sec-mcp | A connection from your agent to PubMed | 30 min |
 | @sec-app | A small app of your own, from a spec you wrote together | 60 min |
@@ -68,6 +68,52 @@ make it @sec-teach: it's the one that pays off every day.
 - **On Windows?** Look for the collapsed "On Windows" boxes, and @sec-windows.
 - **Using something other than Claude?** Google Antigravity, Codex or Copilot all work
   for almost everything here. Where a step is specific to Claude Code, the chapter says so.
+
+## Learn it with your agent {#preface-tutor}
+
+You can also have your agent teach you the book. Every page is published a second time
+as plain Markdown, which agents read more easily than a web page, and there's an index
+of them at a standard address, `llms.txt`
+[@url:https://llmstxt.org/]:
+
+| For | Address |
+|---|---|
+| The index of every chapter | <https://seandavi.github.io/2026-penn-epigen-agentic-workshop/llms.txt> |
+| One chapter | The chapter's web address, with `.html` changed to `.llms.md` |
+
+: The book, in the form an agent reads. {#tbl-preface-llms}
+
+Start a session in the folder the chapter's *Your turn* works in (chapter 2, for
+example, goes back to chapter 1's `website` folder), so the exercises happen where they
+should. Then paste this, changing the chapter number:
+
+```default
+I'm working through the book whose index is at
+https://seandavi.github.io/2026-penn-epigen-agentic-workshop/llms.txt
+
+Read the index. Then download chapter 2 into this folder with curl (or
+Invoke-WebRequest on Windows) and read it from the file, so you have the exact text
+rather than a summary.
+
+I'd like to work on chapter 2 now. Can you teach me the material and then work
+through the material and exercises with me? Challenge me with questions about my
+understanding along the way.
+```
+
+The download matters. Some agents' web tools pass a page through a smaller model that
+summarises it (@sec-website's worked example ran into this), and a summarised prompt
+isn't the prompt the chapter tested. In a chat without file access, such as claude.ai,
+open the chapter's `.llms.md` address in your browser and paste the text in instead.
+With file access, the agent leaves a copy of the chapter in your folder; that's fine.
+
+::: {.callout-warning}
+## Your tutor is an agent too
+
+It will explain fluently and it will sometimes be wrong, about the book as about
+anything else. When it says something the chapter doesn't, check the page. And it
+should have **you** do each step on your own computer; if it starts doing the exercises
+for you, say so. Everything in @sec-ledger about checking its claims applies here.
+:::
 
 ::: {.callout-important}
 ## What not to give an agent

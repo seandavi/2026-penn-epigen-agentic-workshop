@@ -568,3 +568,57 @@ Nothing caught.
 
 The honest version of "the agent does it on its own" is "it does it because a standing
 instruction tells it to". The book says so.
+
+---
+
+## Entry 17 — llms.txt, and the book as something an agent can teach
+
+**Asked** (SD)
+
+> Can we also turn on the llms.txt support for quarto? We can also tell people how to
+> point their agent at this website and a prompt that they can use to walk through the
+> material in the chat. For example, "I'd like to work on chapter 2 now. Can you teach
+> me the material and then work through the material and exercises with me? Challenge
+> me with questions about my understanding along the way."
+
+**Agent did**
+
+Turned on `llms-txt` in `book/_quarto.yml`. It has to go under `website:`, because
+Quarto reads it from there even in a book. That gives `docs/llms.txt` and a `.llms.md`
+twin of every page. Quarto 1.9.38's output had three faults: callout titles were
+dropped, cross-references were left as `[sec-teach](#sec-teach)`, and the page titles
+in `llms.txt` carried raw markup. A post-render script, `book/_llms_fix.py`, repairs
+all three from the rendered HTML. It also adds a description and a note for agents
+acting as tutors. The preface gets a section, "Learn it with your agent", with the
+addresses, SD's prompt and a warning that the tutor is an agent too. The prompt was
+extended to download the chapter rather than fetch it. Setup's Going further links to
+the new section.
+
+**Checked how**
+
+*Agent:*
+- The render is clean, and every callout count in the Markdown matched the HTML.
+- A grep finds no unresolved `sec-`, `fig-` or `tbl-` references in any `.llms.md`.
+- Quarto 1.10.18's `llms.lua` was read on GitHub: it has the same callout code, so
+  upgrading (SD offered) would not fix it.
+- The preface prompt was run once with `claude -p` (Claude Code 2.1.280) in an empty
+  folder, against a local copy of the site. It read the index, downloaded chapter 2
+  with curl, said it was working from the exact text, taught sections 2.1–2.2, asked
+  two questions, and said it wouldn't do the steps for the reader. It also pointed out
+  that chapter 2's exercises belong in the `website` folder, and the wording was fixed.
+
+Not checked:
+- the live site's `.llms.md` files, until this is merged;
+- any tutoring beyond the first turn;
+- Antigravity, Codex or Copilot;
+- a claude.ai chat reading the pasted text.
+
+**Confidently wrong**
+
+The agent's own first wording, "start a session in the chapter's own folder", is wrong
+for chapter 2. The test run caught it.
+
+**Keep**
+
+Quarto's llms.txt output has to be checked like any other generated thing; it looked
+fine until the callouts were read.
