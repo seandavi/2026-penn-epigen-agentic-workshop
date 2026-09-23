@@ -453,3 +453,48 @@ fixes, one replacement swallowed the sentence after it; caught on re-reading the
 
 **Keep** — Every fresh build finds something. Two builds from the same spec is cheap
 insurance before a room full of people tries it.
+
+---
+
+## Entry 14 — Talk first, then a book
+
+**Asked** — *SD*: divide the day into a lecture and exercises that follow, with the
+hands-on part self-directed and explanatory, "akin to the chapters in RBiocBook".
+10:00–12:00 talk, 13:00–14:30 hands-on. Chapters: setup; build a website from an
+artefact; the ledger (with the *AI in Medicine* examples); teach the agent your
+project (README vs AGENTS.md, links); a skill (deseq2-triage worked example, then
+create your own, the agent writing it under your direction); an MCP connection
+(anthropics/life-sciences); build an app from a starter prompt that checks the machine
+and writes a spec; work like a project (ledger, ADRs, git if available). Windows too.
+Quarto book, quartobot for references, lightbox, margin notes, figures. Merge PR #6.
+
+**Agent did**
+- Merged PR #6. Wrote [ADR-0007](adr/0007-talk-first-then-a-self-paced-book.md),
+  superseding ADR-0001's timetable.
+- Scaffolded a Quarto book in `book/`, rendering to `docs/` (Pages unchanged), and a
+  writers' brief, `book/AGENTS.md`. Wrote the preface.
+- Eight parallel worker agents wrote one chapter each. Chapters 1, 3, 4, 5 and 6 ran
+  their worked examples for real with Claude Code 2.1.280 (`claude -p`, temporary
+  folders); chapter 6's starter prompt was run twice against a scripted attendee and
+  revised between runs.
+- A fresh reviewer read the whole book; the same workers applied its fixes.
+
+**Checked how** — *Agent*: before writing, PubMed's and Open Targets' MCP servers
+answered `initialize` with no account (curl); the deepsense.ai servers returned 403
+(unconfirmed, not broken). Claude Code's Windows install from its setup docs. The whole
+book renders with no warnings; every page opened in Chrome with no unresolved
+references, and copy buttons on prompts. **Taken on trust from workers:** that their
+worked-example runs happened as described (their reports give times and outputs, and
+chapter 4's numbers were recounted by that worker against the Vahedi data README).
+**Not checked:** anything in the desktop app itself; anything on Windows; chapter 7's
+prompts.
+
+**Confidently wrong** — *Agent*: the brief told writers to use ```` ```text ```` for
+prompts, which renders with no copy button; two workers caught it. The first chapter
+draft of the ledger chapter used an example that broke the chapter's own rules for
+"Asked" and "Checked how"; the reviewer caught it. Chapters numbered from Setup, so
+file names and chapter numbers disagreed.
+
+**Keep** — A shared brief made eight parallel chapters read as one book; a reviewer
+reading the whole thing in order found what no chapter writer could: folders that
+drifted, a ledger model that changed between chapters, and a timetable that didn't fit.

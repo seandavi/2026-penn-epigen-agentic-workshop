@@ -43,7 +43,7 @@ flowchart LR
 
 | Chapter | You'll make | Roughly |
 |---|---|---|
-| [Setup](chapters/00-setup.qmd) | An agent running in a workshop folder | 10 min |
+| [Setup](chapters/00-setup.qmd) | An agent running in a workshop folder | 15–20 min |
 | @sec-website | A one-page website, from a paper, a CV or a link | 20 min |
 | @sec-ledger | A record of what the agent did and how you checked it | 20 min |
 | @sec-teach | An `AGENTS.md` for a real analysis folder | 30 min |

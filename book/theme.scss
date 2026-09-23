@@ -47,3 +47,6 @@ $primary: #1864ab !default;
   color: $primary;
   font-weight: 500;
 }
+
+// Tables read better left-aligned; pipe tables without colons come out centred.
+.table th, .table td { text-align: left !important; }
