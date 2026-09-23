@@ -295,6 +295,16 @@ summarise it. Then tell me its size.
 
 It should be about 5.7 MB. Then use "the PDF in this folder" as the source in step 3.
 
+**Lost, or the download didn't work?** Download the files yourself and move them from
+your Downloads folder into `website`:
+
+- the scBaseCount paper:
+  [scbasecount_paper.pdf](https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/scbasecount_paper.pdf)
+  (5.7 MB);
+- the DESeq2 paper, if you'd rather work from its PDF than its DOI:
+  [the PDF from Genome Biology](https://genomebiology.biomedcentral.com/counter/pdf/10.1186/s13059-014-0550-8.pdf)
+  (2.4 MB).
+
 ::: {.callout-warning}
 ## Privacy: only what you'd put on a public page
 
