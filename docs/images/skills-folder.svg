@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-labelledby="t d">
+  <title id="t">The deseq2-triage skill folder</title>
+  <desc id="d">A project folder contains .claude, which contains skills, which contains deseq2-triage. Inside it, SKILL.md is required and README.md is for people. scripts and references folders are optional and not used by this skill.</desc>
+  <style>
+    .f { font: 17px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1f2933; }
+    .dim { fill: #9aa5b1; }
+    .n { font: 15px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #52606d; }
+    .req { font: 600 15px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #1864ab; }
+    .ln { stroke: #9aa5b1; stroke-width: 1.5; fill: none; }
+  </style>
+  <rect x="1" y="1" width="758" height="298" rx="10" fill="#f8fafc" stroke="#d9e2ec"/>
+  <text class="f" x="30" y="45">my-analysis/</text>
+  <text class="n" x="330" y="45">the folder you start the agent in</text>
+  <path class="ln" d="M44 53 V78 H60"/>
+  <text class="f" x="66" y="84">.claude/</text>
+  <path class="ln" d="M80 92 V117 H96"/>
+  <text class="f" x="102" y="123">skills/</text>
+  <path class="ln" d="M116 131 V156 H132"/>
+  <text class="f" x="138" y="162">deseq2-triage/</text>
+  <text class="n" x="330" y="162">folder name = the skill's name</text>
+  <path class="ln" d="M152 170 V273 M152 195 H168 M152 221 H168 M152 247 H168 M152 273 H168"/>
+  <text class="f" x="174" y="201">SKILL.md</text>
+  <text class="req" x="330" y="201">required: name, description, instructions</text>
+  <text class="f" x="174" y="227">README.md</text>
+  <text class="n" x="330" y="227">optional: for people, not the agent</text>
+  <text class="f dim" x="174" y="253">scripts/</text>
+  <text class="n dim" x="330" y="253">optional: code the agent runs (not used here)</text>
+  <text class="f dim" x="174" y="279">references/</text>
+  <text class="n dim" x="330" y="279">optional: docs read only when needed (not used here)</text>
+</svg>

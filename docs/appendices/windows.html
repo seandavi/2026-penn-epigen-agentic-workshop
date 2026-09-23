@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sean Davis">
-<meta name="dcterms.date" content="2026-09-24">
 
-<title>Agents for bench scientists</title>
+<title>Appendix A — Windows notes – Agents for bench scientists</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,27 +23,63 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./chapters/00-setup.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8db532a760e6309ca89cbbb647cf1feb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../appendices/references.html" rel="next">
+<link href="../chapters/07-work-like-a-project.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8db532a760e6309ca89cbbb647cf1feb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -73,10 +107,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<meta name="mermaid-theme" content="neutral">
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -90,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendices/windows.html">Appendices</a></li><li class="breadcrumb-item"><a href="../appendices/windows.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Windows notes</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -105,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Agents for bench scientists</a> 
+      <a href="../">Agents for bench scientists</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/tree/main/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
@@ -120,13 +150,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/00-setup.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/00-setup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Setup</span></a>
   </div>
 </li>
@@ -141,19 +171,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/01-website.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/01-website.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Build a website</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/02-ledger.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/02-ledger.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ledger</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/03-teach-your-agent.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/03-teach-your-agent.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Teach the agent your project</span></span></a>
   </div>
 </li>
@@ -170,13 +200,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/04-skills.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/04-skills.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Write a skill</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/05-mcp.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/05-mcp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connect to a database (MCP)</span></span></a>
   </div>
 </li>
@@ -193,13 +223,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/06-build-an-app.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/06-build-an-app.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Build an app</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/07-work-like-a-project.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/07-work-like-a-project.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Work like a project</span></span></a>
   </div>
 </li>
@@ -216,13 +246,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./appendices/windows.html" class="sidebar-item-text sidebar-link">
+  <a href="../appendices/windows.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Windows notes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./appendices/references.html" class="sidebar-item-text sidebar-link">
+  <a href="../appendices/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -238,43 +268,28 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
-  <ul class="collapse">
-  <li><a href="#how-the-day-works" id="toc-how-the-day-works" class="nav-link" data-scroll-target="#how-the-day-works">How the day works</a></li>
-  <li><a href="#whats-in-it" id="toc-whats-in-it" class="nav-link" data-scroll-target="#whats-in-it">What’s in it</a></li>
-  <li><a href="#how-to-read-it" id="toc-how-to-read-it" class="nav-link" data-scroll-target="#how-to-read-it">How to read it</a></li>
-  <li><a href="#when-something-goes-wrong" id="toc-when-something-goes-wrong" class="nav-link" data-scroll-target="#when-something-goes-wrong">When something goes wrong</a></li>
-  <li><a href="#how-this-book-was-made" id="toc-how-this-book-was-made" class="nav-link" data-scroll-target="#how-this-book-was-made">How this book was made</a></li>
-  </ul></li>
+  <li><a href="#win-documents" id="toc-win-documents" class="nav-link active" data-scroll-target="#win-documents"><span class="header-section-number">A.1</span> Documents, and a folder’s full path</a></li>
+  <li><a href="#win-extensions" id="toc-win-extensions" class="nav-link" data-scroll-target="#win-extensions"><span class="header-section-number">A.2</span> File name extensions and hidden files</a></li>
+  <li><a href="#win-powershell" id="toc-win-powershell" class="nav-link" data-scroll-target="#win-powershell"><span class="header-section-number">A.3</span> PowerShell versus CMD</a></li>
+  <li><a href="#win-html" id="toc-win-html" class="nav-link" data-scroll-target="#win-html"><span class="header-section-number">A.4</span> Opening a web page the agent made</a></li>
+  <li><a href="#win-git" id="toc-win-git" class="nav-link" data-scroll-target="#win-git"><span class="header-section-number">A.5</span> Git for Windows (optional)</a></li>
+  <li><a href="#if-something-else-goes-wrong" id="toc-if-something-else-goes-wrong" class="nav-link" data-scroll-target="#if-something-else-goes-wrong"><span class="header-section-number">A.6</span> If something else goes wrong</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/appendices/windows.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendices/windows.html">Appendices</a></li><li class="breadcrumb-item"><a href="../appendices/windows.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Windows notes</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Agents for bench scientists</h1>
-<p class="subtitle lead">The hands-on half of the Penn Epigenetics Institute agentic AI workshop</p>
+<h1 class="title"><span id="sec-windows" class="quarto-section-identifier">Appendix A — Windows notes</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p><a href="https://seandavi.github.io/">Sean Davis</a> </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 24, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -284,170 +299,219 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="preface" class="level1 unnumbered page-columns page-full">
-<h1 class="unnumbered">Preface</h1>
-<p>This morning was about what an AI agent is: a model that can read your files, run commands and make things, rather than only answer questions about them. This book is the other half. It’s where you use one, on your own work, at your own pace.</p>
-<p>Each chapter explains <strong>why</strong> before it asks you to do anything. Then it walks through an example we did ourselves, including what went wrong, and hands over to you. You don’t need to know how to code for any of it. You do need to read what the agent tells you, and to check the parts that matter, because the agent will not always be right, and it will rarely say when it isn’t.</p>
-<section id="how-the-day-works" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="how-the-day-works">How the day works</h2>
-<div id="tbl-day" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<p>Everything in this book works on Windows 10 (version 1809 or later) and Windows 11. Most of it works exactly as on a Mac, because you’re typing plain-English prompts and the agent deals with the operating system. This appendix collects the few places where Windows differs, so chapters can point here instead of repeating themselves.</p>
+<div id="tbl-windows-summary" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
-<div aria-describedby="tbl-day-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-windows-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <thead>
 <tr class="header">
-<th>Time</th>
-<th>What</th>
+<th>You want to…</th>
+<th>On Windows</th>
+<th>Section</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>10:00–12:00</td>
-<td>The talk: from chatbot to agent, what’s under the hood, working well, skills and MCP</td>
+<td>Find your Documents folder and its full path</td>
+<td>File Explorer; it may be inside OneDrive</td>
+<td><a href="#win-documents">Documents</a></td>
 </tr>
 <tr class="even">
-<td>12:00–13:00</td>
-<td>Lunch</td>
+<td>See <code>.html</code>, <code>.md</code>, <code>.csv</code> at the end of file names</td>
+<td>Turn on <strong>File name extensions</strong></td>
+<td><a href="#win-extensions">Extensions</a></td>
 </tr>
 <tr class="odd">
-<td>13:00–14:30</td>
-<td>This book, with Sean in the room. A short getting-started, then your own pace.</td>
+<td>See folders like <code>.claude</code></td>
+<td>Turn on <strong>Hidden items</strong></td>
+<td><a href="#win-extensions">Extensions</a></td>
 </tr>
 <tr class="even">
-<td>14:30 onwards</td>
-<td>The Vahedi lab’s self-directed afternoon (<a href="https://github.com/golnazvahedi/epigenetics-agentic-workshop">their repository</a>)</td>
+<td>Type a command</td>
+<td>PowerShell, not CMD</td>
+<td><a href="#win-powershell">PowerShell</a></td>
+</tr>
+<tr class="odd">
+<td>Open a web page the agent made</td>
+<td>Double-click it, or <strong>Open with</strong></td>
+<td><a href="#win-html">Opening HTML</a></td>
+</tr>
+<tr class="even">
+<td>Use <code>git</code> (<a href="../chapters/07-work-like-a-project.html" class="quarto-xref"><span>Chapter 7</span></a> only)</td>
+<td>Git for Windows, optional; mind OneDrive</td>
+<td><a href="#win-git">Git</a></td>
 </tr>
 </tbody>
 </table>
 </div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-day-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: The day
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-windows-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;A.1: Where Windows differs.
 </figcaption>
 </figure>
 </div>
-<p><strong>Nobody is expected to finish the book by 14:30.</strong> Most people will get through setup and chapters 1 and 2, and some further. The rest is written to be read alone, later, without anyone to ask.</p>
-</section>
-<section id="whats-in-it" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="whats-in-it">What’s in it</h2>
-<div class="cell page-columns page-full" data-layout-align="default">
-<div class="cell-output-display page-columns page-full">
-<div id="fig-map" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="quarto-float quarto-float-fig figure page-columns page-full">
-<div aria-describedby="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div>
-<pre class="mermaid mermaid-js" data-label="fig-map">flowchart LR
-  accDescr: A flow diagram. Setup leads to Build a website, which leads to The ledger. Setup also leads to Teach the agent your project, which leads to Write a skill, Connect to a database, and Build an app. Build an app leads to Work like a project.
-  S[0 Setup] --&gt; W[1 Website] --&gt; L[2 Ledger]
-  S --&gt; T[3 Teach your agent]
-  T -.-&gt; K[4 Skill]
-  T -.-&gt; M[5 MCP]
-  T -.-&gt; A[6 Build an app]
-  L -.-&gt; A
-  A --&gt; P[7 Work like a project]
-</pre>
-</div>
-</div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: How the chapters build on each other. Solid arrows: you need the earlier chapter’s folder. Dashed: helpful, not required.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div id="tbl-chapters" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<section id="win-documents" class="level2 page-columns page-full" data-number="A.1">
+<h2 data-number="A.1" class="anchored" data-anchor-id="win-documents"><span class="header-section-number">A.1</span> Documents, and a folder’s full path</h2>
+<p>Your Documents folder is in File Explorer’s left-hand pane, under <strong>This PC</strong> or your name. On many institution-managed laptops, <strong>OneDrive</strong> has taken it over, so the real location is:</p>
+<div id="tbl-windows-documents" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-tbl figure page-columns page-full">
-<div aria-describedby="tbl-chapters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-windows-documents-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Chapter</th>
-<th>You’ll make</th>
-<th>Roughly</th>
+<th>Documents is…</th>
+<th>Full path</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./chapters/00-setup.html">Setup</a></td>
-<td>An agent running in a workshop folder</td>
-<td>15–20 min</td>
+<td>Local</td>
+<td><code>C:\Users\&lt;you&gt;\Documents</code></td>
 </tr>
 <tr class="even">
-<td><a href="chapters/01-website.html" class="quarto-xref"><span>1&nbsp; Build a website</span></a></td>
-<td>A one-page website, from a paper, a CV or a link</td>
-<td>20 min</td>
-</tr>
-<tr class="odd">
-<td><a href="chapters/02-ledger.html" class="quarto-xref"><span>2&nbsp; The ledger</span></a></td>
-<td>A record of what the agent did and how you checked it</td>
-<td>20 min</td>
-</tr>
-<tr class="even">
-<td><a href="chapters/03-teach-your-agent.html" class="quarto-xref"><span>3&nbsp; Teach the agent your project</span></a></td>
-<td>An <code>AGENTS.md</code> for a real analysis folder</td>
-<td>30 min</td>
-</tr>
-<tr class="odd">
-<td><a href="chapters/04-skills.html" class="quarto-xref"><span>4&nbsp; Write a skill</span></a></td>
-<td>A skill that checks a file you know well</td>
-<td>40 min</td>
-</tr>
-<tr class="even">
-<td><a href="chapters/05-mcp.html" class="quarto-xref"><span>5&nbsp; Connect to a database (MCP)</span></a></td>
-<td>A connection from your agent to PubMed</td>
-<td>30 min</td>
-</tr>
-<tr class="odd">
-<td><a href="chapters/06-build-an-app.html" class="quarto-xref"><span>6&nbsp; Build an app</span></a></td>
-<td>A small app of your own, from a spec you wrote together</td>
-<td>60 min</td>
-</tr>
-<tr class="even">
-<td><a href="chapters/07-work-like-a-project.html" class="quarto-xref"><span>7&nbsp; Work like a project</span></a></td>
-<td>The same app, with decisions, a ledger and a history</td>
-<td>45 min</td>
+<td>In OneDrive</td>
+<td><code>C:\Users\&lt;you&gt;\OneDrive\Documents</code> (sometimes <code>OneDrive - &lt;institution&gt;</code>)</td>
 </tr>
 </tbody>
 </table>
 </div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-chapters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: The chapters
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-windows-documents-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;A.2: Where Documents usually lives on Windows.
 </figcaption>
 </figure>
 </div>
-<p>Chapters 1 and 2 go together. After that, pick what’s useful. If you do only one more, make it <a href="chapters/03-teach-your-agent.html" class="quarto-xref"><span>3&nbsp; Teach the agent your project</span></a>: it’s the one that pays off every day.</p>
-</section>
-<section id="how-to-read-it" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-read-it">How to read it</h2>
+<p>Either is fine for this book. To see which you have, open the folder in File Explorer and click once in the address bar at the top: it switches from a breadcrumb trail to the full path, which you can copy. You can also right-click a file or folder while holding <strong>Shift</strong> and choose <strong>Copy as path</strong>.</p>
+<p>The simplest check is the one from <a href="../chapters/00-setup.html">Setup</a>: ask the agent “What folder are you in?” It will print the full path.</p>
+<p>In PowerShell, this goes to your workshop folder wherever Documents is, OneDrive or not:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cd</span> <span class="op">(</span><span class="fu">Join-Path</span> <span class="op">([</span>Environment<span class="op">]::</span>GetFolderPath<span class="op">(</span><span class="st">'MyDocuments'</span><span class="op">))</span> agents-workshop<span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Windows paths use backslashes (<code>C:\Users\...</code>); Macs use forward slashes. You don’t need to translate: type paths either way in a prompt and the agent will cope.</p>
+</div></div></section>
+<section id="win-extensions" class="level2" data-number="A.2">
+<h2 data-number="A.2" class="anchored" data-anchor-id="win-extensions"><span class="header-section-number">A.2</span> File name extensions and hidden files</h2>
+<p>By default, File Explorer hides the end of file names, so <code>index.html</code> shows as just <code>index</code>, and <code>SKILL.md</code> as <code>SKILL</code>. This book talks about files by their full names, so <strong>turn extensions on</strong>:</p>
 <ul>
-<li><strong>Prompts to paste</strong> are in grey boxes with a copy button. Change the parts in <code>&lt;angle brackets&gt;</code> to your own.</li>
-<li><strong>Your own material first.</strong> Every activity works best on something you actually do. Each one also gives a fallback, usually public data from the Vahedi lab, for when you have nothing to hand or don’t want to use your own.</li>
-<li><strong>On Windows?</strong> Look for the collapsed “On Windows” boxes, and <a href="appendices/windows.html" class="quarto-xref"><span>Appendix A — Windows notes</span></a>.</li>
-<li><strong>Using something other than Claude?</strong> Gemini CLI, Codex or Copilot all work for almost everything here. Where a step is specific to Claude Code, the chapter says so.</li>
+<li><strong>Windows 11:</strong> in File Explorer, <strong>View → Show → File name extensions</strong>.</li>
+<li><strong>Windows 10:</strong> in File Explorer, the <strong>View</strong> tab, then tick <strong>File name extensions</strong>.</li>
 </ul>
-<div class="callout callout-style-default callout-important callout-titled">
+<p>In the same menu, <strong>Hidden items</strong> shows files and folders whose names start with a dot, such as <code>.claude</code>, where Claude Code keeps skills and settings for a project (<a href="../chapters/04-skills.html" class="quarto-xref"><span>Chapter 4</span></a>). Turn it on too.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>What not to give an agent
+<span class="screen-reader-only">Warning</span>A file called <code>notes.txt.txt</code>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Nothing identifiable about patients or participants. Nothing unpublished that you aren’t allowed to share. No passwords or keys. Your institution’s rules on what may go into an AI tool apply here as everywhere; when in doubt, use the fallback data.</p>
+<p>With extensions hidden, a file you save as <code>notes.txt</code> from Notepad can end up as <code>notes.txt.txt</code>, and a file the agent made called <code>AGENTS.md</code> looks like a file called <code>AGENTS</code>. If a file “isn’t there” when the agent says it is, turn extensions on first.</p>
 </div>
 </div>
 </section>
-<section id="when-something-goes-wrong" class="level2">
-<h2 class="anchored" data-anchor-id="when-something-goes-wrong">When something goes wrong</h2>
-<p>It will. Tell the agent what happened, in plain words, and paste the error message: it’s usually good at diagnosing its own setup. If it’s going in circles, start a new session and say what you want again, more precisely. That is not failure. It’s most of the skill.</p>
+<section id="win-powershell" class="level2 page-columns page-full" data-number="A.3">
+<h2 data-number="A.3" class="anchored" data-anchor-id="win-powershell"><span class="header-section-number">A.3</span> PowerShell versus CMD</h2>
+<p>You only need a terminal if you use the <code>claude</code> command rather than the desktop app. Windows has two, and they take different commands. <strong>Use PowerShell for every command in this book</strong>: the installer, <code>cd</code>, <code>claude</code>, <code>claude mcp add</code> in <a href="../chapters/05-mcp.html" class="quarto-xref"><span>Chapter 5</span></a>, and <code>winget</code>. Commands shown in grey boxes for Windows are PowerShell commands.</p>
+<div id="tbl-windows-shells" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-windows-shells-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>PowerShell</th>
+<th>CMD (Command Prompt)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>How to open</td>
+<td><strong>Win + X</strong>, then <strong>Windows PowerShell</strong> or <strong>Terminal</strong></td>
+<td>Start menu, “cmd”</td>
+</tr>
+<tr class="even">
+<td>The prompt looks like</td>
+<td><code>PS C:\Users\you&gt;</code></td>
+<td><code>C:\Users\you&gt;</code> (no <code>PS</code>)</td>
+</tr>
+<tr class="odd">
+<td>Use it for this book?</td>
+<td><strong>Yes</strong></td>
+<td>Only if told to</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-windows-shells-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;A.3: Telling PowerShell from CMD.
+</figcaption>
+</figure>
+</div>
+<p>The install command in <a href="../chapters/00-setup.html">Setup</a>, <code>irm https://claude.ai/install.ps1 | iex</code>, is for PowerShell. If you see <code>'irm' is not recognized</code>, you’re in CMD: close it and open PowerShell. If <code>claude</code> itself is “not recognized” after installing, the install folder isn’t on your PATH yet; the fix is in <a href="https://code.claude.com/docs/en/terminal-guide#windows-troubleshooting">Claude Code’s terminal guide</a>. Close PowerShell and open a new window after applying it. You don’t need to run PowerShell as Administrator.</p>
+<p>If Windows offers <strong>Windows PowerShell (x86)</strong>, don’t pick it: Claude Code needs the 64-bit one, without “(x86)” in the name.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>WSL
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you already use WSL (Linux inside Windows), you can run Claude Code there instead. You don’t need to for this book, and plugins aren’t available in WSL sessions of the desktop app, which matters for <a href="../chapters/05-mcp.html" class="quarto-xref"><span>Chapter 5</span></a>. If in doubt, use native Windows.</p>
+</div>
+</div>
 </section>
-<section id="how-this-book-was-made" class="level2">
-<h2 class="anchored" data-anchor-id="how-this-book-was-made">How this book was made</h2>
-<p>Written with agents, at Sean Davis’s direction, the day before the workshop. The decisions behind its shape are in the repository’s <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/tree/main/adr">decision records</a>, and what was asked, done and checked is in its <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/LEDGER.md">ledger</a>, the same format <a href="chapters/02-ledger.html" class="quarto-xref"><span>2&nbsp; The ledger</span></a> teaches.</p>
+<section id="win-html" class="level2" data-number="A.4">
+<h2 data-number="A.4" class="anchored" data-anchor-id="win-html"><span class="header-section-number">A.4</span> Opening a web page the agent made</h2>
+<p>Several chapters end with an <code>.html</code> file: a small web page or app that runs entirely in your browser. To open one, <strong>double-click it</strong> in File Explorer. It opens in your default browser, usually Edge on Windows.</p>
+<p>To choose the browser, right-click the file and pick <strong>Open with</strong>, then Chrome or Edge. Both are fine. The PeakPeek example in <a href="../chapters/06-build-an-app.html" class="quarto-xref"><span>Chapter 6</span></a> was tested in Chrome.</p>
+<p>The address bar will show something like <code>file:///C:/Users/you/Documents/...</code>. That’s expected: the page is reading from your disk, not the internet.</p>
+</section>
+<section id="win-git" class="level2 page-columns page-full" data-number="A.5">
+<h2 data-number="A.5" class="anchored" data-anchor-id="win-git"><span class="header-section-number">A.5</span> Git for Windows (optional)</h2>
+<p><strong>Nothing before <a href="../chapters/07-work-like-a-project.html" class="quarto-xref"><span>Chapter 7</span></a> needs <code>git</code>.</strong> That chapter uses it for version control, and offers a way round if you can’t install it.</p>
+<p>Having Git for Windows installed also changes one thing about Claude Code: with it, the agent runs commands through <strong>Git Bash</strong> (the same kind of shell as on a Mac); without it, the agent uses <strong>PowerShell</strong>. Either works for this book, and you won’t need to learn Git Bash yourself.</p>
+<p>To install it, either download the installer from <a href="https://git-scm.com/install/windows">git-scm.com/install/windows</a> and accept the defaults on every screen, or, in PowerShell:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>winget install <span class="op">--</span>id Git<span class="op">.</span><span class="fu">Git</span> <span class="op">-</span>e <span class="op">--</span>source winget</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then close and reopen the desktop app or PowerShell, so it finds <code>git</code>.</p>
+<p>Or let the agent do it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Check whether git is installed. If not, tell me how to install Git for Windows</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>on this computer, and wait for me to say go before running anything.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>On an institution-managed laptop, installing software may be blocked. That’s fine: skip it, and use the no-git route in <a href="../chapters/07-work-like-a-project.html" class="quarto-xref"><span>Chapter 7</span></a>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Git and OneDrive don’t mix well
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>OneDrive syncs files while <code>git</code> is writing them, and the two can clash, leaving a project’s history damaged. If your Documents is in OneDrive, either <strong>pause OneDrive syncing</strong> while you work (from the OneDrive icon in the taskbar), or keep the project in a folder outside OneDrive, such as <code>C:\Users\&lt;you&gt;\agents-workshop</code>, as <a href="../chapters/07-work-like-a-project.html" class="quarto-xref"><span>Chapter 7</span></a> suggests.</p>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Line endings.</strong> Windows and Macs end lines in text files differently, and Git sometimes prints warnings about <code>LF</code> and <code>CRLF</code>. You can ignore them for everything in this book.</p>
+</div></div></section>
+<section id="if-something-else-goes-wrong" class="level2" data-number="A.6">
+<h2 data-number="A.6" class="anchored" data-anchor-id="if-something-else-goes-wrong"><span class="header-section-number">A.6</span> If something else goes wrong</h2>
+<p>Paste the exact error into a session and ask the agent what it means. For install problems, Claude Code’s <a href="https://code.claude.com/docs/en/troubleshoot-install">troubleshooting guide</a> matches error messages to fixes.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -853,10 +917,13 @@ Table&nbsp;2: The chapters
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../chapters/07-work-like-a-project.html" class="pagination-link" aria-label="Work like a project">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Work like a project</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapters/00-setup.html" class="pagination-link" aria-label="Setup">
-        <span class="nav-page-text">Setup</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../appendices/references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -865,4 +932,4 @@ Table&nbsp;2: The chapters
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/appendices/windows.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

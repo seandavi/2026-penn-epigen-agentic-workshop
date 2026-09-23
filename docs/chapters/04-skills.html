@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; Write a skill – Agents for bench scientists</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/05-mcp.html" rel="next">
+<link href="../chapters/03-teach-your-agent.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8db532a760e6309ca89cbbb647cf1feb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="mermaid-theme" content="neutral">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating slimcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/04-skills.html">Extending the agent</a></li><li class="breadcrumb-item"><a href="../chapters/04-skills.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Write a skill</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Agents for bench scientists</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/tree/main/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Working with an agent</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-website.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Build a website</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-ledger.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ledger</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-teach-your-agent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Teach the agent your project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extending the agent</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-skills.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Write a skill</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-mcp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connect to a database (MCP)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Building things</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-build-an-app.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Build an app</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-work-like-a-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Work like a project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Windows notes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-youll-learn" id="toc-what-youll-learn" class="nav-link active" data-scroll-target="#what-youll-learn"><span class="header-section-number">4.1</span> What you’ll learn</a></li>
+  <li><a href="#what-a-skill-is" id="toc-what-a-skill-is" class="nav-link" data-scroll-target="#what-a-skill-is"><span class="header-section-number">4.2</span> What a skill is</a>
+  <ul class="collapse">
+  <li><a href="#the-description-decides-everything" id="toc-the-description-decides-everything" class="nav-link" data-scroll-target="#the-description-decides-everything"><span class="header-section-number">4.2.1</span> The description decides everything</a></li>
+  <li><a href="#where-skills-live" id="toc-where-skills-live" class="nav-link" data-scroll-target="#where-skills-live"><span class="header-section-number">4.2.2</span> Where skills live</a></li>
+  <li><a href="#what-makes-a-good-skill" id="toc-what-makes-a-good-skill" class="nav-link" data-scroll-target="#what-makes-a-good-skill"><span class="header-section-number">4.2.3</span> What makes a good skill</a></li>
+  </ul></li>
+  <li><a href="#worked-example-deseq2-triage" id="toc-worked-example-deseq2-triage" class="nav-link" data-scroll-target="#worked-example-deseq2-triage"><span class="header-section-number">4.3</span> Worked example: <code>deseq2-triage</code></a>
+  <ul class="collapse">
+  <li><a href="#reading-the-skill-part-by-part" id="toc-reading-the-skill-part-by-part" class="nav-link" data-scroll-target="#reading-the-skill-part-by-part"><span class="header-section-number">4.3.1</span> Reading the skill, part by part</a></li>
+  <li><a href="#running-it" id="toc-running-it" class="nav-link" data-scroll-target="#running-it"><span class="header-section-number">4.3.2</span> Running it</a></li>
+  <li><a href="#the-same-question-without-the-skill" id="toc-the-same-question-without-the-skill" class="nav-link" data-scroll-target="#the-same-question-without-the-skill"><span class="header-section-number">4.3.3</span> The same question, without the skill</a></li>
+  </ul></li>
+  <li><a href="#your-turn-create-your-own" id="toc-your-turn-create-your-own" class="nav-link" data-scroll-target="#your-turn-create-your-own"><span class="header-section-number">4.4</span> Your turn: create your own</a>
+  <ul class="collapse">
+  <li><a href="#pick-a-file-you-check-by-hand" id="toc-pick-a-file-you-check-by-hand" class="nav-link" data-scroll-target="#pick-a-file-you-check-by-hand"><span class="header-section-number">4.4.1</span> 1. Pick a file you check by hand</a></li>
+  <li><a href="#have-the-agent-interview-you" id="toc-have-the-agent-interview-you" class="nav-link" data-scroll-target="#have-the-agent-interview-you"><span class="header-section-number">4.4.2</span> 2. Have the agent interview you</a></li>
+  <li><a href="#read-the-draft-before-you-accept-it" id="toc-read-the-draft-before-you-accept-it" class="nav-link" data-scroll-target="#read-the-draft-before-you-accept-it"><span class="header-section-number">4.4.3</span> 3. Read the draft before you accept it</a></li>
+  <li><a href="#test-it-on-a-file-where-you-know-the-answer" id="toc-test-it-on-a-file-where-you-know-the-answer" class="nav-link" data-scroll-target="#test-it-on-a-file-where-you-know-the-answer"><span class="header-section-number">4.4.4</span> 4. Test it on a file where you know the answer</a></li>
+  <li><a href="#test-the-description" id="toc-test-the-description" class="nav-link" data-scroll-target="#test-the-description"><span class="header-section-number">4.4.5</span> 5. Test the description</a></li>
+  </ul></li>
+  <li><a href="#what-to-notice" id="toc-what-to-notice" class="nav-link" data-scroll-target="#what-to-notice"><span class="header-section-number">4.5</span> What to notice</a></li>
+  <li><a href="#check-yourself" id="toc-check-yourself" class="nav-link" data-scroll-target="#check-yourself"><span class="header-section-number">4.6</span> Check yourself</a></li>
+  <li><a href="#going-further" id="toc-going-further" class="nav-link" data-scroll-target="#going-further"><span class="header-section-number">4.7</span> Going further</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/chapters/04-skills.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/04-skills.html">Extending the agent</a></li><li class="breadcrumb-item"><a href="../chapters/04-skills.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Write a skill</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-skills" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Write a skill</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Every lab has checks that live in someone’s head. Before anyone plots a DESeq2 table, the person who has been burned before asks which group is the reference. Before a sample sheet goes to the core, someone looks for the duplicated row and the three date formats. Before a qPCR plate gets analysed, someone checks the no-template controls. None of this is written down, so it gets done when that person is in the room and forgotten when they’re not. An agent has the same problem: each new session starts knowing nothing about your lab’s traps, and you end up explaining them again, or, worse, not explaining them and getting a confident answer that skipped the check that mattered.</p>
+<p>A <strong>skill</strong> is how you write a check like that down once, in a form an agent picks up by itself when the task calls for it. It’s a folder with a Markdown file in it. No code, no build step, no registration. The file says what the procedure is for, when to use it, and what to do, and the agent loads it when your request matches.</p>
+<p>The part people don’t expect is who does the writing. <strong>You don’t write the skill by hand. The agent writes it, with your direction, and you verify it.</strong> Your contribution is the part the agent can’t supply: what a good file looks like, which problems you’ve actually seen, which of them lead to wrong conclusions, and what the skill must never do. The agent is good at turning that into a clear, well-structured instruction file. It’s bad at knowing that your core’s exports put the plate barcode in row 3, and it can’t know whether its own skill works until you test it on a file where you already know the answer. This chapter is about that division of labour.</p>
+<section id="what-youll-learn" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="what-youll-learn"><span class="header-section-number">4.1</span> What you’ll learn</h2>
+<ul>
+<li>What a skill is, where it lives, and how an agent decides to load one.</li>
+<li>How to read a real skill, <code>deseq2-triage</code>, and why each part of it is there.</li>
+<li>What a skill changes, by comparing the same request with it and without it.</li>
+<li>How to direct an agent to write a skill for a file <em>you</em> check often.</li>
+<li>How to verify it: on a good file, on a file with problems you planted, and on the wording that should (and shouldn’t) make it load.</li>
+</ul>
+</section>
+<section id="what-a-skill-is" class="level2 page-columns page-full" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="what-a-skill-is"><span class="header-section-number">4.2</span> What a skill is</h2>
+<p>A skill is a folder whose name is the skill’s name, containing a file called <code>SKILL.md</code> (<a href="#fig-skills-folder" class="quarto-xref">Figure&nbsp;<span>4.1</span></a>). The file starts with a short header, between two <code>---</code> lines, holding two fields: <code>name</code> and <code>description</code>. Everything after the header is instructions, written in plain Markdown, for the agent to follow. A skill can also carry <code>scripts/</code> (code for the agent to run) and <code>references/</code> (longer documents it reads only when a step says to), but many good skills are a single file.</p>
+<div id="fig-skills-folder" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="Folder tree: my-analysis contains .claude, which contains skills, which contains deseq2-triage. Inside it, SKILL.md is required; README.md is for people; scripts and references folders are optional.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-skills-folder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../images/skills-folder.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;4.1: A skill is a folder. Only SKILL.md is required; the rest is optional. The folder sits in .claude/skills/ inside a project, or in your home folder to be available everywhere."><img src="../images/skills-folder.svg" class="img-fluid figure-img" alt="Folder tree: my-analysis contains .claude, which contains skills, which contains deseq2-triage. Inside it, SKILL.md is required; README.md is for people; scripts and references folders are optional."></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-skills-folder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: A skill is a folder. Only <code>SKILL.md</code> is required; the rest is optional. The folder sits in <code>.claude/skills/</code> inside a project, or in your home folder to be available everywhere.
+</figcaption>
+</figure>
+</div>
+<section id="the-description-decides-everything" class="level3 page-columns page-full" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="the-description-decides-everything"><span class="header-section-number">4.2.1</span> The description decides everything</h3>
+<p>When a session starts, the agent doesn’t read your skills. It reads a list of their names and descriptions: a line or two each. Only when your request matches a description does it load the rest of that skill’s file (<a href="#fig-skills-loading" class="quarto-xref">Figure&nbsp;<span>4.2</span></a>). This is called <strong>progressive disclosure</strong>, and it’s why you can have dozens of skills without filling the agent’s memory: the instructions cost nothing until they’re needed <span class="citation" data-cites="url:https://code.claude.com/docs/en/skills">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/skills" role="doc-biblioref"><span>“Extend <span>Claude</span> with Skills,”</span> n.d.</a>)</span>.</p>
+<div class="no-row-height column-margin column-container"></div><div class="cell page-columns page-full" data-layout-align="default">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-skills-loading" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-skills-loading-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-skills-loading">flowchart LR
+  accDescr: Flowchart - the session starts, the agent reads each skill's name and
+  A["Session starts"] --&gt; B["Agent reads every skill's&lt;br/&gt;name and description"]
+  B --&gt; C{"Does your request&lt;br/&gt;match a description?"}
+  C -- "no" --&gt; D["Answers without it&lt;br/&gt;(no warning)"]
+  C -- "yes" --&gt; E["Loads the full SKILL.md,&lt;br/&gt;then scripts/ or references/&lt;br/&gt;only if a step says to"]
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-skills-loading-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: How a skill gets loaded. The agent sees only the description until your request matches it. A skill whose description never matches never runs, and nothing tells you.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The consequence is the most important fact in this chapter. The agent never sees the body of a skill until it has already decided to use it, so <strong>a skill that never loads is indistinguishable from a skill you never wrote</strong>. No error, no warning: you just get the answer you’d have got anyway. A good description says what the skill does, then when to use it, in the words you’d actually type: “check”, “sanity-check”, “is this OK”, “can I trust this”.</p>
+</section>
+<section id="where-skills-live" class="level3 page-columns page-full" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="where-skills-live"><span class="header-section-number">4.2.2</span> Where skills live</h3>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>An open format.</strong> <code>SKILL.md</code> follows the Agent Skills standard <span class="citation" data-cites="url:https://agentskills.io">(<a href="../appendices/references.html#ref-url:https://agentskills.io" role="doc-biblioref"><span>“Agent <span>Skills</span> <span>Overview</span>,”</span> n.d.</a>)</span>, so the same folder works in Codex CLI, Gemini CLI and GitHub Copilot as well as Claude Code. Where each tool looks for skills differs; check its documentation.</p>
+<div id="ref-url:https://agentskills.io" class="csl-entry" role="listitem">
+<span>“Agent <span>Skills</span> <span>Overview</span>.”</span> n.d. Accessed September 23, 2026. <a href="https://agentskills.io/home">https://agentskills.io/home</a>.
+</div></div></div><div id="tbl-skills-where" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-skills-where-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Where</th>
+<th style="text-align: left;">Path</th>
+<th style="text-align: left;">Who gets it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">This project</td>
+<td style="text-align: left;"><code>.claude/skills/&lt;name&gt;/SKILL.md</code>, inside the folder you start the agent in</td>
+<td style="text-align: left;">Anyone working in this folder; share it with the folder</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Just you, everywhere</td>
+<td style="text-align: left;"><code>~/.claude/skills/&lt;name&gt;/SKILL.md</code>, in your home folder</td>
+<td style="text-align: left;">You, in every project on this computer</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-skills-where-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.1: Where Claude Code looks for skills. Start with the project folder: it keeps the skill next to the data it’s for, and it’s easy to find and delete. Source: the Claude Code skills documentation.
+</figcaption>
+</figure>
+</div>
+<p>In the Claude desktop app, type <code>/</code> in the prompt box to see the skills available in a session, or ask the agent “What skills are available?”. Both are useful for checking that a new skill was found at all.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>On Windows
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>~</code> means your home folder, <code>C:\Users\&lt;you&gt;</code>. So personal skills live in <code>C:\Users\&lt;you&gt;\.claude\skills\</code>. Project skills live in <code>.claude\skills\</code> inside your project folder.</li>
+<li>Folders whose names start with a dot can be awkward to create by hand in File Explorer. Let the agent create them: “save it as <code>.claude/skills/&lt;name&gt;/SKILL.md</code> in this folder” works the same on Windows and macOS.</li>
+<li>If a skill runs scripts, prefer Python or R over shell scripts. A skill that needs <code>bash</code> fails on Windows unless Git for Windows is installed.</li>
+</ul>
+<p>More in <a href="../appendices/windows.html" class="quarto-xref"><span>Appendix A</span></a>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Can’t see <code>.claude</code> on a Mac?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Finder hides folders whose names start with a dot. Press <strong>Cmd + Shift + .</strong> in a Finder window to show them, and again to hide them.</p>
+</div>
+</div>
+</section>
+<section id="what-makes-a-good-skill" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="what-makes-a-good-skill"><span class="header-section-number">4.2.3</span> What makes a good skill</h3>
+<p>The best skills encode knowledge that <strong>isn’t in the data</strong>. An agent can read a table perfectly well; what it can’t know is the thing your lab learned the hard way. Ask of any candidate procedure: would a careful newcomer, with the file in front of them, work this out? If yes, the agent probably will too, and the skill adds little. If no (which group is the reference, which instrument column is unreliable, which sample names break the join) it’s worth a skill.</p>
+<p>Skills and the <code>AGENTS.md</code> file from <a href="03-teach-your-agent.html" class="quarto-xref"><span>Chapter 3</span></a> do different jobs. <code>AGENTS.md</code> holds the <strong>rules</strong> for one project, read at the start of every session there. A skill holds a <strong>procedure</strong>, loaded only when a task needs it, in whichever project you’re in. When a section of your <code>AGENTS.md</code> has turned into a list of steps, it wants to be a skill.</p>
+</section>
+</section>
+<section id="worked-example-deseq2-triage" class="level2 page-columns page-full" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="worked-example-deseq2-triage"><span class="header-section-number">4.3</span> Worked example: <code>deseq2-triage</code></h2>
+<p>This workshop’s repository includes a skill, <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/tree/main/examples/skills/deseq2-triage"><code>deseq2-triage</code></a>, written for the two DESeq2 results tables in the <a href="https://github.com/golnazvahedi/epigenetics-agentic-workshop">Vahedi lab’s workshop repository</a> (<code>track-a/data/</code>). DESeq2 <span class="citation" data-cites="doi:10.1186/s13059-014-0550-8">(<a href="../appendices/references.html#ref-doi:10.1186/s13059-014-0550-8" role="doc-biblioref">Love et al. 2014</a>)</span> results tables arrive without the facts you need to read them: the genome build, the coordinate convention, which group is the reference, and what was filtered before export. The numbers are fine. The context is missing.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-doi:10.1186/s13059-014-0550-8" class="csl-entry" role="listitem">
+Love, Michael I, Wolfgang Huber, and Simon Anders. 2014. <span>“Moderated Estimation of Fold Change and Dispersion for <span class="nocase">RNA-seq</span> Data with <span>DESeq2</span>.”</span> <em>Genome Biology</em> 15 (12). <a href="https://doi.org/10.1186/s13059-014-0550-8">https://doi.org/10.1186/s13059-014-0550-8</a>.
+</div></div><p>The two tables make the point sharply. The data README says that in <code>differential_genes.tsv</code> a positive fold change means <em>higher in wild type</em> (lower in the knockout), while in <code>differential_peaks.csv</code> it means <em>more H3K27ac in the knockout</em>. The two files use opposite conventions, and neither says so.</p>
+<section id="reading-the-skill-part-by-part" class="level3 page-columns page-full" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="reading-the-skill-part-by-part"><span class="header-section-number">4.3.1</span> Reading the skill, part by part</h3>
+<p>Open <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/examples/skills/deseq2-triage/SKILL.md"><code>SKILL.md</code></a> alongside this table. Each part is there for a reason.</p>
+<div id="tbl-skills-parts" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-skills-parts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">What it says</th>
+<th style="text-align: left;">Why it’s there</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>name</code></td>
+<td style="text-align: left;"><code>deseq2-triage</code></td>
+<td style="text-align: left;">Matches the folder name. Lowercase, hyphens.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>description</code></td>
+<td style="text-align: left;">What it checks, then “Use when the user asks to check, QC, sanity-check, triage, or look over a results table … or asks what is wrong with one or whether it can be trusted.”</td>
+<td style="text-align: left;">This is what the agent matches your request against. It lists the words people actually use.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">What this is for</td>
+<td style="text-align: left;">The four missing facts. “Run these checks and report. Do not fix anything.”</td>
+<td style="text-align: left;">Tells the agent the <em>goal</em>, so it can handle a table that doesn’t fit the steps exactly.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Step 2, direction</td>
+<td style="text-align: left;">Work the direction out from the per-sample counts if they’re there. If not, report <code>UNVERIFIABLE</code>. “Do not infer it from column order, from group names … Do not guess.”</td>
+<td style="text-align: left;">The trap that matters most, and the one an agent is most tempted to paper over. Forbidding the specific guesses is what stops them.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Steps 3–6</td>
+<td style="text-align: left;">Missing <code>padj</code>, p-values of exactly 0, chromosome names, interval widths, duplicated IDs</td>
+<td style="text-align: left;">The lab’s known traps, each with the reason it matters (a naive filter drops rows; <code>-log10(0)</code> is infinity; <code>chr1</code> never joins to <code>1</code>).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Step 7, report</td>
+<td style="text-align: left;">Three sections: <strong>Blocking</strong>, <strong>Worth knowing</strong>, <strong>Checked and fine</strong>, then the four facts to ask for</td>
+<td style="text-align: left;">A fixed shape makes reports comparable from one file to the next, and puts what stops you first.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Constraints</td>
+<td style="text-align: left;">Report only; don’t write a cleaned copy; don’t state a direction you haven’t shown from counts; stop</td>
+<td style="text-align: left;">Agents are helpful. Without these, it may “fix” the table and carry on to a volcano plot.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-skills-parts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.2: The parts of <code>deseq2-triage/SKILL.md</code>. The <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/examples/skills/deseq2-triage/README.md">README</a> beside it is for people: why the skill exists, and how to install it. The agent doesn’t need it.
+</figcaption>
+</figure>
+</div>
+<p>Two lessons carry over to any skill you write. First, <strong>the “don’t” lines matter as much as the steps</strong>: each one closes off a helpful-looking move that would destroy the point of the check. Second, <strong>say why</strong>. “Count rows where <code>padj</code> is missing” gets you a number; adding “a naive <code>padj &lt; 0.05</code> filter silently discards those rows” gets you a warning a person will act on.</p>
+</section>
+<section id="running-it" class="level3 page-columns page-full" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="running-it"><span class="header-section-number">4.3.2</span> Running it</h3>
+<p>We ran it on 23 September 2026. We made an empty folder, copied the skill into <code>.claude/skills/deseq2-triage/</code>, downloaded the two tables, and asked Claude Code (Claude Opus 5.5) about each file in a fresh session. The prompt deliberately doesn’t name the skill:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>I've been handed differential_peaks.csv by a collaborator. Can I trust it?</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Sanity-check it before I use it.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Both times, the agent loaded <code>deseq2-triage</code> on its own: “sanity-check” and “can I trust it” are in the description. Here is the start of its report on the peaks file, unedited apart from shortening:</p>
+<blockquote class="blockquote">
+<p><strong>Blocking</strong></p>
+<ol type="1">
+<li><strong>Fold-change direction: can’t be checked from this file.</strong> Without per-sample counts, nothing here shows which group a positive <code>log2FoldChange</code> means. The reference level has to come from the analyst or their DESeq2 script […] If the direction is wrong, every “gained” peak is really a “lost” one.</li>
+</ol>
+<p><strong>Worth knowing</strong></p>
+<ol start="2" type="1">
+<li><strong>No missing <code>padj</code> values, which suggests the table was filtered before export.</strong> […]</li>
+<li><strong>4 rows have <code>pvalue</code> and <code>padj</code> exactly 0.</strong> That’s floating-point underflow, not certainty. On a volcano plot <code>-log10(0)</code> is infinity […]</li>
+<li><strong>Chromosome names use the Ensembl style (<code>1</code>, <code>2</code>, …, <code>X</code>, <code>Y</code>), not UCSC (<code>chr1</code>).</strong> Joining against a UCSC-style file […] will match nothing, and it won’t raise an error.</li>
+</ol>
+</blockquote>
+<p>On the genes file, it worked the direction out from the counts: “positive <code>log2FoldChange</code> means higher in WT than in CTCFBSKO”, consistent for all 60 significant genes, with <em>Jun</em> as the worked case. It flagged that 20,982 genes have no adjusted p-value, and explained that they are “not tested”, not “not significant”. That’s DESeq2’s independent filtering <span class="citation" data-cites="doi:10.1073/pnas.0914005107">(<a href="../appendices/references.html#ref-doi:10.1073/pnas.0914005107" role="doc-biblioref">Bourgon et al. 2010</a>)</span>.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-doi:10.1073/pnas.0914005107" class="csl-entry" role="listitem">
+Bourgon, Richard, Robert Gentleman, and Wolfgang Huber. 2010. <span>“Independent Filtering Increases Detection Power for High-Throughput Experiments.”</span> <em>Proceedings of the National Academy of Sciences</em> 107 (21): 9546–51. <a href="https://doi.org/10.1073/pnas.0914005107">https://doi.org/10.1073/pnas.0914005107</a>.
+</div></div><p><strong>We didn’t take the report on trust.</strong> We recounted every number in it with a short script (rows, missing <code>padj</code>, zero p-values, the 60/60 direction check, the 16 duplicated gene symbols, the widths from 180 to 93,567 bp) and compared the findings with the quirks listed in the Vahedi lab’s <a href="https://github.com/golnazvahedi/epigenetics-agentic-workshop/blob/main/track-a/data/README.md">data README</a>. All matched.</p>
+</section>
+<section id="the-same-question-without-the-skill" class="level3 page-columns page-full" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="the-same-question-without-the-skill"><span class="header-section-number">4.3.3</span> The same question, without the skill</h3>
+<p>A skill is only worth having if it changes something. So we asked the same question, about the same files, in a folder with no skill (<a href="#tbl-skills-compare" class="quarto-xref">Table&nbsp;<span>4.3</span></a>).</p>
+<div id="tbl-skills-compare" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-skills-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Known problem (from the data README)</th>
+<th style="text-align: left;">File</th>
+<th style="text-align: left;">With the skill</th>
+<th style="text-align: left;">Without it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Positive fold change means higher in WT</td>
+<td style="text-align: left;">genes</td>
+<td style="text-align: left;"><strong>Blocking</strong>; shown from counts, 60/60</td>
+<td style="text-align: left;">Found from counts; its first concern</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>padj</code> missing for 20,982 genes</td>
+<td style="text-align: left;">genes</td>
+<td style="text-align: left;"><strong>Blocking</strong>; “not tested”, not “not significant”</td>
+<td style="text-align: left;">Found; also “not tested”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">16 duplicated gene symbols</td>
+<td style="text-align: left;">genes</td>
+<td style="text-align: left;">Worth knowing: join on <code>Gene_ID</code></td>
+<td style="text-align: left;">Mentioned as normal</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Direction unstated, no counts to check it</td>
+<td style="text-align: left;">peaks</td>
+<td style="text-align: left;"><strong>Blocking</strong>: <code>UNVERIFIABLE</code></td>
+<td style="text-align: left;">Half a sentence at the end of another point</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4 p-values of exactly 0 (underflow)</td>
+<td style="text-align: left;">peaks</td>
+<td style="text-align: left;">Worth knowing</td>
+<td style="text-align: left;"><strong>Not mentioned</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">No <code>chr</code> prefix</td>
+<td style="text-align: left;">peaks</td>
+<td style="text-align: left;">Worth knowing: joins fail silently</td>
+<td style="text-align: left;">Mentioned</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Widths up to 93,567 bp</td>
+<td style="text-align: left;">peaks</td>
+<td style="text-align: left;">Worth knowing</td>
+<td style="text-align: left;">“Minor”</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Time taken</td>
+<td style="text-align: left;">both</td>
+<td style="text-align: left;">48 s and 43 s</td>
+<td style="text-align: left;">91 s and 90 s</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-skills-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.3: One run of each, same model, same prompt, on 23 September 2026. Agents vary from run to run, so treat this as an illustration, not a benchmark.
+</figcaption>
+</figure>
+</div>
+<p>The agent without the skill wasn’t careless. It did a lot: it reported recomputing the p-values and the Benjamini–Hochberg adjustment (we didn’t check that), and it noticed that three peaks on chromosome Y are strongly up. (We checked: they are.) But it chose its own checks, so it skipped one the lab knows matters (underflow). It buried the one that matters most for the peaks file (direction). And its explanation for the Y peaks, that “the two groups contain different numbers of males”, can’t be right as stated: the data README says these samples come from a <strong>cell line</strong>. The agent didn’t know that, because the file doesn’t say.</p>
+<p>That’s the case for a skill in one table. <strong>Without it, you get a thoughtful answer that varies with the agent’s choices. With it, you get your lab’s checks, every time, in the same order, and it stops when it’s done.</strong></p>
+</section>
+</section>
+<section id="your-turn-create-your-own" class="level2 page-columns page-full" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="your-turn-create-your-own"><span class="header-section-number">4.4</span> Your turn: create your own</h2>
+<p>You’ll direct an agent to write a skill that checks a kind of file you handle often, then verify it. Budget 30–40 minutes. <a href="#fig-skills-loop" class="quarto-xref">Figure&nbsp;<span>4.3</span></a> shows who does what.</p>
+<div class="cell page-columns page-full" data-layout-align="default">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-skills-loop" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-skills-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-skills-loop">flowchart TD
+  accDescr: Flowchart - you describe the file and its traps, the agent interviews you
+  A["&lt;b&gt;You&lt;/b&gt;: the file, what good looks like,&lt;br/&gt;the traps you've seen"] --&gt; B["&lt;b&gt;Agent&lt;/b&gt;: interviews you,&lt;br/&gt;drafts SKILL.md"]
+  B --&gt; C["&lt;b&gt;You&lt;/b&gt;: read the draft; test it on a good file,&lt;br/&gt;a file with planted problems,&lt;br/&gt;and the words that should load it"]
+  C -- "something failed" --&gt; D["&lt;b&gt;Agent&lt;/b&gt;: revises,&lt;br/&gt;from what you found"]
+  D --&gt; C
+  C -- "all passed" --&gt; E["Keep it"]
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-skills-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.3: Writing a skill with an agent. You supply what the agent can’t know, and you do the testing; the agent does the writing.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="pick-a-file-you-check-by-hand" class="level3 page-columns page-full" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="pick-a-file-you-check-by-hand"><span class="header-section-number">4.4.1</span> 1. Pick a file you check by hand</h3>
+<p>Your own material first. Good candidates are files that arrive from somewhere else and have burned you before (<a href="#tbl-skills-ideas" class="quarto-xref">Table&nbsp;<span>4.4</span></a>).</p>
+<div id="tbl-skills-ideas" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-skills-ideas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">File</th>
+<th style="text-align: left;">The checks you might already do in your head</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A sample sheet for the sequencing core</td>
+<td style="text-align: left;">Duplicate IDs, inconsistent names, mixed date formats, missing conditions, characters the pipeline rejects</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A qPCR export</td>
+<td style="text-align: left;">No-template controls amplified, replicate Ct spread, missing wells, undetermined values</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A peak file (BED, narrowPeak)</td>
+<td style="text-align: left;"><code>chr</code> prefix, 0- or 1-based starts, zero-width peaks, genome build</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A FastQC or MultiQC summary</td>
+<td style="text-align: left;">Failed modules that matter for your assay versus ones that don’t</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A flow cytometry or plate-reader export</td>
+<td style="text-align: left;">Units, blank wells, saturated values, the plate layout</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-skills-ideas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.4: Candidate files for a checking skill.
+</figcaption>
+</figure>
+</div>
+<p><strong>No file of your own to hand?</strong> Use the Vahedi lab’s <a href="https://github.com/golnazvahedi/epigenetics-agentic-workshop/blob/main/track-a/data/sample_sheet_messy.csv"><code>sample_sheet_messy.csv</code></a>, a simulated RNA-seq submission sheet with known problems. (Their afternoon has an exercise that <em>cleans</em> this sheet. Here you’re writing a skill that <em>checks</em> sheets like it and fixes nothing.) Or extend <code>deseq2-triage</code> with a trap from your own lab’s pipeline.</p>
+<p>To use the fallback, once you’ve made the <code>skill</code> folder and started a session on it (step 2), ask the agent to fetch the exact file rather than retype it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Download this file into this folder, saving it byte for byte (curl on macOS,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Invoke-WebRequest on Windows), not by retyping it:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/sample_sheet_messy.csv</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>Then tell me how many rows and columns it has.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>What you show the agent leaves your computer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Anything the agent reads is sent to the model. Use a file you’d be allowed to email to a collaborator: no patient data, nothing identifiable, and nothing unpublished that your lab’s rules keep in-house. For a sensitive file type, describe it in words and make a small fake example.</p>
+</div>
+</div>
+</section>
+<section id="have-the-agent-interview-you" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="have-the-agent-interview-you"><span class="header-section-number">4.4.2</span> 2. Have the agent interview you</h3>
+<p>Make a folder called <code>skill</code> inside <code>Documents/agents-workshop/</code>, put a copy of your example file in it (or fetch the fallback, above), and start a <strong>new</strong> session on that folder, as in <a href="../chapters/00-setup.html">Setup</a>. Then paste this, filling in the angle brackets:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>I want you to write a skill (a SKILL.md in the Agent Skills format) that checks</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>&lt;a kind of file, e.g. "the sample sheets we send to our sequencing core"&gt; before</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>anyone uses it. There's an example in this folder: &lt;file name&gt;.</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Don't write anything yet. First interview me, one question at a time, about:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>- where these files come from, and what a good one looks like;</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>- the problems I've actually seen in them, and which would lead to a wrong result;</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>- anything that can't be checked from the file alone and must be asked of a person;</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>- what the skill must never do (for example, change the file);</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>- the words I'd use when asking for this check.</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>Then show me a draft. The skill must report problems, not fix them, and must say</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plainly when something can't be checked from the file. Save it to</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>.claude/skills/&lt;short-name&gt;/SKILL.md in this folder only when I say it's right.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Answer from experience. The most useful answers are specific: not “check the dates” but “we’ve had three date formats in one sheet, and <code>3/2/26</code> means 3 February to our UK collaborators”.</p>
+</section>
+<section id="read-the-draft-before-you-accept-it" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="read-the-draft-before-you-accept-it"><span class="header-section-number">4.4.3</span> 3. Read the draft before you accept it</h3>
+<p>It’s short; read all of it. Check that:</p>
+<ul>
+<li>the <strong>description</strong> says what it does, then when to use it, in your words;</li>
+<li>every trap you mentioned is there, <strong>with the reason it matters</strong>;</li>
+<li>there’s a <strong>“do not”</strong> for each helpful-looking move you don’t want (fixing the file, filling in missing values, carrying on to an analysis);</li>
+<li>the report has a fixed shape, with what stops you first;</li>
+<li>it doesn’t claim to check something it can’t. Ask the agent: “Which of these checks could give a wrong answer, and how would I know?”</li>
+</ul>
+<p>Ask for changes in plain language. Then let it save the file.</p>
+</section>
+<section id="test-it-on-a-file-where-you-know-the-answer" class="level3" data-number="4.4.4">
+<h3 data-number="4.4.4" class="anchored" data-anchor-id="test-it-on-a-file-where-you-know-the-answer"><span class="header-section-number">4.4.4</span> 4. Test it on a file where you know the answer</h3>
+<p>Testing is your job, not the agent’s. It needs two files.</p>
+<ol type="1">
+<li><strong>A good file.</strong> A real one you’ve already checked by hand. The skill should report little or nothing, and nothing false.</li>
+<li><strong>A bad file.</strong> Copy the good one and break it yourself: add a duplicate row, delete a value, change one date format, misspell a sample name. <strong>Write down what you broke before you run the check.</strong> Then you know exactly what it should find.</li>
+</ol>
+<p>Run each in a <strong>new session</strong>, so the agent that wrote the skill can’t answer from memory, with a prompt that doesn’t name the skill:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>I've just been sent &lt;file name&gt;. Is it OK to use?</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Compare what it reports with your list. Anything missed means the instructions need work. Anything it invented is worse: tell the agent exactly what it claimed, and ask it to change the skill so that can’t happen again.</p>
+</section>
+<section id="test-the-description" class="level3 page-columns page-full" data-number="4.4.5">
+<h3 data-number="4.4.5" class="anchored" data-anchor-id="test-the-description"><span class="header-section-number">4.4.5</span> 5. Test the description</h3>
+<p>Now test the part that decides whether the skill ever runs. Write three requests that <strong>should</strong> load it and three neighbouring ones that <strong>shouldn’t</strong>. Use how you’d really ask, not how you’d describe the skill.</p>
+<div id="tbl-skills-triggers" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-skills-triggers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Should load it</th>
+<th style="text-align: left;">Should <em>not</em> load it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">“Can you look over this sample sheet?”</td>
+<td style="text-align: left;">“Make me a blank sample sheet template”</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">“Is this ready to send to the core?”</td>
+<td style="text-align: left;">“What does the core charge per lane?”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">“Anything wrong with tconv_batch2.csv?”</td>
+<td style="text-align: left;">“Plot the harvest dates in this sheet”</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-skills-triggers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.5: An example should/shouldn’t pair for a sample-sheet checker.
+</figcaption>
+</figure>
+</div>
+<p>Try each in a new session. If you can’t tell from the transcript whether the skill was used, ask “Did you use a skill for that?”. When a phrasing you’d genuinely use doesn’t load it, tell the agent the phrase and ask it to revise the description, then test again. The usual failure is a skill that loads too rarely, not too often, so lean towards a description with more of your everyday words in it.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>If it never loads at all
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ask “What skills are available?”. If yours isn’t listed, the folder is in the wrong place, or the header between the <code>---</code> lines is malformed. Ask the agent to check both. You can always run a skill directly by typing <code>/</code> and its name.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="what-to-notice" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="what-to-notice"><span class="header-section-number">4.5</span> What to notice</h2>
+<ul>
+<li><strong>You wrote almost none of it,</strong> and it still encodes exactly what you know. The value was in your answers and your tests, not the typing.</li>
+<li><strong>The “do not” lines did real work.</strong> Without them, a checking skill drifts into a fixing skill, and a fixed file hides the problem you most needed to see.</li>
+<li><strong>The agent can’t verify its own skill.</strong> It can check that the file is well formed. Only a file where you know the answer tells you whether the checks are right.</li>
+<li><strong>The description is an interface.</strong> It failed silently or it worked; there was no error message either way.</li>
+</ul>
+</section>
+<section id="check-yourself" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="check-yourself"><span class="header-section-number">4.6</span> Check yourself</h2>
+<p>You’re done when:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">your skill is at <code>.claude/skills/&lt;name&gt;/SKILL.md</code> in your project folder;</label></li>
+<li><label><input type="checkbox">on your good file, it reported nothing false;</label></li>
+<li><label><input type="checkbox">on your broken file, it found everything you planted, or you’ve changed it so it does;</label></li>
+<li><label><input type="checkbox">it loaded for a phrasing that isn’t copied from its description, and didn’t load for a neighbouring request;</label></li>
+<li><label><input type="checkbox">you’ve added a ledger entry (<a href="02-ledger.html" class="quarto-xref"><span>Chapter 2</span></a>) saying what you tested it on and what it missed.</label></li>
+</ul>
+</section>
+<section id="going-further" class="level2 page-columns page-full" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="going-further"><span class="header-section-number">4.7</span> Going further</h2>
+<ul>
+<li><strong>Real examples.</strong> Anthropic’s <a href="https://github.com/anthropics/life-sciences">life-sciences</a> repository publishes skills for scientific work. Read <a href="https://github.com/anthropics/life-sciences/tree/main/single-cell-rna-qc"><code>single-cell-rna-qc</code></a>: a <code>SKILL.md</code> that runs Python scripts from <code>scripts/</code> and reads scverse QC guidance from <code>references/</code> only when needed. It’s the same format you just used, grown larger.</li>
+<li><strong>Share it with your lab.</strong> A skill in a project’s <code>.claude/skills/</code> travels with the project. Put it in a shared lab folder or repository (<a href="07-work-like-a-project.html" class="quarto-xref"><span>Chapter 7</span></a>), and every trainee who starts there gets your checks without having to know they exist.</li>
+<li><strong>Measure it.</strong> The <code>skill-creator</code> plugin for Claude Code runs a skill against test prompts with and without it, and suggests description changes. See “Evaluate and iterate on a skill” in the skills documentation <span class="citation" data-cites="url:https://code.claude.com/docs/en/skills">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/skills" role="doc-biblioref"><span>“Extend <span>Claude</span> with Skills,”</span> n.d.</a>)</span>.</li>
+<li><strong>Connect it to data.</strong> Skills tell an agent <em>how</em>; MCP servers (<a href="05-mcp.html" class="quarto-xref"><span>Chapter 5</span></a>) give it access to databases it can’t otherwise reach. The two combine.</li>
+</ul>
+
+
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://code.claude.com/docs/en/skills" class="csl-entry" role="listitem">
+<span>“Extend <span>Claude</span> with Skills.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/skills">https://code.claude.com/docs/en/skills</a>.
+</div></div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/seandavi\.github\.io\/2026-penn-epigen-agentic-workshop\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/03-teach-your-agent.html" class="pagination-link" aria-label="Teach the agent your project">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Teach the agent your project</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/05-mcp.html" class="pagination-link" aria-label="Connect to a database (MCP)">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connect to a database (MCP)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/chapters/04-skills.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

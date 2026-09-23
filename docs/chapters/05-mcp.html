@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Connect to a database (MCP) – Agents for bench scientists</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/06-build-an-app.html" rel="next">
+<link href="../chapters/04-skills.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8db532a760e6309ca89cbbb647cf1feb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="mermaid-theme" content="neutral">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating slimcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/04-skills.html">Extending the agent</a></li><li class="breadcrumb-item"><a href="../chapters/05-mcp.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connect to a database (MCP)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Agents for bench scientists</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/tree/main/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Working with an agent</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-website.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Build a website</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-ledger.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ledger</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-teach-your-agent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Teach the agent your project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extending the agent</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-skills.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Write a skill</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-mcp.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connect to a database (MCP)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Building things</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-build-an-app.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Build an app</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-work-like-a-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Work like a project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Windows notes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-youll-learn" id="toc-what-youll-learn" class="nav-link active" data-scroll-target="#what-youll-learn"><span class="header-section-number">5.1</span> What you’ll learn</a></li>
+  <li><a href="#how-an-mcp-connection-works" id="toc-how-an-mcp-connection-works" class="nav-link" data-scroll-target="#how-an-mcp-connection-works"><span class="header-section-number">5.2</span> How an MCP connection works</a>
+  <ul class="collapse">
+  <li><a href="#anthropics-life-sciences-servers" id="toc-anthropics-life-sciences-servers" class="nav-link" data-scroll-target="#anthropics-life-sciences-servers"><span class="header-section-number">5.2.1</span> Anthropic’s life-sciences servers</a></li>
+  </ul></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example"><span class="header-section-number">5.3</span> Worked example</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">5.4</span> Your turn</a>
+  <ul class="collapse">
+  <li><a href="#ask-first-without-a-connection" id="toc-ask-first-without-a-connection" class="nav-link" data-scroll-target="#ask-first-without-a-connection"><span class="header-section-number">5.4.1</span> 1. Ask first, without a connection</a></li>
+  <li><a href="#connect-pubmed" id="toc-connect-pubmed" class="nav-link" data-scroll-target="#connect-pubmed"><span class="header-section-number">5.4.2</span> 2. Connect PubMed</a></li>
+  <li><a href="#check-what-the-agent-can-now-do" id="toc-check-what-the-agent-can-now-do" class="nav-link" data-scroll-target="#check-what-the-agent-can-now-do"><span class="header-section-number">5.4.3</span> 3. Check what the agent can now do</a></li>
+  <li><a href="#ask-again-with-the-database" id="toc-ask-again-with-the-database" class="nav-link" data-scroll-target="#ask-again-with-the-database"><span class="header-section-number">5.4.4</span> 4. Ask again, with the database</a></li>
+  <li><a href="#check-three-pmids-by-hand" id="toc-check-three-pmids-by-hand" class="nav-link" data-scroll-target="#check-three-pmids-by-hand"><span class="header-section-number">5.4.5</span> 5. Check three PMIDs by hand</a></li>
+  <li><a href="#if-it-goes-wrong" id="toc-if-it-goes-wrong" class="nav-link" data-scroll-target="#if-it-goes-wrong"><span class="header-section-number">5.4.6</span> If it goes wrong</a></li>
+  </ul></li>
+  <li><a href="#what-to-notice" id="toc-what-to-notice" class="nav-link" data-scroll-target="#what-to-notice"><span class="header-section-number">5.5</span> What to notice</a></li>
+  <li><a href="#check-yourself" id="toc-check-yourself" class="nav-link" data-scroll-target="#check-yourself"><span class="header-section-number">5.6</span> Check yourself</a></li>
+  <li><a href="#going-further" id="toc-going-further" class="nav-link" data-scroll-target="#going-further"><span class="header-section-number">5.7</span> Going further</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/chapters/05-mcp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/04-skills.html">Extending the agent</a></li><li class="breadcrumb-item"><a href="../chapters/05-mcp.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connect to a database (MCP)</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-mcp" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connect to a database (MCP)</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Ask an agent for “recent papers on TCF-1 and chromatin in T cells” and it will answer from memory. That memory is large, and it is often right, but it is frozen at the date the model was trained, and it has no way to tell a paper it read from a paper that merely sounds plausible. Language models are known to invent references: in one study, 18% of the citations GPT-4 produced for short literature reviews did not exist, and a quarter of the real ones had substantive errors <span class="citation" data-cites="doi:10.1038/s41598-023-41032-5">(<a href="../appendices/references.html#ref-doi:10.1038/s41598-023-41032-5" role="doc-biblioref">Walters and Wilder 2023</a>)</span>. Newer models are better at saying “I don’t know”, but “better” is not a standard you can cite.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-doi:10.1038/s41598-023-41032-5" class="csl-entry" role="listitem">
+Walters, William H., and Esther Isabelle Wilder. 2023. <span>“Fabrication and Errors in the Bibliographic Citations Generated by <span>ChatGPT</span>.”</span> <em>Scientific Reports</em> 13 (1). <a href="https://doi.org/10.1038/s41598-023-41032-5">https://doi.org/10.1038/s41598-023-41032-5</a>.
+</div><div id="ref-url:https://modelcontextprotocol.io" class="csl-entry" role="listitem">
+<span>“What Is the <span>Model</span> <span>Context</span> <span>Protocol</span> <span>(MCP)?</span>”</span> n.d. Accessed September 23, 2026. <a href="https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro">https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro</a>.
+</div></div><p>The fix is not a cleverer prompt. It is to let the agent <strong>ask the system of record</strong>: search PubMed itself, get back real PMIDs, and show you where each fact came from. The <strong>Model Context Protocol (MCP)</strong> is how that connection is made <span class="citation" data-cites="url:https://modelcontextprotocol.io">(<a href="../appendices/references.html#ref-url:https://modelcontextprotocol.io" role="doc-biblioref"><span>“What Is the <span>Model</span> <span>Context</span> <span>Protocol</span> <span>(MCP)?</span>”</span> n.d.</a>/)</span>. An MCP server sits in front of a database or service and offers the agent a handful of tools, such as “search articles” or “get article metadata”. The agent decides when to call them and what to ask. You add the server once, and from then on it is part of what the agent can do.</p>
+<p>In <a href="04-skills.html" class="quarto-xref"><span>Chapter 4</span></a> you gave the agent <em>instructions</em>: how your lab triages a results table. A skill tells the agent <strong>how</strong>. An MCP server tells it <strong>what is there now</strong>. This chapter connects one server, PubMed, which needs no account, and then does the thing that matters most: checks what came back.</p>
+<section id="what-youll-learn" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="what-youll-learn"><span class="header-section-number">5.1</span> What you’ll learn</h2>
+<ul>
+<li>What an MCP server is, and how it differs from a skill.</li>
+<li>How to connect the PubMed server, three ways: by asking the agent, from the command line, or as a plugin from Anthropic’s life-sciences marketplace.</li>
+<li>How to compare an answer from memory with an answer from a live database.</li>
+<li>How to check retrieved results by hand, and why retrieval is not the same as truth.</li>
+<li>What an MCP server can see, and which servers to trust.</li>
+</ul>
+</section>
+<section id="how-an-mcp-connection-works" class="level2 page-columns page-full" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="how-an-mcp-connection-works"><span class="header-section-number">5.2</span> How an MCP connection works</h2>
+<p>An MCP server is a small program, usually run by whoever owns the data, that speaks one agreed protocol. When your agent starts, it asks each configured server “what tools do you have?” and gets back a list with names, descriptions and inputs. From then on, whenever a question needs one of those tools, the agent calls it, reads the result and carries on (<a href="#fig-mcp-flow" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>).</p>
+<div class="cell page-columns page-full" data-layout-align="default">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-mcp-flow" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-mcp-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-mcp-flow">sequenceDiagram
+  accDescr: A sequence diagram with four participants - You, Agent, PubMed MCP server
+    participant You
+    participant Agent
+    participant Server as PubMed MCP server
+    participant PubMed
+    You-&gt;&gt;Agent: Find papers on TCF-1 and 3D genome
+    Agent-&gt;&gt;Server: search_articles("TCF-1 AND chromatin …")
+    Server-&gt;&gt;PubMed: search
+    PubMed--&gt;&gt;Server: matching PMIDs
+    Server--&gt;&gt;Agent: PMIDs
+    Agent-&gt;&gt;Server: get_article_metadata([PMIDs])
+    Server--&gt;&gt;Agent: titles, authors, journals
+    Agent--&gt;&gt;You: three papers, with PMIDs and sources
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-mcp-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: One question, answered through the PubMed MCP server. The agent chooses the tools and the search terms; the server turns each call into a query against PubMed and returns the records.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Protocol</strong>: an agreed way for two programs to talk. Because MCP is shared, the same PubMed server works with Claude Code, Claude’s desktop app, Gemini CLI, Codex and Copilot. Only the place you configure it differs.</p>
+</div></div><p>Two things follow from this picture. First, <strong>the agent writes the query</strong>. You asked in plain English; the agent turned that into search terms, and a search can match the wrong organism, the wrong assay or the wrong TCF (there are several). Second, <strong>the server sees your question</strong>, or at least the parts of it the agent sends. Both come back later in this chapter.</p>
+<p><a href="#tbl-mcp-vs-skill" class="quarto-xref">Table&nbsp;<span>5.1</span></a> sets MCP beside the skill you wrote in <a href="04-skills.html" class="quarto-xref"><span>Chapter 4</span></a>.</p>
+<div id="tbl-mcp-vs-skill" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-mcp-vs-skill-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Skill (<a href="04-skills.html" class="quarto-xref"><span>Chapter 4</span></a>)</th>
+<th>MCP server (this chapter)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>What it is</td>
+<td>A folder of instructions, perhaps with scripts</td>
+<td>A live connection to another system</td>
+</tr>
+<tr class="even">
+<td>What it adds</td>
+<td><em>How</em> to do a task your way</td>
+<td><em>What is there</em>, now: records, data</td>
+</tr>
+<tr class="odd">
+<td>Where it runs</td>
+<td>On your machine, inside the agent’s session</td>
+<td>On someone’s server, usually</td>
+</tr>
+<tr class="even">
+<td>What leaves your machine</td>
+<td>Nothing beyond the usual</td>
+<td>Whatever the agent sends in its tool calls</td>
+</tr>
+<tr class="odd">
+<td>Example</td>
+<td><code>deseq2-triage</code></td>
+<td>PubMed, Open Targets</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-mcp-vs-skill-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.1: A skill and an MCP server do different jobs, and they combine: a skill can tell the agent which server to use and how to check its results.
+</figcaption>
+</figure>
+</div>
+<section id="anthropics-life-sciences-servers" class="level3 page-columns page-full" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="anthropics-life-sciences-servers"><span class="header-section-number">5.2.1</span> Anthropic’s life-sciences servers</h3>
+<p>Anthropic keeps a list of MCP servers and skills for life sciences in a public GitHub repository, packaged as Claude Code <strong>plugins</strong> in a <strong>marketplace</strong> <span class="citation" data-cites="url:https://github.com/anthropics/life-sciences">(<a href="../appendices/references.html#ref-url:https://github.com/anthropics/life-sciences" role="doc-biblioref">Anthropic 2026</a>)</span>. A plugin is a bundle; a marketplace is a list of plugins you can install by name. The servers themselves are run by the data providers, not by Anthropic. PubMed, which this chapter uses, is one of them; “Going further” lists some of the others (<a href="#tbl-mcp-servers" class="quarto-xref">Table&nbsp;<span>5.5</span></a>).</p>
+<div class="no-row-height column-margin column-container"></div><p><strong>PubMed is not in the official Anthropic marketplace</strong> that Claude Code sets up for you. To install it as a plugin you add the life-sciences marketplace first. The simpler route, which works in every tool, is to give the agent the server’s address directly.</p>
+</section>
+</section>
+<section id="worked-example" class="level2 page-columns page-full" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="worked-example"><span class="header-section-number">5.3</span> Worked example</h2>
+<p>We asked the same question twice, in two empty folders, with web search and the shell turned off so the only route to PubMed was MCP. First, with no server connected:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Find three papers on how TCF-1 (Tcf7) shapes 3D genome organisation or chromatin in</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>T cells. For each give the first author, year, journal, title and PMID. Say where each</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>fact came from.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The bare agent was careful. It said it had no way to look anything up, gave three papers from memory, and <strong>left the PMIDs blank</strong>, “because I don’t remember them reliably, and a made-up PMID is worse than a blank”. All three papers turned out to be real. But you could not have known that from the answer, and without PMIDs you had to do the searching yourself.</p>
+<p>Then we connected PubMed in the second folder, using the <code>.mcp.json</code> file you’ll write in a moment, and asked again. This time the agent searched PubMed twice (<code>search_articles</code>) and fetched the records it found (<code>get_article_metadata</code>), and came back in about 30 seconds with <a href="#tbl-mcp-worked" class="quarto-xref">Table&nbsp;<span>5.2</span></a>.</p>
+<div id="tbl-mcp-worked" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-mcp-worked-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>First author, year</th>
+<th>Journal</th>
+<th>Title (shortened)</th>
+<th>PMID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wang, 2022</td>
+<td><em>Nat Immunol</em></td>
+<td>TCF-1 promotes chromatin interactions across TADs in T cell progenitors</td>
+<td>35726060</td>
+</tr>
+<tr class="even">
+<td>Shan, 2022</td>
+<td><em>Nat Immunol</em></td>
+<td>Tcf1–CTCF cooperativity shapes genomic architecture …</td>
+<td>35882936</td>
+</tr>
+<tr class="odd">
+<td>Johnson, 2018</td>
+<td><em>Immunity</em></td>
+<td>Lineage-determining TF TCF-1 initiates the epigenetic identity of T cells</td>
+<td>29466756</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-mcp-worked-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.2: What the agent returned with PubMed connected <span class="citation" data-cites="pmid:35726060 pmid:35882936 pmid:29466756">(<a href="../appendices/references.html#ref-pmid:35726060" role="doc-biblioref">Wang et al. 2022</a>; <a href="../appendices/references.html#ref-pmid:35882936" role="doc-biblioref">Shan et al. 2022</a>; <a href="../appendices/references.html#ref-pmid:29466756" role="doc-biblioref">Johnson et al. 2018</a>)</span>.
+<div id="ref-pmid:35726060" class="csl-entry" role="listitem">
+Wang, Wenliang, Aditi Chandra, Naomi Goldman, et al. 2022. <span>“TCF-1 Promotes Chromatin Interactions Across Topologically Associating Domains in <span>T</span> Cell Progenitors.”</span> <em>Nature Immunology</em> 23 (7): 1052–62. <a href="https://doi.org/10.1038/s41590-022-01232-z">https://doi.org/10.1038/s41590-022-01232-z</a>.
+</div><div id="ref-pmid:35882936" class="csl-entry" role="listitem">
+Shan, Qiang, Shaoqi Zhu, Xia Chen, et al. 2022. <span>“Tcf1-CTCF Cooperativity Shapes Genomic Architecture to Promote <span>CD8</span>.”</span> <em>Nature Immunology</em> 23 (8): 1222–35. <a href="https://doi.org/10.1038/s41590-022-01263-6">https://doi.org/10.1038/s41590-022-01263-6</a>.
+</div><div id="ref-pmid:29466756" class="csl-entry" role="listitem">
+Johnson, John L, Georgios Georgakilas, Jelena Petrovic, et al. 2018. <span>“Lineage-Determining <span>Transcription</span> <span>Factor</span> <span>TCF-1</span> <span>Initiates</span> the <span>Epigenetic</span> <span>Identity</span> of <span>T</span> <span>Cells.</span>”</span> <em>Immunity</em> 48 (2): 243–257.e10. <a href="https://doi.org/10.1016/j.immuni.2018.01.012">https://doi.org/10.1016/j.immuni.2018.01.012</a>.
+</div></figcaption>
+</figure>
+</div>
+<p>Just as useful was what it said about its own work:</p>
+<ul>
+<li>It picked papers 1 and 3 <strong>from their titles alone</strong>, and said so: “I didn’t read its abstract.”</li>
+<li>Paper 2 did not come up in its broad search. It <strong>remembered</strong> the paper, searched for it by name, and took every detail from the PubMed record. It said that too.</li>
+<li>Paper 3 is about chromatin accessibility, not 3D structure, which it flagged as a partial fit.</li>
+</ul>
+<p>Then we checked. We looked up all three PMIDs directly in PubMed, independently of the agent: every title, first author, journal and year matched. We also checked the paper the bare agent had remembered but the connected one did not use (Shan 2021, <em>Nat Commun</em>); it is real too <span class="citation" data-cites="pmid:34615872">(<a href="../appendices/references.html#ref-pmid:34615872" role="doc-biblioref">Shan et al. 2021</a>)</span>.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-pmid:34615872" class="csl-entry" role="listitem">
+Shan, Qiang, Xiang Li, Xia Chen, et al. 2021. <span>“Tcf1 and <span>Lef1</span> Provide Constant Supervision to <span class="nocase">mature&nbsp;CD8</span>.”</span> <em>Nature Communications</em> 12 (1): 5863. <a href="https://doi.org/10.1038/s41467-021-26159-1">https://doi.org/10.1038/s41467-021-26159-1</a>.
+</div></div><p>So memory did not fail here, and that is the honest result. <strong>What changed is that the answer became checkable</strong>: every claim came with an identifier and a stated source, and the agent separated what it had read from what it had inferred from a title.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Is the second paper really about 3D genome structure?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The agent read that abstract and quoted it: Tcf1 and CTCF together “promote chromatin interactions and form highly connected, dynamic interaction hubs”. That is a claim about the paper, not a PMID, and checking it means reading the abstract yourself. That is the part of the check that no tool does for you.</p>
+</div>
+</div>
+</section>
+<section id="your-turn" class="level2 page-columns page-full" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">5.4</span> Your turn</h2>
+<p>You’ll need about 20 minutes. Inside your <code>agents-workshop</code> folder in Documents (from <a href="../chapters/00-setup.html">Setup</a>), make a new folder called <code>mcp</code>, and start a <strong>new</strong> session on it. Ask “what folder are you in?” to be sure. Everything in this chapter happens in <code>agents-workshop/mcp</code>, and its <code>LEDGER.md</code> lives there too (<a href="02-ledger.html" class="quarto-xref"><span>Chapter 2</span></a>).</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>What leaves your machine
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every tool call sends the agent’s query to the server’s operator. For PubMed that means your search terms: a topic, gene names, a disease. That is usually fine. Don’t put anything in a query you wouldn’t type into the PubMed website: no patient details, and nothing about unpublished work you’ve been asked to keep quiet.</p>
+</div>
+</div>
+<section id="ask-first-without-a-connection" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="ask-first-without-a-connection"><span class="header-section-number">5.4.1</span> 1. Ask first, without a connection</h3>
+<p>Pick a topic you know well enough to judge an answer: your own field, a method you use, a gene you study. Start a new session and ask:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Find three recent papers on &lt;your topic&gt;. For each give the first author, year,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>journal, title and PMID. Say where each fact came from. Don't search the web, and</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>don't use any PubMed or other database tools.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The last sentence matters: Claude Code can search the web, and your account may already have a PubMed connection (see “Two PubMed servers?” below). Today you want to see what the agent knows <strong>without</strong> a database. Start a <code>LEDGER.md</code> entry in this folder: the prompt goes under <em>Asked</em>, and the agent’s answer under <em>Agent did</em>.</p>
+<p>No topic in mind? Use ours: the question in the worked example. Or use genes from the Vahedi lab’s RNA-seq data: the top hits in <code>differential_genes.tsv</code>, from their repository’s <code>track-a/data/README.md</code>, are Jun, Myc, Irf4 and Ccr7, in B cells lacking a CTCF binding site (<a href="https://github.com/golnazvahedi/epigenetics-agentic-workshop">Vahedi lab repository</a>).</p>
+</section>
+<section id="connect-pubmed" class="level3 page-columns page-full" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="connect-pubmed"><span class="header-section-number">5.4.2</span> 2. Connect PubMed</h3>
+<p>Choose <strong>one</strong> route (<a href="#tbl-mcp-routes" class="quarto-xref">Table&nbsp;<span>5.3</span></a>). If you’re not sure, use route A: the agent does the work, and it works in the desktop app and the command line alike.</p>
+<div id="tbl-mcp-routes" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-mcp-routes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Route</th>
+<th>Best if you use</th>
+<th>You type</th>
+<th>Where it’s saved</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A. Ask the agent</td>
+<td>Anything</td>
+<td>A prompt</td>
+<td><code>.mcp.json</code> in this folder</td>
+</tr>
+<tr class="even">
+<td>B. Command line</td>
+<td>The <code>claude</code> command in a terminal</td>
+<td>One command</td>
+<td><code>.mcp.json</code> in this folder</td>
+</tr>
+<tr class="odd">
+<td>C. Plugin</td>
+<td>Claude Code</td>
+<td>Two commands, or the plugin browser</td>
+<td>Your user settings: every folder</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-mcp-routes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.3: Three ways to connect the same server. A and B only affect this folder, which is what you want for a first try.
+</figcaption>
+</figure>
+</div>
+<p><strong>Route A: ask the agent.</strong> In a session in your workshop folder, paste:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Create a file called .mcp.json in this folder, containing exactly:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  "mcpServers": {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    "pubmed": {</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      "type": "http",</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      "url": "https://pubmed.mcp.claude.com/mcp"</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>Then create .claude/settings.local.json in this folder (make the .claude folder if</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>needed; if the file exists, add the key and keep what's there), containing:</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  "enabledMcpjsonServers": ["pubmed"]</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>Then tell me the full path of both files.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The first file is the project-level MCP file Claude Code reads, in the documented format <span class="citation" data-cites="url:https://code.claude.com/docs/en/mcp">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/mcp" role="doc-biblioref"><span>“Connect <span>Claude</span> <span>Code</span> to Tools via <span>MCP</span>,”</span> n.d.</a>)</span>. The desktop app’s Code tab reads the same file. The second <strong>approves</strong> the server: Claude Code won’t use a server from <code>.mcp.json</code> until you do, and <code>enabledMcpjsonServers</code> in <code>.claude/settings.local.json</code> is exactly what its approval dialog writes when you say yes <span class="citation" data-cites="url:https://code.claude.com/docs/en/settings-reference">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/settings-reference" role="doc-biblioref"><span>“All Settings,”</span> n.d.</a>)</span>. You’re approving it by hand, having read what’s in it, so it works whether you use the desktop app or the command line. Then <strong>start a new session in the same folder</strong>: servers are loaded when a session starts. If an approval prompt appears anyway, approve it.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://code.claude.com/docs/en/settings-reference" class="csl-entry" role="listitem">
+<span>“All Settings.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/settings-reference">https://code.claude.com/docs/en/settings-reference</a>.
+</div></div><p><strong>Route B: the command line.</strong> Only if you installed the <code>claude</code> command; the desktop app on its own doesn’t give you one. In a terminal, in <code>agents-workshop/mcp</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> mcp add <span class="at">--transport</span> http pubmed <span class="at">--scope</span> project https://pubmed.mcp.claude.com/mcp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It writes the same <code>.mcp.json</code> as route A. Leave out <code>--scope project</code> and it’s saved in your personal settings instead, for this folder only. Then run <code>claude</code> and approve the server when asked.</p>
+<p><strong>Route C: a plugin from the life-sciences marketplace.</strong> In Claude Code, type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>/plugin marketplace add anthropics/life-sciences</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>/plugin install pubmed@life-sciences</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The first command adds the marketplace, the second installs PubMed from it. By default this installs it for <strong>you</strong>, in every folder, not just this one. We tested the same two steps from the shell (<code>claude plugin marketplace add …</code>, then <code>claude plugin install …</code>) and the server connected. In the desktop app, plugins live under the <strong>+</strong> button, then <strong>Plugins</strong>, then <strong>Add plugin</strong>, which browses the marketplaces you’ve already added. We haven’t confirmed that you can add a <em>new</em> marketplace from there, so if you use only the desktop app, route A is the safer choice.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Using Gemini CLI, Codex or Copilot?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The server is the same; only the configuration file differs. Ask your agent: “Add a remote HTTP MCP server called pubmed, at https://pubmed.mcp.claude.com/mcp, to your own MCP configuration for this folder, and tell me which file you changed.” Then check the file it names.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>On Windows
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Let the agent create <code>.mcp.json</code> (route A).</strong> The name starts with a dot and File Explorer hides extensions by default, so a file made in Notepad can end up called <code>.mcp.json.txt</code> and be silently ignored.</li>
+<li>Route B’s command is for <strong>PowerShell</strong>, once <code>claude</code> is installed.</li>
+<li>Plugins aren’t available in WSL sessions. See <a href="../appendices/windows.html" class="quarto-xref"><span>Appendix A</span></a>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>If the connection is blocked
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Organisations can restrict which marketplaces and servers their members may add. If a route fails with a message about policy or permissions, that isn’t you doing something wrong. Try route A, and if that’s blocked too, ask whoever runs your Claude account.</p>
+</div>
+</div>
+</section>
+<section id="check-what-the-agent-can-now-do" class="level3" data-number="5.4.3">
+<h3 data-number="5.4.3" class="anchored" data-anchor-id="check-what-the-agent-can-now-do"><span class="header-section-number">5.4.3</span> 3. Check what the agent can now do</h3>
+<p>In the new session, ask:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Which MCP servers are connected, and what tools does each one give you?</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You should see a PubMed server with seven tools: <code>search_articles</code>, <code>get_article_metadata</code>, <code>find_related_articles</code>, <code>lookup_article_by_citation</code>, <code>convert_article_ids</code>, <code>get_full_text_article</code> and <code>get_copyright_status</code>. In the command line, <code>/mcp</code> lists each server with its status and number of tools. If PubMed isn’t listed, see “If it goes wrong” below.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Two PubMed servers?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Servers added to your claude.ai account as <strong>connectors</strong> also appear in Claude Code when you’re signed in with that account. On Team and Enterprise plans only admins can add them, and an admin can switch on a PubMed connector <strong>for everyone</strong>. If yours has, your agent had PubMed before you added anything, which is why step 1 tells it not to use database tools. So you may see a “claude.ai PubMed” as well as the one you just added. They reach the same database; either will do.</p>
+</div>
+</div>
+</section>
+<section id="ask-again-with-the-database" class="level3" data-number="5.4.4">
+<h3 data-number="5.4.4" class="anchored" data-anchor-id="ask-again-with-the-database"><span class="header-section-number">5.4.4</span> 4. Ask again, with the database</h3>
+<p>Ask exactly the question from step 1, but take out the last sentence (“Don’t search the web …”) and add:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Use PubMed. For each paper, say whether you read the abstract or chose it from the</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>title alone.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Put the two answers side by side. What’s different: the papers, the PMIDs, how sure the agent sounds, what it says about where each fact came from?</p>
+</section>
+<section id="check-three-pmids-by-hand" class="level3" data-number="5.4.5">
+<h3 data-number="5.4.5" class="anchored" data-anchor-id="check-three-pmids-by-hand"><span class="header-section-number">5.4.5</span> 5. Check three PMIDs by hand</h3>
+<p>This is the step that counts. For three of the papers, open <code>https://pubmed.ncbi.nlm.nih.gov/&lt;PMID&gt;/</code> in your browser, putting the PMID in place of <code>&lt;PMID&gt;</code>, and check:</p>
+<ol type="1">
+<li><strong>Does the PMID exist</strong>, and is it the paper the agent named: title, first author, year?</li>
+<li><strong>Is it about what you asked?</strong> Right organism, right assay, right gene? A search for “TCF” can find the wrong TCF.</li>
+<li><strong>Does the abstract support what the agent said about it?</strong> Read it. This is the check no tool can do for you.</li>
+</ol>
+<p>Then write a second ledger entry. <em>Asked</em> is the step 4 prompt; <em>Agent did</em> is how you connected PubMed and what the agent answered; <em>Checked how</em> is the three PMIDs and what you found; <em>Confidently wrong</em> is anything that didn’t hold up; <em>Keep</em> is what you’d do the same way next time.</p>
+</section>
+<section id="if-it-goes-wrong" class="level3 page-columns page-full" data-number="5.4.6">
+<h3 data-number="5.4.6" class="anchored" data-anchor-id="if-it-goes-wrong"><span class="header-section-number">5.4.6</span> If it goes wrong</h3>
+<div id="tbl-mcp-troubleshoot" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-mcp-troubleshoot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>What you see</th>
+<th>What to try</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PubMed isn’t in the tool list</td>
+<td>Start a <strong>new</strong> session in the same folder; servers load at start.</td>
+</tr>
+<tr class="even">
+<td>“Pending approval”, or PubMed listed but not connected</td>
+<td>Check <code>.claude/settings.local.json</code> exists in this folder and names <code>pubmed</code> (route A’s second file), then start a new session. With the <code>claude</code> command, you can instead run <code>claude</code> in the folder and approve it.</td>
+</tr>
+<tr class="odd">
+<td>The agent searches the web instead</td>
+<td>Say “Use the PubMed tools, not web search.”</td>
+</tr>
+<tr class="even">
+<td><code>.mcp.json</code> is somewhere else</td>
+<td>Ask “What folder are you in?” The file must sit in the folder the session was started in.</td>
+</tr>
+<tr class="odd">
+<td>A plugin command is “unknown”</td>
+<td>Update Claude Code, or use route A.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-mcp-troubleshoot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.4: Common problems when connecting a server.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="what-to-notice" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="what-to-notice"><span class="header-section-number">5.5</span> What to notice</h2>
+<ul>
+<li><strong>The agent chose the tools and wrote the queries.</strong> You never saw PubMed’s search syntax. That’s convenient, and it’s also where silent errors come from: look at the search terms it used (ask it) before trusting that “no papers found” means none exist.</li>
+<li><strong>Retrieval is not truth.</strong> A real PMID proves the paper exists. It doesn’t prove the paper says what the agent claims, or that it’s the best paper on the topic. The agent in our worked example chose two papers from their titles and said so. Ask yours to do the same.</li>
+<li><strong>The good answer showed its sources.</strong> Compare how each answer said where its facts came from. That, more than the facts, is what the connection bought.</li>
+<li><strong>You added a capability without writing code.</strong> Four lines of JSON, and the agent can now search a database it couldn’t reach before.</li>
+</ul>
+</section>
+<section id="check-yourself" class="level2 page-columns page-full" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="check-yourself"><span class="header-section-number">5.6</span> Check yourself</h2>
+<p>You’re done when:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">the agent lists the PubMed server and its tools;</label></li>
+<li><label><input type="checkbox">you have two answers to the same question, one from memory and one from PubMed;</label></li>
+<li><label><input type="checkbox">you have opened three PMIDs on the PubMed website and checked them against what the agent said;</label></li>
+<li><label><input type="checkbox">your ledger has an entry saying what you checked and what you found.</label></li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Which servers to trust
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A server you connect can see every query the agent sends it, and its answers go straight into the agent’s work. Content a server returns can even contain instructions aimed at the agent (a <em>prompt injection</em>), which is why Claude Code’s documentation says to verify you trust each server before connecting it <span class="citation" data-cites="url:https://code.claude.com/docs/en/mcp">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/mcp" role="doc-biblioref"><span>“Connect <span>Claude</span> <span>Code</span> to Tools via <span>MCP</span>,”</span> n.d.</a>)</span>. Plugins are trusted more still: they can run code on your machine.</p>
+<ul>
+<li>Install servers from the data’s owner or from a source you trust, such as the NLM, the Open Targets consortium or Anthropic’s own list, not from a random repository.</li>
+<li>For servers that need an account, <strong>treat the token like a password</strong>. Don’t paste it into the chat, and don’t put it in a <code>.mcp.json</code> you’ll share or commit.</li>
+<li>Your institution’s rules on data still apply. A connection doesn’t change what you’re allowed to send.</li>
+</ul>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://code.claude.com/docs/en/mcp" class="csl-entry" role="listitem">
+<span>“Connect <span>Claude</span> <span>Code</span> to Tools via <span>MCP</span>.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/mcp">https://code.claude.com/docs/en/mcp</a>.
+</div></div></section>
+<section id="going-further" class="level2 page-columns page-full" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="going-further"><span class="header-section-number">5.7</span> Going further</h2>
+<ul>
+<li><strong>A second database.</strong> Add Open Targets to the same <code>.mcp.json</code>, as a second entry under <code>"mcpServers"</code> with <code>"url": "https://mcp.platform.opentargets.org/mcp"</code>, and ask: “Using Open Targets, what are the top five diseases associated with the human gene IRF4, with their overall association scores?” When we tried it, the answer matched Open Targets’ own API exactly. Then check one of the diseases on <a href="https://platform.opentargets.org">platform.opentargets.org</a>: which kinds of evidence hold its score up?</li>
+<li><strong>Two databases, one question.</strong> With both connected, ask a question that needs both: “For the top five IRF4-associated diseases in Open Targets, find one recent review for each in PubMed.”</li>
+<li><strong>A skill that uses a server.</strong> Combine this chapter with <a href="04-skills.html" class="quarto-xref"><span>Chapter 4</span></a>: a skill that says “when asked for literature, use PubMed, give PMIDs, and say which abstracts you read”.</li>
+<li><strong>Build your own server.</strong> The Vahedi lab’s afternoon has a pod on exactly this: wiring up a server, or having the agent write a small one around a public API such as Ensembl or GEO: <a href="https://github.com/golnazvahedi/epigenetics-agentic-workshop/blob/main/track-b/pod-2-mcp-connections.md">Pod 2, Connect to the outside world</a>.</li>
+<li><strong>Undo it.</strong> Ask the agent to delete <code>.mcp.json</code> and <code>.claude/settings.local.json</code>, or run <code>claude mcp remove pubmed -s project</code>. A plugin can be uninstalled from <code>/plugin</code>, or from <strong>Manage plugins</strong> in the desktop app.</li>
+<li><strong>Other life-sciences servers.</strong> Anthropic’s marketplace <span class="citation" data-cites="url:https://github.com/anthropics/life-sciences">(<a href="../appendices/references.html#ref-url:https://github.com/anthropics/life-sciences" role="doc-biblioref">Anthropic 2026</a>)</span> lists more. <a href="#tbl-mcp-servers" class="quarto-xref">Table&nbsp;<span>5.5</span></a> says only what we checked on 23 September 2026.</li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://github.com/anthropics/life-sciences" class="csl-entry" role="listitem">
+Anthropic. 2026. <em>Anthropics/Life-Sciences</em>. Released September 23. <a href="https://github.com/anthropics/life-sciences">https://github.com/anthropics/life-sciences</a>.
+</div></div><div id="tbl-mcp-servers" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-mcp-servers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Plugin</th>
+<th>Reaches</th>
+<th>Account</th>
+<th>What we checked</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>pubmed</code></td>
+<td>PubMed and PubMed Central (NLM)</td>
+<td>None</td>
+<td>Connected, listed 7 tools, answered real queries</td>
+</tr>
+<tr class="even">
+<td><code>open-targets</code></td>
+<td>Open Targets Platform: target–disease evidence</td>
+<td>None found</td>
+<td>Connected, answered a real query that matched the website’s API</td>
+</tr>
+<tr class="odd">
+<td><code>biorxiv</code></td>
+<td>bioRxiv and medRxiv preprints</td>
+<td>Not stated</td>
+<td>Not checked: refused our test request (403), which may be bot-blocking</td>
+</tr>
+<tr class="even">
+<td><code>chembl</code></td>
+<td>ChEMBL bioactive compounds</td>
+<td>Not stated</td>
+<td>Not checked, as above</td>
+</tr>
+<tr class="odd">
+<td><code>clinical-trials</code></td>
+<td>ClinicalTrials.gov</td>
+<td>Not stated</td>
+<td>Not checked, as above</td>
+</tr>
+<tr class="even">
+<td><code>biorender</code>, <code>synapse</code>, <code>wiley-scholar-gateway</code>, <code>consensus</code></td>
+<td>Figures; Sage data; Wiley papers; paper search</td>
+<td>Free account</td>
+<td>Not checked; account needs from the repository’s README</td>
+</tr>
+<tr class="odd">
+<td><code>10x-genomics</code>, <code>cortellis</code>, <code>adisinsight</code></td>
+<td>10x Cloud; drug regulation; drug pipelines</td>
+<td>Paid or institutional</td>
+<td>Not checked; from the README</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-mcp-servers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.5: Some of the MCP servers in <code>anthropics/life-sciences</code>. The repository also carries skills (single-cell QC, nf-core pipelines, scvi-tools), which are the kind of thing you met in <a href="04-skills.html" class="quarto-xref"><span>Chapter 4</span></a>.
+</figcaption>
+</figure>
+</div>
+
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/seandavi\.github\.io\/2026-penn-epigen-agentic-workshop\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/04-skills.html" class="pagination-link" aria-label="Write a skill">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Write a skill</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/06-build-an-app.html" class="pagination-link" aria-label="Build an app">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Build an app</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/chapters/05-mcp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

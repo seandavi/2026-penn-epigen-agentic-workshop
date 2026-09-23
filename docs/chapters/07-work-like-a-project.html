@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Work like a project – Agents for bench scientists</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../appendices/windows.html" rel="next">
+<link href="../chapters/06-build-an-app.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8db532a760e6309ca89cbbb647cf1feb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="mermaid-theme" content="neutral">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating slimcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/06-build-an-app.html">Building things</a></li><li class="breadcrumb-item"><a href="../chapters/07-work-like-a-project.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Work like a project</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Agents for bench scientists</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/tree/main/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Working with an agent</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-website.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Build a website</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-ledger.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ledger</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-teach-your-agent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Teach the agent your project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extending the agent</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-skills.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Write a skill</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-mcp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connect to a database (MCP)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Building things</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-build-an-app.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Build an app</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-work-like-a-project.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Work like a project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Windows notes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-youll-learn" id="toc-what-youll-learn" class="nav-link active" data-scroll-target="#what-youll-learn"><span class="header-section-number">7.1</span> What you’ll learn</a></li>
+  <li><a href="#three-records-three-questions" id="toc-three-records-three-questions" class="nav-link" data-scroll-target="#three-records-three-questions"><span class="header-section-number">7.2</span> Three records, three questions</a>
+  <ul class="collapse">
+  <li><a href="#decision-records" id="toc-decision-records" class="nav-link" data-scroll-target="#decision-records"><span class="header-section-number">7.2.1</span> Decision records</a></li>
+  <li><a href="#git-the-undo-button" id="toc-git-the-undo-button" class="nav-link" data-scroll-target="#git-the-undo-button"><span class="header-section-number">7.2.2</span> Git, the undo button</a></li>
+  <li><a href="#no-git-snapshots" id="toc-no-git-snapshots" class="nav-link" data-scroll-target="#no-git-snapshots"><span class="header-section-number">7.2.3</span> No git? Snapshots</a></li>
+  </ul></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example"><span class="header-section-number">7.3</span> Worked example</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">7.4</span> Your turn</a>
+  <ul class="collapse">
+  <li><a href="#step-1-set-up" id="toc-step-1-set-up" class="nav-link" data-scroll-target="#step-1-set-up"><span class="header-section-number">7.4.1</span> Step 1: set up</a></li>
+  <li><a href="#step-2-two-changes-the-full-loop" id="toc-step-2-two-changes-the-full-loop" class="nav-link" data-scroll-target="#step-2-two-changes-the-full-loop"><span class="header-section-number">7.4.2</span> Step 2: two changes, the full loop</a></li>
+  <li><a href="#step-3-break-something-then-go-back" id="toc-step-3-break-something-then-go-back" class="nav-link" data-scroll-target="#step-3-break-something-then-go-back"><span class="header-section-number">7.4.3</span> Step 3: break something, then go back</a></li>
+  </ul></li>
+  <li><a href="#what-to-notice" id="toc-what-to-notice" class="nav-link" data-scroll-target="#what-to-notice"><span class="header-section-number">7.5</span> What to notice</a></li>
+  <li><a href="#check-yourself" id="toc-check-yourself" class="nav-link" data-scroll-target="#check-yourself"><span class="header-section-number">7.6</span> Check yourself</a></li>
+  <li><a href="#going-further" id="toc-going-further" class="nav-link" data-scroll-target="#going-further"><span class="header-section-number">7.7</span> Going further</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/chapters/07-work-like-a-project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/06-build-an-app.html">Building things</a></li><li class="breadcrumb-item"><a href="../chapters/07-work-like-a-project.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Work like a project</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-project" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Work like a project</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The app you built in <a href="06-build-an-app.html" class="quarto-xref"><span>Chapter 6</span></a> is finished in the sense that it works. If you never open it again, that’s enough. But most useful things get opened again. Next month you’ll want it to read another file format, a colleague will ask why it rounds the way it does, and you’ll ask an agent to make “one small change” that quietly breaks something you checked by hand three weeks ago.</p>
+<p>At that point two questions matter, and a chat transcript answers neither. The first is <strong>why is it like this?</strong> Somebody chose to reject zero-width peaks, or to draw charts without a library, or to treat CSV coordinates as 0-based. If that choice isn’t written down, the next person to touch the code, and the agent most of all, will “fix” it. An agent tidying code can’t tell a deliberate decision from an accident. The second is <strong>how do I get back?</strong> Agents edit many files quickly and confidently. When a change goes wrong you want to return to the last version that worked, exactly, without remembering what it looked like.</p>
+<p>Software projects settled both questions long ago, and the answers are cheap. This chapter adds three habits to the app you already have: the <strong>ledger</strong> from <a href="02-ledger.html" class="quarto-xref"><span>Chapter 2</span></a>, for every change; <strong>decision records</strong>, for the few choices that would be awkward to undo; and <strong>git</strong>, the undo button, if you have it or can install it. If you can’t, you’ll keep dated copies of the folder instead, and that is fine.</p>
+<p>You don’t have to type git commands, or remember them. The agent runs them. Your job is the same as everywhere else in this book: say what you want, and check what happened.</p>
+<section id="what-youll-learn" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="what-youll-learn"><span class="header-section-number">7.1</span> What you’ll learn</h2>
+<ul>
+<li>Why a project you’ll come back to needs a record of <strong>what was decided and why</strong>, not just what the code does.</li>
+<li>How to write a short <strong>architecture decision record</strong> (ADR), and why “must not” in a file called <code>adr/</code> works on agents as well as people.</li>
+<li>How to have the agent <strong>commit</strong> each change with a real message, show you the history, and <strong>go back</strong> when something breaks.</li>
+<li>What to do instead if git isn’t available: <strong>snapshots</strong>.</li>
+<li>Where to go next: GitHub, issues and pull requests.</li>
+</ul>
+</section>
+<section id="three-records-three-questions" class="level2 page-columns page-full" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="three-records-three-questions"><span class="header-section-number">7.2</span> Three records, three questions</h2>
+<p>Each habit answers a different question, and they don’t replace each other (<a href="#tbl-project-records" class="quarto-xref">Table&nbsp;<span>7.1</span></a>). The ledger is the story of your work with the agent: what you asked, what it did, how you checked. A decision record is the reason behind one choice, written once and kept. A commit is the exact change to the files, with a way back.</p>
+<div id="tbl-project-records" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-project-records-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Answers</th>
+<th>Write one</th>
+<th>Who reads it</th>
+<th>Changed later?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Ledger entry</strong></td>
+<td>What did I ask, what happened, how did I check?</td>
+<td>For every task</td>
+<td>You, a reviewer, your PI</td>
+<td>No: add a new entry</td>
+</tr>
+<tr class="even">
+<td><strong>Decision record</strong></td>
+<td>Why is it this way? What must not change?</td>
+<td>Only for choices awkward to reverse</td>
+<td>The next person, and the agent before it edits</td>
+<td>No: a new record supersedes it</td>
+</tr>
+<tr class="odd">
+<td><strong>Commit</strong></td>
+<td>What exactly changed, and when?</td>
+<td>For every change that works</td>
+<td>git, and anyone going back</td>
+<td>No: history is kept</td>
+</tr>
+<tr class="even">
+<td><strong>Snapshot</strong> (no git)</td>
+<td>How do I get back?</td>
+<td>Before every change</td>
+<td>You, when something breaks</td>
+<td>No: make a new one</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-project-records-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;7.1: What each record is for. None is edited to rewrite the past.
+</figcaption>
+</figure>
+</div>
+<p>A useful rhythm is one loop per change (<a href="#fig-project-loop" class="quarto-xref">Figure&nbsp;<span>7.1</span></a>). Decide whether it’s a decision worth recording; if so, write the record first, so the agent builds to it. Make the change. Check it. Write the ledger entry. Commit.</p>
+<div class="cell page-columns page-full" data-layout-align="default">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-project-loop" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-project-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-project-loop">flowchart LR
+  accDescr: One loop per change. Next change; if awkward to reverse, write an ADR first; make the change; check it; if broken, go back; if it works, ledger entry, then commit or snapshot.
+  A[Next change] --&gt; B{Awkward to&lt;br/&gt;reverse?}
+  B -- yes --&gt; C[Write an ADR]
+  B -- no --&gt; D[Make the change]
+  C --&gt; D
+  D --&gt; E[Check it:&lt;br/&gt;tests, by eye]
+  E -- broken --&gt; F[Go back]
+  F --&gt; D
+  E -- works --&gt; G[Ledger entry]
+  G --&gt; H[Commit or&lt;br/&gt;snapshot]
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-project-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: One loop per change. The decision record comes first, when there is one, so the agent builds to it. Nothing is committed that hasn’t been checked.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="decision-records" class="level3 page-columns page-full" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="decision-records"><span class="header-section-number">7.2.1</span> Decision records</h3>
+<p>An <strong>architecture decision record</strong> is a short numbered file, one per decision, with three parts: the <strong>context</strong> that forced a choice, the <strong>decision</strong>, and its <strong>consequences</strong>, good and bad. Michael Nygard proposed the format in 2011, for software teams that kept losing the reasons behind their own designs <span class="citation" data-cites="url:https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions">(<a href="../appendices/references.html#ref-url:https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions" role="doc-biblioref"><span>“Documenting <span>Architecture</span> <span>Decisions</span>”</span> 2011</a>)</span>. They live together in a folder called <code>adr/</code>, numbered in order: <code>0001-…md</code>, <code>0002-…md</code>.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions" class="csl-entry" role="listitem">
+<span>“Documenting <span>Architecture</span> <span>Decisions</span>.”</span> 2011. November 15. <a href="https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions">https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions</a>.
+</div></div><p>Two rules make them work. First, <strong>write only the decisions that would be awkward to reverse</strong>, or that someone would be tempted to undo: which coordinate convention a file uses, whether to depend on a library, what counts as a duplicate. “Make the button blue” isn’t one. Second, <strong>a decision record is never edited to reverse it.</strong> If you change your mind, you write a new record that says it supersedes the old one, and mark the old one “superseded by …”. The history of your thinking stays readable. Fixing a factual slip in the wording is fine, and it’s honest to append a short “Correction” note saying so.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>This workshop keeps its own. The day you’re attending changed shape the day before it ran: <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/adr/0001-taught-session-ends-at-1400.md">ADR-0001</a> set a timetable, and <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/adr/0007-talk-first-then-a-self-paced-book.md">ADR-0007</a> superseded it. Both are still there.</p>
+</div></div><p>Decision records turn out to suit agents unusually well. An agent reads a folder before it changes things, and it follows plain, imperative rules. “We generally prefer hand-written charts” reads to an agent as a preference it can weigh against your latest request. “The page <strong>must not</strong> load anything from the network” reads as a rule. Write the Decision section with <em>must</em> and <em>must not</em>, and add one line to your <code>AGENTS.md</code> (<a href="03-teach-your-agent.html" class="quarto-xref"><span>Chapter 3</span></a>) telling the agent to read <code>adr/</code> before changing behaviour.</p>
+</section>
+<section id="git-the-undo-button" class="level3 page-columns page-full" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="git-the-undo-button"><span class="header-section-number">7.2.2</span> Git, the undo button</h3>
+<p><strong>git</strong> records the state of every file in a folder each time you <strong>commit</strong>, with a message saying what changed and why. You can list the history, see exactly what changed between any two points, and put the folder back the way it was. It has a reputation for being hard, and typing it by hand can be. But you won’t be typing it: the agent knows git thoroughly, and you ask in plain words.</p>
+<p>Four ideas are enough for this chapter:</p>
+<div id="tbl-project-git" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-project-git-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Idea</th>
+<th>What it means</th>
+<th>Ask the agent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Commit</strong></td>
+<td>Save a checked change, with a message</td>
+<td>“Commit this, with a message that says what and why.”</td>
+</tr>
+<tr class="even">
+<td><strong>History</strong></td>
+<td>The list of commits</td>
+<td>“Show me the history, one line per commit.”</td>
+</tr>
+<tr class="odd">
+<td><strong>Diff</strong></td>
+<td>Exactly what changed</td>
+<td>“What’s changed since the last commit?”</td>
+</tr>
+<tr class="even">
+<td><strong>Revert</strong></td>
+<td>Undo a commit by adding a new one that reverses it</td>
+<td>“Revert the last commit.”</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-project-git-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;7.2: Enough git for this chapter.
+</figcaption>
+</figure>
+</div>
+<p>A fifth, <strong>branch</strong>, is a separate line of history for an experiment. If the experiment works, you merge it back; if not, you switch back and delete it, and nothing else was touched.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Claude Code also keeps its own checkpoints: in the terminal, <code>/rewind</code> (or pressing Esc twice) can undo its file edits within a session. But it doesn’t undo changes made by commands the agent ran, and the checkpoints expire, by default after about 30 days <span class="citation" data-cites="url:https://code.claude.com/docs/en/checkpointing">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/checkpointing" role="doc-biblioref"><span>“Checkpointing,”</span> n.d.</a>)</span>. git covers everything, and keeps it.</p>
+<div id="ref-url:https://code.claude.com/docs/en/checkpointing" class="csl-entry" role="listitem">
+<span>“Checkpointing.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/checkpointing">https://code.claude.com/docs/en/checkpointing</a>.
+</div></div></div><p>A commit stays on your computer. Nothing goes anywhere unless you later choose to put the folder on GitHub (see “Going further”). Even so, <strong>git keeps everything you ever committed</strong>, so a file you commit and then delete is still in the history. Decide before your first commit what should never be in the folder’s history: data you couldn’t share, passwords, keys.</p>
+</section>
+<section id="no-git-snapshots" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="no-git-snapshots"><span class="header-section-number">7.2.3</span> No git? Snapshots</h3>
+<p>Some laptops won’t let you install anything, and some people would rather not today. Then ignore git entirely. Before each change, ask the agent: “Copy everything in this folder except snapshots/ into snapshots/<name>/”, with a short name for what’s about to change. Going back means copying a snapshot back. You lose the tidy history and the exact diffs, but you keep the part that matters most, which is a way back to something that worked. The ledger and the decision records work exactly the same without git.</name></p>
+</section>
+</section>
+<section id="worked-example" class="level2 page-columns page-full" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="worked-example"><span class="header-section-number">7.3</span> Worked example</h2>
+<p><a href="https://github.com/seandavi/peakpeek">PeakPeek</a> is a small browser page that summarises a peak file: widths, chromosomes, duplicates, overlaps. It’s the same app as the fallback in <a href="06-build-an-app.html" class="quarto-xref"><span>Chapter 6</span></a>, built the long way by several agents in one afternoon, with Sean as the maintainer (an agent did most of the maintaining on his behalf, and the records say so). Its folder holds a specification, eleven decision records, a four-entry ledger and fifteen commits (<a href="#fig-project-commits" class="quarto-xref">Figure&nbsp;<span>7.2</span></a>). It’s small enough to read in ten minutes, and every record in it is real.</p>
+<div id="fig-project-commits" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="GitHub's commit list for seandavi/peakpeek: fifteen commits, newest first, from 'Spec, decisions, fixture, placeholders' through 'Issue 1: Page shell and test page' to 'Issue 7: acceptance, and ledger entry 3' and 'Empty favicon: no 404 on GitHub Pages'.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-project-commits-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../images/project-peakpeek-commits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;7.2: PeakPeek’s history on GitHub. Each commit is one checked piece of work, and the messages say what changed and why."><img src="../images/project-peakpeek-commits.png" class="img-fluid figure-img" alt="GitHub's commit list for seandavi/peakpeek: fifteen commits, newest first, from 'Spec, decisions, fixture, placeholders' through 'Issue 1: Page shell and test page' to 'Issue 7: acceptance, and ledger entry 3' and 'Empty favicon: no 404 on GitHub Pages'."></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-project-commits-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.2: PeakPeek’s history on GitHub. Each commit is one checked piece of work, and the messages say what changed and why.
+</figcaption>
+</figure>
+</div>
+<p><strong>A decision record.</strong> The specification left eleven questions open, and each got an ADR (<a href="#fig-project-adr" class="quarto-xref">Figure&nbsp;<span>7.3</span></a>). Here is <a href="https://github.com/seandavi/peakpeek/blob/main/adr/0009-charts.md">0009</a>, in full (rewrapped to fit):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 0009 — Hand-written SVG or a charting library</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>**Status:** accepted</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>**Deciders:** orchestrating agent, acting for Sean Davis</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>(not yet reviewed by him). SPEC.md §6 Q9, suggested default taken.</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Context</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>A library means a CDN (network, and a third party sees the page</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>load) or a copy in the folder (and its licence).</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## Decision</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>Hand-written SVG.</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Consequences</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>About 60 lines per chart; no dependencies at all.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Three short sentences. Without them, an agent asked to “make the histogram nicer” might well reach for a charting library, and the page would quietly start loading code from someone else’s server.</p>
+<div id="fig-project-adr" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="GitHub's file view of seandavi/peakpeek/adr, listing 0001-zero-width-peaks.md to 0011-problems.md, README.md and template.md, with the README's index of decisions below.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-project-adr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../images/project-peakpeek-adr.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;7.3: PeakPeek’s adr/ folder: one file per decision, an index, and a template to copy."><img src="../images/project-peakpeek-adr.png" class="img-fluid figure-img" alt="GitHub's file view of seandavi/peakpeek/adr, listing 0001-zero-width-peaks.md to 0011-problems.md, README.md and template.md, with the README's index of decisions below."></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-project-adr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.3: PeakPeek’s <code>adr/</code> folder: one file per decision, an index, and a template to copy.
+</figcaption>
+</figure>
+</div>
+<p><strong>A change that touched all three records.</strong> After the first build, a second agent built the same app independently from the same spec, as a test of the spec. Wherever the two builds disagreed, the spec hadn’t said something. One disagreement showed that <a href="https://github.com/seandavi/peakpeek/blob/main/adr/0003-duplicates.md">ADR-0003</a> was wrong about a fact: the CTCF file’s “exact duplicate line” was really two peaks with the same coordinates and different scores. The decision (count duplicates and flag them) still stood, so the record wasn’t rewritten. It got a “Correction” note appended. The commit that made the fix, <a href="https://github.com/seandavi/peakpeek/commit/35c2f42"><code>35c2f42</code></a>, changed three files together: the spec, the ADR’s correction, and ledger entry 4, which reads in part:</p>
+<blockquote class="blockquote">
+<p><strong>Confidently wrong</strong> — <em>Orchestrator</em>: SPEC §2 said CTCF has “an exact duplicate line”. It has a duplicate <em>peak</em>: same coordinates, different scores. […] ADR-0003 has a correction note.</p>
+<p><strong>Keep</strong> — A second independent build is a cheap test of a spec: every place the two disagree is a sentence the spec didn’t write.</p>
+</blockquote>
+<p><strong>A mistake the records caught.</strong> <a href="https://github.com/seandavi/peakpeek/blob/main/LEDGER.md">Ledger entry 2</a> records that, while five agents were writing code in the same folder, the orchestrating agent committed a spec change with a command that commits <em>every</em> changed file. It swept three agents’ half-finished code into the commit. One of the other agents noticed, and the commit was redone with the spec alone. The lesson went into the ledger’s “Keep” field. You probably won’t run five agents at once, but the general point holds: <strong>look at what a commit includes before trusting it</strong>, which is why the prompts below ask the agent to show you.</p>
+<p>What we checked for this section: the commit list, the ADR folder and the files quoted above, read directly from the repository on 23 September 2026. We didn’t re-run PeakPeek’s tests for this chapter; its ledger records how they were checked.</p>
+</section>
+<section id="your-turn" class="level2 page-columns page-full" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">7.4</span> Your turn</h2>
+<p>You need the folder from <a href="06-build-an-app.html" class="quarto-xref"><span>Chapter 6</span></a>, <code>Documents/agents-workshop/my-app</code>, with your app in it and its <code>LEDGER.md</code>. No app? Use the PeakPeek exercise from <a href="06-build-an-app.html" class="quarto-xref"><span>Chapter 6</span></a> as your starting point, or any small folder you care about. Start a new session in that folder, and ask “What folder are you in?” before anything else.</p>
+<p>Allow 30–40 minutes. There are three steps: set up, two changes, and one deliberate mistake. With git, your history will end up looking something like <a href="#fig-project-history" class="quarto-xref">Figure&nbsp;<span>7.4</span></a>.</p>
+<div class="cell page-columns page-full" data-layout-align="default">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-project-history" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-project-history-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-project-history">gitGraph
+  accDescr: On main, a starting point, change 1 with an ADR, change 2, a deliberate mistake and its revert, with ledger entries. A try-idea branch holds one unmerged experiment.
+  commit id: "Starting point"
+  commit id: "ADR-0001 + change 1" tag: "Ledger 1"
+  commit id: "Change 2" tag: "Ledger 2"
+  branch try-idea
+  commit id: "Experiment"
+  checkout main
+  commit id: "Deliberate mistake"
+  commit id: "Revert mistake" tag: "Ledger 3"
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-project-history-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.4: Where this chapter’s activity leaves you: a starting point, two changes (one with a decision record), a mistake and its revert, each with a ledger entry. The optional experiment branch is never merged here, so main never sees it.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Before your first commit
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>git keeps everything you ever commit. If the folder holds data you couldn’t share, anything identifiable, or any password or key, move it out, or have it listed in <code>.gitignore</code> so git never records it, <strong>before</strong> the first commit. Snapshots keep copies too: the same care applies.</p>
+</div>
+</div>
+<section id="step-1-set-up" class="level3 page-columns page-full" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="step-1-set-up"><span class="header-section-number">7.4.1</span> Step 1: set up</h3>
+<p>First, find out whether you have git. Paste this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Is git installed on this computer? Just check, and tell me the version</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>if so. Don't install anything yet. If it isn't installed, tell me the</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>simplest way to install it on my operating system, and wait for me.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><strong>macOS:</strong> typing <code>git</code> in Terminal usually offers to install Apple’s Command Line Tools, which include git. Accept, and wait a few minutes. The agent may suggest <code>xcode-select --install</code>, which does the same.</li>
+<li><strong>Windows:</strong> install <a href="https://git-scm.com/install/windows">Git for Windows</a>, or, in PowerShell, <code>winget install --id Git.Git -e --source winget</code>. Then start a new agent session so it can find git.</li>
+<li><strong>Can’t install it</strong> (a managed laptop, or no time): skip every git step below and use the snapshot prompts instead. You lose nothing that matters for this chapter.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>On Windows
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>After installing Git for Windows, restart the Claude desktop app or your terminal before asking again. The installer’s defaults are fine. Claude Code on Windows uses git’s bundled Git Bash to run commands when it’s installed, and PowerShell when it isn’t <span class="citation" data-cites="url:https://code.claude.com/docs/en/setup">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/setup" role="doc-biblioref"><span>“Advanced Setup,”</span> n.d.</a>)</span>; either works for this chapter. Folder paths will look like <code>snapshots\start</code>.</p>
+<p><strong>OneDrive and git can clash.</strong> If your Documents folder is synced to OneDrive, OneDrive may lock or re-sync files inside the hidden <code>.git</code> folder while git is writing them, and the repository can end up broken. Pause OneDrive syncing while you work, or keep the project in a folder outside OneDrive (for example <code>C:\Users\&lt;you&gt;\agents-workshop</code>). See <a href="../appendices/windows.html" class="quarto-xref"><span>Appendix A</span></a> for more.</p>
+</div>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://code.claude.com/docs/en/setup" class="csl-entry" role="listitem">
+<span>“Advanced Setup.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/setup">https://code.claude.com/docs/en/setup</a>.
+</div></div><p>Then set up the records. <strong>With git:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Set this folder up as a project I'll come back to.</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>1. Make it a git repository. Before committing anything, add a</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>   .gitignore that lists snapshots/ and anything else that shouldn't</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>   be recorded (large data, anything private, system files like</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>   .DS_Store). Then show me the list of files you would commit, and</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>   wait for my OK. If git asks for a name and email, ask me what to</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>   use.</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>2. Create adr/ with a README.md index and a template.md: title, status</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>   (accepted, or superseded by ADR-NNNN), date, Context, Decision</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>   (written with "must" and "must not"), Consequences.</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>3. If there's no LEDGER.md, create one with the fields Asked, Agent</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>   did, Checked how, Confidently wrong, Keep.</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>4. Add to AGENTS.md (create it if needed): read adr/ before changing</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>   how the app behaves; never edit an accepted ADR to reverse it,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>   write a new one that supersedes it; every change gets a ledger</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>   entry and a commit. If there's no CLAUDE.md, create one containing</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>   the single line @AGENTS.md.</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>5. Commit everything as the starting point, then show me the history.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Without git</strong>, replace steps 1 and 5 with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Instead of git, keep snapshots. A snapshot means: copy everything in</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>this folder except snapshots/ into snapshots/&lt;name&gt;/. Make one before</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>any change, named for the change. Make the first one now, called</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>"start", and add the snapshot rule to AGENTS.md.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Check that <code>adr/</code>, <code>LEDGER.md</code>, <code>AGENTS.md</code> and <code>CLAUDE.md</code> exist, and open <code>AGENTS.md</code> to read the rules the agent wrote for itself. Are they what you asked for? (<code>CLAUDE.md</code> holds only <code>@AGENTS.md</code>, so Claude Code reads the same rules as other agents; <a href="03-teach-your-agent.html" class="quarto-xref"><span>Chapter 3</span></a> explains why.)</p>
+</section>
+<section id="step-2-two-changes-the-full-loop" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="step-2-two-changes-the-full-loop"><span class="header-section-number">7.4.2</span> Step 2: two changes, the full loop</h3>
+<p>Pick two improvements to your app. Try to make one of them a real decision: something with more than one sensible answer, where you’d want to remember why you chose. Examples: what to do with missing values, which file formats to accept, whether a threshold is fixed or adjustable, whether to use a library. The other can be small.</p>
+<p>For each, paste this, with your change filled in:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Next change: &lt;describe it&gt;.</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>1. If this involves a decision that would be awkward to reverse, write</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>   an ADR in adr/ first, and show it to me before building.</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>2. Make the change.</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>3. Check it: run the tests if there are any, and tell me exactly what</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>   I should check by hand.</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>4. Add a ledger entry. "Checked how" says only what was actually run</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>   or looked at.</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>5. Show me what's changed since the last commit, then commit it with a</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>   message that says what changed and why. Show me the history.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>(Without git: ask for a snapshot before step 2, and leave out step 5.)</p>
+<p>Do the hand check yourself before you let it commit. If the agent’s ADR doesn’t match what you’d decide, say so: the ADR records <strong>your</strong> decision, not the agent’s suggestion.</p>
+</section>
+<section id="step-3-break-something-then-go-back" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="step-3-break-something-then-go-back"><span class="header-section-number">7.4.3</span> Step 3: break something, then go back</h3>
+<p>Now make a mistake on purpose, so you’ve seen the way back work before you need it. Choose something whose effect you’ll notice: a label, a calculation, a colour.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>For practice: make a deliberate mistake in the app (for example,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>&lt;an idea&gt;), and commit it with the message "Deliberate mistake, for</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>practice". Then show me the history.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Open the app and see the mistake. Then:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Revert the last commit, so the history keeps both the mistake and the</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>undo. Show me the history, and check that the app is back to how it</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>was. Then write one ledger entry covering both: what broke, how we</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>went back, and how we checked.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Without git:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>For practice: copy everything in this folder except snapshots/ into</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>snapshots/before-mistake/. Then make a deliberate mistake</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>(for example, &lt;an idea&gt;). When I've seen it, restore the app from that</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>snapshot. Don't touch LEDGER.md or snapshots/ when restoring. Then</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>write one ledger entry covering both.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Optional: a branch for an experiment
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>With git, try an idea you’re unsure of on a <strong>branch</strong>: “Make a branch called try-dark-mode, and make the change there” (named for your idea). Look at it. Then say either “merge it into main” or “switch back to main and delete the branch”. Either way, main never saw the half-done version.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="what-to-notice" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="what-to-notice"><span class="header-section-number">7.5</span> What to notice</h2>
+<ul>
+<li><strong>The agent is good at git, and fast.</strong> It knows the commands better than most people. That’s exactly why you ask it to <em>show</em> you what it’s about to commit: speed isn’t the same as checking.</li>
+<li><strong>Commit messages are for later readers, including agents.</strong> “Update files” is useless in a month. “Reject negative widths, per ADR-0002” tells the next reader, and the next agent session, what happened and why.</li>
+<li><strong>Did the agent treat your ADR as a rule?</strong> Try asking for a change that contradicts one. Does it stop and point to the record, or cheerfully go ahead? If it goes ahead, look at how the Decision is worded, and at whether <code>AGENTS.md</code> tells it to read <code>adr/</code>.</li>
+<li><strong>Going back felt like nothing.</strong> That’s the point. Once going back is cheap, you can let the agent try bolder changes.</li>
+</ul>
+</section>
+<section id="check-yourself" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="check-yourself"><span class="header-section-number">7.6</span> Check yourself</h2>
+<ul>
+<li>The history (“show me the history”) has at least four commits: the starting point, two changes and the revert, each with a message that says why. Or, without git, <code>snapshots/</code> has at least three folders, each named for a change.</li>
+<li><code>adr/</code> has at least one record, in your words, with a Decision that uses <em>must</em> or <em>must not</em>.</li>
+<li><code>LEDGER.md</code> has an entry for each change, and every “Checked how” names something that was actually run or looked at.</li>
+<li>You went back once, and the app works again.</li>
+<li>In a <strong>new</strong> session, ask “Why does this app …?” about the thing your ADR decided. The agent should find the ADR and answer from it.</li>
+</ul>
+</section>
+<section id="going-further" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="going-further"><span class="header-section-number">7.7</span> Going further</h2>
+<ul>
+<li><strong>GitHub.</strong> Putting the folder on GitHub adds a copy off your laptop, <strong>issues</strong> to track what’s next, <strong>pull requests</strong> so someone (or another agent) reviews a change before it lands, and automatic tests on every change. It’s also where the privacy warning above starts to matter. PeakPeek’s <a href="https://github.com/seandavi/peakpeek/issues/1">issue #1</a> sets out how to build and run it that way, step by step.</li>
+<li><strong>Learning git properly.</strong> For R users, <a href="https://happygitwithr.com/"><em>Happy Git and GitHub for the useR</em></a> is the kindest introduction. The free <a href="https://git-scm.com/book/en/v2">Pro Git</a> book is the reference.</li>
+<li><strong>More on decision records:</strong> the templates and tools collected at <a href="https://adr.github.io/">adr.github.io</a>, and this workshop’s own <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/tree/main/adr"><code>adr/</code></a> and <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/LEDGER.md"><code>LEDGER.md</code></a>.</li>
+</ul>
+
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/seandavi\.github\.io\/2026-penn-epigen-agentic-workshop\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/06-build-an-app.html" class="pagination-link" aria-label="Build an app">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Build an app</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../appendices/windows.html" class="pagination-link" aria-label="Windows notes">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Windows notes</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/chapters/07-work-like-a-project.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

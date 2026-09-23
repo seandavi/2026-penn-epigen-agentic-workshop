@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6&nbsp; Build an app – Agents for bench scientists</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/07-work-like-a-project.html" rel="next">
+<link href="../chapters/05-mcp.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8db532a760e6309ca89cbbb647cf1feb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="mermaid-theme" content="neutral">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating slimcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/06-build-an-app.html">Building things</a></li><li class="breadcrumb-item"><a href="../chapters/06-build-an-app.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Build an app</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Agents for bench scientists</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/tree/main/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Working with an agent</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-website.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Build a website</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-ledger.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ledger</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-teach-your-agent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Teach the agent your project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extending the agent</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-skills.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Write a skill</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-mcp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connect to a database (MCP)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Building things</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-build-an-app.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Build an app</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-work-like-a-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Work like a project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Windows notes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-youll-learn" id="toc-what-youll-learn" class="nav-link active" data-scroll-target="#what-youll-learn"><span class="header-section-number">6.1</span> What you’ll learn</a></li>
+  <li><a href="#what-a-spec-is" id="toc-what-a-spec-is" class="nav-link" data-scroll-target="#what-a-spec-is"><span class="header-section-number">6.2</span> What a spec is</a></li>
+  <li><a href="#worked-example-peakpeek" id="toc-worked-example-peakpeek" class="nav-link" data-scroll-target="#worked-example-peakpeek"><span class="header-section-number">6.3</span> Worked example: PeakPeek</a></li>
+  <li><a href="#worked-example-the-starter-prompt-tested" id="toc-worked-example-the-starter-prompt-tested" class="nav-link" data-scroll-target="#worked-example-the-starter-prompt-tested"><span class="header-section-number">6.4</span> Worked example: the starter prompt, tested</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">6.5</span> Your turn</a>
+  <ul class="collapse">
+  <li><a href="#make-a-folder-start-a-new-session" id="toc-make-a-folder-start-a-new-session" class="nav-link" data-scroll-target="#make-a-folder-start-a-new-session"><span class="header-section-number">6.5.1</span> 1. Make a folder, start a new session</a></li>
+  <li><a href="#paste-the-starter-prompt" id="toc-paste-the-starter-prompt" class="nav-link" data-scroll-target="#paste-the-starter-prompt"><span class="header-section-number">6.5.2</span> 2. Paste the starter prompt</a></li>
+  <li><a href="#have-the-conversation" id="toc-have-the-conversation" class="nav-link" data-scroll-target="#have-the-conversation"><span class="header-section-number">6.5.3</span> 3. Have the conversation</a></li>
+  <li><a href="#try-it-then-save-it" id="toc-try-it-then-save-it" class="nav-link" data-scroll-target="#try-it-then-save-it"><span class="header-section-number">6.5.4</span> 4. Try it, then save it</a></li>
+  </ul></li>
+  <li><a href="#what-to-notice" id="toc-what-to-notice" class="nav-link" data-scroll-target="#what-to-notice"><span class="header-section-number">6.6</span> What to notice</a></li>
+  <li><a href="#check-yourself" id="toc-check-yourself" class="nav-link" data-scroll-target="#check-yourself"><span class="header-section-number">6.7</span> Check yourself</a></li>
+  <li><a href="#going-further" id="toc-going-further" class="nav-link" data-scroll-target="#going-further"><span class="header-section-number">6.8</span> Going further</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/chapters/06-build-an-app.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/06-build-an-app.html">Building things</a></li><li class="breadcrumb-item"><a href="../chapters/06-build-an-app.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Build an app</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-app" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Build an app</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In <a href="01-website.html" class="quarto-xref"><span>Chapter 1</span></a> you asked for a web page and got one. That page <em>said</em> things. An app <em>does</em> things: it reads your file, works something out, and shows you an answer. That is where agents are at their most impressive, and where they fail most quietly. Ask for “a page that looks up my genes in a DESeq2 table” and within a few minutes you’ll have one that loads, looks tidy and gives answers. Whether those answers are right is a separate question, and the page won’t tell you. A fold change read the wrong way round, an <code>NA</code> treated as “not significant”, <code>chr10</code> sorted before <code>chr2</code>: each one produces a page that works perfectly and is wrong.</p>
+<p>This morning’s talk put the reason plainly. A one-line request leaves dozens of decisions unmade, and the agent quietly <strong>guesses every one</strong>. Most guesses are reasonable. All of them being right is the unlikely part. The fix is not a cleverer model or a longer prompt. It’s a <strong>specification</strong>: a short document that says what the app does, what it doesn’t, what goes in, and how you’ll know it’s right. It records the decisions, so nobody has to guess them.</p>
+<p>You won’t write that spec yourself, and you won’t write any code. The agent will interview you, one question at a time, and write the spec from your answers. Then it builds the app from the spec. Your job is the part only you can do: knowing what would actually help in your work, and knowing the right answers for a small test case. This chapter gives you a starter prompt that runs the whole conversation, from “what do you work on?” to a working app in a folder on your laptop.</p>
+<section id="what-youll-learn" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="what-youll-learn"><span class="header-section-number">6.1</span> What you’ll learn</h2>
+<ul>
+<li>What goes in a small, useful spec, and what goes wrong when each part is missing.</li>
+<li>Why a <strong>test case with answers worked out by hand</strong> is the most important part of it.</li>
+<li>How to let an agent interview you into a spec, rather than writing one.</li>
+<li>How to pick a way of building that needs nothing new on your computer, on Windows or macOS.</li>
+<li>How to read an agent’s “what I checked” report, and what to do with “what I couldn’t”.</li>
+</ul>
+</section>
+<section id="what-a-spec-is" class="level2 page-columns page-full" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="what-a-spec-is"><span class="header-section-number">6.2</span> What a spec is</h2>
+<p>A spec for a small app fits on two pages. It has seven parts (<a href="#tbl-app-spec-parts" class="quarto-xref">Table&nbsp;<span>6.1</span></a>), and each one exists because of a particular way things go wrong.</p>
+<div id="tbl-app-spec-parts" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-app-spec-parts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part</th>
+<th>What it says</th>
+<th>Without it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Purpose</strong></td>
+<td>Who it’s for, and the one question it answers</td>
+<td>The app grows features nobody asked for</td>
+</tr>
+<tr class="even">
+<td><strong>What it does</strong></td>
+<td>A numbered list of behaviours</td>
+<td>The agent decides, and each build decides differently</td>
+</tr>
+<tr class="odd">
+<td><strong>What it doesn’t</strong></td>
+<td>Non-goals, said out loud</td>
+<td>Plots, databases and logins arrive uninvited</td>
+</tr>
+<tr class="even">
+<td><strong>Inputs</strong></td>
+<td>Formats, with a real example of each</td>
+<td>It works on the agent’s invented example, not your file</td>
+</tr>
+<tr class="odd">
+<td><strong>Tiny test case</strong></td>
+<td>An input small enough to check by eye, and its answers, <strong>worked out by hand</strong></td>
+<td>“It works” means “it runs”</td>
+</tr>
+<tr class="even">
+<td><strong>Open decisions</strong></td>
+<td>Each choice, with a suggested default</td>
+<td>Silent guesses, discovered months later</td>
+</tr>
+<tr class="odd">
+<td><strong>Done when</strong></td>
+<td>A checklist you can tick yourself</td>
+<td>Nobody knows when to stop</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-app-spec-parts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.1: The seven parts of a small spec, and what goes wrong without each.
+</figcaption>
+</figure>
+</div>
+<p>The test case deserves a word of its own. An agent that writes the code <em>and</em> works out the expected answers by running that code has only shown that the code agrees with itself. The answers have to come from somewhere else: from rules written down before any code existed, checked by a person. That’s you. The rule that goes with it is simple: <strong>never change the answers to make a test pass.</strong> If the code disagrees with an answer you checked, the code is wrong.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Fixture</strong> is the programmer’s word for a small test file with known answers. PeakPeek’s is 17 lines long, and every line is there to catch one particular mistake.</p>
+</div></div><p>The order matters as much as the parts. The conversation goes from your work to your computer to the spec, and only then to code, with you approving the spec before anything is built (<a href="#fig-app-loop" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>).</p>
+<div class="cell page-columns page-full" data-layout-align="default">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-app-loop" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-app-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-app-loop">flowchart TD
+  accDescr: A flowchart in two boxes. The first, Conversation - no code yet, runs 1 the idea, 2 your computer, 3 the spec, then a decision - you approve? Not yet loops back to the spec. Approved leads to the second box, Build and check - 4 build, then check against the hand-worked answers, with fails looping back to build.
+  subgraph talk ["Conversation: no code yet"]
+    direction LR
+    A["1. The idea&lt;br/&gt;what do you work on?"] --&gt; B["2. Your computer&lt;br/&gt;what's installed?"]
+    B --&gt; C["3. The spec&lt;br/&gt;SPEC.md + test case"]
+    C --&gt; D{"You&lt;br/&gt;approve?"}
+    D -- "not yet" --&gt; C
+  end
+  subgraph build ["Build and check"]
+    direction LR
+    E["4. Build"] --&gt; F["Check against the&lt;br/&gt;hand-worked answers"]
+    F -- "fails" --&gt; E
+  end
+  talk -- "approved" --&gt; build
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-app-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: The starter prompt’s four stages. Nothing is built until you approve the spec; when a check fails, the fix goes back into the spec or the code, never into the answers.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="worked-example-peakpeek" class="level2 page-columns page-full" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="worked-example-peakpeek"><span class="header-section-number">6.3</span> Worked example: PeakPeek</h2>
+<p>PeakPeek is a page that tells you what’s in a peak file: how many peaks, how wide, on which chromosomes, and what’s wrong with the file. Its <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/examples/peakpeek/SPEC.md">spec</a> is much longer than the one you’ll write, about 440 lines, because it was written to be built by a roomful of people without anyone to ask. But it has the same seven parts. Its reference data are five public ENCODE peak files from mouse thymus <span class="citation" data-cites="doi:10.1038/s41586-020-2493-4">(<a href="../appendices/references.html#ref-doi:10.1038/s41586-020-2493-4" role="doc-biblioref">Abascal et al. 2020</a>)</span>, with the right answers for each worked out with <code>awk</code>, Python and <code>bedtools</code>, independently of any app. Its fixture is a 17-line BED file with a blank line, a zero-width peak, a start that isn’t a number, and a <code>chr10</code> placed to catch anyone who sorts chromosome names as text.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-doi:10.1038/s41586-020-2493-4" class="csl-entry" role="listitem">
+Abascal, Federico and, Reyes Acosta, Nicholas J. Addleman, et al. 2020. <span>“Expanded Encyclopaedias of <span>DNA</span> Elements in the Human and Mouse Genomes.”</span> <em>Nature</em> 583 (7818): 699–710. <a href="https://doi.org/10.1038/s41586-020-2493-4">https://doi.org/10.1038/s41586-020-2493-4</a>.
+</div></div><p>With a spec that complete, <strong>the building was not the slow part.</strong> We gave a fresh agent (Claude Opus 5.5) an empty folder, the spec and a single prompt, twice. It built the whole page in 15 minutes the first time and 13 the second, and both pages worked first time, with every test passing (<a href="#fig-app-peakpeek" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> shows the finished version).</p>
+<div id="fig-app-peakpeek" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="The PeakPeek web page. At the top, a drop zone and a box of two ENCODE URLs. Below, two cards side by side, one per file, each with tables of counts and widths, a list of problems, and bar charts of peak width and peaks per chromosome.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-app-peakpeek-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../images/app-peakpeek.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;6.2: PeakPeek, the finished version, with two ENCODE files loaded by URL: CTCF and H3K4me3. The CTCF card’s numbers (20,220 peaks, median width 344 bp, 6,003,019 bp after merging overlaps) match the answers worked out with bedtools."><img src="../images/app-peakpeek.png" class="img-fluid figure-img" alt="The PeakPeek web page. At the top, a drop zone and a box of two ENCODE URLs. Below, two cards side by side, one per file, each with tables of counts and widths, a list of problems, and bar charts of peak width and peaks per chromosome."></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-app-peakpeek-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.2: PeakPeek, the finished version, with two ENCODE files loaded by URL: CTCF and H3K4me3. The CTCF card’s numbers (20,220 peaks, median width 344 bp, 6,003,019 bp after merging overlaps) match the answers worked out with <code>bedtools</code>.
+</figcaption>
+</figure>
+</div>
+<p>What the builds got wrong is more instructive than what they got right. Almost every problem traced back to the <strong>spec</strong>, not the code:</p>
+<ul>
+<li><strong>An undefined word.</strong> The spec asked for a count of “overlapping peaks” but never said what counted as overlapping. Two builds chose differently and reported 1,763 and 3,457 for the same CTCF file. Both were reasonable; they couldn’t both be the answer.</li>
+<li><strong>A wrong definition, with the right answer.</strong> The spec said the CTCF file had one “exact duplicate” line. It has two lines with the same position and different scores. The count of 1 was right; the description was wrong. A build found it.</li>
+<li><strong>A rule that contradicted itself.</strong> “Accept <code>1e+03</code>, reject <code>1.5e2</code>” looks tidy until you notice that 1.5e2 is 150, a perfectly good whole number, and that R writes large numbers exactly this way.</li>
+<li><strong>Something that could never work.</strong> The first draft had the test page read its answers from a separate file. A page opened by double-clicking isn’t allowed to read other files, so that test could never have passed. The answers moved into a script.</li>
+</ul>
+<p><strong>Every fresh build found something.</strong> That’s the case for running the check, and for having a spec to fix: the correction goes into one place, and the next build gets it. The finished PeakPeek is public at <a href="https://github.com/seandavi/peakpeek" class="uri">https://github.com/seandavi/peakpeek</a>, and you can use it at <a href="https://seandavi.github.io/peakpeek/" class="uri">https://seandavi.github.io/peakpeek/</a>.</p>
+</section>
+<section id="worked-example-the-starter-prompt-tested" class="level2 page-columns page-full" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="worked-example-the-starter-prompt-tested"><span class="header-section-number">6.4</span> Worked example: the starter prompt, tested</h2>
+<p>The prompt you’ll use in a moment was tested before it reached you. We played the part of an attendee: a postdoc studying gene regulation in B cells, with a DESeq2 <span class="citation" data-cites="doi:10.1186/s13059-014-0550-8">(<a href="../appendices/references.html#ref-doi:10.1186/s13059-014-0550-8" role="doc-biblioref">Love et al. 2014</a>)</span> results table from the Vahedi lab’s <a href="https://github.com/golnazvahedi/epigenetics-agentic-workshop/tree/main/track-a/data">workshop data</a> and a project folder with the kind of <code>AGENTS.md</code> you wrote in <a href="03-teach-your-agent.html" class="quarto-xref"><span>Chapter 3</span></a>. The agent was Claude Code on a Mac. The answers were ours, typed from a script, so <strong>your conversation will go differently</strong>; that’s the point of it.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-doi:10.1186/s13059-014-0550-8" class="csl-entry" role="listitem">
+Love, Michael I, Wolfgang Huber, and Simon Anders. 2014. <span>“Moderated Estimation of Fold Change and Dispersion for <span class="nocase">RNA-seq</span> Data with <span>DESeq2</span>.”</span> <em>Genome Biology</em> 15 (12). <a href="https://doi.org/10.1186/s13059-014-0550-8">https://doi.org/10.1186/s13059-014-0550-8</a>.
+</div></div><p>Here is what happened, stage by stage.</p>
+<p><strong>The idea.</strong> The agent read the project’s README and <code>AGENTS.md</code>, then asked before opening the data. Allowed to look at the first few lines, it checked the fold-change direction against the raw counts itself (<code>Myc</code>: about 600 reads in the knockout, 1,600 in wild type, log2 fold change +1.19, so positive means <em>lower</em> in the knockout, as <code>AGENTS.md</code> said). It then offered three ideas, each built around a mistake the table invites: a gene lookup that states the direction in words, a sanity report for any new table from the core, and an exporter for significant-gene lists. We picked the lookup.</p>
+<p><strong>Your computer.</strong> Without installing anything, it reported the operating system and versions of R, RStudio, Python, Node and git, then recommended a single web page, on the grounds that it needs nothing new, works on Windows, and keeps the data on the laptop.</p>
+<p><strong>The spec.</strong> 130 lines, all seven parts. The test case was a seven-gene table: two real genes copied from the file and five made-up ones, each built to test one trap: a <code>padj</code> of <code>NA</code>, a symbol shared by two genes, a <code>padj</code> of exactly 0.05, an Ensembl ID with a version suffix, and an ID that isn’t in the table. It showed its working for each answer and asked us to confirm them. It raised five open decisions, and flagged the one that mattered most: keep the fold change as written in the file, and let the words carry the direction.</p>
+<p><strong>The build.</strong> Two minutes. Its own test compared the page’s output with our eight approved rows and matched every one. It reported what it had checked, and what it hadn’t: it had not clicked through the page itself, nor tried pasting into slides. So we did: the page, opened in Chrome and given the test file, produced exactly the eight rows (<a href="#fig-app-gene-lookup" class="quarto-xref">Figure&nbsp;<span>6.3</span></a>).</p>
+<div id="fig-app-gene-lookup" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="A web page titled Gene lookup. A yellow banner explains that log2FoldChange is wild type relative to the knockout. Below, a file picker, a box of pasted gene names, a Copy table button, and a table of eight rows with columns Query, Symbol, Gene_ID, baseMean, log2FC, padj, Verdict and Note.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-app-gene-lookup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../images/app-gene-lookup.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;6.3: The gene lookup built in the test run, given its own seven-gene test table. Five of the genes are made up, each to test one trap: a missing padj, a shared symbol, a padj of exactly 0.05, an ID that isn’t there. The yellow line states the direction of the fold change at all times."><img src="../images/app-gene-lookup.png" class="img-fluid figure-img" alt="A web page titled Gene lookup. A yellow banner explains that log2FoldChange is wild type relative to the knockout. Below, a file picker, a box of pasted gene names, a Copy table button, and a table of eight rows with columns Query, Symbol, Gene_ID, baseMean, log2FC, padj, Verdict and Note."></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-app-gene-lookup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.3: The gene lookup built in the test run, given its own seven-gene test table. Five of the genes are made up, each to test one trap: a missing <code>padj</code>, a shared symbol, a <code>padj</code> of exactly 0.05, an ID that isn’t there. The yellow line states the direction of the fold change at all times.
+</figcaption>
+</figure>
+</div>
+<p>Three things went less well, and the prompt below was changed because of them:</p>
+<ul>
+<li><strong>Its test needed Node</strong>, a programming tool many attendees won’t have, especially on Windows. The prompt now asks for a test you can run with only what’s on your computer: for a web page, a <code>test.html</code> you double-click. A second run of the revised prompt did exactly that, and its <code>test.html</code> showed 17 of 17 checks passing when we opened it.</li>
+<li><strong>It went beyond the spec without asking.</strong> It added a second clipboard format so tables paste properly into slides. That was sensible, and it told us, but the prompt had said to ask first. The second run did the same with three small choices, listed them, and asked afterwards. Watch for this: an agent’s idea of “obviously helpful” is still a decision, and decisions belong in the spec.</li>
+<li><strong>We rubber-stamped the answers.</strong> Our script said “all correct” without checking. We checked afterwards, and they were, but that’s luck, not a method. The second run’s spec had eleven answers, including fold changes like 2<sup>0.3</sup> = 1.23: easy to check with a calculator, and easy to skip.</li>
+</ul>
+<p>In the second run, with the same scripted answers, the agent made a different and arguably better choice: the app refuses to show results until you say which group a positive fold change favours, because getting that backwards is the most likely mistake. It asked before reading more than the first few lines of the real file, and the whole conversation took under seven minutes of the agent’s time, four of them building. <strong>Same prompt, same person, different app.</strong> Neither is wrong. That’s why the spec exists: it’s where you see the choice and make it yours.</p>
+</section>
+<section id="your-turn" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">6.5</span> Your turn</h2>
+<p>You’ll need about 30–45 minutes, most of it conversation. The build itself is usually the short part.</p>
+<section id="make-a-folder-start-a-new-session" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="make-a-folder-start-a-new-session"><span class="header-section-number">6.5.1</span> 1. Make a folder, start a new session</h3>
+<p>Make a new folder called <code>my-app</code> inside <strong>Documents/agents-workshop</strong>, next to the folders from earlier chapters. Not inside your project from <a href="03-teach-your-agent.html" class="quarto-xref"><span>Chapter 3</span></a>: the app is a new thing, and it gets its own folder. Start a <strong>new</strong> session on it, as in <a href="../chapters/00-setup.html">Setup</a> (in the Claude desktop app, choose the folder as the session’s project folder), and check with “what folder are you in?”</p>
+<p>If you did <a href="03-teach-your-agent.html" class="quarto-xref"><span>Chapter 3</span></a>, have the path to that project folder to hand. The agent will ask.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Your data and the agent
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The app itself can keep your data on your laptop: a page opened by double-clicking reads files without sending them anywhere. <strong>The conversation doesn’t.</strong> Anything the agent reads, including “the first few lines of the data file”, is sent to the model. The morning’s rule applies: nothing identifiable, no patient data, nothing unpublished you aren’t allowed to share. If in doubt, ask the agent to invent a small example in the same format, and try your real file only in the finished app.</p>
+</div>
+</div>
+</section>
+<section id="paste-the-starter-prompt" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="paste-the-starter-prompt"><span class="header-section-number">6.5.2</span> 2. Paste the starter prompt</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>I'd like to build a small app with you: one I'd actually use in my work. I don't write</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>code, and I don't want to start now. Lead me through it in four stages, and don't start</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>the next stage until I say so. Ask me one question at a time. Look around before you ask</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>anything you could find out yourself.</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>Stage 1, the idea. Ask what I work on. If I point you to a project folder, read its</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>README and AGENTS.md (or CLAUDE.md) first, and ask before opening anything else there.</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Then suggest three small app ideas that would save me time or catch mistakes in my</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>work. Each should be something I could describe in two sentences and try on one file.</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Help me pick one and cut it down to the smallest useful version.</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>Stage 2, my computer. Without installing anything, find out which operating system I'm</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>on and whether R, RStudio, Python, Node and git are installed. Tell me what you found.</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>Then pick the simplest way to build the app that needs nothing new. If in doubt, make</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>it a web page: one folder, opened by double-clicking index.html, with no server, no</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>packages and no internet needed to run it. It must work on Windows as well as macOS.</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>Stage 3, the spec. Write a short SPEC.md in this folder, two pages at most:</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>- Purpose: who it's for, and the question it answers.</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>- What it does, as a numbered list.</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>- What it doesn't do.</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>- Inputs: formats, with a real example of each.</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>- A tiny test case: an input small enough to check by eye, and its right answers,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  worked out by hand. Show me the working, and ask me to confirm each answer.</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>- Open decisions, each with a suggested default.</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>- Done when: a short checklist I can tick myself.</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>Then ask me to read it. Write no code until I say "approved".</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>Stage 4, the build. Build exactly what SPEC.md describes. Save the test case and its</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>answers as files, with a test I can run myself using only what's on my computer (for a</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>web page, a test.html I double-click). Never change the answers to make a test pass: if</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>the code disagrees, fix the code, or stop and tell me. If something needs more than the</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>spec says, ask me first. Then add an entry to LEDGER.md (start one if there isn't one),</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>with the headings Asked / Agent did / Checked how / Confidently wrong / Keep, and tell</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>me how to open the app, what you checked and how, and what you couldn't check.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="have-the-conversation" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="have-the-conversation"><span class="header-section-number">6.5.3</span> 3. Have the conversation</h3>
+<p>A few things make it go well.</p>
+<ul>
+<li><strong>Answer in your own words.</strong> “I get DESeq2 tables from the core and I always forget which way the fold change goes” is a perfect answer. So is “I don’t know, what would you suggest?”</li>
+<li><strong>Say “smaller”.</strong> The first idea is almost always too big. The smallest useful version is something you could try on one file this afternoon.</li>
+<li><strong>Take the suggested defaults</strong> for the open decisions the first time through, unless one is plainly wrong for your work. You can change them later; that’s what the spec is for.</li>
+<li><strong>Check the test answers yourself.</strong> This is the one step you can’t hand over. Work each one out from the rules in the spec, with a calculator if you need one. If you can’t tell whether an answer is right, the rule is unclear: ask for it to be rewritten.</li>
+<li><strong>Read the spec before you say “approved”.</strong> Two pages. Anything you don’t understand is a question worth asking now.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>If it goes wrong
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>The agent wants to install something.</strong> Say no, and ask for a way that needs nothing new. A web page almost always works.</li>
+<li><strong>The spec is long.</strong> “Cut it to two pages; move anything optional to ‘What it doesn’t do’.”</li>
+<li><strong>It stopped halfway through the build.</strong> Say “continue”.</li>
+<li><strong>A blank page.</strong> Open the browser’s console (⌥⌘J on a Mac, Ctrl+Shift+J on Windows, in Chrome or Edge) and paste the red text to the agent.</li>
+<li><strong>A test fails.</strong> Ask “is the code wrong, or the expected answer?” You checked the answers, so it’s the code, unless you find you made a mistake. If you did, fix the answer <em>in the spec</em> first, deliberately, and say why in the ledger.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>On Windows
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Double-clicking <code>index.html</code></strong> opens it in your default browser, usually Edge. That’s fine: Edge and Chrome behave the same here.</li>
+<li><strong>File extensions are hidden</strong> by default, so <code>index.html</code> may show as <code>index</code>; see
+<ol class="example" type="1">
+<li></li>
+</ol></li>
+<li><strong>Checking what’s installed</strong>: the agent may run commands in PowerShell rather than a Unix shell, and ask permission for each. They only read version numbers; allowing them is safe.</li>
+<li><strong>R and RStudio</strong> are often installed without being on the command line’s path, so the agent may not find them at first. If you know they’re there, tell it.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="try-it-then-save-it" class="level3" data-number="6.5.4">
+<h3 data-number="6.5.4" class="anchored" data-anchor-id="try-it-then-save-it"><span class="header-section-number">6.5.4</span> 4. Try it, then save it</h3>
+<p>Open the app and run its test first: every answer should match the ones you checked. Then try it on a real file, and on something it should reject. Ask the agent about anything that surprises you.</p>
+<p><strong><a href="07-work-like-a-project.html" class="quarto-xref"><span>Chapter 7</span></a> carries on with this app</strong>, so keep the folder. When you’re happy with it, ask:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Copy everything in this folder except snapshots/ into snapshots/first-build/.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>No idea, or no time?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Build PeakPeek instead. The spec is finished, and one prompt builds it: <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/exercises/stretch-peakpeek.md">PeakPeek: a page built in one prompt</a>. Then come back and use the starter prompt on an idea of your own when one arrives.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="what-to-notice" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="what-to-notice"><span class="header-section-number">6.6</span> What to notice</h2>
+<ul>
+<li><strong>The questions found decisions you didn’t know you were making.</strong> Which way does the fold change go? Is exactly 0.05 significant? What happens to a gene that isn’t there? Each one would have been a silent guess.</li>
+<li><strong>The build was fast; the checking was yours.</strong> A few minutes of building sat behind a conversation several times as long. That’s the right proportion.</li>
+<li><strong>“What I couldn’t check” is the most useful part of the report.</strong> In our test, the agent couldn’t click through its own page. It said so. The page was right, but only because we went and looked.</li>
+<li><strong>Did it go beyond the spec?</strong> Anything it added unasked is a decision somebody made without you. Put it in the spec, or take it out.</li>
+</ul>
+</section>
+<section id="check-yourself" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="check-yourself"><span class="header-section-number">6.7</span> Check yourself</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Your folder has a <code>SPEC.md</code> you’ve read, with a test case whose answers you worked out yourself.</label></li>
+<li><label><input type="checkbox">The app opens by double-clicking, with nothing installed for it.</label></li>
+<li><label><input type="checkbox">Its test passes, and you ran it yourself.</label></li>
+<li><label><input type="checkbox">You tried it on a real file, and on one it should reject.</label></li>
+<li><label><input type="checkbox"><code>LEDGER.md</code> says what was built and how it was checked, including what wasn’t.</label></li>
+<li><label><input type="checkbox">There’s a snapshot in <code>snapshots/first-build/</code>.</label></li>
+</ul>
+</section>
+<section id="going-further" class="level2 page-columns page-full" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="going-further"><span class="header-section-number">6.8</span> Going further</h2>
+<ul>
+<li><strong>A new session for the build.</strong> For anything bigger than this, the Claude Code documentation recommends writing the spec in one session and building from it in a fresh one, which has nothing in its context but the spec <span class="citation" data-cites="url:https://code.claude.com/docs/en/best-practices">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/best-practices" role="doc-biblioref"><span>“Best Practices for <span>Claude</span> <span>Code</span>,”</span> n.d.</a>)</span>. The spec is the distillate; hand over the distillate, not the conversation.</li>
+<li><strong>Build it twice.</strong> Give the same spec to two fresh sessions and compare the apps. Wherever they differ, the spec left something open.</li>
+<li><strong>A bigger spec.</strong> <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/exercises/stretch-spec-then-build.md">Spec first, then build: peak overlap</a> is a spec at the scale of a real project, and <a href="https://github.com/seandavi/peakwhere">peakwhere</a> is that spec built by agents, with every decision and review on the record.</li>
+<li><strong>Keep going with your app.</strong> <a href="07-work-like-a-project.html" class="quarto-xref"><span>Chapter 7</span></a> turns it into a project: a ledger entry for every change, a record of each decision, and a way back when a change goes wrong.</li>
+</ul>
+
+
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://code.claude.com/docs/en/best-practices" class="csl-entry" role="listitem">
+<span>“Best Practices for <span>Claude</span> <span>Code</span>.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/best-practices">https://code.claude.com/docs/en/best-practices</a>.
+</div></div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/seandavi\.github\.io\/2026-penn-epigen-agentic-workshop\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/05-mcp.html" class="pagination-link" aria-label="Connect to a database (MCP)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connect to a database (MCP)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/07-work-like-a-project.html" class="pagination-link" aria-label="Work like a project">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Work like a project</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/chapters/06-build-an-app.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>
