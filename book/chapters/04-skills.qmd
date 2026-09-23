@@ -85,9 +85,9 @@ this OK", "can I trust this".
 
 ::: {.column-margin}
 **An open format.** `SKILL.md` follows the Agent Skills standard
-[@url:https://agentskills.io], so the same folder works in Codex CLI, Gemini CLI and
-GitHub Copilot as well as Claude Code. Where each tool looks for skills differs; check
-its documentation.
+[@url:https://agentskills.io], so the same folder works in Codex CLI, Google Antigravity
+and GitHub Copilot as well as Claude Code. Where each tool looks for skills differs
+(Antigravity: `.agents/skills/` in the project); check its documentation.
 :::
 
 | Where | Path | Who gets it |

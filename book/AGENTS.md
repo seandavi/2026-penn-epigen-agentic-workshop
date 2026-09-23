@@ -10,7 +10,7 @@ Bench scientists and bioinformaticians, many of whom have never used a coding ag
 and don't write code. About 40 people in a room from 13:00 to 14:30, with Sean there;
 then anyone, alone, later. **Every chapter must make sense read alone, without Sean.**
 Some are on **Windows**. Most will use the **Claude desktop app** (its Code tab);
-some the `claude` CLI; a few Gemini CLI, Codex or Copilot. Name Claude Code where a
+some the `claude` CLI; a few Google Antigravity (it replaced Gemini CLI), Codex or Copilot. Name Claude Code where a
 step is specific to it, and say what the equivalent is elsewhere when it matters
 (ADR-0004: tool-neutral, Claude Code supported).
 

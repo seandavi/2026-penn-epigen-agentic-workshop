@@ -66,8 +66,8 @@ sequenceDiagram
 
 ::: {.column-margin}
 **Protocol**: an agreed way for two programs to talk. Because MCP is shared, the same
-PubMed server works with Claude Code, Claude's desktop app, Gemini CLI, Codex and
-Copilot. Only the place you configure it differs.
+PubMed server works with Claude Code, Claude's desktop app, Google Antigravity,
+Codex and Copilot. Only the place you configure it differs.
 :::
 
 Two things follow from this picture. First, **the agent writes the query**. You asked
@@ -272,12 +272,12 @@ We haven't confirmed that you can add a *new* marketplace from there, so if you 
 the desktop app, route A is the safer choice.
 
 ::: {.callout-tip}
-## Using Gemini CLI, Codex or Copilot?
+## Using Antigravity, Codex or Copilot?
 
 The server is the same; only the configuration file differs. Ask your agent: "Add a
 remote HTTP MCP server called pubmed, at https://pubmed.mcp.claude.com/mcp, to your own
 MCP configuration for this folder, and tell me which file you changed." Then check the
-file it names.
+file it names. (In Antigravity it's `.agents/mcp_config.json`.)
 :::
 
 ::: {.callout-note collapse="true"}

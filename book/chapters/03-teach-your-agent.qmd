@@ -63,8 +63,8 @@ loaded into every session. {#tbl-teach-readme-vs-agents}
 
 ::: {.column-margin}
 **Same idea, different names.** `AGENTS.md` is an open convention that many tools read
-[@url:https://agents.md]. Claude Code's own name is `CLAUDE.md`; Gemini CLI's is
-`GEMINI.md` by default. Codex reads `AGENTS.md`. Check your tool's documentation if
+[@url:https://agents.md]. Claude Code's own name is `CLAUDE.md`. Google Antigravity
+reads `AGENTS.md` (and `GEMINI.md`), and so does Codex. Check your tool's documentation if
 you're not on Claude Code.
 :::
 

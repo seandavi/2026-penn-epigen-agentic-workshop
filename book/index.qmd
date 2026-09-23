@@ -66,8 +66,8 @@ make it @sec-teach: it's the one that pays off every day.
   Each one also gives a fallback, usually public data from the Vahedi lab, for when you
   have nothing to hand or don't want to use your own.
 - **On Windows?** Look for the collapsed "On Windows" boxes, and @sec-windows.
-- **Using something other than Claude?** Gemini CLI, Codex or Copilot all work for
-  almost everything here. Where a step is specific to Claude Code, the chapter says so.
+- **Using something other than Claude?** Google Antigravity, Codex or Copilot all work
+  for almost everything here. Where a step is specific to Claude Code, the chapter says so.
 
 ::: {.callout-important}
 ## What not to give an agent

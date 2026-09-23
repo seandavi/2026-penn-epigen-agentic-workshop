@@ -46,11 +46,11 @@ flowchart LR
 There are several ways to run the same agent. They behave the same where it matters for
 this book: the prompts, the folder and the permission prompts.
 
-| | Claude desktop app, **Code** tab | `claude` on the command line | Another agent |
+| | Claude desktop app, **Code** | `claude` on the command line | Google Antigravity 2.0 |
 |---|---|---|---|
-| Who it suits | Most people. No terminal needed. | People who already live in a terminal. | People already using Gemini CLI, Codex or Copilot. |
-| How you pick the folder | **Local**, then **Select folder**, when starting a session | `cd` into the folder, then run `claude` | Start it in the folder |
-| How you change permissions | The mode selector next to the send button | **Shift+Tab** cycles the modes | See that tool's documentation |
+| Who it suits | Most people. No terminal needed. | People who already live in a terminal. | People who'd rather use Google's agent, with a personal Google account. |
+| How you pick the folder | **Local**, then **Select folder**, when starting a session | `cd` into the folder, then run `claude` | A **Project**: the folder icon with a "+" in the left sidebar, **New Project**, **Add Folder**, **Create** |
+| How you change permissions | The mode selector next to the send button | **Shift+Tab** cycles the modes | The project's security preset, in its settings |
 | Supported in the room | Yes | Yes | Best effort |
 
 : Ways to run an agent for this book. Everything in later chapters works in all three,
@@ -68,18 +68,24 @@ upgrade, or you can't see the Code tab, tell Sean or a helper straight away.
    Surface laptops) has a separate installer, linked from the
    [desktop quickstart](https://code.claude.com/docs/en/desktop-quickstart).
 2. Open Claude from Applications (macOS) or the Start menu (Windows) and sign in.
-3. Click the **Code** tab at the top centre.
+3. Click **Code** at the top of the window.
 
-The app has three tabs, and only one of them is for this book
-[@url:https://code.claude.com/docs/en/desktop-quickstart]:
+The app has two places to work, and only one of them is for this book:
 
-| Tab | What it is | For this book? |
+| Where | What it is | For this book? |
 |---|---|---|
-| **Chat** | Conversation, like claude.ai. It can't see your files. | No |
-| **Cowork** | A background agent that works in its own sandboxed virtual machine. | No |
+| **Home** | Chat and Cowork. A **Chat / Cowork** switch at the bottom left of the message box picks between a conversation (it can't see your files) and Cowork, a background agent that works in its own sandbox. On some accounts there's no switch: Claude picks for you. | No |
 | **Code** | An agent working directly on files in a folder you choose. | **Yes** |
 
-: The desktop app's three tabs. {#tbl-setup-tabs}
+: The desktop app, as of September 2026. {#tbl-setup-tabs}
+
+::: {.column-margin}
+The app changes often. Older versions, and some of the documentation, show three tabs
+instead: **Chat**, **Cowork** and **Code**
+[@url:https://code.claude.com/docs/en/desktop-quickstart]. Chat and Cowork now "share
+one home" [@url:https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile].
+Whatever yours shows, you want **Code**.
+:::
 
 The desktop app includes Claude Code. You don't need to install anything else.
 
@@ -126,8 +132,27 @@ Windows appendix, @sec-windows, covers PowerShell versus CMD, finding your Docum
 folder, showing file extensions, and what to do if `claude` is "not recognized".
 :::
 
+### Google Antigravity (an alternative)
+
+Google's agent, [Antigravity 2.0](https://antigravity.google/download), is a desktop app
+that works much like Claude's Code pane [@url:https://antigravity.google/docs/getting-started].
+Download it for macOS, Windows or Linux, open it, and sign in with a Google account.
+
+- **Use a personal Google account** (an `@gmail.com` address). Antigravity's FAQ says
+  institutional Google Workspace accounts may not be able to sign in
+  [@url:https://antigravity.google/docs/faq].
+- Its agent works in a **Project**: one or more folders you add. By default it can only
+  read and write inside those folders, and it asks before running terminal commands
+  [@url:https://antigravity.google/docs/features].
+- Where this book says `CLAUDE.md`, Antigravity reads `AGENTS.md` (and `GEMINI.md`);
+  its project skills go in `.agents/skills/` and its MCP servers in
+  `.agents/mcp_config.json` [@url:https://antigravity.google/docs/cli/gcli-migration].
+
+Gemini CLI, which earlier versions of this workshop mentioned, has been replaced by
+Antigravity's CLI.
+
 ::: {.callout-tip}
-## Using Gemini CLI, Codex or GitHub Copilot?
+## Using Codex or GitHub Copilot?
 
 Bring it. What this book teaches carries across: a folder per piece of work, prompts in
 plain English, a ledger of what you checked. What differs is detail: where a tool keeps
@@ -138,7 +163,12 @@ agent: "This book says to do X in Claude Code. What's the equivalent here?"
 
 ## Make a workshop folder
 
-Make a new, empty folder called `agents-workshop` inside your **Documents** folder:
+Make a new, empty folder called `agents-workshop` inside your **Documents** folder. The
+easiest place to do it is the agent app itself, as you start your first session (next
+section): the folder picker in Claude's Code pane, and in Antigravity, opens on your
+files, and you can make a new folder there before selecting it.
+
+If you'd rather make it first:
 
 - **macOS:** in Finder, open Documents, then **File → New Folder**.
 - **Windows:** in File Explorer, open Documents, then right-click an empty space and
@@ -168,9 +198,15 @@ full path.
 This is the one place the book explains how to start a session. Every later chapter
 says "start a new session in <folder>" and links back here; the steps are always these.
 
-**Desktop app.** In the Code tab, choose **Local** as the environment, click **Select
-folder**, and pick the folder (here, `agents-workshop`). Leave the model on its default.
-Then type your first prompt and press **Enter**.
+**Desktop app.** In **Code**, choose **Local** as the environment and click **Select
+folder**. Go to Documents, make the `agents-workshop` folder there if you haven't yet,
+and select it. Leave the model on its default. Then type your first prompt and press
+**Enter**.
+
+**Antigravity.** Click the folder icon with a "+" in the left sidebar, then **New
+Project**. Click **Add Folder**, go to Documents, make `agents-workshop` there if you
+haven't yet, and select it. Click **Create**, then type your first prompt in the
+project.
 
 **Command line.** Open a terminal, move into the folder, and start the agent:
 
@@ -323,7 +359,7 @@ file you could open without it. A chatbot couldn't do either.
 ::: {.callout-tip}
 ## You're done when
 
-- [ ] Claude (the Code tab) or `claude` opens and you're signed in.
+- [ ] Claude (**Code**), `claude`, or Antigravity opens and you're signed in.
 - [ ] Asked "What folder are you in, and what's in it?", the agent names your
       `agents-workshop` folder.
 - [ ] You found and opened `hello.txt` yourself, outside the agent.
