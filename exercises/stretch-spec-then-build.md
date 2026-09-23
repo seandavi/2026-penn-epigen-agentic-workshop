@@ -6,7 +6,7 @@ project: a specification, recorded decisions, a GitHub repository with issues, a
 agents building different parts at once.
 
 The project is small enough to finish and real enough to be useful: **a web page that takes
-a GTF and some peak files and draws a bar chart of where the peaks fall** — promoter, exon,
+a gene annotation and some peak files and draws a bar chart of where the peaks fall** — promoter, exon,
 intron, intergenic. It runs entirely in the browser. Nothing is uploaded.
 
 The point is not the chart. It's that **the spec is where the work actually happens**, and
@@ -37,7 +37,7 @@ reproduce something close to it. Paraphrase this rather than pasting it — the 
 in your own words will ask for what you actually care about:
 
 > I want a browser-only web page — no server, files never leave my machine — that takes a
-> GTF gene annotation and one or more peak files (BED, narrowPeak, or CSV), classifies
+> gene annotation (GFF3 or GTF) and one or more peak files (BED, narrowPeak, or CSV), classifies
 > each peak as promoter, UTR, exon, intron or intergenic, and draws a stacked bar chart of
 > the proportions, one bar per file.
 >
@@ -53,8 +53,9 @@ in your own words will ask for what you actually care about:
 > that could be built in parallel without conflicting.
 
 Then compare what you get with `SPEC.md`. **Where they differ is the interesting part.**
-Did yours catch that GENCODE has no 5′/3′ UTR features? That the reference peaks say `1`
-where the GTF says `chr1`? Did it actually run the libraries, or describe them from
+Did yours catch that GENCODE's GTF has no 5′/3′ UTR features, but its GFF3 does? That the
+obvious GFF3 library needs 5.6 GB on GENCODE's file? That the Vahedi peaks say `1` where
+GENCODE says `chr1`? Did it actually run the libraries, or describe them from
 memory? **Before installing anything it names, check the package exists**
 (`npm view <name>`) and look at who publishes it.
 
@@ -163,18 +164,37 @@ the description.
 The annotation model and the overlap engine come after, **one agent, one worktree, in
 sequence**. That's where the bugs live, and splitting it up splits the understanding too.
 
-## 7. Check it
+## 7. Try it on real data
 
-Get the reference data:
+SPEC.md §2 lists the reference data, all public and all mm10: the GENCODE annotation, five
+ENCODE peak files from mouse thymus (H3K4me3, H3K36me3, H3K27me3, CTCF, DNase-seq), and
+the Vahedi lab's H3K27ac peaks. Fetch them into a `data/` folder that git ignores:
 
 ```bash
-curl -sLO https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M25/gencode.vM25.basic.annotation.gtf.gz
+mkdir -p data && echo "data/" >> .gitignore && cd data
+
+# annotation: GENCODE M25, the last release on mm10 (23 MB; start it early)
+curl -sLO https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M25/gencode.vM25.basic.annotation.gff3.gz
+
+# peaks: ENCODE adult mouse thymus, one file per experiment type
+for acc in ENCFF674JZY ENCFF853BYO ENCFF478UYW ENCFF714WDP ENCFF979ULB; do
+  curl -sLO "https://www.encodeproject.org/files/$acc/@@download/$acc.bed.gz"
+done
+cd ..
 ```
 
-and use `track-a/data/differential_peaks.csv` from the workshop repository. Both are
-mm10. The GTF is 19 MB, so start the download before you need it.
+The accession numbers are the file names, so keep the table in SPEC.md handy for which
+is which. The Vahedi peaks are `track-a/data/differential_peaks.csv` in the workshop
+repository you already cloned.
 
-Then work through the acceptance tests in SPEC.md §7, and ledger each one. The ones that
+**Before you load them, predict.** Which bar should be mostly promoter? Which should have
+almost nothing in intergenic space? Write it in the ledger first (SPEC.md §7, test 8).
+If the chart disagrees with textbook biology, suspect the code before the biology. Then
+look at the CTCF bar, and at that file's ENCODE page, and decide whether you trust it.
+
+## 8. Check it
+
+Work through the acceptance tests in SPEC.md §7, and ledger each one. The ones that
 catch real bugs:
 
 - **Does anything land outside Intergenic?** If every peak is intergenic, chromosome names
@@ -184,8 +204,11 @@ catch real bugs:
 - **Your hand-written fixture.** Every mismatch is either a bug or an ADR you now
   disagree with. Both are worth knowing.
 
-If you have R and ChIPseeker, the cross-check (§7.6) is the best test of the lot: same
-settings, same data, two independent tools. Explain every difference. Don't tune it away.
+The cross-check (§7.6) is the best test of the lot: same settings, same data, two
+independent tools. ChIPseeker works if you have R; otherwise `brew install bedtools` (or
+`conda install -c bioconda bedtools`) and ask your agent for the bedtools version
+— then check that it really is independent, and doesn't just reuse your app's logic.
+Explain every difference. Don't tune it away.
 
 ## Success looks like
 
