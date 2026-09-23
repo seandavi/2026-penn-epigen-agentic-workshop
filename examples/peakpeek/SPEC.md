@@ -1,7 +1,7 @@
 # PeakPeek — a peak file at a glance: specification
 
-**Status:** draft. Section 6 lists open questions; **no code gets written until each one
-has an answer recorded in `adr/`**.
+**Status:** ready to build. Section 6 lists the decisions, each with a suggested default;
+**taking the defaults is an answer**. Record what was chosen in `adr/` before any code.
 
 ## 1. What this is
 
@@ -50,7 +50,7 @@ distinction matters).
 | H3K27ac (Vahedi lab) | `https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/differential_peaks.csv` | DESeq2 output: a CSV, chromosomes written `1` not `chr1` |
 
 The ENCODE files are gzipped narrowPeak, adult mouse thymus; their experiment pages are
-linked from [the other exercise's spec](../peak-overlap/SPEC.md#reference-data).
+linked from [the other exercise's spec](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/examples/peak-overlap/SPEC.md#reference-data).
 
 **The right answers** for the reference data, worked out with `awk`, Python and `bedtools`,
 independently of any app (§7, test 6):
@@ -129,7 +129,9 @@ not assumed:
 - **Classic scripts, not ES modules.** A page opened from a file has the origin `null`,
   and Chrome refuses to load `<script type="module">` imports from it. Plain
   `<script src="src/parse.js">` tags work. Each script adds its functions to one global
-  object, `window.PeakPeek`.
+  object, `window.PeakPeek`, and **every script, including `examples/fixture.js`, starts
+  with `window.PeakPeek = window.PeakPeek || {};`** so it adds to the object rather than
+  replacing what earlier scripts put there.
 - **No build step and no packages.** The charts are hand-written SVG: a histogram and a
   bar chart are about 60 lines each. If you want a charting library anyway, that's a
   decision (Q9), not a default.
@@ -263,8 +265,6 @@ defaults are **suggestions**.
 6. **Cross-check.** For one file, reproduce the peak count, median width and merged bp
    with a tool that isn't the page: `awk`, R, Python or `bedtools`. Ask an agent to write
    it, then check it doesn't reuse the page's code.
-7. **Biology.** Before loading them, predict which of the five ENCODE files has the widest
-   peaks, and which the narrowest. Write the prediction in the ledger first.
 
 ### The fixture
 
@@ -298,7 +298,7 @@ With the suggested defaults (Q1, Q3, Q4):
 | Accepted | 9: `a b c d e f g k a` |
 | Skipped | 4: lines 1, 2, 3 and 15 |
 | Rejected | 4: line 11 (zero width), 12 (end before start), 13 (start isn't a number), 17 (too few columns) |
-| Widths | min 1, median 100, mean 196 (1,761 ÷ 9 = 195.67), max 1,000 |
+| Widths | min 1, median 100, mean 195.67 (1,761 ÷ 9; compare within 0.01, show as 196), max 1,000 |
 | Sum of widths | 1,761 |
 | Merged bp | 1,611 (on chr1, `a`, `b` and the duplicate `a` merge to 150 bp) |
 | Duplicates | 1 |
@@ -310,15 +310,9 @@ is there to catch.
 
 ## 8. Issues
 
-The issues live **here, as checklists**, not on GitHub. Each one owns its files and
-touches nothing else, so issues 1–5 can be built **at the same time, by different agents,
-in the same folder**.
-
-**How to use them.** Built by **one agent**, it ticks the boxes as it goes and you check
-them. Built by **several at once**, each agent *reports* which boxes it believes are met,
-and **you** tick them: two agents editing this file at the same moment can silently undo
-each other's changes. Either way, *Status* says `Done — <your name>` only after a person
-has checked, with a ledger entry. An issue isn't done until a person says so.
+The issues live **here, as checklists**, not on a website. Build them in order. The agent
+ticks each box as it's met; **you** check, and change *Status* to `Done — <your name>`.
+An issue isn't done until a person says so.
 
 | # | Issue | Owns | Needs |
 |---|---|---|---|
@@ -341,7 +335,8 @@ Spec: §3.1, §4. **Status:** open
 - [ ] `tests/assert.js` gives §4's `PeakPeek.test`, `PeakPeek.assert` and
       `PeakPeek.runTests`, with failure messages that show expected and actual
 - [ ] Both pages open by double-clicking, with no console errors
-- [ ] Works with only placeholder `src/` files, so issues 2–5 don't wait for it
+- [ ] Works before the `src/` files exist: a script that fails to load shows as a failed
+      test, not a blank page
 
 ### Issue 2: Reading files and URLs
 
@@ -413,7 +408,6 @@ Spec: §7. Needs 6. **Status:** open
 - [ ] Test 4: the Vahedi CSV by URL, both coordinate settings, matches §2
 - [ ] Test 5: a Zenodo URL gives the CORS message
 - [ ] Test 6: one file cross-checked with a tool that isn't the page
-- [ ] Test 7: the prediction was written in the ledger *before* loading
 - [ ] `examples/fixture.bed` dropped into the page gives the numbers in `PeakPeek.EXPECTED`
 
 ### Later, if you like
@@ -423,18 +417,12 @@ Spec: §7. Needs 6. **Status:** open
 - Overlap between two files: how many peaks in A touch a peak in B.
 - A shareable link that reloads the same URLs.
 
-## 9. Working together without GitHub
-
-The project should still look like one where someone else could pick it up: what was
-decided, who did what, and how it was checked.
+## 9. What the folder holds at the end
 
 - [ ] `README.md`: what this is, how to open it, and what state it's in
-- [ ] `SPEC.md`: this file, or your version of it
-- [ ] `adr/`: one record per §6 question, plus a `template.md`
-- [ ] §8's issues ticked and signed off by a person, as each one is checked
-- [ ] `AGENTS.md` (or `CLAUDE.md`): only what an agent can't work out by reading the folder
-- [ ] `LEDGER.md`: one entry per issue: asked, did, checked how, confidently wrong, keep
-- [ ] `examples/fixture.bed`, and its answers in `examples/fixture.js`, written by a person
-- [ ] `test.html` passes, and the ledger says who last saw it pass
-- [ ] Version history: `git`, if you have it (one commit per issue); if not, copy the
-      folder to `snapshots/<date>-issue-N/` before each issue starts
+- [ ] `SPEC.md`: this file, with §8's boxes ticked
+- [ ] `adr/`: what was decided for each §6 question (one file listing accepted defaults
+      is fine)
+- [ ] `LEDGER.md`: what was asked, what was done, and how it was checked
+- [ ] `examples/fixture.bed`, and its answers in `examples/fixture.js`, from §7
+- [ ] `test.html` passes

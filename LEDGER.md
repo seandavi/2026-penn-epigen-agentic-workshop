@@ -394,3 +394,38 @@ one prompt, check, then make it yours. The long way became "Going further".
 hour. The building was never the slow part; writing the spec and checking the result
 were. So the exercise hands over the spec, and gives attendees the checking and the
 changing.
+
+---
+
+## Entry 12 — PeakPeek: one prompt only; the finished one published
+
+**Asked** — *SD*: simplify to the one-shot build; push PeakPeek to GitHub; leave social
+coding as an issue there. Step 3 is just "what worked, what didn't", with no prediction:
+part of the goal is confidence to try things. Look at the new review file.
+
+**Agent did**
+- Published `~/Documents/git/peakpeek` as
+  [seandavi/peakpeek](https://github.com/seandavi/peakpeek), MIT, on GitHub Pages. Filed
+  issue #1 (social coding: issues, PRs, worktrees, CI, branch protection), and #2–#5 for
+  follow-ups found while building.
+- Cut the exercise to four steps: make a folder with the agent (no terminal), build in
+  one prompt, try it, make it yours. Parallel building, ADR-writing and the GitHub prompt
+  are gone from it; the finished repo shows them.
+- From the persona review (`REVIEW-stretch-peakpeek.md`, not committed): the no-terminal
+  setup, a "what folder are you in?" check, "take the defaults first time", measured
+  timing, an "if it goes wrong / done when" box, "Open With → Chrome", a real Zenodo URL,
+  the privacy caveat for your own files, an R cross-check for RStudio users, and permission
+  to stop. In SPEC.md: the dead relative link, the "no code until" status line, the
+  `window.PeakPeek ||` rule, the placeholder box, the mean's tolerance; Test 7
+  (predict) and §9's social-coding checklist removed.
+
+**Checked how** — *Agent*: the live page, in Chrome 152, loads CTCF by URL (20,220 peaks)
+and its `test.html` shows 77 passed, with no console errors after adding an empty favicon.
+The Zenodo URL fails on CORS in Chrome (checked earlier). **Not checked:** a fresh
+one-shot build from the edited SPEC.md; the edits are small, but the 15-minute figure is
+from the previous version.
+
+**Confidently wrong** — Nothing new caught this round.
+
+**Keep** — The review's practitioner items mostly became unnecessary once the exercise
+stopped teaching process. Cutting was the fix.

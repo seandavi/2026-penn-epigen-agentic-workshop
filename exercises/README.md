@@ -13,7 +13,7 @@ specification. Neither is part of the taught session.
 
 | Stretch | Size | Needs |
 |---|---|---|
-| [PeakPeek: a peak file at a glance](stretch-peakpeek.md) | One prompt to build, then the afternoon to check and change it | A browser. No GitHub, `git` or Node. |
+| [PeakPeek: a peak file at a glance](stretch-peakpeek.md) | One prompt to build, then the afternoon to try and change it | Chrome. No GitHub, `git` or Node. |
 | [Peak overlap](stretch-spec-then-build.md) | More than an afternoon | `git`, and GitHub if you want issues and pull requests |
 
 ## Bring your own work
