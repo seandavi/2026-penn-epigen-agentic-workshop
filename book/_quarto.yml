@@ -31,6 +31,12 @@ book:
   repo-subdir: book
   repo-actions: [edit, issue]
   search: true
+  # Sean's site-wide GA4 tag; filter by page path /2026-penn-epigen-agentic-workshop/.
+  # storage: none is cookieless, so no consent banner. Agents reading llms.txt or the
+  # .llms.md pages run no JavaScript and are not counted.
+  google-analytics:
+    tracking-id: "G-KLLV1GCF4E"
+    storage: none
   chapters:
     - index.qmd
     - chapters/00-setup.qmd
