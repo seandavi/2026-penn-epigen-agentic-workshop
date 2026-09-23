@@ -310,3 +310,49 @@ by grepping minified code.
 not piece by piece. Testing in Node is not testing in a browser. And a reference file
 that is unusually complete, like GENCODE's GFF3, hides the bugs a less complete file
 would expose. Write the fixture to the standard, not to the example.
+
+---
+
+## Entry 10 — A second, smaller stretch exercise: Peek
+
+**Asked** — *SD*: the peak-overlap app is too big for an afternoon, and some attendees
+won't have `git` or GitHub. Write a smaller exercise, a peak-file summariser taking
+uploads or URLs, with the prompt to get the spec, the spec itself, a social-coding
+checklist and the likely problems. Keep development local.
+
+**Agent did** — Wrote `examples/peak-stats/SPEC.md` and `exercises/stretch-peek.md`. The
+design is one folder with `index.html` opened by double-clicking. It uses classic
+scripts, no packages or build step, and a `test.html` page instead of a test runner.
+Issues go in `ISSUES.md`, parallel agents share one folder on disjoint files, and
+history is `git` if available, otherwise folder snapshots. Indexed both from the READMEs,
+and pointed the peak-overlap exercise at Peek and peakwhere.
+
+**Checked how** — *Agent*, all in Chrome 152 driven by `playwright-core`, because `curl`
+answers a different question:
+
+- From a double-clicked page, fetched and gunzipped ENCODE's H3K4me3 file (25,099 lines)
+  and the Vahedi CSV (49,782 lines). Zenodo and `example.com` failed on CORS.
+- A module import from `file://` is blocked; a classic script loads.
+- Two gzip members concatenated, as `bgzip` writes them: Chrome delivers the first
+  member's text, then throws "Junk found after end of compressed data". Through
+  `Response.text()`, the same error surfaces as "Failed to fetch".
+- The reference table in §2 was computed with `awk`, Python and `bedtools merge`. The
+  fixture's answers were recomputed by a separate script from the fixture text in the
+  spec.
+
+*SD*: not yet reviewed.
+
+**Confidently wrong** — *Agent*: the first browser test said ENCODE blocks web pages.
+`curl` showed CORS headers on every hop, and the difference turned out to be the user
+agent. ENCODE returns 403, with no CORS header, to `HeadlessChrome`, and serves a normal
+Chrome user agent fine. The spec would have said "ENCODE URLs don't work; upload
+instead". Before that, a probe bug of the agent's own (reading a response body twice)
+looked like a CORS failure on GitHub, and a local test server lost to Docker, which
+already held the port. The spec's first draft also said multi-member gzip is "quietly"
+truncated. The test showed Chrome throws, but only after handing over the first member,
+so it's truncated only if the error is ignored.
+
+**Keep** — When a browser test fails, find out what the browser was sent before
+concluding anything about the server. The test harness is part of the experiment. And
+this is exactly the trap an attendee's agent will fall into, so the exercise asks them to
+watch for it.
