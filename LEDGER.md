@@ -310,3 +310,146 @@ by grepping minified code.
 not piece by piece. Testing in Node is not testing in a browser. And a reference file
 that is unusually complete, like GENCODE's GFF3, hides the bugs a less complete file
 would expose. Write the fixture to the standard, not to the example.
+
+---
+
+## Entry 10 — A second, smaller stretch exercise: PeakPeek
+
+**Asked** — *SD*: the peak-overlap app is too big for an afternoon, and some attendees
+won't have `git` or GitHub. Write a smaller exercise, a peak-file summariser taking
+uploads or URLs, with the prompt to get the spec, the spec itself, a social-coding
+checklist and the likely problems. Keep development local.
+
+**Agent did** — Wrote `examples/peakpeek/SPEC.md` and `exercises/stretch-peakpeek.md`. The
+design is one folder with `index.html` opened by double-clicking. It uses classic
+scripts, no packages or build step, and a `test.html` page instead of a test runner.
+Issues are checklists in the spec itself (§8): agents tick boxes, and only a person signs
+an issue off. Parallel agents share one folder on disjoint files, and
+history is `git` if available, otherwise folder snapshots. Indexed both from the READMEs,
+and pointed the peak-overlap exercise at PeakPeek and peakwhere. *SD* chose the name
+PeakPeek, and chose checklists in the spec over a separate issues file.
+
+**Checked how** — *Agent*, all in Chrome 152 driven by `playwright-core`, because `curl`
+answers a different question:
+
+- From a double-clicked page, fetched and gunzipped ENCODE's H3K4me3 file (25,099 lines)
+  and the Vahedi CSV (49,782 lines). Zenodo and `example.com` failed on CORS.
+- A module import from `file://` is blocked; a classic script loads.
+- Two gzip members concatenated, as `bgzip` writes them: Chrome delivers the first
+  member's text, then throws "Junk found after end of compressed data". Through
+  `Response.text()`, the same error surfaces as "Failed to fetch".
+- The reference table in §2 was computed with `awk`, Python and `bedtools merge`. The
+  fixture's answers were recomputed by a separate script from the fixture text in the
+  spec.
+
+*SD*: not yet reviewed.
+
+**Confidently wrong** — *Agent*: the first browser test said ENCODE blocks web pages.
+`curl` showed CORS headers on every hop, and the difference turned out to be the user
+agent. ENCODE returns 403, with no CORS header, to `HeadlessChrome`, and serves a normal
+Chrome user agent fine. The spec would have said "ENCODE URLs don't work; upload
+instead". Before that, a probe bug of the agent's own (reading a response body twice)
+looked like a CORS failure on GitHub, and a local test server lost to Docker, which
+already held the port. The spec's first draft also said multi-member gzip is "quietly"
+truncated. The test showed Chrome throws, but only after handing over the first member,
+so it's truncated only if the error is ignored.
+
+**Keep** — When a browser test fails, find out what the browser was sent before
+concluding anything about the server. The test harness is part of the experiment. And
+this is exactly the trap an attendee's agent will fall into, so the exercise asks them to
+watch for it.
+
+---
+
+## Entry 11 — PeakPeek built twice: the long way, then in one prompt
+
+**Asked** — *SD*: build PeakPeek locally as an attendee would. Then, when the long way
+felt too slow: make the exercise basically a one-shot build, leaving the afternoon for
+iterating on ideas.
+
+**Agent did** — Built it the long way in `~/Documents/git/peakpeek`: decisions in `adr/`,
+five workers in parallel on issues 1–5 in one folder, then issue 6, reviewing and
+committing each. Then gave one fresh agent only the workshop's SPEC.md and the prompt
+now in step 3. Rewrote the exercise around that: set up, read the decisions, build in
+one prompt, check, then make it yours. The long way became "Going further".
+
+**Checked how** — *Agent*, in Chrome 152 via `file://`:
+- Long way: 77 tests pass; all five §2 ENCODE files and the Vahedi CSV at both
+  settings match §2 through the page; `bedtools merge` agrees on CTCF and DNase.
+- One-shot: 14.5 minutes from an empty folder. 62 tests pass. The fixture and CTCF
+  through its page match §2; the other files are its own claim, not re-checked.
+
+**Confidently wrong** — *Agent*, in SPEC.md, all found by building it:
+- `test.html` could never read `expected.json` from `file://`; the fixture and its
+  answers moved into a script.
+- "CTCF has an exact duplicate line." It doesn't: two lines share chromosome, start and
+  end, with different scores. The answer of 1 was right; the definition was wrong.
+  The one-shot agent found it.
+- "Overlapping peaks" and the side-by-side y-axis were never defined; the two builds
+  chose differently (1,763 vs 3,457 CTCF overlaps; counts vs share of each file).
+- *Agent*, while building: committed with `git commit -a` as workers were writing, sweeping
+  up their half-written code. A worker noticed; the commit was redone.
+
+**Keep** — With a spec this complete, a single agent built the page in a quarter of an
+hour. The building was never the slow part; writing the spec and checking the result
+were. So the exercise hands over the spec, and gives attendees the checking and the
+changing.
+
+---
+
+## Entry 12 — PeakPeek: one prompt only; the finished one published
+
+**Asked** — *SD*: simplify to the one-shot build; push PeakPeek to GitHub; leave social
+coding as an issue there. Step 3 is just "what worked, what didn't", with no prediction:
+part of the goal is confidence to try things. Look at the new review file.
+
+**Agent did**
+- Published `~/Documents/git/peakpeek` as
+  [seandavi/peakpeek](https://github.com/seandavi/peakpeek), MIT, on GitHub Pages. Filed
+  issue #1 (social coding: issues, PRs, worktrees, CI, branch protection), and #2–#5 for
+  follow-ups found while building.
+- Cut the exercise to four steps: make a folder with the agent (no terminal), build in
+  one prompt, try it, make it yours. Parallel building, ADR-writing and the GitHub prompt
+  are gone from it; the finished repo shows them.
+- From the persona review (`REVIEW-stretch-peakpeek.md`, not committed): the no-terminal
+  setup, a "what folder are you in?" check, "take the defaults first time", measured
+  timing, an "if it goes wrong / done when" box, "Open With → Chrome", a real Zenodo URL,
+  the privacy caveat for your own files, an R cross-check for RStudio users, and permission
+  to stop. In SPEC.md: the dead relative link, the "no code until" status line, the
+  `window.PeakPeek ||` rule, the placeholder box, the mean's tolerance; Test 7
+  (predict) and §9's social-coding checklist removed.
+
+**Checked how** — *Agent*: the live page, in Chrome 152, loads CTCF by URL (20,220 peaks)
+and its `test.html` shows 77 passed, with no console errors after adding an empty favicon.
+The Zenodo URL fails on CORS in Chrome (checked earlier). **Not checked:** a fresh
+one-shot build from the edited SPEC.md; the edits are small, but the 15-minute figure is
+from the previous version.
+
+**Confidently wrong** — Nothing new caught this round.
+
+**Keep** — The review's practitioner items mostly became unnecessary once the exercise
+stopped teaching process. Cutting was the fix.
+
+---
+
+## Entry 13 — Dry run of the one-prompt exercise
+
+**Asked** — *Agent*: check the simplified exercise end to end before calling it done.
+
+**Agent did** — Gave a fresh agent, in an empty folder, exactly step 1's and step 2's
+prompts (downloading from this branch). Fixed the seven spec gaps it reported: §4's
+`summarise` and `parsePeaks` now list the fields §2 and §3 need; "main chromosomes"
+covers human as well as mouse; format names agree across §3.2 and §4; scientific
+notation accepts any whole number (`1.5e+07`, as R writes it); the CORS message names
+wrong addresses too; test 5 gives a Zenodo URL; `test.html`'s load order points to §4.
+
+**Checked how** — *Agent*: the build took 13.1 minutes. Its `test.html` shows 56 passed,
+0 failed in Chrome 152 (re-run by me). Its own report says every §2 number matches through
+the page, with Python and `bedtools` agreeing; that part is its claim.
+
+**Confidently wrong** — *Agent*: "accept `1e+03`, reject `1.5e2`" was self-contradictory
+(1.5e2 is 150, a whole number) and would have rejected real R output. Also, applying these
+fixes, one replacement swallowed the sentence after it; caught on re-reading the diff.
+
+**Keep** — Every fresh build finds something. Two builds from the same spec is cheap
+insurance before a room full of people tries it.
