@@ -27,8 +27,8 @@ Discussion drives the activity, as in RBiocBook
    checked, what we found (including what went wrong). Real, not invented: if you
    show an output, you produced it, or you say it's illustrative.
 5. `## Your turn`: the activity. **Your own material first, a fallback second**
-   (ADR-0002). Prompts to paste go in fenced blocks (```` ```text ````) so they get a
-   copy button.
+   (ADR-0002). Prompts to paste go in fenced blocks (```` ```default ````; ```` ```text ```` renders without a
+   copy button).
 6. `## What to notice`, and `## Check yourself`: how you know it worked.
 7. `## Going further`: optional, short, links.
 
@@ -69,7 +69,7 @@ words. Prose paragraphs, not walls of bullets.
 
   | File | ID |
   |---|---|
-  | `chapters/00-setup.qmd` | `sec-setup` |
+  | `chapters/00-setup.qmd` | unnumbered: link it as `[Setup](…/00-setup.qmd)` |
   | `chapters/01-website.qmd` | `sec-website` |
   | `chapters/02-ledger.qmd` | `sec-ledger` |
   | `chapters/03-teach-your-agent.qmd` | `sec-teach` |

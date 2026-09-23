@@ -1,0 +1,420 @@
+# Connect to a database (MCP) {#sec-mcp}
+
+Ask an agent for "recent papers on TCF-1 and chromatin in T cells" and it will answer
+from memory. That memory is large, and it is often right, but it is frozen at the date
+the model was trained, and it has no way to tell a paper it read from a paper that merely
+sounds plausible. Language models are known to invent references: in one study, 18% of
+the citations GPT-4 produced for short literature reviews did not exist, and a quarter
+of the real ones had substantive errors [@doi:10.1038/s41598-023-41032-5]. Newer models
+are better at saying "I don't know", but "better" is not a standard you can cite.
+
+The fix is not a cleverer prompt. It is to let the agent **ask the system of record**:
+search PubMed itself, get back real PMIDs, and show you where each fact came from. The
+**Model Context Protocol (MCP)** is how that connection is made
+[@url:https://modelcontextprotocol.io/]. An MCP server sits in front of a database or
+service and offers the agent a handful of tools, such as "search articles" or "get
+article metadata". The agent decides when to call them and what to ask. You add the
+server once, and from then on it is part of what the agent can do.
+
+In @sec-skills you gave the agent *instructions*: how your lab triages a results table.
+A skill tells the agent **how**. An MCP server tells it **what is there now**. This
+chapter connects one server, PubMed, which needs no account, and then does the thing
+that matters most: checks what came back.
+
+## What you'll learn
+
+- What an MCP server is, and how it differs from a skill.
+- How to connect the PubMed server, three ways: by asking the agent, from the command
+  line, or as a plugin from Anthropic's life-sciences marketplace.
+- How to compare an answer from memory with an answer from a live database.
+- How to check retrieved results by hand, and why retrieval is not the same as truth.
+- What an MCP server can see, and which servers to trust.
+
+## How an MCP connection works
+
+An MCP server is a small program, usually run by whoever owns the data, that speaks one
+agreed protocol. When your agent starts, it asks each configured server "what tools do
+you have?" and gets back a list with names, descriptions and inputs. From then on,
+whenever a question needs one of those tools, the agent calls it, reads the result and
+carries on (@fig-mcp-flow).
+
+```{mermaid}
+%%| label: fig-mcp-flow
+%%| fig-cap: "One question, answered through the PubMed MCP server. The agent chooses
+%%|   the tools and the search terms; the server turns each call into a query against
+%%|   PubMed and returns the records."
+sequenceDiagram
+    participant You
+    participant Agent
+    participant Server as PubMed MCP server
+    participant PubMed
+    You->>Agent: Find papers on TCF-1 and 3D genome
+    Agent->>Server: search_articles("TCF-1 AND chromatin …")
+    Server->>PubMed: search
+    PubMed-->>Server: matching PMIDs
+    Server-->>Agent: PMIDs
+    Agent->>Server: get_article_metadata([PMIDs])
+    Server-->>Agent: titles, authors, journals
+    Agent-->>You: three papers, with PMIDs and sources
+```
+
+::: {.column-margin}
+**Protocol**: an agreed way for two programs to talk. Because MCP is shared, the same
+PubMed server works with Claude Code, Claude's desktop app, Gemini CLI, Codex and
+Copilot. Only the place you configure it differs.
+:::
+
+Two things follow from this picture. First, **the agent writes the query**. You asked
+in plain English; the agent turned that into search terms, and a search can match the
+wrong organism, the wrong assay or the wrong TCF (there are several). Second, **the
+server sees your question**, or at least the parts of it the agent sends. Both come
+back later in this chapter.
+
+@tbl-mcp-vs-skill sets MCP beside the skill you wrote in @sec-skills.
+
+| | Skill (@sec-skills) | MCP server (this chapter) |
+|---|---|---|
+| What it is | A folder of instructions, perhaps with scripts | A live connection to another system |
+| What it adds | *How* to do a task your way | *What is there*, now: records, data |
+| Where it runs | On your machine, inside the agent's session | On someone's server, usually |
+| What leaves your machine | Nothing beyond the usual | Whatever the agent sends in its tool calls |
+| Example | `deseq2-triage` | PubMed, Open Targets |
+
+: A skill and an MCP server do different jobs, and they combine: a skill can tell the
+agent which server to use and how to check its results. {#tbl-mcp-vs-skill}
+
+### Anthropic's life-sciences servers
+
+Anthropic keeps a list of MCP servers and skills for life sciences in a public GitHub
+repository, packaged as Claude Code **plugins** in a **marketplace**
+[@url:https://github.com/anthropics/life-sciences]. A plugin is a bundle; a marketplace
+is a list of plugins you can install by name. The servers themselves are run by the
+data providers, not by Anthropic. @tbl-mcp-servers lists the ones most useful to this
+room, and only claims what we checked on 23 September 2026.
+
+| Plugin | Reaches | Account | What we checked |
+|---|---|---|---|
+| `pubmed` | PubMed and PubMed Central (NLM) | None | Connected, listed 7 tools, answered real queries |
+| `open-targets` | Open Targets Platform: target–disease evidence | None found | Connected, answered a real query that matched the website's API |
+| `biorxiv` | bioRxiv and medRxiv preprints | Not stated | Not checked: refused our test request (403), which may be bot-blocking |
+| `chembl` | ChEMBL bioactive compounds | Not stated | Not checked, as above |
+| `clinical-trials` | ClinicalTrials.gov | Not stated | Not checked, as above |
+| `biorender`, `synapse`, `wiley-scholar-gateway`, `consensus` | Figures; Sage data; Wiley papers; paper search | Free account | Not checked; account needs from the repository's README |
+| `10x-genomics`, `cortellis`, `adisinsight` | 10x Cloud; drug regulation; drug pipelines | Paid or institutional | Not checked; from the README |
+
+: Some of the MCP servers in `anthropics/life-sciences`. The repository also carries
+skills (single-cell QC, nf-core pipelines, scvi-tools), which are the kind of thing you
+met in @sec-skills. {#tbl-mcp-servers}
+
+**PubMed is not in the official Anthropic marketplace** that Claude Code sets up for
+you. To install it as a plugin you add the life-sciences marketplace first. The simpler
+route, which works in every tool, is to give the agent the server's address directly.
+
+## Worked example
+
+We asked the same question twice, in two empty folders, with web search and the shell
+turned off so the only route to PubMed was MCP. First, with no server connected:
+
+```default
+Find three papers on how TCF-1 (Tcf7) shapes 3D genome organisation or chromatin in
+T cells. For each give the first author, year, journal, title and PMID. Say where each
+fact came from.
+```
+
+The bare agent was careful. It said it had no way to look anything up, gave three
+papers from memory, and **left the PMIDs blank**, "because I don't remember them
+reliably, and a made-up PMID is worse than a blank". All three papers turned out to be
+real. But you could not have known that from the answer, and without PMIDs you had to do
+the searching yourself.
+
+Then we connected PubMed in the second folder, using the `.mcp.json` file you'll write
+in a moment, and asked again. This time the agent searched PubMed twice
+(`search_articles`) and fetched the records it found (`get_article_metadata`), and came
+back in about 30 seconds with @tbl-mcp-worked.
+
+| First author, year | Journal | Title (shortened) | PMID |
+|---|---|---|---|
+| Wang, 2022 | *Nat Immunol* | TCF-1 promotes chromatin interactions across TADs in T cell progenitors | 35726060 |
+| Shan, 2022 | *Nat Immunol* | Tcf1–CTCF cooperativity shapes genomic architecture … | 35882936 |
+| Johnson, 2018 | *Immunity* | Lineage-determining TF TCF-1 initiates the epigenetic identity of T cells | 29466756 |
+
+: What the agent returned with PubMed connected [@pmid:35726060; @pmid:35882936;
+@pmid:29466756]. {#tbl-mcp-worked}
+
+Just as useful was what it said about its own work:
+
+- It picked papers 1 and 3 **from their titles alone**, and said so: "I didn't read its
+  abstract."
+- Paper 2 did not come up in its broad search. It **remembered** the paper, searched
+  for it by name, and took every detail from the PubMed record. It said that too.
+- Paper 3 is about chromatin accessibility, not 3D structure, which it flagged as a
+  partial fit.
+
+Then we checked. We looked up all three PMIDs directly in PubMed, independently of the
+agent: every title, first author, journal and year matched. We also checked the paper
+the bare agent had remembered but the connected one did not use (Shan 2021, *Nat
+Commun*); it is real too [@pmid:34615872].
+
+So memory did not fail here, and that is the honest result. **What changed is that the
+answer became checkable**: every claim came with an identifier and a stated source, and
+the agent separated what it had read from what it had inferred from a title.
+
+::: {.callout-note}
+## Is the second paper really about 3D genome structure?
+
+The agent read that abstract and quoted it: Tcf1 and CTCF together "promote chromatin
+interactions and form highly connected, dynamic interaction hubs". That is a claim about
+the paper, not a PMID, and checking it means reading the abstract yourself. That is the
+part of the check that no tool does for you.
+:::
+
+## Your turn
+
+You'll need about 20 minutes. Use your workshop folder from [Setup](00-setup.qmd), or make a new
+folder for this chapter.
+
+::: {.callout-warning}
+## What leaves your machine
+
+Every tool call sends the agent's query to the server's operator. For PubMed that means
+your search terms: a topic, gene names, a disease. That is usually fine. Don't put
+anything in a query you wouldn't type into the PubMed website: no patient details, and
+nothing about unpublished work you've been asked to keep quiet.
+:::
+
+### 1. Ask first, without a connection
+
+Pick a topic you know well enough to judge an answer: your own field, a method you use,
+a gene you study. Start a new session and ask:
+
+```default
+Find three recent papers on <your topic>. For each give the first author, year,
+journal, title and PMID. Say where each fact came from. Don't search the web.
+```
+
+"Don't search the web" matters: Claude Code can search the web, and today you want
+to see what it knows **without** a database. Copy the answer into your ledger
+(@sec-ledger) under *Asked*.
+
+No topic in mind? Use ours: the question in the worked example. Or use genes from the
+Vahedi lab's RNA-seq data: the top hits in `differential_genes.tsv`, from their
+repository's `track-a/data/README.md`, are Jun, Myc, Irf4 and Ccr7, in B cells lacking a
+CTCF binding site ([Vahedi lab repository](https://github.com/golnazvahedi/epigenetics-agentic-workshop)).
+
+### 2. Connect PubMed
+
+Choose **one** route (@tbl-mcp-routes). If you're not sure, use route A: the agent does
+the work, and it works in the desktop app and the command line alike.
+
+| Route | Best if you use | You type | Where it's saved |
+|---|---|---|---|
+| A. Ask the agent | Anything | A prompt | `.mcp.json` in this folder |
+| B. Command line | `claude` in a terminal | One command | `.mcp.json` in this folder |
+| C. Plugin | Claude Code | Two commands, or the plugin browser | Your user settings: every folder |
+
+: Three ways to connect the same server. A and B only affect this folder, which is
+what you want for a first try. {#tbl-mcp-routes}
+
+**Route A: ask the agent.** In a session in your workshop folder, paste:
+
+```default
+Create a file called .mcp.json in this folder, containing exactly:
+
+{
+  "mcpServers": {
+    "pubmed": {
+      "type": "http",
+      "url": "https://pubmed.mcp.claude.com/mcp"
+    }
+  }
+}
+
+Then tell me the full path of the file.
+```
+
+This is the project-level MCP file Claude Code reads, in the documented format
+[@url:https://code.claude.com/docs/en/mcp]. The desktop app's Code tab reads the same
+file. Then **start a new session in the same folder**: servers are loaded when a session
+starts. Claude Code asks you to approve a server from `.mcp.json` the first time it
+sees it. Approve it; you've read what's in it. (In the desktop app, check on the day
+exactly how that approval appears.)
+
+**Route B: the command line.** In a terminal, in your workshop folder:
+
+```bash
+claude mcp add --transport http pubmed --scope project https://pubmed.mcp.claude.com/mcp
+```
+
+It writes the same `.mcp.json` as route A. Leave out `--scope project` and it's saved in
+your personal settings instead, for this folder only. Then run `claude` and approve the
+server when asked.
+
+**Route C: a plugin from the life-sciences marketplace.** In Claude Code, type:
+
+```default
+/plugin marketplace add anthropics/life-sciences
+/plugin install pubmed@life-sciences
+```
+
+The first command adds the marketplace, the second installs PubMed from it. By default
+this installs it for **you**, in every folder, not just this one. We tested the same two
+steps from the shell (`claude plugin marketplace add …`, then `claude plugin install …`)
+and the server connected. In the desktop app, plugins live under the **+** button, then
+**Plugins**, then **Add plugin**, which browses the marketplaces you've already added.
+Whether you can add a *new* marketplace from there, check on the day. If not, use
+route A.
+
+::: {.callout-tip}
+## Using Gemini CLI, Codex or Copilot?
+
+The server is the same; only the configuration file differs. Ask your agent: "Add a
+remote HTTP MCP server called pubmed, at https://pubmed.mcp.claude.com/mcp, to your own
+MCP configuration for this folder, and tell me which file you changed." Then check the
+file it names.
+:::
+
+::: {.callout-note collapse="true"}
+## On Windows
+
+- **Let the agent create `.mcp.json` (route A).** The name starts with a dot and File
+  Explorer hides extensions by default, so a file made in Notepad can end up called
+  `.mcp.json.txt` and be silently ignored.
+- Route B works in PowerShell or CMD once `claude` is installed.
+- Plugins aren't available in WSL sessions. See @sec-windows.
+:::
+
+::: {.callout-important}
+## If the connection is blocked
+
+Organisations can restrict which marketplaces and servers their members may add. If a
+route fails with a message about policy or permissions, that isn't you doing something
+wrong. Try route A, and if that's blocked too, ask whoever runs your Claude account.
+:::
+
+### 3. Check what the agent can now do
+
+In the new session, ask:
+
+```default
+Which MCP servers are connected, and what tools does each one give you?
+```
+
+You should see a PubMed server with seven tools: `search_articles`,
+`get_article_metadata`, `find_related_articles`, `lookup_article_by_citation`,
+`convert_article_ids`, `get_full_text_article` and `get_copyright_status`. In the
+command line, `/mcp` lists each server with its status and number of tools. If PubMed isn't
+listed, see "If it goes wrong" below.
+
+::: {.callout-note}
+## Two PubMed servers?
+
+Servers added to your claude.ai account as **connectors** also appear in Claude Code
+when you're signed in with that account. On Team and Enterprise plans only admins can
+add them. So you may see a "claude.ai PubMed" as well as the one you just added. They
+reach the same database; either will do.
+:::
+
+### 4. Ask again, with the database
+
+Ask exactly the question from step 1, but take out "Don't search the web" and add:
+
+```default
+Use PubMed. For each paper, say whether you read the abstract or chose it from the
+title alone.
+```
+
+Put the two answers side by side. What's different: the papers, the PMIDs, how sure
+the agent sounds, what it says about where each fact came from?
+
+### 5. Check three PMIDs by hand
+
+This is the step that counts. For three of the papers, open
+`https://pubmed.ncbi.nlm.nih.gov/<PMID>/` in your browser, putting the PMID in place of
+`<PMID>`, and check:
+
+1. **Does the PMID exist**, and is it the paper the agent named: title, first author,
+   year?
+2. **Is it about what you asked?** Right organism, right assay, right gene? A search for
+   "TCF" can find the wrong TCF.
+3. **Does the abstract support what the agent said about it?** Read it. This is the
+   check no tool can do for you.
+
+Then write a ledger entry. *Checked how* is the three PMIDs and what you found, and
+*Confidently wrong* is anything that didn't hold up.
+
+### If it goes wrong
+
+| What you see | What to try |
+|---|---|
+| PubMed isn't in the tool list | Start a **new** session in the same folder; servers load at start. |
+| "Pending approval" | Run `claude` in the folder and approve the server, or start a new desktop session there. |
+| The agent searches the web instead | Say "Use the PubMed tools, not web search." |
+| `.mcp.json` is somewhere else | Ask "What folder are you in?" The file must sit in the folder the session was started in. |
+| A plugin command is "unknown" | Update Claude Code, or use route A. |
+
+: Common problems when connecting a server. {#tbl-mcp-troubleshoot}
+
+## What to notice
+
+- **The agent chose the tools and wrote the queries.** You never saw PubMed's search
+  syntax. That's convenient, and it's also where silent errors come from: look at the
+  search terms it used (ask it) before trusting that "no papers found" means none
+  exist.
+- **Retrieval is not truth.** A real PMID proves the paper exists. It doesn't prove the
+  paper says what the agent claims, or that it's the best paper on the topic. The agent
+  in our worked example chose two papers from their titles and said so. Ask yours to do
+  the same.
+- **The good answer showed its sources.** Compare how each answer said where its facts
+  came from. That, more than the facts, is what the connection bought.
+- **You added a capability without writing code.** Four lines of JSON, and the agent
+  can now search a database it couldn't reach before.
+
+## Check yourself
+
+You're done when:
+
+- [ ] the agent lists the PubMed server and its tools;
+- [ ] you have two answers to the same question, one from memory and one from PubMed;
+- [ ] you have opened three PMIDs on the PubMed website and checked them against what
+  the agent said;
+- [ ] your ledger has an entry saying what you checked and what you found.
+
+::: {.callout-warning}
+## Which servers to trust
+
+A server you connect can see every query the agent sends it, and its answers go straight
+into the agent's work. Content a server returns can even contain instructions aimed at
+the agent (a *prompt injection*), which is why Claude Code's documentation says to
+verify you trust each server before connecting it
+[@url:https://code.claude.com/docs/en/mcp]. Plugins are trusted more still: they can run
+code on your machine.
+
+- Install servers from the data's owner or from a source you trust, such as the NLM, the
+  Open Targets consortium or Anthropic's own list, not from a random repository.
+- For servers that need an account, **treat the token like a password**. Don't paste it
+  into the chat, and don't put it in a `.mcp.json` you'll share or commit.
+- Your institution's rules on data still apply. A connection doesn't change what you're
+  allowed to send.
+:::
+
+## Going further
+
+- **A second database.** Add Open Targets to the same `.mcp.json`, as a second entry
+  under `"mcpServers"` with `"url": "https://mcp.platform.opentargets.org/mcp"`, and ask:
+  "Using Open Targets, what are the top five diseases associated with the human gene
+  IRF4, with their overall association scores?" When we tried it, the answer matched
+  Open Targets' own API exactly. Then check one of the diseases on
+  [platform.opentargets.org](https://platform.opentargets.org): which kinds of evidence
+  hold its score up?
+- **Two databases, one question.** With both connected, ask a question that needs both:
+  "For the top five IRF4-associated diseases in Open Targets, find one recent review
+  for each in PubMed."
+- **A skill that uses a server.** Combine this chapter with @sec-skills: a skill that
+  says "when asked for literature, use PubMed, give PMIDs, and say which abstracts you
+  read".
+- **Build your own server.** The Vahedi lab's afternoon has a pod on exactly this:
+  wiring up a server, or having the agent write a small one around a public API such as
+  Ensembl or GEO:
+  [Pod 2, Connect to the outside world](https://github.com/golnazvahedi/epigenetics-agentic-workshop/blob/main/track-b/pod-2-mcp-connections.md).
+- **Undo it.** Delete `.mcp.json`, or run `claude mcp remove pubmed -s project`. A plugin
+  can be uninstalled from `/plugin`, or from **Manage plugins** in the desktop app.

@@ -1,0 +1,360 @@
+# The ledger {#sec-ledger}
+
+In @sec-website you asked an agent for a web page, and a few minutes later you had one.
+Look at what you have now. There's a file on disk, and a chat that scrolls back a long
+way. The file tells you what the agent produced. It doesn't tell you what you asked for,
+what the agent actually did to get there, or which parts of it anyone has looked at
+closely. The chat has some of that, mixed in with everything else, and it disappears
+when you close the session.
+
+That matters because of what you saw this morning: an agent's mistakes read exactly like
+its correct work. It says "done" in the same confident voice whether it checked
+something or not, and it often reports checks it didn't run. Nothing in the output tells
+the two apart. The only thing that separates work you can trust from work you can't is
+**what someone actually checked**, and unless that is written down, it's gone by
+tomorrow.
+
+The **ledger** is where it gets written down. It's a plain text file, `LEDGER.md`, that
+sits next to your work, with one short entry per task: what you asked, what the agent
+did, how you checked, what it got confidently wrong, and what's worth keeping. It is the
+agent-era version of the lab notebook you already keep at the bench, and it answers the
+questions your PI, a reviewer, a collaborator or you in six months will ask about
+anything an agent helped make: **which parts of this can I trust, and why?**
+
+::: {.column-margin}
+**Markdown** is plain text with a few conventions: `#` starts a heading, `**bold**` is
+bold, `>` starts a quotation. Any text editor can open a `.md` file, and GitHub shows it
+formatted.
+:::
+
+## What you'll learn
+
+- Why an agent's work needs a written record, and who reads it.
+- The five fields of a ledger entry, and why **Checked how** is the one that must never
+  be blank.
+- How to tell a useful entry from a useless one.
+- How to keep a ledger as you work, not reconstruct it afterwards.
+- Why an agent's own account of its work claims more checking than happened, and how to
+  ask for an honest one.
+
+## Five fields
+
+A ledger entry has five fields. The template is in this workshop's repository as
+[`LEDGER-template.md`](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/exercises/LEDGER-template.md).
+
+| Field | What goes in it | A useful entry | A useless entry |
+|---|---|---|---|
+| **Asked** | The prompt you actually typed, pasted, not tidied | "Make me a one-page website about my 2024 paper, using the abstract below …" | "Asked for a website." |
+| **Agent did** | What happened: files read and written, commands run | "Wrote `index.html` (one file). Read nothing else. Ran no commands." | "Built the site." |
+| **Checked how** | What *you* did to confirm it. Never blank; "Not checked" is allowed | "Opened it in Chrome. Read every sentence against the abstract. Clicked the DOI link. Not checked: on a phone." | "Looks good." or "The agent verified it." |
+| **Confidently wrong** | Anything it stated that wasn't true, or "Nothing caught" | "Gave the year as 2023; it was 2024. Said it had checked the page on mobile; nothing in the session shows it opened the page at all." | *(left blank)*, or an invented failure to fill the box |
+| **Keep** | The prompt, file or lesson worth taking away. Often nothing | "Pasting the abstract, not the DOI, stopped it making things up about the paper." | "Agents are great!" |
+
+: The five fields of a ledger entry, each with a useful and a useless example. The
+examples are illustrative. {#tbl-ledger-fields}
+
+Most of the fields are easy. Two need more thought.
+
+**Checked how** is the field that matters. It records the verification *you* did, not
+the verification the agent says it did. "The agent said the tests pass" is not a check;
+"I opened `test.html` and it shows 56 passed" is. And **"Not checked" is an honest,
+acceptable answer.** You won't check everything, and you shouldn't try. What you must not
+do is leave the field blank, because a blank reads as "fine" to whoever comes after you.
+An empty box is uncomfortable in a way that "I meant to check that" never is, and that
+discomfort is the whole mechanism.
+
+**Confidently wrong** is the one people skip, because it feels like admitting a mistake.
+It isn't yours; it's the agent's, and collecting them is how you learn where *this*
+agent, on *your* kind of work, goes wrong. Over a week the pattern shows up: dates,
+units, fold-change directions, claims to have run things. "Nothing caught" is a
+legitimate entry. Don't invent failures to fill the box.
+
+::: {.column-margin}
+"Before doing that, it is important to document how you know the experiment failed,
+since the interpretation of your results may not be obvious to someone else reading
+your lab notebook." Noble's advice on computational lab notebooks
+[@doi:10.1371/journal.pcbi.1000424] applies unchanged to agents.
+:::
+
+@fig-ledger-loop shows where the ledger sits in a session. The dashed line is the
+shortcut to avoid: copying the agent's summary of its own work straight into the record.
+
+```{mermaid}
+%%| label: fig-ledger-loop
+%%| fig-cap: "The ledger in a session. Each task ends with an entry written from what you
+%%|   checked, not from what the agent reported."
+%%| fig-alt: "A loop: you ask, the agent acts, the agent says it is done and checked, you
+%%|   check, you write a ledger entry, then the next task. A dashed shortcut goes from the
+%%|   agent's report straight to the ledger entry, labelled as the step to avoid."
+flowchart LR
+  ask["You ask"] --> act["Agent acts"]
+  act --> says["Agent says:<br/>done, all checked"]
+  says --> check["You check"]
+  check --> write["Ledger entry"]
+  write -- "next task" --> ask
+  says -. "copying its summary:<br/>avoid" .-> write
+```
+
+## What real ledgers look like
+
+A ledger doesn't have to use these exact five headings. What matters is that it says
+what was done and what a person actually checked. Three real ones, all public:
+
+**This workshop's own.** The material you're reading was written with agents, and the
+repository keeps a
+[`LEDGER.md`](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/LEDGER.md)
+in the five-field format, with each entry saying whether a field was written by Sean or
+by the agent. The worked example below is taken from it.
+
+**PeakPeek.** The app in @sec-app was built by several agents at once, and its
+[`LEDGER.md`](https://github.com/seandavi/peakpeek/blob/main/LEDGER.md) records which
+agent did what, and which of their claims were re-run by another agent and which were
+taken on trust. Its first entry's **Confidently wrong** field is about the specification
+itself, which had been reviewed and was still wrong: it planned a test file that a
+double-clicked page can never read.
+
+**_AI in Medicine_.** Sean's course book for medical students has two pages worth reading
+side by side.
+[How this book was made](https://ai-in-medicine.seandavi.workers.dev/appendix/about)
+is the narrative: the
+design constraints came first, one chapter was written by hand as the model, ten agents
+then drafted ten chapters in parallel, and every agent recorded what it had and had not
+been able to verify. The
+[AI ledger](https://ai-in-medicine.seandavi.workers.dev/appendix/ai-ledger) is the
+record, one row per change (@fig-ledger-aim)
+[@url:https://ai-in-medicine.seandavi.workers.dev/appendix/about;
+@url:https://ai-in-medicine.seandavi.workers.dev/appendix/ai-ledger].
+
+![The top of *AI in Medicine*'s AI ledger. Its rule: "'Human review' says what a person
+actually did, not that review happened." Screenshot taken 23 September
+2026.](../images/ledger-ai-in-medicine.png){#fig-ledger-aim
+fig-alt="A web page headed Appendix C, AI ledger. A paragraph states the rule that any commit where an AI tool drafted or
+verified content adds a row, and that Human review says what a person actually did. A
+table of standing uses has columns What, Tool and Human review. Below it, a per-commit
+log table has columns Date, Artifact, What AI did and Human review."}
+
+Two things in that ledger are worth copying. First, the **Human review** column is held
+to the same standard as *Checked how*: it says what a person did ("Author to read the
+corrected sentences"), not that review happened. Second, some rows say the author *had
+not yet* read the chapters an agent drafted, and a note explains that those rows were
+left as written, "because they record what was true at that commit". **A ledger entry is
+never edited later to look better.** If something changes, add a new entry.
+
+## Worked example
+
+Here is a real entry from this workshop's ledger, written the day before the workshop.
+Sean had asked for the app-building exercise to be simplified, and the agent doing the
+work decided to test the simplified version before calling it done: it gave a fresh
+agent, in an empty folder, exactly the prompts you'll use in @sec-app.
+
+```markdown
+## Entry 13 — Dry run of the one-prompt exercise
+
+**Asked** — *Agent*: check the simplified exercise end to end before calling it done.
+
+**Agent did** — Gave a fresh agent, in an empty folder, exactly step 1's and step 2's prompts. Fixed the seven spec gaps it reported: […]
+
+**Checked how** — *Agent*: the build took 13.1 minutes. Its `test.html` shows 56 passed, 0 failed in Chrome 152 (re-run by me). Its own report says every §2 number matches through the page, with Python and `bedtools` agreeing; that part is its claim.
+
+**Confidently wrong** — *Agent*: "accept `1e+03`, reject `1.5e2`" was self-contradictory (1.5e2 is 150, a whole number) and would have rejected real R output. Also, applying these fixes, one replacement swallowed the sentence after it; caught on re-reading the diff.
+
+**Keep** — Every fresh build finds something. Two builds from the same spec is cheap insurance before a room full of people tries it.
+```
+
+What makes this entry useful:
+
+- **Checked how splits what was re-run from what was taken on trust.** The test count
+  was re-run; the claim that every reference number matched was the second agent's, and
+  the entry says so: "that part is its claim". A reader knows exactly which sentence to
+  check if it matters.
+- **Confidently wrong includes the recorder's own mistake.** A search-and-replace had
+  deleted the sentence after the one it was fixing. It was caught by re-reading the
+  change, and recorded, because the next person doing the same kind of edit should know
+  it happens.
+- **It names numbers.** "13.1 minutes", "56 passed, 0 failed", "Chrome 152". Vague
+  entries ("tests pass") can't be checked later; specific ones can.
+- **Keep is one sentence**, and it's a practice, not a compliment.
+
+::: {.callout-tip}
+## "Nothing caught" is a real answer
+
+Plenty of entries will say *Confidently wrong: nothing caught*. That's fine, and it's
+information: it tells a reader you looked. What isn't fine is making something up to
+fill the box, or leaving it blank.
+:::
+
+## Your turn
+
+You'll use the website folder from @sec-website. If you didn't do that chapter, do its
+activity first. It takes about fifteen minutes and this chapter builds on it.
+
+Allow about 30 minutes.
+
+### Step 1: put the template in your folder
+
+Open your agent in the website folder, as a new session or the one you were using, and
+paste:
+
+```default
+Download https://raw.githubusercontent.com/seandavi/2026-penn-epigen-agentic-workshop/main/exercises/LEDGER-template.md and save it in this folder as LEDGER.md, unchanged. Then tell me the full path of the file you saved.
+```
+
+Check it's there: open the folder in Finder or File Explorer and look for `LEDGER.md`,
+then open it. On a Mac, right-click it and choose **Open With → TextEdit**; on Windows,
+Notepad will do. In the Claude desktop app
+you can also click a file path in the chat to open it in the file pane, edit it and click
+**Save**
+[@url:https://code.claude.com/docs/en/desktop].
+
+::: {.callout-note collapse="true"}
+## On Windows
+
+File Explorer hides file extensions by default, so `LEDGER.md` may show as just
+`LEDGER`. If Windows asks which app to open it with, choose Notepad. After saving, check
+the file is still called `LEDGER.md` and hasn't become `LEDGER.md.txt`; with extensions
+hidden you can't tell. See @sec-windows for turning extensions on.
+:::
+
+### Step 2: write entry 1 yourself, for what you've already done
+
+Write an honest entry for the website you built in @sec-website. Write it yourself,
+not the agent: the point is to notice what you do and don't know.
+
+- **Asked:** scroll back through the chat and paste the prompt you actually typed,
+  typos and all. If you asked for changes, paste those too.
+- **Agent did:** what files are in the folder now that weren't before? Did it run
+  anything? If you don't know, say so.
+- **Checked how:** what did you do yourself? Opened the page? Read it against your CV,
+  paper or ORCID record? Clicked the links? Anything you didn't check goes here as
+  "Not checked: …".
+- **Confidently wrong:** did the page state anything that wasn't true: a date, a title,
+  a co-author, a claim about your work? Did the agent say it had checked something it
+  couldn't have?
+- **Keep:** a prompt that worked, or nothing.
+
+Here is an illustrative entry, invented for this chapter, so you can see the size and
+tone to aim for:
+
+```markdown
+## Entry 1 — A one-page website about my 2024 paper
+
+**Asked**
+
+> make me a one page website about my paper, heres the abstract: [pasted abstract] and the DOI is 10.xxxx/xxxxx. something clean, one file I can double click
+
+Then: "make the title bigger and add a link to the journal"
+
+**Agent did**
+
+Wrote `index.html` (one file, styles inside it). Changed the title size and added a link on the second request. Ran no commands.
+
+**Checked how**
+
+Double-clicked `index.html`: it opens in Chrome. Read every sentence against the abstract. Clicked the journal link: it goes to the right paper.
+Not checked: how it looks on a phone; whether the colours work for colour-blind readers.
+
+**Confidently wrong**
+
+Gave the publication year as 2023 (it's 2024). Its summary said the page "displays correctly on mobile"; nothing in the session shows it opened the page at all.
+
+**Keep**
+
+Pasting the abstract, rather than just the DOI, kept it from inventing findings.
+```
+
+### Step 3: make one more change, and ledger it as you go
+
+Pick a change: add a figure from your paper, a section about your methods, a photo, a
+contact line. This time, **write the ledger entry while you work**, not afterwards:
+
+1. Paste your prompt into **Asked** *before* you send it.
+2. While the agent works, note in **Agent did** what it reads, writes and runs. The
+   chat shows each file it touches and each command it asks permission for.
+3. When it says it's done, check the change yourself, and write **Checked how** from
+   what you did.
+4. Fill in **Confidently wrong** and **Keep**.
+
+You'll notice this is easier than step 2. Reconstructing an entry from memory is hard,
+even an hour later; writing it as you go takes a minute.
+
+### Step 4: ask the agent for its version, and compare
+
+Now see what the agent would have written. Paste:
+
+```default
+Write a ledger entry for the change we just made, using the five fields in LEDGER.md. Save it as agent-entry.md in this folder. Don't change LEDGER.md.
+```
+
+Open `agent-entry.md` next to your entry and compare them, field by field. Look hardest
+at **Checked how**. Agents tend to describe the checks that *should* have happened, or
+that they believe happened, as if they did: "verified the page renders correctly",
+"confirmed all links work". Ask yourself whether anything in the session shows each of
+those things being done.
+
+Then ask it to audit itself:
+
+```default
+Go through the Checked how field in agent-entry.md. For each item, say whether you actually did it in this session, and what exactly you did (the command, or the file you opened), or whether you are assuming it. Rewrite the field so that anything you didn't do is listed as "Not checked".
+```
+
+Keep your own entry in `LEDGER.md`. If the agent's version reminded you of something
+true that you'd left out, add it. Then delete `agent-entry.md`, or keep it for
+comparison.
+
+::: {.callout-warning}
+## What goes in a ledger can be read by others
+
+Your ledger holds your prompts, pasted exactly. If you pasted anything into a prompt, it
+is now in `LEDGER.md` too. Before you share a ledger or put it on GitHub, read it for
+anything identifiable, unpublished or private: patient details, unpublished results,
+collaborators' data, passwords or keys. Better still, don't paste those into an agent
+in the first place.
+:::
+
+### Step 5: make it a habit the agent helps with
+
+Writing every entry yourself is the best way to learn what a good one looks like. After
+a few, it's reasonable to have the agent draft them, *as long as you correct them*. Put
+this in your ledger's **Keep** field, so you have it to hand:
+
+```default
+Keep LEDGER.md as we work. After each task, add an entry with the five fields. In Checked how, list only what you actually did in this session, and say what I should check myself. Never fill in Checked how on my behalf: leave "(your check)" for me.
+```
+
+@sec-teach shows how to write standing instructions like this into a file the agent
+reads at the start of every session, so you don't have to paste them.
+
+## What to notice
+
+- **Step 2 was harder than step 3.** Most people can't reconstruct what the agent did an
+  hour later. That's the argument for writing it as you go.
+- **Your Checked how is shorter than the agent's**, and truer. An agent's account of its
+  own checking is a claim, like everything else it says. Treat it as one.
+- **"Not checked" felt uncomfortable to write.** Good. It's the most useful line in the
+  file, because it tells the next reader exactly where to look.
+- **The ledger took minutes, not hours.** Terse is right. It's a lab notebook, not a
+  report.
+
+## Check yourself
+
+You're done when:
+
+- `LEDGER.md` is in your website folder and has **two entries**.
+- **Every Checked how field describes something you personally did**, or says
+  "Not checked" plainly. None says "the agent verified" or "looks good".
+- Every **Confidently wrong** field has something in it, even if it's "Nothing caught".
+- You can point to at least one claim in the agent's own entry that nothing in the
+  session supports, or you checked and found none.
+
+## Going further
+
+- **Why the ledger runs through the whole day:** the workshop's decision record,
+  [ADR-0005](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/adr/0005-the-ledger-is-the-spine.md),
+  "The ledger is the spine of the day". Keep the same ledger going through the rest of
+  the book.
+- **Ledgers and decision records:** a ledger records *what happened*; a decision record
+  records *what was decided and why*. @sec-project adds the second, for anything you'll
+  come back to.
+- **The older advice:** "For every result, keep track of how it was produced" is rule 1
+  of Sandve and colleagues' ten rules for reproducible computational research
+  [@doi:10.1371/journal.pcbi.1003285]. A ledger applies it to work an agent did.

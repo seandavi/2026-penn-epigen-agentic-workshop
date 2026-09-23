@@ -1,0 +1,335 @@
+# Setup {#sec-setup .unnumbered}
+
+Everything in this book happens in one place: a **session** with a coding agent, started
+in a folder on your own computer. This chapter gets you there. It is the least
+interesting chapter and the one most worth doing carefully, because every later chapter
+assumes three things are true: the agent is running, you're signed in, and it is working
+in the folder you meant it to.
+
+The morning talk made the case that an agent differs from a chatbot because it acts:
+it reads your files, writes new ones and runs commands. That is exactly why the folder
+matters. A chatbot can only see what you paste into it. An agent can see, and change,
+whatever is in the folder you start it in, and it will ask before reaching further. So
+the first habit of the day is a small one: **make a folder for the work, start the agent
+there, and ask it where it is** before asking it to do anything.
+
+You don't need to know how to code, and you don't need a terminal if you use the
+desktop app. You also don't need `git`, R, Python or anything else installed. Later
+chapters check what you have and work with it.
+
+## What you'll learn
+
+- Install and sign in to Claude Code, using the desktop app or the command line, on
+  macOS or Windows.
+- Make a workshop folder and start a session in it.
+- Read a permission prompt and decide what's safe to allow.
+- Start a new session, and know why you'd want to.
+
+## The pieces
+
+@fig-setup-session shows how the parts fit together. You type into a **session**. The
+session has a chat history, a model and a permission mode, and it works in one
+**folder**. Inside that folder the agent can read freely; changing things, or reaching
+outside, depends on what you allow.
+
+```{mermaid}
+%%| label: fig-setup-session
+%%| fig-cap: "You talk to a session; the session works in one folder. Reading inside the folder is free. Edits and commands follow the permission mode, and anything outside the folder asks first."
+%%| fig-alt: "Diagram: You send prompts to a session, which has a chat history, a model and a permission mode. The session works in the agents-workshop folder and its files. Anything outside the folder needs your approval."
+flowchart LR
+  you([You]) -- prompts --> s["Session<br/>chat history · model · permission mode"]
+  s -- reads and writes --> f["agents-workshop/<br/>your files"]
+  s -. asks first .-> o["Anything outside<br/>the folder"]
+```
+
+There are several ways to run the same agent. They behave the same where it matters for
+this book: the prompts, the folder and the permission prompts.
+
+| | Claude desktop app, **Code** tab | `claude` on the command line | Another agent |
+|---|---|---|---|
+| Who it suits | Most people. No terminal needed. | People who already live in a terminal. | People already using Gemini CLI, Codex or Copilot. |
+| How you pick the folder | **Select folder** when starting a session | `cd` into the folder, then run `claude` | Start it in the folder |
+| How you change permissions | The mode selector next to the send button | **Shift+Tab** cycles the modes | See that tool's documentation |
+| Supported in the room | Yes | Yes | Best effort |
+
+: Ways to run an agent for this book. Everything in later chapters works in all three,
+with small differences named where they matter. {#tbl-setup-surfaces}
+
+## Install and sign in
+
+Everyone at the workshop has a seat on the Institute's **Claude Team plan**. Sign in with
+the account that seat belongs to. If you're not sure which account that is, ask in the
+room before installing anything else.
+
+### The desktop app (recommended)
+
+1. Download the installer for your computer from
+   [claude.com/download](https://claude.com/download) and run it. Windows on ARM (some
+   Surface laptops) has a separate installer, linked from the
+   [desktop quickstart](https://code.claude.com/docs/en/desktop-quickstart).
+2. Open Claude from Applications (macOS) or the Start menu (Windows) and sign in.
+3. Click the **Code** tab at the top.
+
+The app has three tabs, and only one of them is for this book
+[@url:https://code.claude.com/docs/en/desktop-quickstart]:
+
+| Tab | What it is | For this book? |
+|---|---|---|
+| **Chat** | Conversation, like claude.ai. It can't see your files. | No |
+| **Cowork** | A background agent working in its own sandboxed machine. | No |
+| **Code** | An agent working directly on files in a folder you choose. | **Yes** |
+
+: The desktop app's three tabs. {#tbl-setup-tabs}
+
+The desktop app includes Claude Code. You don't need to install anything else.
+
+::: {.callout-warning}
+## If the Code tab won't open
+
+If it asks you to upgrade, you're signed in with a personal account, not the Team-plan
+one: sign out and sign in with the right account. If you see `Error 403: Forbidden`,
+sign out and back in; if that fails, quit the app completely (not just close the window)
+and reopen it. These fixes come from the app's troubleshooting guide
+[@url:https://code.claude.com/docs/en/desktop].
+:::
+
+### The command line (optional)
+
+If you'd rather use a terminal, install the `claude` command
+[@url:https://code.claude.com/docs/en/setup]. On macOS, in Terminal:
+
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+On Windows, in **PowerShell** (not CMD; @sec-windows explains the difference):
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+or, if you use `winget`:
+
+```powershell
+winget install Anthropic.ClaudeCode
+```
+
+Then type `claude` and follow the sign-in prompts in your browser. You don't need to run
+as Administrator.
+
+::: {.callout-note collapse="true"}
+## On Windows
+
+Claude Code runs natively on Windows 10 (version 1809 or later) and Windows 11. **Git for
+Windows is optional.** With it, the agent runs commands through Git Bash; without it, it
+uses PowerShell. Both work for this book, and you only need Git itself in
+@sec-project, where the chapter offers a way round if you can't install it. The
+Windows appendix, @sec-windows, covers PowerShell versus CMD, finding your Documents
+folder, showing file extensions, and what to do if `claude` is "not recognized".
+:::
+
+::: {.callout-tip}
+## Using Gemini CLI, Codex or GitHub Copilot?
+
+Bring it. What this book teaches carries across: a folder per piece of work, prompts in
+plain English, a ledger of what you checked. What differs is detail: where a tool keeps
+its instructions file, how it asks permission, and how it adds skills and connections.
+Chapters name Claude Code where a step is specific to it. If yours differs, ask your
+agent: "This book says to do X in Claude Code. What's the equivalent here?"
+:::
+
+## Make a workshop folder
+
+Make a new, empty folder called `agents-workshop` inside your **Documents** folder:
+
+- **macOS:** in Finder, open Documents, then **File → New Folder**.
+- **Windows:** in File Explorer, open Documents, then right-click an empty space and
+  choose **New → Folder**.
+
+::: {.column-margin}
+Why a new, empty folder? So that everything the agent makes in this book is in one
+place you can find, and nothing else you own is in reach. Later chapters make their own
+sub-folders inside it.
+:::
+
+Keep the name exactly `agents-workshop`, with no spaces. Spaces in folder names work, but
+they trip up commands in small ways, and later chapters assume this name.
+
+::: {.callout-note collapse="true"}
+## On Windows: is my Documents folder in OneDrive?
+
+On many managed laptops, Documents lives inside OneDrive, so its full path is
+`C:\Users\<you>\OneDrive\Documents` rather than `C:\Users\<you>\Documents`. Either is
+fine. When the agent tells you where it is, the path will show which you have.
+@sec-windows shows how to see a folder's full path.
+:::
+
+## Start a session in the folder
+
+**Desktop app.** In the Code tab, choose **Local** as the environment, click **Select
+folder**, and pick `agents-workshop`. Leave the model on its default.
+
+**Command line.** Open a terminal, move into the folder, and start the agent:
+
+```bash
+cd ~/Documents/agents-workshop
+claude
+```
+
+On Windows, in PowerShell, the same `cd ~/Documents/agents-workshop` works, unless your
+Documents is in OneDrive, in which case use `cd ~/OneDrive/Documents/agents-workshop`.
+
+Now send your first prompt:
+
+```default
+What folder are you in, and what's in it?
+```
+
+It should answer with the full path to `agents-workshop` and say the folder is empty
+(on a Mac it may mention a hidden `.DS_Store` file, which Finder makes; ignore it).
+That answer is worth reading properly. If it names a different folder, stop: every file
+it makes from here on would land in the wrong place. Start a new session and pick the
+folder again.
+
+Then ask it to make something, so you see an edit happen:
+
+```default
+Make a file called hello.txt containing one line: "Setup worked on" followed by
+today's date. Then tell me the full path to the file.
+```
+
+Now go and find `hello.txt` yourself, in Finder or File Explorer, and open it. This is
+the first check of the day, and the pattern for all the rest: **the agent says it did
+something; you look.**
+
+## Permission prompts
+
+Depending on its **permission mode**, the agent will stop and ask before editing a file
+or running a command. These prompts are not errors. They are the safety catch working,
+and they are how you stay in charge of what happens on your computer.
+
+The desktop app has a mode selector next to the send button; on the command line,
+**Shift+Tab** cycles through the modes. The main ones
+[@url:https://code.claude.com/docs/en/permission-modes]:
+
+| Mode | What the agent does without asking | When to use it |
+|---|---|---|
+| **Manual** | Reads files. Asks before every edit and every command, showing you the change. | Your first session, so you see everything it does. |
+| **Accept edits** | Reads, and edits files in the folder. Still asks before other commands. | **Most of this book**, once you're comfortable. |
+| **Plan** | Reads and explores, then proposes a plan without changing anything. | Before a big or unfamiliar task. |
+| **Auto** | Acts, with background safety checks that block risky actions. | If you see it offered, later, when you know what to expect. |
+
+: Permission modes in Claude Code. Your organisation may hide some of them. The desktop
+app remembers the mode you pick for each folder. {#tbl-setup-modes}
+
+A fifth mode, **Bypass permissions**, turns off the prompts altogether. It is meant for
+throwaway sandboxes, not your laptop. Don't use it.
+
+When a prompt does appear, three questions settle most of them (@fig-setup-allow).
+**Reading is fine.** Looking at files and listing folders can't change anything, and the
+agent does most of it without asking at all. **Edits inside the workshop folder are
+fine**: that's what the folder is for, and if an edit is wrong you can ask for it to be
+undone. **Read before allowing anything else**: a command that deletes or moves files,
+installs software, touches anything outside the folder, or sends data somewhere. Those
+are often fine too, but they're the ones worth a second look.
+
+```{mermaid}
+%%| label: fig-setup-allow
+%%| fig-cap: "Deciding on a permission prompt. When in doubt, say no and ask the agent what the command does and why it needs it."
+%%| fig-alt: "Decision diagram. Is it only reading? Allow. Is it editing files inside your workshop folder? Allow. Otherwise (it deletes, installs, reaches outside the folder or sends data out), read it first, and if unsure say no and ask why."
+flowchart LR
+  q1{"Only<br/>reading?"} -- yes --> a1([Allow])
+  q1 -- no --> q2{"Editing inside<br/>agents-workshop?"}
+  q2 -- yes --> a1
+  a2(["Read it first.<br/>Unsure? Say no,<br/>ask why."])
+  q2 -- "no: deletes, installs,<br/>goes outside, sends out" --> a2
+```
+
+Saying no is always safe. The agent doesn't sulk; it tries another way, or asks what you'd
+prefer. A good follow-up, in plain words:
+
+```default
+Before you run that, explain what the command does, which files it touches,
+and why you need it.
+```
+
+::: {.callout-note}
+## "Yes, and don't ask again"
+
+Some prompts offer to remember your answer for that kind of command in this folder. That's
+handy for something harmless it runs often, such as listing files. Don't use it for
+anything that deletes or installs.
+:::
+
+## Sessions: when to start a new one
+
+A session is one conversation: its own chat history, its own folder, its own permission
+mode. The agent remembers everything said earlier in the session, and nothing from other
+sessions, unless it's written down in a file (that's what @sec-teach is about).
+
+Start a **new session** for each chapter of this book, and whenever you change task. A
+long session drifts. It fills up with earlier detail, gets slower, and starts
+confusing old instructions with new ones, which is the context-window problem from this
+morning. A fresh session in the same folder costs nothing, because everything that
+matters is in the files.
+
+- **Desktop app:** **+ New session** in the sidebar (**Cmd+N** on macOS, **Ctrl+N** on
+  Windows). Pick the folder again. Old sessions stay listed in the sidebar.
+- **Command line:** type `/exit`, then `claude` again. `claude -c` picks up the most
+  recent conversation in the folder, if you want it back.
+
+## Where the example data comes from
+
+Some later chapters use real data shared for teaching by the Vahedi lab, from their
+[workshop repository](https://github.com/golnazvahedi/epigenetics-agentic-workshop).
+You don't need to download it now, and you don't need `git` to get it. When a chapter
+uses one of those files, it gives you a prompt that has the agent download just that
+file into your folder.
+
+Your own material comes first in every chapter, though. The fallback data is there for
+anyone without something to hand.
+
+::: {.callout-important}
+## Privacy
+
+Don't give the agent patient data, identifiable information, or unpublished data you
+aren't allowed to share, in this book or anywhere else, until you know what your
+institution permits. Most of what's worth trying today is public or de-identified
+material, and every chapter offers a public fallback.
+:::
+
+## What to notice
+
+- The agent answered a question about your computer, not about the world: which
+  folder, which files. A chatbot couldn't.
+- It made a real file you could open without the agent.
+- It asked before acting, or it didn't, depending on the mode. Either way, you chose.
+
+## Check yourself
+
+::: {.callout-tip}
+## You're done when
+
+- [ ] Claude (the Code tab) or `claude` opens and you're signed in with your Team-plan
+      account.
+- [ ] Asked "What folder are you in, and what's in it?", the agent names your
+      `agents-workshop` folder.
+- [ ] You found and opened `hello.txt` yourself, outside the agent.
+- [ ] You know where the permission mode is, and have set it to **Manual** or
+      **Accept edits**.
+- [ ] You can start a new session.
+
+**If it goes wrong:** paste the exact error message into a session and ask the agent
+what it means (it is surprisingly good at diagnosing its own setup), or pair with a
+neighbour. Two people at one laptop is a fine way to do this book.
+:::
+
+## Going further
+
+- [Get started with the desktop app](https://code.claude.com/docs/en/desktop-quickstart)
+  and the fuller [desktop guide](https://code.claude.com/docs/en/desktop).
+- [Choose a permission mode](https://code.claude.com/docs/en/permission-modes): every
+  mode, and what none of them will do without asking.
+- [Claude Code for first-time terminal users](https://code.claude.com/docs/en/terminal-guide)
+  [@url:https://code.claude.com/docs/en/terminal-guide].
+- On Windows: @sec-windows.
