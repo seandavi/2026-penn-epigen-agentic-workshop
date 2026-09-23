@@ -1,0 +1,64 @@
+project:
+  type: book
+  output-dir: ../docs
+  # quartobot resolves @doi:, @pmid:, @url: … cite keys into references.resolved.bib
+  # before render (`uv tool install quartobot`). Commit the resolved .bib, so a render
+  # never needs the network.
+  pre-render: quartobot resolve --from-scan . --id-mode citation-key
+  render:
+    - index.qmd
+    - chapters/*.qmd
+    - appendices/*.qmd
+
+lightbox: true
+
+book:
+  title: "Agents for bench scientists"
+  subtitle: "The hands-on half of the Penn Epigenetics Institute agentic AI workshop"
+  author:
+    - name: Sean Davis
+      url: https://seandavi.github.io/
+  date: "2026-09-24"
+  site-url: https://seandavi.github.io/2026-penn-epigen-agentic-workshop/
+  repo-url: https://github.com/seandavi/2026-penn-epigen-agentic-workshop
+  repo-subdir: book
+  repo-actions: [edit, issue]
+  search: true
+  chapters:
+    - index.qmd
+    - chapters/00-setup.qmd
+    - part: "Working with an agent"
+      chapters:
+        - chapters/01-website.qmd
+        - chapters/02-ledger.qmd
+        - chapters/03-teach-your-agent.qmd
+    - part: "Extending the agent"
+      chapters:
+        - chapters/04-skills.qmd
+        - chapters/05-mcp.qmd
+    - part: "Building things"
+      chapters:
+        - chapters/06-build-an-app.qmd
+        - chapters/07-work-like-a-project.qmd
+  appendices:
+    - appendices/windows.qmd
+    - appendices/references.qmd
+
+bibliography:
+  - references.bib
+  - references.resolved.bib
+
+format:
+  html:
+    theme:
+      light: [cosmo, theme.scss]
+    fig-cap-location: margin
+    tbl-cap-location: margin
+    reference-location: margin
+    citation-location: margin
+    code-copy: true
+    code-overflow: wrap
+    linestretch: 1.6
+    toc-depth: 3
+    mermaid:
+      theme: neutral

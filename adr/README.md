@@ -16,12 +16,13 @@ their reconstruction: see the dates in each file.
 
 | | Decision | Date |
 |---|---|---|
-| [0001](0001-taught-session-ends-at-1400.md) | The taught session ends at 14:00 and hands off | 2026-09-22 |
+| [0001](0001-taught-session-ends-at-1400.md) | The taught session ends at 14:00 and hands off (timetable superseded by 0007) | 2026-09-22 |
 | [0002](0002-exercises-are-menus.md) | Exercises are menus of the attendee's own work | 2026-09-22 |
 | [0003](0003-slides-live-in-the-talks-repo.md) | Slides live in the talks repo, not here | 2026-09-22 |
 | [0004](0004-tool-neutral-claude-code-supported.md) | Tool choice stays open; Claude Code is supported | 2026-09-22 |
 | [0005](0005-the-ledger-is-the-spine.md) | The ledger is the spine of the day | 2026-09-22 |
 | [0006](0006-advanced-material-ships-as-appendix.md) | Advanced material ships as a non-presented appendix | 2026-09-22 |
+| [0007](0007-talk-first-then-a-self-paced-book.md) | Talk first, then a self-paced book | 2026-09-23 |
 
 ## Why `adr/` and not `docs/adr/`
 

@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Teach the agent your project – Agents for bench scientists</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/04-skills.html" rel="next">
+<link href="../chapters/02-ledger.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8db532a760e6309ca89cbbb647cf1feb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="mermaid-theme" content="neutral">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating slimcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-website.html">Working with an agent</a></li><li class="breadcrumb-item"><a href="../chapters/03-teach-your-agent.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Teach the agent your project</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Agents for bench scientists</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/tree/main/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Working with an agent</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-website.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Build a website</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-ledger.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ledger</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-teach-your-agent.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Teach the agent your project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extending the agent</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-skills.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Write a skill</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-mcp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connect to a database (MCP)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Building things</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-build-an-app.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Build an app</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-work-like-a-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Work like a project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Windows notes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-youll-learn" id="toc-what-youll-learn" class="nav-link active" data-scroll-target="#what-youll-learn"><span class="header-section-number">3.1</span> What you’ll learn</a></li>
+  <li><a href="#two-files-two-readers" id="toc-two-files-two-readers" class="nav-link" data-scroll-target="#two-files-two-readers"><span class="header-section-number">3.2</span> Two files, two readers</a>
+  <ul class="collapse">
+  <li><a href="#how-claude-code-finds-the-file" id="toc-how-claude-code-finds-the-file" class="nav-link" data-scroll-target="#how-claude-code-finds-the-file"><span class="header-section-number">3.2.1</span> How Claude Code finds the file</a></li>
+  </ul></li>
+  <li><a href="#link-dont-copy" id="toc-link-dont-copy" class="nav-link" data-scroll-target="#link-dont-copy"><span class="header-section-number">3.3</span> Link, don’t copy</a></li>
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example"><span class="header-section-number">3.4</span> Worked example</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">3.5</span> Your turn</a></li>
+  <li><a href="#what-to-notice" id="toc-what-to-notice" class="nav-link" data-scroll-target="#what-to-notice"><span class="header-section-number">3.6</span> What to notice</a></li>
+  <li><a href="#check-yourself" id="toc-check-yourself" class="nav-link" data-scroll-target="#check-yourself"><span class="header-section-number">3.7</span> Check yourself</a></li>
+  <li><a href="#going-further" id="toc-going-further" class="nav-link" data-scroll-target="#going-further"><span class="header-section-number">3.8</span> Going further</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/chapters/03-teach-your-agent.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-website.html">Working with an agent</a></li><li class="breadcrumb-item"><a href="../chapters/03-teach-your-agent.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Teach the agent your project</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-teach" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Teach the agent your project</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Open a real analysis folder, one you’ve worked in for a few months, and look at it as a stranger would. There’s a <code>data/</code> folder, but is everything in it raw, or did someone save a filtered table there too? There are four scripts with names like <code>qc.R</code>, <code>qc_v2.R</code> and <code>qc_final_SD.R</code>: which one is current? A <code>results/</code> folder holds figures from last spring, and nothing says whether they came from the current script. The sample sheet has a column called <code>cond</code>, and only you know that <code>1</code> is the knockout.</p>
+<p>An agent opening that folder is the stranger. It reads quickly and well: files, code, headers, any README it finds. What it can’t read is <strong>what’s only in your head</strong>. Which files it must never touch. Where new output goes. The convention that looks like a mistake and isn’t. What “done” means to you. So it guesses, reasonably, and some of its guesses are wrong <em>for you</em>. You correct it. Next session it has forgotten, and you correct it again.</p>
+<p>This morning’s talk made the fix sound simple: write it down once, in a file the agent reads at the start of every session. It is simple, but there are two traps. The first is writing too much: a long file that restates what the agent could have read for itself, which costs context on every turn and buries the few lines that matter. The second is copying: pasting the sample-sheet description into the agent’s file as well as the README, so there are now two versions to keep in step, and one of them will drift.</p>
+<p>This chapter is about writing the short file, and pointing to everything else.</p>
+<section id="what-youll-learn" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="what-youll-learn"><span class="header-section-number">3.1</span> What you’ll learn</h2>
+<ul>
+<li>The difference between a <strong>README</strong>, which is for people, and an <strong>AGENTS.md</strong> (or <code>CLAUDE.md</code>), which is for agents.</li>
+<li>How Claude Code finds and loads these files, and how to make one file work for several tools.</li>
+<li>How to <strong>link</strong> to other documents instead of copying them, and when an <code>@</code> import is the better choice.</li>
+<li>A loop for finding what belongs in the file: explore, correct, write it down, test it in a fresh session.</li>
+</ul>
+</section>
+<section id="two-files-two-readers" class="level2 page-columns page-full" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="two-files-two-readers"><span class="header-section-number">3.2</span> Two files, two readers</h2>
+<p>Most projects that have any documentation have a README. It’s written for a person: someone new to the lab, a collaborator, a reviewer, you in a year. It says what the project is, how to run it and who to ask. It can be friendly and discursive, because people skim.</p>
+<p>An <code>AGENTS.md</code> is written for an agent, and it should contain <strong>only what an agent can’t work out by reading the folder</strong>, written as rules. The agent will read your README and your code anyway; the agent’s file doesn’t need to explain them. What it needs are the things no amount of reading would reveal: <em><code>data/</code> is read-only</em>, <em>new output goes in <code>results/</code></em>, <em>check the direction of a fold change before you state it</em>. Write those as <strong>must</strong> and <strong>must not</strong>. “We generally prefer” reads as advice to a person and as negotiable to an agent.</p>
+<div id="tbl-teach-readme-vs-agents" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-teach-readme-vs-agents-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>README.md</th>
+<th>AGENTS.md</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Written for</strong></td>
+<td>People: newcomers, collaborators, reviewers, you later</td>
+<td>Coding agents</td>
+</tr>
+<tr class="even">
+<td><strong>Says</strong></td>
+<td>What this is, how to run it, where the data came from, who to ask</td>
+<td>Only what an agent can’t discover: rules, boundaries, what “done” means</td>
+</tr>
+<tr class="odd">
+<td><strong>Tone</strong></td>
+<td>Explanatory, friendly</td>
+<td>Imperative: <em>must</em>, <em>must not</em></td>
+</tr>
+<tr class="even">
+<td><strong>Length</strong></td>
+<td>As long as it needs to be</td>
+<td>Short. Under a page; every line costs context, every session</td>
+</tr>
+<tr class="odd">
+<td><strong>When it’s read</strong></td>
+<td>When someone opens it</td>
+<td>Loaded automatically at the start of each session</td>
+</tr>
+<tr class="even">
+<td><strong>Goes wrong when</strong></td>
+<td>Nobody writes it</td>
+<td>It restates the README, or goes out of date and keeps giving orders</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-teach-readme-vs-agents-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.1: A README and an AGENTS.md do different jobs. The agent reads both, but only one is loaded into every session.
+</figcaption>
+</figure>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Same idea, different names.</strong> <code>AGENTS.md</code> is an open convention that many tools read <span class="citation" data-cites="url:https://agents.md">(<a href="../appendices/references.html#ref-url:https://agents.md" role="doc-biblioref"><span>“AGENTS.md,”</span> n.d.</a>)</span>. Claude Code’s own name is <code>CLAUDE.md</code>; Gemini CLI’s is <code>GEMINI.md</code> by default. Codex reads <code>AGENTS.md</code>. Check your tool’s documentation if you’re not on Claude Code.</p>
+<div id="ref-url:https://agents.md" class="csl-entry" role="listitem">
+<span>“AGENTS.md.”</span> n.d. Accessed September 23, 2026. <a href="https://agents.md/">https://agents.md/</a>.
+</div></div><div id="ref-doi:10.1371/journal.pcbi.1006561" class="csl-entry" role="listitem">
+Lee, Benjamin D. 2018. <span>“Ten Simple Rules for Documenting Scientific Software.”</span> <em>PLOS Computational Biology</em> 14 (12): e1006561. <a href="https://doi.org/10.1371/journal.pcbi.1006561">https://doi.org/10.1371/journal.pcbi.1006561</a>.
+</div><div id="ref-doi:10.1371/journal.pcbi.1005510" class="csl-entry" role="listitem">
+Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, and Tracy K. Teal. 2017. <span>“Good Enough Practices in Scientific Computing.”</span> <em>PLOS Computational Biology</em> 13 (6): e1005510. <a href="https://doi.org/10.1371/journal.pcbi.1005510">https://doi.org/10.1371/journal.pcbi.1005510</a>.
+</div><div id="ref-doi:10.1371/journal.pcbi.1000424" class="csl-entry" role="listitem">
+Noble, William Stafford. 2009. <span>“A <span>Quick</span> <span>Guide</span> to <span>Organizing</span> <span>Computational</span> <span>Biology</span> <span>Projects</span>.”</span> <em>PLoS Computational Biology</em> 5 (7): e1000424. <a href="https://doi.org/10.1371/journal.pcbi.1000424">https://doi.org/10.1371/journal.pcbi.1000424</a>.
+</div></div><p>A good README helps the agent too. It’s often the first file an agent opens, and in the worked example below it did most of the work <span class="citation" data-cites="doi:10.1371/journal.pcbi.1006561">(<a href="../appendices/references.html#ref-doi:10.1371/journal.pcbi.1006561" role="doc-biblioref">Lee 2018</a>)</span>. The advice for organising a computational project hasn’t changed because agents arrived: keep raw data separate from results, record what you did, and make it possible for someone else to follow <span class="citation" data-cites="doi:10.1371/journal.pcbi.1005510 doi:10.1371/journal.pcbi.1000424">(<a href="../appendices/references.html#ref-doi:10.1371/journal.pcbi.1005510" role="doc-biblioref">Wilson et al. 2017</a>; <a href="../appendices/references.html#ref-doi:10.1371/journal.pcbi.1000424" role="doc-biblioref">Noble 2009</a>)</span>. Agents are simply the most literal “someone else” you’ll ever have.</p>
+<section id="how-claude-code-finds-the-file" class="level3 page-columns page-full" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="how-claude-code-finds-the-file"><span class="header-section-number">3.2.1</span> How Claude Code finds the file</h3>
+<p>Claude Code reads its instructions at the start of every session <span class="citation" data-cites="url:https://code.claude.com/docs/en/memory">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/memory" role="doc-biblioref"><span>“How <span>Claude</span> Remembers Your Project,”</span> n.d.</a>)</span>. The details matter, because a file in the wrong place, or with the wrong name, is silently ignored.</p>
+<div class="no-row-height column-margin column-container"></div><ul>
+<li><strong><code>CLAUDE.md</code></strong> in the folder you start the session in, and in every folder above it, is loaded at launch. All of them are concatenated; none overrides another.</li>
+<li><strong><code>AGENTS.md</code></strong> is read <em>instead</em>, but only when there’s no <code>CLAUDE.md</code> in the folder or above it. This needs a recent version of Claude Code (2.1.277 or later), and the documentation notes it isn’t read in the <strong>first session after you install or upgrade</strong>, which is exactly the situation many people are in today.</li>
+<li><strong>Files in subfolders</strong> (<code>data/CLAUDE.md</code>, say) aren’t loaded at launch. They’re read when the agent opens a file in that folder.</li>
+</ul>
+<p>The simplest arrangement that works everywhere is two files: write your rules in <code>AGENTS.md</code>, which every tool can read, and add a <code>CLAUDE.md</code> containing one line:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>@AGENTS.md</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>That line is an <strong>import</strong>. Claude Code expands it, so <code>CLAUDE.md</code> loads the whole of <code>AGENTS.md</code>, whatever version you’re on. Other tools ignore <code>CLAUDE.md</code> and read <code>AGENTS.md</code> directly.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Did it load?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the <code>claude</code> command-line tool, type <code>/context</code>: your instruction files are listed under memory files. In any tool, you can start a session and ask <em>“What instructions did you load for this folder?”</em>, then compare the answer with the file. If it doesn’t mention your rules, check the file’s name and location before anything else.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="link-dont-copy" class="level2 page-columns page-full" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="link-dont-copy"><span class="header-section-number">3.3</span> Link, don’t copy</h2>
+<p>Your project probably already has documents an agent would find useful: a description of the sample sheet, a protocol, notes on how the data were processed. The tempting move is to paste them into <code>AGENTS.md</code>. Don’t. <strong>Point to them instead.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>The sample sheet's columns are described in <span class="co">[</span><span class="ot">docs/samples.md</span><span class="co">](docs/samples.md)</span>.</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>What each data file is, and its known quirks: <span class="co">[</span><span class="ot">data/README.md</span><span class="co">](data/README.md)</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A link does three things. The agent’s file stays short. The document stays in one place, so there’s one version to keep current. And the agent reads it <strong>when it needs it</strong>: working on the sample sheet, it follows the link; fixing a plotting script, it doesn’t.</p>
+<p>Claude Code also has the import you’ve just seen: <code>@docs/samples.md</code>, outside backticks, pulls the whole file into every session at launch, the way <code>@AGENTS.md</code> does.</p>
+<div id="tbl-teach-link-vs-import" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-teach-link-vs-import-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Markdown link</th>
+<th><code>@</code> import (Claude Code)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Written as</strong></td>
+<td><code>[docs/samples.md](docs/samples.md)</code></td>
+<td><code>@docs/samples.md</code></td>
+</tr>
+<tr class="even">
+<td><strong>Loaded</strong></td>
+<td>When the agent decides it needs it</td>
+<td>At the start of every session</td>
+</tr>
+<tr class="odd">
+<td><strong>Costs context</strong></td>
+<td>Only when read</td>
+<td>Always</td>
+</tr>
+<tr class="even">
+<td><strong>Other tools</strong></td>
+<td>Understood everywhere</td>
+<td>Only Claude Code; others see plain text</td>
+</tr>
+<tr class="odd">
+<td><strong>Use for</strong></td>
+<td>Almost everything</td>
+<td>The few documents every session needs, such as <code>@AGENTS.md</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-teach-link-vs-import-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.2: Links are read when needed; imports are always loaded.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-teach-folder" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> shows the arrangement: a README for people, a short <code>AGENTS.md</code> for agents that links to the detailed documents, and a one-line <code>CLAUDE.md</code> that imports it.</p>
+<div class="cell page-columns page-full" data-layout-align="default">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-teach-folder" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-teach-folder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-teach-folder">flowchart LR
+  accDescr: Diagram. CLAUDE.md imports AGENTS.md, which is loaded every session.
+  C["CLAUDE.md&lt;br/&gt;(one line: @AGENTS.md)"] ==&gt;|import| A["AGENTS.md&lt;br/&gt;rules for agents"]
+  R["README.md&lt;br/&gt;for people"]
+  A -.-&gt;|link| DR["data/README.md&lt;br/&gt;what each file is"]
+  A -.-&gt;|link| S["docs/samples.md&lt;br/&gt;sample sheet"]
+  A --&gt;|"must not edit"| D[("data/")]
+  A --&gt;|"new output here"| O[("results/")]
+  A --&gt;|"current code"| SC[("scripts/")]
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-teach-folder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: A project folder that teaches its agent. Solid arrows: loaded at the start of every session. Dashed arrows: links the agent follows when it needs them.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span><code>/init</code>, and why it’s only a start
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Claude Code’s <code>/init</code> command writes a starting <code>CLAUDE.md</code> by analysing the folder: the commands, layout and conventions it discovers. That’s useful in a large codebase, but notice what it can’t include: anything that isn’t discoverable. Treat what it writes as a draft, delete what the agent could have read for itself, and add the rules only you know.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="worked-example" class="level2 page-columns page-full" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="worked-example"><span class="header-section-number">3.4</span> Worked example</h2>
+<p>We tried this on the fallback data you’ll meet below: the Vahedi lab’s teaching files, arranged as a small analysis project with a <code>data/</code> folder (DESeq2 tables, a counts matrix, a messy sample sheet and the data README) and a <code>scripts/</code> folder holding one QC script, which is broken on purpose. We used Claude Code 2.1.280 with Claude Opus 5.5, from the command line, on 23 September 2026, with no personal instructions loaded. Your run will word things differently. The outputs below are real, lightly trimmed.</p>
+<div class="cell page-columns page-full" data-layout-align="default">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-teach-loop" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-teach-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-teach-loop">flowchart LR
+  accDescr: Cycle - explore and summarise, then correct what it got wrong, then write
+  E["1. Explore&lt;br/&gt;and summarise"] --&gt; K["2. Correct&lt;br/&gt;what it got wrong"]
+  K --&gt; W["3. Write AGENTS.md&lt;br/&gt;from the corrections"]
+  W --&gt; T["4. New session:&lt;br/&gt;does it hold?"]
+  T --&gt;|"something slipped"| K
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-teach-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: The loop in this chapter. The file is written from your corrections, not from a description of the project.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>1. Explore.</strong> We asked for a summary, and nothing else:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Explore this folder and summarise it for me in under 250 words: what each file is,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>which are raw data and which are results, what analysis this is, and anything you'd</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>need to ask me before doing further work here. Don't change any files.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It took about 20 seconds. The summary was good, because the data README is good: it had both experiments right, noticed that the two DESeq2 tables have <strong>fold changes pointing in opposite directions</strong>, and found three of the script’s bugs by reading it. Its questions were the useful part:</p>
+<blockquote class="blockquote">
+<ol type="1">
+<li>The README lists <code>scbasecount_paper.pdf</code> and a <code>tools/</code> folder, but neither is here. Are they missing, or not needed?</li>
+<li>What’s the goal: fixing the script, cleaning the sample sheet, or new analysis?</li>
+<li>May I write output files, and where? The data can’t be redistributed outside the workshop.</li>
+</ol>
+</blockquote>
+<p>Every one of those is something it couldn’t have found by reading. That’s the list to work from.</p>
+<p><strong>2. Correct, and 3. write it down.</strong> We answered its questions and added two things we’d have had to say sooner or later, then asked it to turn the lot into rules:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>You explored this folder a moment ago. Here is what you got wrong or had to ask,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>and my answers:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>- The paper and tools/ folder aren't needed; ignore them.</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>- Everything in data/ is read-only. Never edit, overwrite or move those files.</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  New output goes in results/, which you can create.</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>- The goal changes from task to task; I'll say each time.</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>- Before you state which way a fold change points, check it against the counts,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  not just the README.</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>- These data are not to leave this computer: don't upload them or paste them</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  anywhere.</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>- "Done" means a file in results/ and one line saying how you checked it.</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>Write an AGENTS.md in this folder that captures just those, as rules (must / must</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>not) for a future session. Keep it under 20 lines. Don't repeat what data/README.md</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>already says: link to it instead. Also write a one-line CLAUDE.md containing only</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>@AGENTS.md. Then show me both files.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It wrote this <code>AGENTS.md</code>, fourteen lines, and a <code>CLAUDE.md</code> holding only <code>@AGENTS.md</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Rules for this folder</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>What the data files are: see <span class="co">[</span><span class="ot">data/README.md</span><span class="co">](data/README.md)</span>. Don't restate it; read it.</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You must not use the paper or <span class="in">`tools/`</span>. They are not needed.</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You must not edit, overwrite, move or delete anything in <span class="in">`data/`</span>. Treat it as read-only.</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You must write all new output to <span class="in">`results/`</span>. Create it if it doesn't exist.</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You must not assume a standing goal. The user states the goal for each task.</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You must check fold-change direction against the raw counts before you state it.</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  The README alone is not enough.</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You must not upload these data or paste them into any external service, website or tool.</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  They stay on this computer.</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A task is done only when there is a file in <span class="in">`results/`</span> and you give one line</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  saying how you checked it.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Read it the way you’d read a colleague’s protocol. It linked to the data README rather than copying it, as asked. Two lines deserve editing. “Must not use the paper” has turned <em>it isn’t here</em> into a prohibition; harmless, but not what we meant. “Must not assume a standing goal” is true of every session and earns nothing; we’d delete it. <strong>The agent writes the file; you edit it.</strong></p>
+<p><strong>4. Test it in a new session.</strong> A fresh session, a real task, and none of the rules repeated:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Fix scripts/make_qc_report.py so it gives correct answers, run it on the peak table,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>and tell me how many peaks are gained and lost in the knockout at padj &lt; 0.05 and</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>|log2FC| &gt; 1.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It fixed six bugs, changed the script to write its report and plot into <code>results/</code>, and gave the right numbers: <strong>2,202 gained, 3,056 lost</strong>, matching the data README and an independent count we made with <code>awk</code>. The data files were untouched (we compared checksums). It ended with the line the rules asked for, saying how it had checked.</p>
+<p>And it did something we hadn’t expected. The fold-change rule says to check direction against the counts, but <strong>the peak table has no counts</strong>. So it said so:</p>
+<blockquote class="blockquote">
+<p>The project rules say to check it against raw counts, but the peak table has none. The “gained/lost” labels therefore rely on <code>data/README.md</code>.</p>
+</blockquote>
+<p>That’s a rule written from one file’s lesson (the gene table, whose direction is the surprising one) meeting a file it doesn’t fit. It’s a better outcome than silent compliance, and a sign the rule needs rewording: <em>where the table has count columns, check…</em>.</p>
+<p><strong>Did the file make a difference?</strong> We ran the same task in an identical folder with no <code>AGENTS.md</code>. That run also fixed the bugs and got 2,202 and 3,056, and it didn’t touch the data either. The differences were narrower than you might expect: without the file, the script still wrote its plot into whichever folder it was run from, and the answer stated the direction from the README without saying it was unchecked. <strong>Most of the work was done by a good data README.</strong> The agent’s file added the few rules about <em>how we work</em>, and that’s all it should do.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Both runs also found that this computer’s Python had no <code>pandas</code>, and neither could install it without permission. Each wrote an independent check with Python’s built-in <code>csv</code> module instead, and said so. We ran the fixed script afterwards, with <code>pandas</code> supplied by <code>uv</code>, and it printed the same counts.</p>
+</div></div></section>
+<section id="your-turn" class="level2 page-columns page-full" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">3.5</span> Your turn</h2>
+<p>About 30 minutes. You need a folder with some history: <strong>several scripts, some data, some results</strong>. A single notebook is too simple to show much.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Privacy, and a copy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The agent will read every file in the folder. Use data you’re allowed to share with the tool you’re using: nothing identifiable, no patient data, nothing unpublished you haven’t been cleared to use this way. If the folder matters, <strong>work on a copy</strong> until you trust your rules.</p>
+</div>
+</div>
+<p><strong>Your own folder.</strong> Start a new session with the analysis folder as its project folder, and check with <em>“What folder are you in?”</em></p>
+<p><strong>The fallback.</strong> Inside <code>Documents/agents-workshop/</code>, make an empty folder called <code>teach-demo</code>, start a new session there (<a href="../chapters/00-setup.html">Setup</a>), and paste this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>In this folder, make two subfolders, data and scripts. Download these files from</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>into data/: README.md, differential_peaks.csv, differential_genes.tsv,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>counts_matrix.csv and sample_sheet_messy.csv. Download make_qc_report.py from the</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>same place into scripts/. Save each file exactly as downloaded, with curl (or</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>Invoke-WebRequest on Windows); don't retype or rewrite any of them. Don't clone the</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>repository. Then list what you downloaded with each file's size.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>That’s about 11.5 MB: the peak table is 6.7 MB, the gene table 3.5 MB, the counts 1.3 MB, and the rest a few KB each. These are real data from the Vahedi lab, shared for the workshop: don’t redistribute them.</p>
+<p>Now work through the loop in <a href="#fig-teach-loop" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>.</p>
+<ol type="1">
+<li><strong>Explore.</strong> Paste the explore prompt from the worked example. Read the summary carefully, and keep a list: everything it got wrong, every question it asked, and everything you’d have told a new student on their first day.</li>
+<li><strong>Sort the list.</strong> Not everything belongs in the agent’s file. Use
+<ol class="example" type="1">
+<li></li>
+</ol></li>
+<li><strong>Write it down.</strong> Give the agent your list, using the worked example’s second prompt as a model. If there’s no README, ask for one too, for people: what this is, how to run it, who to ask.</li>
+<li><strong>Edit what it wrote.</strong> Delete any line the agent could have worked out by reading. Reword any rule that’s stricter or vaguer than you meant.</li>
+<li><strong>Test it.</strong> Start a <strong>new session</strong> in the same folder (<a href="../chapters/00-setup.html">Setup</a>): it begins with an empty conversation and reloads the instruction files. Give it a real next task, without repeating any rule. Watch whether the rules hold.</li>
+<li><strong>Ledger it.</strong> One entry: what you had to tell it, and whether writing it down stopped you having to (<a href="02-ledger.html" class="quarto-xref"><span>Chapter 2</span></a>).</li>
+</ol>
+<div id="tbl-teach-where-it-goes" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-teach-where-it-goes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>If the correction is…</th>
+<th>It goes in…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A rule about how to work here: what not to touch, where output goes, what “done” means</td>
+<td><code>AGENTS.md</code></td>
+</tr>
+<tr class="even">
+<td>A fact about the project a person would need too: what the data are, how to run it</td>
+<td><code>README.md</code>, or a doc the README links to</td>
+</tr>
+<tr class="odd">
+<td>A detail of one file, such as the sample sheet’s columns</td>
+<td>A document next to it, <strong>linked</strong> from <code>AGENTS.md</code></td>
+</tr>
+<tr class="even">
+<td>Something the agent got wrong once and could have read</td>
+<td>Nowhere. Say it in the chat.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-teach-where-it-goes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.3: Where each correction belongs.
+</figcaption>
+</figure>
+</div>
+<p><strong>On Windows:</strong> turn on file name extensions, or a file you save in Notepad may really be <code>AGENTS.md.txt</code>; names starting with a dot (a <code>.claude</code> folder) are hidden in File Explorer by default. See <a href="../appendices/windows.html" class="quarto-xref"><span>Appendix A</span></a>. And don’t make <code>CLAUDE.md</code> a symbolic link to <code>AGENTS.md</code>, a trick you may see online: on Windows it needs extra rights and can arrive as a one-line text file. The <code>@AGENTS.md</code> import works everywhere.</p>
+</section>
+<section id="what-to-notice" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="what-to-notice"><span class="header-section-number">3.6</span> What to notice</h2>
+<ul>
+<li><strong>What it asked you.</strong> The questions in the first summary are the best guide to what belongs in the file. It asks about what it can’t see.</li>
+<li><strong>How much it got right.</strong> If your folder has a good README, the agent’s file can be very short. If it got a lot wrong, ask whether the README should say more, for people as well as agents.</li>
+<li><strong>How it rewrote your rules.</strong> Agents turn “ignore X” into “must not use X” and soften “never” into “try not to”. Your wording is the rule; check it survived.</li>
+<li><strong>A rule that doesn’t fit.</strong> In the worked example, a sensible rule met a file it couldn’t apply to. When the agent says a rule can’t be followed, that’s the rule telling you to rewrite it.</li>
+<li><strong>What it did without being told.</strong> A fresh session that behaves well with no file is a result too. If your list is empty, write no file.</li>
+</ul>
+</section>
+<section id="check-yourself" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="check-yourself"><span class="header-section-number">3.7</span> Check yourself</h2>
+<ul>
+<li>Open a new session and ask <em>“What rules apply in this folder?”</em> Does its answer match your file, and nothing more?</li>
+<li>Is every line in <code>AGENTS.md</code> something the agent couldn’t have discovered by reading?</li>
+<li>Does anything appear in both the README and <code>AGENTS.md</code>? Replace one with a link.</li>
+<li>Did the new session follow the rules without you repeating them? If one slipped, was the rule unclear, or wasn’t the file loaded?</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Instruction files go stale
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Conventions change and the file doesn’t. Six months on it’s confidently telling your agent to do something you stopped doing in March. Keep it short enough to reread, and reread it when the project changes, the way you’d review a protocol.</p>
+</div>
+</div>
+</section>
+<section id="going-further" class="level2 page-columns page-full" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="going-further"><span class="header-section-number">3.8</span> Going further</h2>
+<ul>
+<li><strong>Rules for one part of a project.</strong> A <code>CLAUDE.md</code> or <code>AGENTS.md</code> inside a subfolder is read when the agent works there, so <code>data/AGENTS.md</code> can hold rules about the data alone. Claude Code also has path-scoped rules in <code>.claude/rules/</code> <span class="citation" data-cites="url:https://code.claude.com/docs/en/memory">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/memory" role="doc-biblioref"><span>“How <span>Claude</span> Remembers Your Project,”</span> n.d.</a>)</span>.</li>
+<li><strong>A procedure, not a rule.</strong> If what you’re writing down is a multi-step procedure, such as how your lab triages a DESeq2 table, it’s a skill, not a rule: that’s
+<ol start="2" class="example" type="1">
+<li></li>
+</ol></li>
+<li><strong>A whole lab’s conventions.</strong> The Vahedi lab’s afternoon material has a pod that goes further, writing the lab’s shared definitions (genome build, what counts as a promoter, what counts as differential) into one file and showing how differently agents answer without it: <a href="https://github.com/golnazvahedi/epigenetics-agentic-workshop/blob/main/track-b/pod-1-teach-the-agent-your-lab.md">Pod 1, Teach the agent your lab</a>.</li>
+</ul>
+
+
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://code.claude.com/docs/en/memory" class="csl-entry" role="listitem">
+<span>“How <span>Claude</span> Remembers Your Project.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/memory">https://code.claude.com/docs/en/memory</a>.
+</div></div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/seandavi\.github\.io\/2026-penn-epigen-agentic-workshop\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/02-ledger.html" class="pagination-link" aria-label="The ledger">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ledger</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/04-skills.html" class="pagination-link" aria-label="Write a skill">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Write a skill</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/chapters/03-teach-your-agent.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

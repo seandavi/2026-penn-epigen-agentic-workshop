@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; The ledger – Agents for bench scientists</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/03-teach-your-agent.html" rel="next">
+<link href="../chapters/01-website.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8db532a760e6309ca89cbbb647cf1feb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="mermaid-theme" content="neutral">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating slimcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-website.html">Working with an agent</a></li><li class="breadcrumb-item"><a href="../chapters/02-ledger.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ledger</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Agents for bench scientists</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/tree/main/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Working with an agent</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-website.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Build a website</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-ledger.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ledger</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-teach-your-agent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Teach the agent your project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extending the agent</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-skills.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Write a skill</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-mcp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connect to a database (MCP)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Building things</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-build-an-app.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Build an app</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-work-like-a-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Work like a project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Windows notes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-youll-learn" id="toc-what-youll-learn" class="nav-link active" data-scroll-target="#what-youll-learn"><span class="header-section-number">2.1</span> What you’ll learn</a></li>
+  <li><a href="#five-fields" id="toc-five-fields" class="nav-link" data-scroll-target="#five-fields"><span class="header-section-number">2.2</span> Five fields</a></li>
+  <li><a href="#what-real-ledgers-look-like" id="toc-what-real-ledgers-look-like" class="nav-link" data-scroll-target="#what-real-ledgers-look-like"><span class="header-section-number">2.3</span> What real ledgers look like</a></li>
+  <li><a href="#ledger-worked-example" id="toc-ledger-worked-example" class="nav-link" data-scroll-target="#ledger-worked-example"><span class="header-section-number">2.4</span> Worked example</a></li>
+  <li><a href="#ledger-your-turn" id="toc-ledger-your-turn" class="nav-link" data-scroll-target="#ledger-your-turn"><span class="header-section-number">2.5</span> Your turn</a>
+  <ul class="collapse">
+  <li><a href="#step-1-put-the-template-in-your-folder" id="toc-step-1-put-the-template-in-your-folder" class="nav-link" data-scroll-target="#step-1-put-the-template-in-your-folder"><span class="header-section-number">2.5.1</span> Step 1: put the template in your folder</a></li>
+  <li><a href="#step-2-write-entry-1-yourself-for-what-youve-already-done" id="toc-step-2-write-entry-1-yourself-for-what-youve-already-done" class="nav-link" data-scroll-target="#step-2-write-entry-1-yourself-for-what-youve-already-done"><span class="header-section-number">2.5.2</span> Step 2: write entry 1 yourself, for what you’ve already done</a></li>
+  <li><a href="#step-3-make-one-more-change-and-ledger-it-as-you-go" id="toc-step-3-make-one-more-change-and-ledger-it-as-you-go" class="nav-link" data-scroll-target="#step-3-make-one-more-change-and-ledger-it-as-you-go"><span class="header-section-number">2.5.3</span> Step 3: make one more change, and ledger it as you go</a></li>
+  <li><a href="#step-4-if-you-have-time-ask-the-agent-for-its-version-and-compare" id="toc-step-4-if-you-have-time-ask-the-agent-for-its-version-and-compare" class="nav-link" data-scroll-target="#step-4-if-you-have-time-ask-the-agent-for-its-version-and-compare"><span class="header-section-number">2.5.4</span> Step 4 (if you have time): ask the agent for its version, and compare</a></li>
+  <li><a href="#step-5-if-you-have-time-make-it-a-habit-the-agent-helps-with" id="toc-step-5-if-you-have-time-make-it-a-habit-the-agent-helps-with" class="nav-link" data-scroll-target="#step-5-if-you-have-time-make-it-a-habit-the-agent-helps-with"><span class="header-section-number">2.5.5</span> Step 5 (if you have time): make it a habit the agent helps with</a></li>
+  </ul></li>
+  <li><a href="#what-to-notice" id="toc-what-to-notice" class="nav-link" data-scroll-target="#what-to-notice"><span class="header-section-number">2.6</span> What to notice</a></li>
+  <li><a href="#check-yourself" id="toc-check-yourself" class="nav-link" data-scroll-target="#check-yourself"><span class="header-section-number">2.7</span> Check yourself</a></li>
+  <li><a href="#going-further" id="toc-going-further" class="nav-link" data-scroll-target="#going-further"><span class="header-section-number">2.8</span> Going further</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/chapters/02-ledger.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-website.html">Working with an agent</a></li><li class="breadcrumb-item"><a href="../chapters/02-ledger.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ledger</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-ledger" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ledger</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In <a href="01-website.html" class="quarto-xref"><span>Chapter 1</span></a> you asked an agent for a web page, and a few minutes later you had one. Look at what you have now. There’s a file on disk, and a chat that scrolls back a long way. The file tells you what the agent produced. It doesn’t tell you what you asked for, what the agent actually did to get there, or which parts of it anyone has looked at closely. The chat has some of that, mixed in with everything else, and it disappears when you close the session.</p>
+<p>That matters because of what you saw this morning: an agent’s mistakes read exactly like its correct work. It says “done” in the same confident voice whether it checked something or not, and it often reports checks it didn’t run. Nothing in the output tells the two apart. The only thing that separates work you can trust from work you can’t is <strong>what someone actually checked</strong>, and unless that is written down, it’s gone by tomorrow.</p>
+<p>The <strong>ledger</strong> is where it gets written down. It’s a plain text file, <code>LEDGER.md</code>, that sits next to your work, with one short entry per task: what you asked, what the agent did, how you checked, what it got confidently wrong, and what’s worth keeping. It is the agent-era version of the lab notebook you already keep at the bench, and it answers the questions your PI, a reviewer, a collaborator or you in six months will ask about anything an agent helped make: <strong>which parts of this can I trust, and why?</strong></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Markdown</strong> is plain text with a few conventions: <code>#</code> starts a heading, <code>**bold**</code> is bold, <code>&gt;</code> starts a quotation. Any text editor can open a <code>.md</code> file, and GitHub shows it formatted.</p>
+</div></div><div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>In the room?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Skip to <a href="#ledger-your-turn">Your turn</a> and come back to the reading later.</p>
+</div>
+</div>
+<section id="what-youll-learn" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="what-youll-learn"><span class="header-section-number">2.1</span> What you’ll learn</h2>
+<ul>
+<li>Why an agent’s work needs a written record, and who reads it.</li>
+<li>The five fields of a ledger entry, and why <strong>Checked how</strong> is the one that must never be blank.</li>
+<li>How to tell a useful entry from a useless one.</li>
+<li>How to keep a ledger as you work, not reconstruct it afterwards.</li>
+<li>Why an agent’s own account of its work claims more checking than happened, and how to ask for an honest one.</li>
+</ul>
+</section>
+<section id="five-fields" class="level2 page-columns page-full" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="five-fields"><span class="header-section-number">2.2</span> Five fields</h2>
+<p>A ledger entry has five fields. The template is in this workshop’s repository as <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/exercises/LEDGER-template.md"><code>LEDGER-template.md</code></a>.</p>
+<div id="tbl-ledger-fields" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-ledger-fields-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>What goes in it</th>
+<th>A useful entry</th>
+<th>A useless entry</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Asked</strong></td>
+<td>The prompt you actually typed, pasted, not tidied</td>
+<td>“Make me a one-page website about my 2024 paper, using the abstract below …”</td>
+<td>“Asked for a website.”</td>
+</tr>
+<tr class="even">
+<td><strong>Agent did</strong></td>
+<td>What happened: files read and written, commands run</td>
+<td>“Wrote <code>index.html</code> (one file). Read nothing else. Ran no commands.”</td>
+<td>“Built the site.”</td>
+</tr>
+<tr class="odd">
+<td><strong>Checked how</strong></td>
+<td>What <em>you</em> did to confirm it. Never blank; “Not checked” is allowed</td>
+<td>“Opened it in Chrome. Read every sentence against the abstract. Clicked the DOI link. Not checked: on a phone.”</td>
+<td>“Looks good.” or “The agent verified it.”</td>
+</tr>
+<tr class="even">
+<td><strong>Confidently wrong</strong></td>
+<td>Anything it stated that wasn’t true, or “Nothing caught”</td>
+<td>“Gave the year as 2023; it was 2024. Said it had checked the page on mobile; nothing in the session shows it opened the page at all.”</td>
+<td><em>(left blank)</em>, or an invented failure to fill the box</td>
+</tr>
+<tr class="odd">
+<td><strong>Keep</strong></td>
+<td>The prompt, file or lesson worth taking away. Often nothing</td>
+<td>“Pasting the abstract, not the DOI, stopped it making things up about the paper.”</td>
+<td>“Agents are great!”</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-ledger-fields-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.1: The five fields of a ledger entry, each with a useful and a useless example. The examples are illustrative.
+</figcaption>
+</figure>
+</div>
+<p>Most of the fields are easy. Two need more thought.</p>
+<p><strong>Checked how</strong> is the field that matters. It records the verification <em>you</em> did, not the verification the agent says it did. “The agent said the tests pass” is not a check; “I opened <code>test.html</code> and it shows 56 passed” is. And <strong>“Not checked” is an honest, acceptable answer.</strong> You won’t check everything, and you shouldn’t try. What you must not do is leave the field blank, because a blank reads as “fine” to whoever comes after you. An empty box is uncomfortable in a way that “I meant to check that” never is, and that discomfort is the whole mechanism.</p>
+<p><strong>Confidently wrong</strong> is the one people skip, because it feels like admitting a mistake. It isn’t yours; it’s the agent’s, and collecting them is how you learn where <em>this</em> agent, on <em>your</em> kind of work, goes wrong. Over a week the pattern shows up: dates, units, fold-change directions, claims to have run things. “Nothing caught” is a legitimate entry. Don’t invent failures to fill the box.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>“Before doing that, it is important to document how you know the experiment failed, since the interpretation of your results may not be obvious to someone else reading your lab notebook.” Noble’s advice on computational lab notebooks <span class="citation" data-cites="doi:10.1371/journal.pcbi.1000424">(<a href="../appendices/references.html#ref-doi:10.1371/journal.pcbi.1000424" role="doc-biblioref">Noble 2009</a>)</span> applies unchanged to agents.</p>
+<div id="ref-doi:10.1371/journal.pcbi.1000424" class="csl-entry" role="listitem">
+Noble, William Stafford. 2009. <span>“A <span>Quick</span> <span>Guide</span> to <span>Organizing</span> <span>Computational</span> <span>Biology</span> <span>Projects</span>.”</span> <em>PLoS Computational Biology</em> 5 (7): e1000424. <a href="https://doi.org/10.1371/journal.pcbi.1000424">https://doi.org/10.1371/journal.pcbi.1000424</a>.
+</div></div></div><p><a href="#fig-ledger-loop" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> shows where the ledger sits in a session. The dashed line is the shortcut to avoid: copying the agent’s summary of its own work straight into the record.</p>
+<div class="cell page-columns page-full" data-layout-align="default">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-ledger-loop" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-ledger-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-ledger-loop">flowchart LR
+  accDescr: A loop - you ask, the agent acts, the agent says it is done and checked, you
+  ask["You ask"] --&gt; act["Agent acts"]
+  act --&gt; says["Agent says:&lt;br/&gt;done, all checked"]
+  says --&gt; check["You check"]
+  check --&gt; write["Ledger entry"]
+  write -- "next task" --&gt; ask
+  says -. "copying its summary:&lt;br/&gt;avoid" .-&gt; write
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-ledger-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: The ledger in a session. Each task ends with an entry written from what you checked, not from what the agent reported.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="what-real-ledgers-look-like" class="level2 page-columns page-full" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="what-real-ledgers-look-like"><span class="header-section-number">2.3</span> What real ledgers look like</h2>
+<p>A ledger doesn’t need these exact headings. It needs to say what was done and what a person actually checked. Three public ones: this workshop’s own <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/LEDGER.md"><code>LEDGER.md</code></a>, which marks each field as written by Sean or by the agent; <a href="https://github.com/seandavi/peakpeek/blob/main/LEDGER.md">PeakPeek’s</a>, which records which agent’s claims were re-run and which were taken on trust; and the <a href="https://ai-in-medicine.seandavi.workers.dev/appendix/ai-ledger">AI ledger</a> of Sean’s course book <em>AI in Medicine</em>, with its narrative companion, <a href="https://ai-in-medicine.seandavi.workers.dev/appendix/about">How this book was made</a> (<a href="#fig-ledger-aim" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>) <span class="citation" data-cites="url:https://ai-in-medicine.seandavi.workers.dev/appendix/about url:https://ai-in-medicine.seandavi.workers.dev/appendix/ai-ledger">(<a href="../appendices/references.html#ref-url:https://ai-in-medicine.seandavi.workers.dev/appendix/about" role="doc-biblioref"><span>“Appendix <span>A</span> — <span>How</span> This Book Was Made – <span>AI</span> in <span>Medicine</span>,”</span> n.d.</a>; <a href="../appendices/references.html#ref-url:https://ai-in-medicine.seandavi.workers.dev/appendix/ai-ledger" role="doc-biblioref"><span>“Appendix <span>C</span> — <span>AI</span> Ledger – <span>AI</span> in <span>Medicine</span>,”</span> n.d.</a>)</span>.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://ai-in-medicine.seandavi.workers.dev/appendix/about" class="csl-entry" role="listitem">
+<span>“Appendix <span>A</span> — <span>How</span> This Book Was Made – <span>AI</span> in <span>Medicine</span>.”</span> n.d. Accessed September 23, 2026. <a href="https://ai-in-medicine.seandavi.workers.dev/appendix/about">https://ai-in-medicine.seandavi.workers.dev/appendix/about</a>.
+</div><div id="ref-url:https://ai-in-medicine.seandavi.workers.dev/appendix/ai-ledger" class="csl-entry" role="listitem">
+<span>“Appendix <span>C</span> — <span>AI</span> Ledger – <span>AI</span> in <span>Medicine</span>.”</span> n.d. Accessed September 23, 2026. <a href="https://ai-in-medicine.seandavi.workers.dev/appendix/ai-ledger">https://ai-in-medicine.seandavi.workers.dev/appendix/ai-ledger</a>.
+</div></div><div id="fig-ledger-aim" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="A web page headed Appendix C, AI ledger. A paragraph states the rule that any commit where an AI tool drafted or verified content adds a row, and that Human review says what a person actually did. A table of standing uses has columns What, Tool and Human review. Below it, a per-commit log table has columns Date, Artifact, What AI did and Human review.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-ledger-aim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../images/ledger-ai-in-medicine.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;2.2: The top of AI in Medicine’s AI ledger. Its rule: “‘Human review’ says what a person actually did, not that review happened.” Screenshot taken 23 September 2026."><img src="../images/ledger-ai-in-medicine.png" class="img-fluid figure-img" alt="A web page headed Appendix C, AI ledger. A paragraph states the rule that any commit where an AI tool drafted or verified content adds a row, and that Human review says what a person actually did. A table of standing uses has columns What, Tool and Human review. Below it, a per-commit log table has columns Date, Artifact, What AI did and Human review."></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-ledger-aim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: The top of <em>AI in Medicine</em>’s AI ledger. Its rule: “‘Human review’ says what a person actually did, not that review happened.” Screenshot taken 23 September 2026.
+</figcaption>
+</figure>
+</div>
+<p>Two things in that ledger are worth copying. Its <strong>Human review</strong> column is held to the same standard as <em>Checked how</em>: what a person did, not that review happened. And rows that turned out incomplete were left as written, “because they record what was true at that commit”. <strong>A ledger entry is never edited later to look better.</strong> If something changes, add a new entry.</p>
+</section>
+<section id="ledger-worked-example" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="ledger-worked-example"><span class="header-section-number">2.4</span> Worked example</h2>
+<p>Here is the ledger entry for <a href="01-website.html" class="quarto-xref"><span>Chapter 1</span></a>’s worked example, the one-page website about the DESeq2 paper, written from the record of that run. If you did chapter 1, you’ve seen every fact in it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Entry 1 — A one-page website about the DESeq2 paper</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>**Asked**</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Make me a one-page website about this paper: https://doi.org/10.1186/s13059-014-0550-8</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; It should be a single HTML file I can open by double-clicking. Write it for a</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; biologist who has heard of RNA-seq but never used DESeq2. When you're done, tell me</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; where the file is and what you checked.</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Then:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; It's too long for someone skimming. Cut it down so the main story fits on about two</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; screens: keep the one-sentence summary, the big idea with both diagrams, and</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 'in practice'. Put everything else behind 'more detail' sections I can click open.</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Add a dark mode that follows my computer's light/dark setting.</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; What did you put on this page that I didn't tell you and you couldn't have checked?</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; List it, most important first.</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>**Agent did**</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>Tried a PubMed tool (not allowed); the publisher's page redirected to a login three</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>times; got the full text from Europe PMC instead. Wrote <span class="in">`deseq2.html`</span> (one file, 29 KB)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>and a hidden helper script, <span class="in">`.check_html.py`</span>. Tried to open the page and run the script:</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>both refused. Shortened the page, with six click-to-open sections, and added an</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="in">`lfcShrink()`</span> line to the R code unasked. Added dark mode, moving the diagram colours</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>into the style sheet. Said each time that it had not seen the page.</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>**Checked how**</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>*Agent, not a person:* a second agent, driving a real Chrome window, did these; nobody</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>has repeated them by hand. Opened <span class="in">`deseq2.html`</span> in Chrome: no errors in the console. Moved the replicates slider</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>(label went from 28% to 72%) and pressed the shrinkage button: both diagrams redrew.</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>Opened all six "more detail" sections. Clicked the three links (the DOI, two</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>Bioconductor pages): all load. Title, authors, journal and year match the DOI's record</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>at Crossref. Switched the computer to dark mode: the page followed.</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>Not checked: the statistics on the page against the paper's text; whether the</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="in">`lfcShrink()`</span> line runs; the "since 2014" section.</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>**Confidently wrong**</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>Nothing caught that was plainly false. But asked what it couldn't have checked, it</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>listed things the page presented as confidently as the checked parts: the <span class="in">`lfcShrink()`</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>line is untested and may need the <span class="in">`apeglm`</span> package; the "since 2014" section is from</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>memory; the paper's facts came through a fetch tool that summarises pages; and the</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>shrinkage diagram draws only well-measured genes as real effects, so shrinkage looks</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>free. None of this was flagged on the page.</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>**Keep**</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>Before trusting a page, ask: "What did you put on this page that I didn't tell you and</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>you couldn't have checked?"</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>What makes this entry useful:</p>
+<ul>
+<li><strong>Asked is pasted whole, follow-ups included.</strong> Anyone can run the same prompts again. “Asked for a website about DESeq2” would lose the reader, the one-file rule, and the question that did the most work.</li>
+<li><strong>Checked how says who checked.</strong> The agent that built the page said it had checked the paper’s details against the full text; that’s its claim, so it isn’t here. The checks that are here were made by a <em>second</em> agent in a real browser, and the entry says so up front. Your own entry should hold what <em>you</em> did. Each of these is a minute’s work by hand, and has numbers in it (28% to 72%, six sections, three links); the <strong>Not checked</strong> line names exactly where to look before publishing.</li>
+<li><strong>Agent did records the surprises:</strong> the refused steps, the hidden file, and the line of R code nobody asked for. Those are what a reader would otherwise never know.</li>
+<li><strong>Confidently wrong doesn’t invent a failure.</strong> Nothing false was caught, and it says so, then records the unsupported claims that only surfaced when asked.</li>
+<li><strong>Keep is one sentence</strong>, and it’s a practice, not a compliment.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>“Nothing caught” is a real answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Plenty of entries will say <em>Confidently wrong: nothing caught</em>. That’s fine, and it’s information: it tells a reader you looked. What isn’t fine is making something up to fill the box, or leaving it blank.</p>
+</div>
+</div>
+</section>
+<section id="ledger-your-turn" class="level2 page-columns page-full" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="ledger-your-turn"><span class="header-section-number">2.5</span> Your turn</h2>
+<p>You’ll use the <code>agents-workshop/website</code> folder from <a href="01-website.html" class="quarto-xref"><span>Chapter 1</span></a>. If you didn’t do that chapter, do its activity first: it takes about twenty minutes, and this chapter builds on it.</p>
+<p>Allow about 20 minutes for steps 1 to 3. Steps 4 and 5 are for if you have time.</p>
+<p><strong>One <code>LEDGER.md</code> per folder.</strong> This ledger is for the website and lives in its folder. Each later chapter works in its own folder inside <code>agents-workshop</code>, and starts its own <code>LEDGER.md</code> there.</p>
+<section id="step-1-put-the-template-in-your-folder" class="level3 page-columns page-full" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="step-1-put-the-template-in-your-folder"><span class="header-section-number">2.5.1</span> Step 1: put the template in your folder</h3>
+<p>Start a <strong>new</strong> session with the <code>website</code> folder as its folder, as in <a href="../chapters/00-setup.html">Setup</a>, and paste:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Download https://raw.githubusercontent.com/seandavi/2026-penn-epigen-agentic-workshop/main/exercises/LEDGER-template.md and save it in this folder as LEDGER.md. Save the exact file: download it with curl (or Invoke-WebRequest on Windows) rather than retyping it. Then tell me the full path of the file you saved.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Check it’s there: open the folder in Finder or File Explorer and look for <code>LEDGER.md</code>, then open it. On a Mac, right-click it and choose <strong>Open With → TextEdit</strong>; on Windows, Notepad will do. In the Claude desktop app you can also click a file path in the chat to open it in the file pane, edit it and click <strong>Save</strong> <span class="citation" data-cites="url:https://code.claude.com/docs/en/desktop">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/desktop" role="doc-biblioref"><span>“Desktop Application,”</span> n.d.</a>)</span>. On Windows, if <code>LEDGER.md</code> shows as just <code>LEDGER</code>, or you’re not sure it hasn’t become <code>LEDGER.md.txt</code>, turn on file extensions (<a href="../appendices/windows.html" class="quarto-xref"><span>Appendix A</span></a>).</p>
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://code.claude.com/docs/en/desktop" class="csl-entry" role="listitem">
+<span>“Desktop Application.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/desktop">https://code.claude.com/docs/en/desktop</a>.
+</div></div></section>
+<section id="step-2-write-entry-1-yourself-for-what-youve-already-done" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="step-2-write-entry-1-yourself-for-what-youve-already-done"><span class="header-section-number">2.5.2</span> Step 2: write entry 1 yourself, for what you’ve already done</h3>
+<p>Write an honest entry for the website you built in <a href="01-website.html" class="quarto-xref"><span>Chapter 1</span></a>. Write it yourself, not the agent: the point is to notice what you do and don’t know.</p>
+<ul>
+<li><strong>Asked:</strong> scroll back through the chat and paste the prompt you actually typed, typos and all. If you asked for changes, paste those too.</li>
+<li><strong>Agent did:</strong> what files are in the folder now that weren’t before? Did it run anything? If you don’t know, say so.</li>
+<li><strong>Checked how:</strong> what did you do yourself? Opened the page? Read it against your CV, paper or ORCID record? Clicked the links? Anything you didn’t check goes here as “Not checked: …”.</li>
+<li><strong>Confidently wrong:</strong> did the page state anything that wasn’t true: a date, a title, a co-author, a claim about your work? Did the agent say it had checked something it couldn’t have?</li>
+<li><strong>Keep:</strong> a prompt that worked, or nothing.</li>
+</ul>
+<p>Use the <a href="#ledger-worked-example">worked example</a> as your model for size and tone. Yours will be shorter: a few lines per field is plenty.</p>
+</section>
+<section id="step-3-make-one-more-change-and-ledger-it-as-you-go" class="level3" data-number="2.5.3">
+<h3 data-number="2.5.3" class="anchored" data-anchor-id="step-3-make-one-more-change-and-ledger-it-as-you-go"><span class="header-section-number">2.5.3</span> Step 3: make one more change, and ledger it as you go</h3>
+<p>Pick a change: add a figure from your paper, a section about your methods, a photo, a contact line. This time, <strong>write the ledger entry while you work</strong>, not afterwards:</p>
+<ol type="1">
+<li>Paste your prompt into <strong>Asked</strong> <em>before</em> you send it.</li>
+<li>While the agent works, note in <strong>Agent did</strong> what it reads, writes and runs. The chat shows each file it touches and each command it asks permission for.</li>
+<li>When it says it’s done, check the change yourself, and write <strong>Checked how</strong> from what you did.</li>
+<li>Fill in <strong>Confidently wrong</strong> and <strong>Keep</strong>.</li>
+</ol>
+<p>You’ll notice this is easier than step 2. Reconstructing an entry from memory is hard, even an hour later; writing it as you go takes a minute.</p>
+</section>
+<section id="step-4-if-you-have-time-ask-the-agent-for-its-version-and-compare" class="level3" data-number="2.5.4">
+<h3 data-number="2.5.4" class="anchored" data-anchor-id="step-4-if-you-have-time-ask-the-agent-for-its-version-and-compare"><span class="header-section-number">2.5.4</span> Step 4 (if you have time): ask the agent for its version, and compare</h3>
+<p>Now see what the agent would have written. Paste:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Write a ledger entry for the change we just made, using the five fields in LEDGER.md. Save it as agent-entry.md in this folder. Don't change LEDGER.md.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Open <code>agent-entry.md</code> next to your entry and compare them, field by field. Look hardest at <strong>Checked how</strong>. Agents tend to describe the checks that <em>should</em> have happened, or that they believe happened, as if they did: “verified the page renders correctly”, “confirmed all links work”. Ask yourself whether anything in the session shows each of those things being done.</p>
+<p>Then ask it to audit itself:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Go through the Checked how field in agent-entry.md. For each item, say whether you actually did it in this session, and what exactly you did (the command, or the file you opened), or whether you are assuming it. Rewrite the field so that anything you didn't do is listed as "Not checked".</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Keep your own entry in <code>LEDGER.md</code>. If the agent’s version reminded you of something true that you’d left out, add it. Then delete <code>agent-entry.md</code>, or keep it for comparison.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>What goes in a ledger can be read by others
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Your ledger holds your prompts, pasted exactly. If you pasted anything into a prompt, it is now in <code>LEDGER.md</code> too. Before you share a ledger or put it on GitHub, read it for anything identifiable, unpublished or private: patient details, unpublished results, collaborators’ data, passwords or keys. Better still, don’t paste those into an agent in the first place.</p>
+</div>
+</div>
+</section>
+<section id="step-5-if-you-have-time-make-it-a-habit-the-agent-helps-with" class="level3" data-number="2.5.5">
+<h3 data-number="2.5.5" class="anchored" data-anchor-id="step-5-if-you-have-time-make-it-a-habit-the-agent-helps-with"><span class="header-section-number">2.5.5</span> Step 5 (if you have time): make it a habit the agent helps with</h3>
+<p>Writing every entry yourself is the best way to learn what a good one looks like. After a few, it’s reasonable to have the agent draft them, <em>as long as you correct them</em>. Put this in your ledger’s <strong>Keep</strong> field, so you have it to hand:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Keep LEDGER.md as we work. After each task, add an entry with the five fields. In Checked how, list only what you actually did in this session, and say what I should check myself. Never fill in Checked how on my behalf: leave "(your check)" for me.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="03-teach-your-agent.html" class="quarto-xref"><span>Chapter 3</span></a> shows how to write standing instructions like this into a file the agent reads at the start of every session, so you don’t have to paste them.</p>
+</section>
+</section>
+<section id="what-to-notice" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="what-to-notice"><span class="header-section-number">2.6</span> What to notice</h2>
+<ul>
+<li><strong>Step 2 was harder than step 3.</strong> Most people can’t reconstruct what the agent did an hour later. That’s the argument for writing it as you go.</li>
+<li><strong>If you did step 4: your Checked how is shorter than the agent’s</strong>, and truer. An agent’s account of its own checking is a claim, like everything else it says. Treat it as one.</li>
+<li><strong>“Not checked” felt uncomfortable to write.</strong> Good. It’s the most useful line in the file, because it tells the next reader exactly where to look.</li>
+<li><strong>The ledger took minutes, not hours.</strong> Terse is right. It’s a lab notebook, not a report.</li>
+</ul>
+</section>
+<section id="check-yourself" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="check-yourself"><span class="header-section-number">2.7</span> Check yourself</h2>
+<p>You’re done when:</p>
+<ul>
+<li><code>LEDGER.md</code> is in your website folder and has <strong>two entries</strong>.</li>
+<li><strong>Every Checked how field describes something you personally did</strong>, or says “Not checked” plainly. None says “the agent verified” or “looks good”.</li>
+<li>Every <strong>Confidently wrong</strong> field has something in it, even if it’s “Nothing caught”.</li>
+<li>If you did step 4: you can point to at least one claim in the agent’s own entry that nothing in the session supports, or you checked and found none.</li>
+</ul>
+</section>
+<section id="going-further" class="level2 page-columns page-full" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="going-further"><span class="header-section-number">2.8</span> Going further</h2>
+<ul>
+<li><strong>Why the ledger runs through the whole day:</strong> the workshop’s decision record, <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/adr/0005-the-ledger-is-the-spine.md">ADR-0005</a>, “The ledger is the spine of the day”. Each later chapter starts a <code>LEDGER.md</code> in its own folder, with the same five fields.</li>
+<li><strong>Ledgers and decision records:</strong> a ledger records <em>what happened</em>; a decision record records <em>what was decided and why</em>. <a href="07-work-like-a-project.html" class="quarto-xref"><span>Chapter 7</span></a> adds the second, for anything you’ll come back to.</li>
+<li><strong>The older advice:</strong> “For every result, keep track of how it was produced” is rule 1 of Sandve and colleagues’ ten rules for reproducible computational research <span class="citation" data-cites="doi:10.1371/journal.pcbi.1003285">(<a href="../appendices/references.html#ref-doi:10.1371/journal.pcbi.1003285" role="doc-biblioref">Sandve et al. 2013</a>)</span>. A ledger applies it to work an agent did.</li>
+</ul>
+
+
+<div class="no-row-height column-margin column-container"><div id="ref-doi:10.1371/journal.pcbi.1003285" class="csl-entry" role="listitem">
+Sandve, Geir Kjetil, Anton Nekrutenko, James Taylor, and Eivind Hovig. 2013. <span>“Ten <span>Simple</span> <span>Rules</span> for <span>Reproducible</span> <span>Computational</span> <span>Research</span>.”</span> <em>PLoS Computational Biology</em> 9 (10): e1003285. <a href="https://doi.org/10.1371/journal.pcbi.1003285">https://doi.org/10.1371/journal.pcbi.1003285</a>.
+</div></div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/seandavi\.github\.io\/2026-penn-epigen-agentic-workshop\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/01-website.html" class="pagination-link" aria-label="Build a website">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Build a website</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/03-teach-your-agent.html" class="pagination-link" aria-label="Teach the agent your project">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Teach the agent your project</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/chapters/02-ledger.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

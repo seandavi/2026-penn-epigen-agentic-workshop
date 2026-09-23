@@ -1,0 +1,420 @@
+# Teach the agent your project {#sec-teach}
+
+Open a real analysis folder, one you've worked in for a few months, and look at it as
+a stranger would. There's a `data/` folder, but is everything in it raw, or did someone
+save a filtered table there too? There are four scripts with names like `qc.R`,
+`qc_v2.R` and `qc_final_SD.R`: which one is current? A `results/` folder holds figures
+from last spring, and nothing says whether they came from the current script. The
+sample sheet has a column called `cond`, and only you know that `1` is the knockout.
+
+An agent opening that folder is the stranger. It reads quickly and well: files, code,
+headers, any README it finds. What it can't read is **what's only in your head**. Which
+files it must never touch. Where new output goes. The convention that looks like a
+mistake and isn't. What "done" means to you. So it guesses, reasonably, and some of its
+guesses are wrong *for you*. You correct it. Next session it has forgotten, and you
+correct it again.
+
+This morning's talk made the fix sound simple: write it down once, in a file the agent
+reads at the start of every session. It is simple, but there are two traps. The first is
+writing too much: a long file that restates what the agent could have read for itself,
+which costs context on every turn and buries the few lines that matter. The second is
+copying: pasting the sample-sheet description into the agent's file as well as the
+README, so there are now two versions to keep in step, and one of them will drift.
+
+This chapter is about writing the short file, and pointing to everything else.
+
+## What you'll learn
+
+- The difference between a **README**, which is for people, and an **AGENTS.md** (or
+  `CLAUDE.md`), which is for agents.
+- How Claude Code finds and loads these files, and how to make one file work for
+  several tools.
+- How to **link** to other documents instead of copying them, and when an `@` import is
+  the better choice.
+- A loop for finding what belongs in the file: explore, correct, write it down, test it
+  in a fresh session.
+
+## Two files, two readers
+
+Most projects that have any documentation have a README. It's written for a person:
+someone new to the lab, a collaborator, a reviewer, you in a year. It says what the
+project is, how to run it and who to ask. It can be friendly and discursive, because
+people skim.
+
+An `AGENTS.md` is written for an agent, and it should contain **only what an agent can't
+work out by reading the folder**, written as rules. The agent will read your README and
+your code anyway; the agent's file doesn't need to explain them. What it needs are the
+things no amount of reading would reveal: *`data/` is read-only*, *new output goes in
+`results/`*, *check the direction of a fold change before you state it*. Write those as
+**must** and **must not**. "We generally prefer" reads as advice to a person and as
+negotiable to an agent.
+
+| | README.md | AGENTS.md |
+|---|---|---|
+| **Written for** | People: newcomers, collaborators, reviewers, you later | Coding agents |
+| **Says** | What this is, how to run it, where the data came from, who to ask | Only what an agent can't discover: rules, boundaries, what "done" means |
+| **Tone** | Explanatory, friendly | Imperative: *must*, *must not* |
+| **Length** | As long as it needs to be | Short. Under a page; every line costs context, every session |
+| **When it's read** | When someone opens it | Loaded automatically at the start of each session |
+| **Goes wrong when** | Nobody writes it | It restates the README, or goes out of date and keeps giving orders |
+
+: A README and an AGENTS.md do different jobs. The agent reads both, but only one is
+loaded into every session. {#tbl-teach-readme-vs-agents}
+
+::: {.column-margin}
+**Same idea, different names.** `AGENTS.md` is an open convention that many tools read
+[@url:https://agents.md]. Claude Code's own name is `CLAUDE.md`; Gemini CLI's is
+`GEMINI.md` by default. Codex reads `AGENTS.md`. Check your tool's documentation if
+you're not on Claude Code.
+:::
+
+A good README helps the agent too. It's often the first file an agent opens, and in the
+worked example below it did most of the work [@doi:10.1371/journal.pcbi.1006561]. The
+advice for organising a computational project hasn't changed because agents arrived:
+keep raw data separate from results, record what you did, and make it possible for
+someone else to follow [@doi:10.1371/journal.pcbi.1005510;
+@doi:10.1371/journal.pcbi.1000424]. Agents are simply the most literal "someone else"
+you'll ever have.
+
+### How Claude Code finds the file
+
+Claude Code reads its instructions at the start of every session
+[@url:https://code.claude.com/docs/en/memory]. The details matter, because a file in
+the wrong place, or with the wrong name, is silently ignored.
+
+- **`CLAUDE.md`** in the folder you start the session in, and in every folder above it,
+  is loaded at launch. All of them are concatenated; none overrides another.
+- **`AGENTS.md`** is read *instead*, but only when there's no `CLAUDE.md` in the folder
+  or above it. This needs a recent version of Claude Code (2.1.277 or later), and the
+  documentation notes it isn't read in the **first session after you install or
+  upgrade**, which is exactly the situation many people are in today.
+- **Files in subfolders** (`data/CLAUDE.md`, say) aren't loaded at launch. They're read
+  when the agent opens a file in that folder.
+
+The simplest arrangement that works everywhere is two files: write your rules in
+`AGENTS.md`, which every tool can read, and add a `CLAUDE.md` containing one line:
+
+```default
+@AGENTS.md
+```
+
+That line is an **import**. Claude Code expands it, so `CLAUDE.md` loads the whole of
+`AGENTS.md`, whatever version you're on. Other tools ignore `CLAUDE.md` and read
+`AGENTS.md` directly.
+
+::: {.callout-tip}
+## Did it load?
+
+In the `claude` command-line tool, type `/context`: your instruction files are listed
+under memory files. In any tool, you can start a session and ask *"What instructions
+did you load for this folder?"*, then compare the answer with the file. If it doesn't
+mention your rules, check the file's name and location before anything else.
+:::
+
+## Link, don't copy
+
+Your project probably already has documents an agent would find useful: a description
+of the sample sheet, a protocol, notes on how the data were processed. The tempting move
+is to paste them into `AGENTS.md`. Don't. **Point to them instead.**
+
+```markdown
+The sample sheet's columns are described in [docs/samples.md](docs/samples.md).
+What each data file is, and its known quirks: [data/README.md](data/README.md).
+```
+
+A link does three things. The agent's file stays short. The document stays in one
+place, so there's one version to keep current. And the agent reads it **when it needs
+it**: working on the sample sheet, it follows the link; fixing a plotting script, it
+doesn't.
+
+Claude Code also has the import you've just seen: `@docs/samples.md`, outside
+backticks, pulls the whole file into every session at launch, the way `@AGENTS.md` does.
+
+| | Markdown link | `@` import (Claude Code) |
+|---|---|---|
+| **Written as** | `[docs/samples.md](docs/samples.md)` | `@docs/samples.md` |
+| **Loaded** | When the agent decides it needs it | At the start of every session |
+| **Costs context** | Only when read | Always |
+| **Other tools** | Understood everywhere | Only Claude Code; others see plain text |
+| **Use for** | Almost everything | The few documents every session needs, such as `@AGENTS.md` |
+
+: Links are read when needed; imports are always loaded. {#tbl-teach-link-vs-import}
+
+@fig-teach-folder shows the arrangement: a README for people, a short `AGENTS.md` for
+agents that links to the detailed documents, and a one-line `CLAUDE.md` that imports it.
+
+```{mermaid}
+%%| label: fig-teach-folder
+%%| fig-cap: "A project folder that teaches its agent. Solid arrows: loaded at the start
+%%|   of every session. Dashed arrows: links the agent follows when it needs them."
+%%| fig-alt: "Diagram. CLAUDE.md imports AGENTS.md, which is loaded every session.
+%%|   AGENTS.md links to data/README.md and docs/samples.md, read when needed, and
+%%|   sets rules for data/, scripts/ and results/. README.md is for people."
+flowchart LR
+  accDescr: Diagram. CLAUDE.md imports AGENTS.md, which is loaded every session.
+  C["CLAUDE.md<br/>(one line: @AGENTS.md)"] ==>|import| A["AGENTS.md<br/>rules for agents"]
+  R["README.md<br/>for people"]
+  A -.->|link| DR["data/README.md<br/>what each file is"]
+  A -.->|link| S["docs/samples.md<br/>sample sheet"]
+  A -->|"must not edit"| D[("data/")]
+  A -->|"new output here"| O[("results/")]
+  A -->|"current code"| SC[("scripts/")]
+```
+
+::: {.callout-note collapse="true"}
+## `/init`, and why it's only a start
+
+Claude Code's `/init` command writes a starting `CLAUDE.md` by analysing the folder: the
+commands, layout and conventions it discovers. That's useful in a large codebase, but
+notice what it can't include: anything that isn't discoverable. Treat what it writes
+as a draft, delete what the agent could have read for itself, and add the rules only
+you know.
+:::
+
+## Worked example
+
+We tried this on the fallback data you'll meet below: the Vahedi lab's teaching files,
+arranged as a small analysis project with a `data/` folder (DESeq2 tables, a counts
+matrix, a messy sample sheet and the data README) and a `scripts/` folder holding one
+QC script, which is broken on purpose. We used Claude Code 2.1.280 with Claude Opus 5.5,
+from the command line, on 23 September 2026, with no personal instructions loaded. Your
+run will word things differently. The outputs below are real, lightly trimmed.
+
+```{mermaid}
+%%| label: fig-teach-loop
+%%| fig-cap: "The loop in this chapter. The file is written from your corrections, not
+%%|   from a description of the project."
+%%| fig-alt: "Cycle: explore and summarise, then correct what it got wrong, then write
+%%|   AGENTS.md from the corrections, then test in a new session, then back to
+%%|   correcting."
+flowchart LR
+  accDescr: Cycle - explore and summarise, then correct what it got wrong, then write
+  E["1. Explore<br/>and summarise"] --> K["2. Correct<br/>what it got wrong"]
+  K --> W["3. Write AGENTS.md<br/>from the corrections"]
+  W --> T["4. New session:<br/>does it hold?"]
+  T -->|"something slipped"| K
+```
+
+**1. Explore.** We asked for a summary, and nothing else:
+
+```default
+Explore this folder and summarise it for me in under 250 words: what each file is,
+which are raw data and which are results, what analysis this is, and anything you'd
+need to ask me before doing further work here. Don't change any files.
+```
+
+It took about 20 seconds. The summary was good, because the data README is good: it
+had both experiments right, noticed that the two DESeq2 tables have **fold changes
+pointing in opposite directions**, and found three of the script's bugs by reading it.
+Its questions were the useful part:
+
+> 1. The README lists `scbasecount_paper.pdf` and a `tools/` folder, but neither is
+>    here. Are they missing, or not needed?
+> 2. What's the goal: fixing the script, cleaning the sample sheet, or new analysis?
+> 4. May I write output files, and where? The data can't be redistributed outside the
+>    workshop.
+
+Every one of those is something it couldn't have found by reading. That's the list to
+work from.
+
+**2. Correct, and 3. write it down.** We answered its questions and added two things
+we'd have had to say sooner or later, then asked it to turn the lot into rules:
+
+```default
+You explored this folder a moment ago. Here is what you got wrong or had to ask,
+and my answers:
+
+- The paper and tools/ folder aren't needed; ignore them.
+- Everything in data/ is read-only. Never edit, overwrite or move those files.
+  New output goes in results/, which you can create.
+- The goal changes from task to task; I'll say each time.
+- Before you state which way a fold change points, check it against the counts,
+  not just the README.
+- These data are not to leave this computer: don't upload them or paste them
+  anywhere.
+- "Done" means a file in results/ and one line saying how you checked it.
+
+Write an AGENTS.md in this folder that captures just those, as rules (must / must
+not) for a future session. Keep it under 20 lines. Don't repeat what data/README.md
+already says: link to it instead. Also write a one-line CLAUDE.md containing only
+@AGENTS.md. Then show me both files.
+```
+
+It wrote this `AGENTS.md`, fourteen lines, and a `CLAUDE.md` holding only `@AGENTS.md`:
+
+```markdown
+# Rules for this folder
+
+What the data files are: see [data/README.md](data/README.md). Don't restate it; read it.
+
+- You must not use the paper or `tools/`. They are not needed.
+- You must not edit, overwrite, move or delete anything in `data/`. Treat it as read-only.
+- You must write all new output to `results/`. Create it if it doesn't exist.
+- You must not assume a standing goal. The user states the goal for each task.
+- You must check fold-change direction against the raw counts before you state it.
+  The README alone is not enough.
+- You must not upload these data or paste them into any external service, website or tool.
+  They stay on this computer.
+- A task is done only when there is a file in `results/` and you give one line
+  saying how you checked it.
+```
+
+Read it the way you'd read a colleague's protocol. It linked to the data README rather
+than copying it, as asked. Two lines deserve editing. "Must not use the paper" has
+turned *it isn't here* into a prohibition; harmless, but not what we meant. "Must not
+assume a standing goal" is true of every session and earns nothing; we'd delete it.
+**The agent writes the file; you edit it.**
+
+**4. Test it in a new session.** A fresh session, a real task, and none of the rules
+repeated:
+
+```default
+Fix scripts/make_qc_report.py so it gives correct answers, run it on the peak table,
+and tell me how many peaks are gained and lost in the knockout at padj < 0.05 and
+|log2FC| > 1.
+```
+
+It fixed six bugs, changed the script to write its report and plot into `results/`, and
+gave the right numbers: **2,202 gained, 3,056 lost**, matching the data README and an
+independent count we made with `awk`. The data files were untouched (we compared
+checksums). It ended with the line the rules asked for, saying how it had checked.
+
+And it did something we hadn't expected. The fold-change rule says to check direction
+against the counts, but **the peak table has no counts**. So it said so:
+
+> The project rules say to check it against raw counts, but the peak table has none.
+> The "gained/lost" labels therefore rely on `data/README.md`.
+
+That's a rule written from one file's lesson (the gene table, whose direction is the
+surprising one) meeting a file it doesn't fit. It's a better outcome than silent
+compliance, and a sign the rule needs rewording: *where the table has count columns,
+check…*.
+
+**Did the file make a difference?** We ran the same task in an identical folder with no
+`AGENTS.md`. That run also fixed the bugs and got 2,202 and 3,056, and it didn't touch
+the data either. The differences were narrower than you might expect: without the file,
+the script still wrote its plot into whichever folder it was run from, and the answer
+stated the direction from the README without saying it was unchecked. **Most of the
+work was done by a good data README.** The agent's file added the few rules about *how
+we work*, and that's all it should do.
+
+::: {.column-margin}
+Both runs also found that this computer's Python had no `pandas`, and neither could
+install it without permission. Each wrote an independent check with Python's built-in
+`csv` module instead, and said so. We ran the fixed script afterwards, with `pandas`
+supplied by `uv`, and it printed the same counts.
+:::
+
+## Your turn
+
+About 30 minutes. You need a folder with some history: **several scripts, some data,
+some results**. A single notebook is too simple to show much.
+
+::: {.callout-important}
+## Privacy, and a copy
+
+The agent will read every file in the folder. Use data you're allowed to share with the
+tool you're using: nothing identifiable, no patient data, nothing unpublished you
+haven't been cleared to use this way. If the folder matters, **work on a copy** until
+you trust your rules.
+:::
+
+**Your own folder.** Start a new session with the analysis folder as its project folder,
+and check with *"What folder are you in?"*
+
+**The fallback.** Inside `Documents/agents-workshop/`, make an empty folder called
+`teach-demo`, start a new session there ([Setup](00-setup.qmd)), and paste this:
+
+```default
+In this folder, make two subfolders, data and scripts. Download these files from
+https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/
+into data/: README.md, differential_peaks.csv, differential_genes.tsv,
+counts_matrix.csv and sample_sheet_messy.csv. Download make_qc_report.py from the
+same place into scripts/. Save each file exactly as downloaded, with curl (or
+Invoke-WebRequest on Windows); don't retype or rewrite any of them. Don't clone the
+repository. Then list what you downloaded with each file's size.
+```
+
+That's about 11.5 MB: the peak table is 6.7 MB, the gene table 3.5 MB, the counts
+1.3 MB, and the rest a few KB each. These are real data from the Vahedi lab, shared for
+the workshop: don't redistribute them.
+
+Now work through the loop in @fig-teach-loop.
+
+1. **Explore.** Paste the explore prompt from the worked example. Read the summary
+   carefully, and keep a list: everything it got wrong, every question it asked, and
+   everything you'd have told a new student on their first day.
+2. **Sort the list.** Not everything belongs in the agent's file. Use
+   @tbl-teach-where-it-goes.
+3. **Write it down.** Give the agent your list, using the worked example's second
+   prompt as a model. If there's no README, ask for one too, for people: what this is,
+   how to run it, who to ask.
+4. **Edit what it wrote.** Delete any line the agent could have worked out by reading.
+   Reword any rule that's stricter or vaguer than you meant.
+5. **Test it.** Start a **new session** in the same folder ([Setup](00-setup.qmd)): it
+   begins with an empty conversation and reloads the instruction files. Give it a
+   real next task, without repeating any rule. Watch whether the rules hold.
+6. **Ledger it.** One entry: what you had to tell it, and whether writing it down
+   stopped you having to (@sec-ledger).
+
+| If the correction is… | It goes in… |
+|---|---|
+| A rule about how to work here: what not to touch, where output goes, what "done" means | `AGENTS.md` |
+| A fact about the project a person would need too: what the data are, how to run it | `README.md`, or a doc the README links to |
+| A detail of one file, such as the sample sheet's columns | A document next to it, **linked** from `AGENTS.md` |
+| Something the agent got wrong once and could have read | Nowhere. Say it in the chat. |
+
+: Where each correction belongs. {#tbl-teach-where-it-goes}
+
+**On Windows:** turn on file name extensions, or a file you save in Notepad may really be
+`AGENTS.md.txt`; names starting with a dot (a `.claude` folder) are hidden in File
+Explorer by default. See @sec-windows. And don't make `CLAUDE.md` a symbolic link to
+`AGENTS.md`, a trick you may see online: on Windows it needs extra rights and can arrive
+as a one-line text file. The `@AGENTS.md` import works everywhere.
+
+## What to notice
+
+- **What it asked you.** The questions in the first summary are the best guide to what
+  belongs in the file. It asks about what it can't see.
+- **How much it got right.** If your folder has a good README, the agent's file can be
+  very short. If it got a lot wrong, ask whether the README should say more, for people
+  as well as agents.
+- **How it rewrote your rules.** Agents turn "ignore X" into "must not use X" and
+  soften "never" into "try not to". Your wording is the rule; check it survived.
+- **A rule that doesn't fit.** In the worked example, a sensible rule met a file it
+  couldn't apply to. When the agent says a rule can't be followed, that's the rule
+  telling you to rewrite it.
+- **What it did without being told.** A fresh session that behaves well with no file is
+  a result too. If your list is empty, write no file.
+
+## Check yourself
+
+- Open a new session and ask *"What rules apply in this folder?"* Does its answer match
+  your file, and nothing more?
+- Is every line in `AGENTS.md` something the agent couldn't have discovered by reading?
+- Does anything appear in both the README and `AGENTS.md`? Replace one with a link.
+- Did the new session follow the rules without you repeating them? If one slipped,
+  was the rule unclear, or wasn't the file loaded?
+
+::: {.callout-warning}
+## Instruction files go stale
+
+Conventions change and the file doesn't. Six months on it's confidently telling your
+agent to do something you stopped doing in March. Keep it short enough to reread, and
+reread it when the project changes, the way you'd review a protocol.
+:::
+
+## Going further
+
+- **Rules for one part of a project.** A `CLAUDE.md` or `AGENTS.md` inside a subfolder
+  is read when the agent works there, so `data/AGENTS.md` can hold rules about the
+  data alone. Claude Code also has path-scoped rules in `.claude/rules/`
+  [@url:https://code.claude.com/docs/en/memory].
+- **A procedure, not a rule.** If what you're writing down is a multi-step procedure,
+  such as how your lab triages a DESeq2 table, it's a skill, not a rule: that's
+  @sec-skills.
+- **A whole lab's conventions.** The Vahedi lab's afternoon material has a pod that goes
+  further, writing the lab's shared definitions (genome build, what counts as a
+  promoter, what counts as differential) into one file and showing how differently
+  agents answer without it: [Pod 1, Teach the agent your
+  lab](https://github.com/golnazvahedi/epigenetics-agentic-workshop/blob/main/track-b/pod-1-teach-the-agent-your-lab.md).

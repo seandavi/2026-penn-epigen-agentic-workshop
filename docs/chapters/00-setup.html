@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Setup – Agents for bench scientists</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/01-website.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-8db532a760e6309ca89cbbb647cf1feb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="mermaid-theme" content="neutral">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating slimcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/00-setup.html">Setup</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Agents for bench scientists</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/tree/main/book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-setup.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Setup</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Working with an agent</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-website.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Build a website</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-ledger.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ledger</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-teach-your-agent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Teach the agent your project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extending the agent</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-skills.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Write a skill</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-mcp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connect to a database (MCP)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Building things</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-build-an-app.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Build an app</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-work-like-a-project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Work like a project</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/windows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Windows notes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-youll-learn" id="toc-what-youll-learn" class="nav-link active" data-scroll-target="#what-youll-learn">What you’ll learn</a></li>
+  <li><a href="#the-pieces" id="toc-the-pieces" class="nav-link" data-scroll-target="#the-pieces">The pieces</a></li>
+  <li><a href="#install-and-sign-in" id="toc-install-and-sign-in" class="nav-link" data-scroll-target="#install-and-sign-in">Install and sign in</a>
+  <ul class="collapse">
+  <li><a href="#the-desktop-app-recommended" id="toc-the-desktop-app-recommended" class="nav-link" data-scroll-target="#the-desktop-app-recommended">The desktop app (recommended)</a></li>
+  <li><a href="#the-command-line-optional" id="toc-the-command-line-optional" class="nav-link" data-scroll-target="#the-command-line-optional">The command line (optional)</a></li>
+  </ul></li>
+  <li><a href="#make-a-workshop-folder" id="toc-make-a-workshop-folder" class="nav-link" data-scroll-target="#make-a-workshop-folder">Make a workshop folder</a></li>
+  <li><a href="#setup-start-session" id="toc-setup-start-session" class="nav-link" data-scroll-target="#setup-start-session">Start a session in the folder</a></li>
+  <li><a href="#permission-prompts" id="toc-permission-prompts" class="nav-link" data-scroll-target="#permission-prompts">Permission prompts</a></li>
+  <li><a href="#sessions-when-to-start-a-new-one" id="toc-sessions-when-to-start-a-new-one" class="nav-link" data-scroll-target="#sessions-when-to-start-a-new-one">Sessions: when to start a new one</a></li>
+  <li><a href="#where-the-example-data-comes-from" id="toc-where-the-example-data-comes-from" class="nav-link" data-scroll-target="#where-the-example-data-comes-from">Where the example data comes from</a></li>
+  <li><a href="#what-to-notice" id="toc-what-to-notice" class="nav-link" data-scroll-target="#what-to-notice">What to notice</a></li>
+  <li><a href="#check-yourself" id="toc-check-yourself" class="nav-link" data-scroll-target="#check-yourself">Check yourself</a></li>
+  <li><a href="#going-further" id="toc-going-further" class="nav-link" data-scroll-target="#going-further">Going further</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/chapters/00-setup.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-setup" class="quarto-section-identifier">Setup</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Everything in this book happens in one place: a <strong>session</strong> with a coding agent, started in a folder on your own computer. This chapter gets you there. It is the least interesting chapter and the one most worth doing carefully, because every later chapter assumes three things are true: the agent is running, you’re signed in, and it is working in the folder you meant it to.</p>
+<p>The morning talk made the case that an agent differs from a chatbot because it acts: it reads your files, writes new ones and runs commands. That is exactly why the folder matters. A chatbot can only see what you paste into it. An agent can see, and change, whatever is in the folder you start it in, and it will ask before reaching further. So the first habit of the day is a small one: <strong>make a folder for the work, start the agent there, and ask it where it is</strong> before asking it to do anything.</p>
+<p>You don’t need to know how to code, and you don’t need a terminal if you use the desktop app. You also don’t need <code>git</code>, R, Python or anything else installed. Later chapters check what you have and work with it. Allow <strong>15–20 minutes</strong>.</p>
+<section id="what-youll-learn" class="level2">
+<h2 class="anchored" data-anchor-id="what-youll-learn">What you’ll learn</h2>
+<ul>
+<li>Install and sign in to Claude Code, using the desktop app or the command line, on macOS or Windows.</li>
+<li>Make a workshop folder and start a session in it.</li>
+<li>Read a permission prompt and decide what’s safe to allow.</li>
+<li>Start a new session, and know why you’d want to.</li>
+</ul>
+</section>
+<section id="the-pieces" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-pieces">The pieces</h2>
+<p><a href="#fig-setup-session" class="quarto-xref">Figure&nbsp;<span>1</span></a> shows how the parts fit together. You type into a <strong>session</strong>. The session has a chat history, a model and a permission mode, and it works in one <strong>folder</strong>. Inside that folder the agent can read freely; changing things, or reaching outside, depends on what you allow.</p>
+<div class="cell page-columns page-full" data-layout-align="default">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-setup-session" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-setup-session-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-setup-session">flowchart LR
+  accDescr: Diagram - You send prompts to a session, which has a chat history, a model and a permission mode. The session works in the agents-workshop folder and its files. Anything outside the folder needs your approval.
+  you([You]) -- prompts --&gt; s["Session&lt;br/&gt;chat history · model · permission mode"]
+  s -- reads and writes --&gt; f["agents-workshop/&lt;br/&gt;your files"]
+  s -. asks first .-&gt; o["Anything outside&lt;br/&gt;the folder"]
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-setup-session-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: You talk to a session; the session works in one folder. Reading inside the folder is free. Edits and commands follow the permission mode, and anything outside the folder asks first.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>There are several ways to run the same agent. They behave the same where it matters for this book: the prompts, the folder and the permission prompts.</p>
+<div id="tbl-setup-surfaces" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-setup-surfaces-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Claude desktop app, <strong>Code</strong> tab</th>
+<th><code>claude</code> on the command line</th>
+<th>Another agent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Who it suits</td>
+<td>Most people. No terminal needed.</td>
+<td>People who already live in a terminal.</td>
+<td>People already using Gemini CLI, Codex or Copilot.</td>
+</tr>
+<tr class="even">
+<td>How you pick the folder</td>
+<td><strong>Local</strong>, then <strong>Select folder</strong>, when starting a session</td>
+<td><code>cd</code> into the folder, then run <code>claude</code></td>
+<td>Start it in the folder</td>
+</tr>
+<tr class="odd">
+<td>How you change permissions</td>
+<td>The mode selector next to the send button</td>
+<td><strong>Shift+Tab</strong> cycles the modes</td>
+<td>See that tool’s documentation</td>
+</tr>
+<tr class="even">
+<td>Supported in the room</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Best effort</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-setup-surfaces-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Ways to run an agent for this book. Everything in later chapters works in all three, with small differences named where they matter.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="install-and-sign-in" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="install-and-sign-in">Install and sign in</h2>
+<p>The Institute has arranged <strong>Claude Team seats</strong> for the workshop. If the app asks you to upgrade, or you can’t see the Code tab, tell Sean or a helper straight away.</p>
+<section id="the-desktop-app-recommended" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="the-desktop-app-recommended">The desktop app (recommended)</h3>
+<ol type="1">
+<li>Download the installer for your computer from <a href="https://claude.com/download">claude.com/download</a> and run it. Windows on ARM (some Surface laptops) has a separate installer, linked from the <a href="https://code.claude.com/docs/en/desktop-quickstart">desktop quickstart</a>.</li>
+<li>Open Claude from Applications (macOS) or the Start menu (Windows) and sign in.</li>
+<li>Click the <strong>Code</strong> tab at the top centre.</li>
+</ol>
+<p>The app has three tabs, and only one of them is for this book <span class="citation" data-cites="url:https://code.claude.com/docs/en/desktop-quickstart">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/desktop-quickstart" role="doc-biblioref"><span>“Get Started with the Desktop App,”</span> n.d.</a>)</span>:</p>
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://code.claude.com/docs/en/desktop-quickstart" class="csl-entry" role="listitem">
+<span>“Get Started with the Desktop App.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/desktop-quickstart">https://code.claude.com/docs/en/desktop-quickstart</a>.
+</div></div><div id="tbl-setup-tabs" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-setup-tabs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tab</th>
+<th>What it is</th>
+<th>For this book?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Chat</strong></td>
+<td>Conversation, like claude.ai. It can’t see your files.</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><strong>Cowork</strong></td>
+<td>A background agent that works in its own sandboxed virtual machine.</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><strong>Code</strong></td>
+<td>An agent working directly on files in a folder you choose.</td>
+<td><strong>Yes</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-setup-tabs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: The desktop app’s three tabs.
+</figcaption>
+</figure>
+</div>
+<p>The desktop app includes Claude Code. You don’t need to install anything else.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>If the Code tab won’t open
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If it asks you to upgrade, shows an error, or isn’t there, don’t spend time on it: tell Sean or a helper straight away. Afterwards, the app’s troubleshooting guide covers sign-in and <code>Error 403</code> problems <span class="citation" data-cites="url:https://code.claude.com/docs/en/desktop">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/desktop" role="doc-biblioref"><span>“Desktop Application,”</span> n.d.</a>)</span>.</p>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://code.claude.com/docs/en/desktop" class="csl-entry" role="listitem">
+<span>“Desktop Application.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/desktop">https://code.claude.com/docs/en/desktop</a>.
+</div></div></section>
+<section id="the-command-line-optional" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="the-command-line-optional">The command line (optional)</h3>
+<p>If you’d rather use a terminal, install the <code>claude</code> command <span class="citation" data-cites="url:https://code.claude.com/docs/en/setup">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/setup" role="doc-biblioref"><span>“Advanced Setup,”</span> n.d.</a>)</span>. On macOS, in Terminal:</p>
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://code.claude.com/docs/en/setup" class="csl-entry" role="listitem">
+<span>“Advanced Setup.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/setup">https://code.claude.com/docs/en/setup</a>.
+</div></div><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://claude.ai/install.sh <span class="kw">|</span> <span class="fu">bash</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>On Windows, in <strong>PowerShell</strong> (not CMD; <a href="../appendices/windows.html" class="quarto-xref"><span>Appendix A — Windows notes</span></a> explains the difference):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">irm</span> https<span class="op">://</span>claude<span class="op">.</span><span class="fu">ai</span><span class="op">/</span>install<span class="op">.</span><span class="fu">ps1</span> <span class="op">|</span> <span class="fu">iex</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>or, if you use <code>winget</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>winget install Anthropic<span class="op">.</span><span class="fu">ClaudeCode</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then type <code>claude</code> and follow the sign-in prompts in your browser. You don’t need to run as Administrator.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>On Windows
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Claude Code runs natively on Windows 10 (version 1809 or later) and Windows 11. <strong>Git for Windows is optional.</strong> With it, the agent runs commands through Git Bash; without it, it uses PowerShell. Both work for this book, and you only need Git itself in <a href="07-work-like-a-project.html" class="quarto-xref"><span>7&nbsp; Work like a project</span></a>, where the chapter offers a way round if you can’t install it. The Windows appendix, <a href="../appendices/windows.html" class="quarto-xref"><span>Appendix A — Windows notes</span></a>, covers PowerShell versus CMD, finding your Documents folder, showing file extensions, and what to do if <code>claude</code> is “not recognized”.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Using Gemini CLI, Codex or GitHub Copilot?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bring it. What this book teaches carries across: a folder per piece of work, prompts in plain English, a ledger of what you checked. What differs is detail: where a tool keeps its instructions file, how it asks permission, and how it adds skills and connections. Chapters name Claude Code where a step is specific to it. If yours differs, ask your agent: “This book says to do X in Claude Code. What’s the equivalent here?”</p>
+</div>
+</div>
+</section>
+</section>
+<section id="make-a-workshop-folder" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="make-a-workshop-folder">Make a workshop folder</h2>
+<p>Make a new, empty folder called <code>agents-workshop</code> inside your <strong>Documents</strong> folder:</p>
+<ul>
+<li><strong>macOS:</strong> in Finder, open Documents, then <strong>File → New Folder</strong>.</li>
+<li><strong>Windows:</strong> in File Explorer, open Documents, then right-click an empty space and choose <strong>New → Folder</strong>.</li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Why a new, empty folder? So that everything the agent makes in this book is in one place you can find, and nothing else you own is in reach. Later chapters make their own sub-folders inside it.</p>
+</div></div><p>Keep the name exactly <code>agents-workshop</code>, with no spaces. Spaces in folder names work, but they trip up commands in small ways, and later chapters assume this name.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>On Windows: is my Documents folder in OneDrive?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>On many managed laptops, Documents lives inside OneDrive, so its full path is <code>C:\Users\&lt;you&gt;\OneDrive\Documents</code>, or <code>C:\Users\&lt;you&gt;\OneDrive - &lt;institution&gt;\Documents</code>, rather than <code>C:\Users\&lt;you&gt;\Documents</code>. Any of these is fine. When the agent tells you where it is, the path will show which you have. <a href="../appendices/windows.html" class="quarto-xref"><span>Appendix A — Windows notes</span></a> shows how to see a folder’s full path.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="setup-start-session" class="level2">
+<h2 class="anchored" data-anchor-id="setup-start-session">Start a session in the folder</h2>
+<p>This is the one place the book explains how to start a session. Every later chapter says “start a new session in <folder>” and links back here; the steps are always these.</folder></p>
+<p><strong>Desktop app.</strong> In the Code tab, choose <strong>Local</strong> as the environment, click <strong>Select folder</strong>, and pick the folder (here, <code>agents-workshop</code>). Leave the model on its default. Then type your first prompt and press <strong>Enter</strong>.</p>
+<p><strong>Command line.</strong> Open a terminal, move into the folder, and start the agent:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Documents/agents-workshop</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>On Windows, in PowerShell, use this instead. It finds your Documents folder wherever it is, including inside OneDrive:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cd</span> <span class="op">(</span><span class="fu">Join-Path</span> <span class="op">([</span>Environment<span class="op">]::</span>GetFolderPath<span class="op">(</span><span class="st">'MyDocuments'</span><span class="op">))</span> agents-workshop<span class="op">)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>claude</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For a later chapter’s folder, add it to the end: <code>agents-workshop/website</code>, and so on.</p>
+<p>Now send your first prompt:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>What folder are you in, and what's in it?</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It should answer with the full path to <code>agents-workshop</code> and say the folder is empty (on a Mac it may mention a hidden <code>.DS_Store</code> file, which Finder makes; ignore it). That answer is worth reading properly. If it names a different folder, stop: every file it makes from here on would land in the wrong place. Start a new session and pick the folder again.</p>
+<p>Then ask it to make something, so you see an edit happen:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Make a file called hello.txt containing one line: "Setup worked on" followed by</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>today's date. Then tell me the full path to the file.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now go and find <code>hello.txt</code> yourself, in Finder or File Explorer, and open it. (On Windows, if it shows as just <code>hello</code>, turn on file extensions: see <a href="../appendices/windows.html" class="quarto-xref"><span>Appendix A — Windows notes</span></a>.) This is the first check of the day, and the pattern for all the rest: <strong>the agent says it did something; you look.</strong></p>
+</section>
+<section id="permission-prompts" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="permission-prompts">Permission prompts</h2>
+<p>Depending on its <strong>permission mode</strong>, the agent will stop and ask before editing a file or running a command. These prompts are not errors. They are the safety catch working, and they are how you stay in charge of what happens on your computer.</p>
+<p>The desktop app has a mode selector next to the send button; on the command line, <strong>Shift+Tab</strong> cycles through the modes. The main ones <span class="citation" data-cites="url:https://code.claude.com/docs/en/permission-modes">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/permission-modes" role="doc-biblioref"><span>“Choose a Permission Mode,”</span> n.d.</a>)</span>:</p>
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://code.claude.com/docs/en/permission-modes" class="csl-entry" role="listitem">
+<span>“Choose a Permission Mode.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/permission-modes">https://code.claude.com/docs/en/permission-modes</a>.
+</div></div><div id="tbl-setup-modes" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-setup-modes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mode</th>
+<th>What the agent does without asking</th>
+<th>When to use it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Manual</strong></td>
+<td>Reads files. Asks before every edit and every command, showing you the change.</td>
+<td>Your first session, so you see everything it does.</td>
+</tr>
+<tr class="even">
+<td><strong>Accept edits</strong></td>
+<td>Reads, and edits files in the folder. Still asks before other commands.</td>
+<td><strong>Most of this book</strong>, once you’re comfortable.</td>
+</tr>
+<tr class="odd">
+<td><strong>Plan</strong></td>
+<td>Reads and explores, then proposes a plan without changing anything.</td>
+<td>Before a big or unfamiliar task.</td>
+</tr>
+<tr class="even">
+<td><strong>Auto</strong></td>
+<td>Acts, with background safety checks that block risky actions.</td>
+<td>If you see it offered, later, when you know what to expect.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-setup-modes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Permission modes in Claude Code. Your organisation may hide some of them. The desktop app remembers the mode you pick for each folder, except Plan.
+</figcaption>
+</figure>
+</div>
+<p>A fifth mode, <strong>Bypass permissions</strong>, turns off the prompts altogether. It is meant for throwaway sandboxes, not your laptop. Don’t use it.</p>
+<p>When a prompt does appear, three questions settle most of them (<a href="#fig-setup-allow" class="quarto-xref">Figure&nbsp;<span>2</span></a>). <strong>Reading is fine.</strong> Looking at files and listing folders can’t change anything, and the agent does most of it without asking at all. <strong>Edits inside the workshop folder are fine</strong>: that’s what the folder is for, and if an edit is wrong you can ask for it to be undone. <strong>Read before allowing anything else</strong>: a command that deletes or moves files, installs software, touches anything outside the folder, or sends data somewhere. Those are often fine too, but they’re the ones worth a second look.</p>
+<div class="cell page-columns page-full" data-layout-align="default">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-setup-allow" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-setup-allow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-setup-allow">flowchart LR
+  accDescr: Decision diagram. Is it only reading? Allow. Is it editing files inside your workshop folder? Allow. Otherwise (it deletes, installs, reaches outside the folder or sends data out), read it first, and if unsure say no and ask why.
+  q1{"Only&lt;br/&gt;reading?"} -- yes --&gt; a1([Allow])
+  q1 -- no --&gt; q2{"Editing inside&lt;br/&gt;agents-workshop?"}
+  q2 -- yes --&gt; a1
+  a2(["Read it first.&lt;br/&gt;Unsure? Say no,&lt;br/&gt;ask why."])
+  q2 -- "no: deletes, installs,&lt;br/&gt;goes outside, sends out" --&gt; a2
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-setup-allow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Deciding on a permission prompt. When in doubt, say no and ask the agent what the command does and why it needs it.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Saying no is always safe. The agent doesn’t sulk; it tries another way, or asks what you’d prefer. A good follow-up, in plain words:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Before you run that, explain what the command does, which files it touches,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>and why you need it.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>“Yes, and don’t ask again”
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Some prompts offer to remember your answer for that kind of command in this folder. That’s handy for something harmless it runs often, such as listing files. Don’t use it for anything that deletes or installs.</p>
+</div>
+</div>
+</section>
+<section id="sessions-when-to-start-a-new-one" class="level2">
+<h2 class="anchored" data-anchor-id="sessions-when-to-start-a-new-one">Sessions: when to start a new one</h2>
+<p>A session is one conversation: its own chat history, its own folder, its own permission mode. The agent remembers everything said earlier in the session, and nothing from other sessions, unless it’s written down in a file (that’s what <a href="03-teach-your-agent.html" class="quarto-xref"><span>3&nbsp; Teach the agent your project</span></a> is about).</p>
+<p>Start a <strong>new session</strong> for each chapter of this book, and whenever you change task. A long session drifts. It fills up with earlier detail, gets slower, and starts confusing old instructions with new ones, which is the context-window problem from this morning. A fresh session in the same folder costs nothing, because everything that matters is in the files.</p>
+<ul>
+<li><strong>Desktop app:</strong> <strong>+ New session</strong> in the sidebar (<strong>Cmd+N</strong> on macOS, <strong>Ctrl+N</strong> on Windows). Choose <strong>Local</strong> and <strong>Select folder</strong> again, as <a href="#setup-start-session">above</a>. Old sessions stay listed in the sidebar.</li>
+<li><strong>Command line:</strong> type <code>/exit</code>, then <code>cd</code> into the new folder if the chapter uses one, and run <code>claude</code> again. <code>claude -c</code> picks up the most recent conversation in the folder, if you want it back.</li>
+</ul>
+<p>Each later chapter works in its own folder inside <code>agents-workshop</code> (for example <code>agents-workshop/website</code> in <a href="01-website.html" class="quarto-xref"><span>1&nbsp; Build a website</span></a>). When a chapter says “start a new session in” a folder, it means these steps, with that folder picked. Then ask “What folder are you in?” before anything else.</p>
+</section>
+<section id="where-the-example-data-comes-from" class="level2">
+<h2 class="anchored" data-anchor-id="where-the-example-data-comes-from">Where the example data comes from</h2>
+<p>The fallback data in later chapters is real data shared by the Vahedi lab, from their <a href="https://github.com/golnazvahedi/epigenetics-agentic-workshop">workshop repository</a>; there’s nothing to download now, and each chapter’s prompt has the agent fetch the one file it needs.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Privacy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Don’t give the agent patient data, identifiable information, or unpublished data you aren’t allowed to share, in this book or anywhere else, until you know what your institution permits. Most of what’s worth trying today is public or de-identified material, and every chapter offers a public fallback.</p>
+</div>
+</div>
+</section>
+<section id="what-to-notice" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-notice">What to notice</h2>
+<p>The agent answered a question about your computer, not about the world, and made a real file you could open without it. A chatbot couldn’t do either.</p>
+</section>
+<section id="check-yourself" class="level2">
+<h2 class="anchored" data-anchor-id="check-yourself">Check yourself</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>You’re done when
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul class="task-list">
+<li><label><input type="checkbox">Claude (the Code tab) or <code>claude</code> opens and you’re signed in.</label></li>
+<li><label><input type="checkbox">Asked “What folder are you in, and what’s in it?”, the agent names your <code>agents-workshop</code> folder.</label></li>
+<li><label><input type="checkbox">You found and opened <code>hello.txt</code> yourself, outside the agent.</label></li>
+<li><label><input type="checkbox">You know where the permission mode is, and have set it to <strong>Manual</strong> or <strong>Accept edits</strong>.</label></li>
+<li><label><input type="checkbox">You can start a new session.</label></li>
+</ul>
+<p><strong>If it goes wrong:</strong> paste the exact error message into a session and ask the agent what it means (it is surprisingly good at diagnosing its own setup), or pair with a neighbour. Two people at one laptop is a fine way to do this book.</p>
+</div>
+</div>
+</section>
+<section id="going-further" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="going-further">Going further</h2>
+<ul>
+<li><a href="https://code.claude.com/docs/en/desktop-quickstart">Get started with the desktop app</a> and the fuller <a href="https://code.claude.com/docs/en/desktop">desktop guide</a>.</li>
+<li><a href="https://code.claude.com/docs/en/permission-modes">Choose a permission mode</a>: every mode, and what none of them will do without asking.</li>
+<li><a href="https://code.claude.com/docs/en/terminal-guide">Claude Code for first-time terminal users</a> <span class="citation" data-cites="url:https://code.claude.com/docs/en/terminal-guide">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/terminal-guide" role="doc-biblioref"><span>“Terminal Guide for New Users,”</span> n.d.</a>)</span>.</li>
+<li>On Windows: <a href="../appendices/windows.html" class="quarto-xref"><span>Appendix A — Windows notes</span></a>.</li>
+</ul>
+
+
+<div class="no-row-height column-margin column-container"><div id="ref-url:https://code.claude.com/docs/en/terminal-guide" class="csl-entry" role="listitem">
+<span>“Terminal Guide for New Users.”</span> n.d. Accessed September 23, 2026. <a href="https://code.claude.com/docs/en/terminal-guide">https://code.claude.com/docs/en/terminal-guide</a>.
+</div></div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/seandavi\.github\.io\/2026-penn-epigen-agentic-workshop\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/01-website.html" class="pagination-link" aria-label="Build a website">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Build a website</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/edit/main/book/chapters/00-setup.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/seandavi/2026-penn-epigen-agentic-workshop/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
