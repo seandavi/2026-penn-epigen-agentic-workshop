@@ -1,0 +1,92 @@
+# Preface {.unnumbered}
+
+This morning was about what an AI agent is: a model that can read your files, run
+commands and make things, rather than only answer questions about them. This book is the
+other half. It's where you use one, on your own work, at your own pace.
+
+Each chapter explains **why** before it asks you to do anything. Then it walks through
+an example we did ourselves, including what went wrong, and hands over to you. You don't
+need to know how to code for any of it. You do need to read what the agent tells you,
+and to check the parts that matter, because the agent will not always be right, and
+it will rarely say when it isn't.
+
+## How the day works
+
+| Time | What |
+|---|---|
+| 10:00–12:00 | The talk: from chatbot to agent, what's under the hood, working well, skills and MCP |
+| 12:00–13:00 | Lunch |
+| 13:00–14:30 | This book, with Sean in the room. A short getting-started, then your own pace. |
+| 14:30 onwards | The Vahedi lab's self-directed afternoon ([their repository](https://github.com/golnazvahedi/epigenetics-agentic-workshop)) |
+
+: The day {#tbl-day}
+
+**Nobody is expected to finish the book by 14:30.** Most people will get through
+chapters 0 to 2, and some further. The rest is written to be read alone, later, without
+anyone to ask.
+
+## What's in it
+
+```{mermaid}
+%%| label: fig-map
+%%| fig-cap: "How the chapters build on each other. Solid arrows: you need the earlier chapter's folder. Dashed: helpful, not required."
+%%| fig-alt: "A flow diagram. Setup leads to Build a website, which leads to The ledger. Setup also leads to Teach the agent your project, which leads to Write a skill, Connect to a database, and Build an app. Build an app leads to Work like a project."
+flowchart LR
+  S[0 Setup] --> W[1 Website] --> L[2 Ledger]
+  S --> T[3 Teach your agent]
+  T -.-> K[4 Skill]
+  T -.-> M[5 MCP]
+  T -.-> A[6 Build an app]
+  L -.-> A
+  A --> P[7 Work like a project]
+```
+
+| Chapter | You'll make | Roughly |
+|---|---|---|
+| @sec-setup | An agent running in a workshop folder | 10 min |
+| @sec-website | A one-page website, from a paper, a CV or a link | 20 min |
+| @sec-ledger | A record of what the agent did and how you checked it | 20 min |
+| @sec-teach | An `AGENTS.md` for a real analysis folder | 30 min |
+| @sec-skills | A skill that checks a file you know well | 40 min |
+| @sec-mcp | A connection from your agent to PubMed | 30 min |
+| @sec-app | A small app of your own, from a spec you wrote together | 60 min |
+| @sec-project | The same app, with decisions, a ledger and a history | 45 min |
+
+: The chapters {#tbl-chapters}
+
+Chapters 1 and 2 go together. After that, pick what's useful. If you do only one more,
+make it @sec-teach: it's the one that pays off every day.
+
+## How to read it
+
+- **Prompts to paste** are in grey boxes with a copy button. Change the parts in
+  `<angle brackets>` to your own.
+- **Your own material first.** Every activity works best on something you actually do.
+  Each one also gives a fallback, usually public data from the Vahedi lab, for when you
+  have nothing to hand or don't want to use your own.
+- **On Windows?** Look for the collapsed "On Windows" boxes, and @sec-windows.
+- **Using something other than Claude?** Gemini CLI, Codex or Copilot all work for
+  almost everything here. Where a step is specific to Claude Code, the chapter says so.
+
+::: {.callout-important}
+## What not to give an agent
+
+Nothing identifiable about patients or participants. Nothing unpublished that you aren't
+allowed to share. No passwords or keys. Your institution's rules on what may go into an
+AI tool apply here as everywhere; when in doubt, use the fallback data.
+:::
+
+## When something goes wrong
+
+It will. Tell the agent what happened, in plain words, and paste the error message: it's
+usually good at diagnosing its own setup. If it's going in circles, start a new session
+and say what you want again, more precisely. That is not failure. It's most of the skill.
+
+## How this book was made
+
+Written with agents, at Sean Davis's direction, the day before the workshop.
+The decisions behind its shape are in the repository's
+[decision records](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/tree/main/adr),
+and what was asked, done and checked is in its
+[ledger](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/LEDGER.md),
+the same format @sec-ledger teaches.
