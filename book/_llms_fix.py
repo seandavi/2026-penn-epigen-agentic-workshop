@@ -42,6 +42,7 @@ the reader pastes to you. If your web tool summarises pages, download the chapte
 .llms.md file and read it instead, so the prompts you give the reader are exact."""
 
 CALLOUT_MD = re.compile(r"^> \*\*(NOTE|TIP|IMPORTANT|WARNING|CAUTION):\*\*$", re.M)
+CALLOUT_DONE = re.compile(r"^> \*\*(?:NOTE|TIP|IMPORTANT|WARNING|CAUTION): .+\*\*$", re.M)
 CALLOUT_HTML = re.compile(r'<div class="callout callout-style-\w+ callout-(\w+)')
 TITLE_HTML = re.compile(r'<div class="callout-title-container flex-fill">(.*?)</div>', re.S)
 XREF_HTML = re.compile(r'<a href="#((?:fig|tbl)-[^"]+)" class="quarto-xref">(.*?)</a>', re.S)
@@ -98,7 +99,9 @@ def main() -> int:
             # Drop the screen-reader label ("Tip", "Note") Quarto puts before the title.
             titles.append(text(SR_ONLY.sub("", t.group(1))) if t else "")
         markers = list(CALLOUT_MD.finditer(s))
-        if len(markers) == len(titles):
+        if not markers and len(CALLOUT_DONE.findall(s)) == len(titles):
+            pass  # already fixed by an earlier render
+        elif len(markers) == len(titles):
             it = iter(titles)
             s = CALLOUT_MD.sub(
                 lambda m: f"> **{m.group(1)}: {t}**" if (t := next(it)) else m.group(0), s
