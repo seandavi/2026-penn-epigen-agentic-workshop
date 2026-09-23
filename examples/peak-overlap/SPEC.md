@@ -5,7 +5,7 @@ has an answer recorded in `adr/`**.
 
 ## 1. What this is
 
-A single web page that takes a gene annotation (GTF) and one or more peak files, works out
+A single web page that takes a gene annotation (GFF3 or GTF) and one or more peak files, works out
 what kind of genomic region each peak falls in, and draws a bar chart of the proportions,
 with one bar per peak file.
 
@@ -29,21 +29,52 @@ no server and no account, and the page can be hosted as a static site (GitHub Pa
 
 | Input | Formats | Notes |
 |---|---|---|
-| Annotation | GTF, plain or `.gz` | One file. Tested against GENCODE. |
+| Annotation | GFF3 or GTF, plain or `.gz` | One file. Tested against GENCODE. GFF3 is the better choice (§4). |
 | Peaks | BED3+, narrowPeak, broadPeak, plain or `.gz`; CSV/TSV with named `chr`/`start`/`end` columns | One or more files. Each file becomes one bar. |
 
-The reference test data, which is real, public and already in the workshop materials:
+### Reference data
 
-| File | What it is | Size |
+All of it is real, public and **mm10**. Every link was downloaded and checked on
+2026-09-23. Nothing here needs an account.
+
+**Annotation.** GENCODE mouse M25 is the last GENCODE release on GRCm38/mm10. Later
+releases are on mm39 and will silently misplace every mm10 peak (Q12).
+
+| File | Size | URL |
 |---|---|---|
-| `gencode.vM25.basic.annotation.gtf.gz` | GENCODE mouse M25, the last release on **GRCm38/mm10** | 19 MB gzipped; 630 MB and 1,302,168 lines unpacked |
-| `track-a/data/differential_peaks.csv` in [golnazvahedi/epigenetics-agentic-workshop](https://github.com/golnazvahedi/epigenetics-agentic-workshop) | 49,781 H3K27ac union peaks with DESeq2 results, **mm10** | 6.7 MB |
+| GFF3, basic | 23 MB gzipped | `https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M25/gencode.vM25.basic.annotation.gff3.gz` |
+| GTF, basic | 19 MB gzipped; 630 MB and 1,302,168 lines unpacked | `https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M25/gencode.vM25.basic.annotation.gtf.gz` |
 
-Annotation URL:
-`https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M25/gencode.vM25.basic.annotation.gtf.gz`
+**Peaks: five experiment types, one tissue.** All are ENCODE adult male mouse thymus,
+which is mostly developing T cells. They are chosen because they should look
+*different*: each assay has a known genomic preference, so the chart has something to
+show and the participant has something to predict (§7, test 8). Each is ENCODE's
+default peak file for its experiment and downloads as a gzipped narrowPeak.
 
-The peak CSV can be split into two "files" (up in knockout, down in knockout) to exercise
-the multi-file path. How to split it is a user decision, not the tool's (§6, Q10).
+| Assay | File | Experiment | Peaks | What to expect | Caveat |
+|---|---|---|---|---|---|
+| H3K4me3 | [`ENCFF674JZY`](https://www.encodeproject.org/files/ENCFF674JZY/@@download/ENCFF674JZY.bed.gz) | [ENCSR000CCJ](https://www.encodeproject.org/experiments/ENCSR000CCJ/) | 25,099 | Active promoters | |
+| H3K36me3 | [`ENCFF853BYO`](https://www.encodeproject.org/files/ENCFF853BYO/@@download/ENCFF853BYO.bed.gz) | [ENCSR000CFV](https://www.encodeproject.org/experiments/ENCSR000CFV/) | 91,474 | Bodies of transcribed genes | A broad mark called as narrow peaks, so domains are chopped into many ~200 bp pieces. Q2 matters here. |
+| H3K27me3 | [`ENCFF478UYW`](https://www.encodeproject.org/files/ENCFF478UYW/@@download/ENCFF478UYW.bed.gz) | [ENCSR000CGC](https://www.encodeproject.org/experiments/ENCSR000CGC/) | 16,586 | Polycomb-repressed, often developmental, genes | Also broad, also called narrow |
+| CTCF | [`ENCFF714WDP`](https://www.encodeproject.org/files/ENCFF714WDP/@@download/ENCFF714WDP.bed.gz) | [ENCSR000CDZ](https://www.encodeproject.org/experiments/ENCSR000CDZ/) | 20,220 | Insulators, spread across introns and intergenic space | ENCODE flags it *extremely low read depth*. It shows more promoter signal than CTCF usually does. Is that biology, or depth? |
+| DNase-seq | [`ENCFF979ULB`](https://www.encodeproject.org/files/ENCFF979ULB/@@download/ENCFF979ULB.bed.gz) | [ENCSR322AIL](https://www.encodeproject.org/experiments/ENCSR322AIL/) | 67,929 | All accessible chromatin: promoters plus distal elements | Different lab and strain (B6CASTF1/J, not B6NCrl); same tissue, age and sex |
+
+The four ChIP-seq experiments come from the Ren lab (UCSD, ENCODE 2). A sixth file pairs
+with the Vahedi data below: thymus **H3K27ac**,
+[`ENCFF974HMO`](https://www.encodeproject.org/files/ENCFF974HMO/@@download/ENCFF974HMO.bed.gz)
+(35,290 peaks, same experiment series).
+
+Every ENCODE file uses `chr1`-style names, matching GENCODE. Four of them include a
+handful of peaks (1 to 15) on unplaced contigs such as `chrUn_JH584304`, which aren't in
+the `basic` annotation. That exercises the unmatched-chromosome report without tripping
+the 5% refusal.
+
+**The Vahedi lab's own peaks.** `track-a/data/differential_peaks.csv` in
+[golnazvahedi/epigenetics-agentic-workshop](https://github.com/golnazvahedi/epigenetics-agentic-workshop)
+holds 49,781 H3K27ac union peaks with DESeq2 results (6.7 MB). It's a CSV, not a BED, and
+it uses `1`-style chromosome names: two traps in one file (§5). It can be split into two
+"files" (up in knockout, down in knockout) to exercise the multi-file path. How to split
+it is the user's decision, not the tool's (Q10).
 
 ## 3. Outputs
 
@@ -59,21 +90,29 @@ the multi-file path. How to split it is a user decision, not the tool's (§6, Q1
 
 ## 4. Categories
 
-GTF files do not contain most of the categories people want. They have to be **derived**:
+Annotation files contain only some of the categories people want. The rest have to be
+**derived**, and how much derivation is needed depends on the format:
 
-| Category | In the GENCODE GTF? | How to derive it |
-|---|---|---|
-| Promoter | No | A window around each transcript's TSS. The TSS is `start` on `+` strand and `end` on `−` strand. Window size is Q1. |
-| 5′ UTR | **No.** GENCODE has a single `UTR` feature type | `UTR` segments upstream of the transcript's CDS, in transcript orientation. |
-| 3′ UTR | **No**, same as above | `UTR` segments downstream of the CDS. |
-| Exon (CDS / other) | Yes: `exon`, `CDS` | Directly. Non-coding transcripts have exons and no CDS. |
-| Intron | No | Transcript span minus its exons. |
-| Downstream / TTS | No | A window past each transcript's end. Optional (Q7). |
-| Intergenic | No | Everything not covered by any of the above. |
+| Category | GENCODE GFF3 | GENCODE GTF | How to derive it |
+|---|---|---|---|
+| Promoter | No | No | A window around each transcript's TSS. The TSS is `start` on `+` strand and `end` on `−` strand. Window size is Q1. |
+| 5′ UTR | **Yes**: `five_prime_UTR` | **No.** Only a single `UTR` type | From GTF: `UTR` segments upstream of the transcript's CDS, in transcript orientation. |
+| 3′ UTR | **Yes**: `three_prime_UTR` | **No**, same as above | From GTF: `UTR` segments downstream of the CDS. |
+| Exon (CDS / other) | Yes: `exon`, `CDS` | Yes: `exon`, `CDS` | Directly. Non-coding transcripts have exons and no CDS. |
+| Intron | No | No | Transcript span minus its exons. |
+| Downstream / TTS | No | No | A window past each transcript's end. Optional (Q7). |
+| Intergenic | No | No | Everything not covered by any of the above. |
 
-Feature counts in `gencode.vM25.basic`, verified: 55,401 `gene`, 81,540 `transcript`,
-527,731 `exon`, 428,717 `CDS`, 117,716 `UTR`. There are **no** `five_prime_UTR`,
-`three_prime_UTR`, `intron` or `promoter` lines.
+Feature counts, verified for M25 basic:
+
+- **GTF:** 55,401 `gene`, 81,540 `transcript`, 527,731 `exon`, 428,717 `CDS`, 117,716
+  `UTR`.
+- **GFF3:** the same genes, transcripts and exons; 428,861 `CDS`; 68,996
+  `five_prime_UTR`; 45,585 `three_prime_UTR`.
+
+Neither format has `intron` or `promoter` lines. The GFF3 saves the one fiddly
+derivation, splitting UTRs by CDS position and strand, which is why it's the preferred
+input.
 
 Categories overlap: an exon of one transcript can be an intron of another, and a promoter
 can sit inside the intron of a neighbouring gene. Each peak or base therefore needs a
@@ -86,10 +125,10 @@ can sit inside the intron of a neighbouring gene. Each peak or base therefore ne
 This is where these tools are wrong most often, and the error is always small enough to
 look plausible.
 
-- GTF is **1-based, closed**: `start..end` includes both ends.
+- GTF and GFF3 are **1-based, closed**: `start..end` includes both ends.
 - BED is **0-based, half-open**: `[start, end)`.
-- Internally, everything is 0-based half-open. GTF `start` becomes `start − 1`, and `end`
-  is unchanged.
+- Internally, everything is 0-based half-open. An annotation `start` becomes
+  `start − 1`, and `end` is unchanged.
 - If an interval library uses closed intervals, conversion happens at exactly one
   boundary in the code, and a test covers it (see §7).
 
@@ -112,10 +151,12 @@ raising an error.
 
 ### Performance
 
-- Target: the reference GTF plus the reference peaks, from file drop to chart in **under
-  30 seconds** on a 2022-era laptop, without the tab becoming unresponsive.
-- The GTF is streamed line by line and never held in memory as one 630 MB string. Gzip
-  is decoded with the browser's built-in `DecompressionStream`.
+- Target: the reference annotation plus the five ENCODE peak files, from file drop to
+  chart in **under 30 seconds** on a 2022-era laptop, without the tab becoming
+  unresponsive.
+- The annotation is streamed line by line. It is never held in memory as one string, and
+  never as a full tree of feature objects: §8 shows a tree-building parser reaching
+  5.6 GB on this file. Gzip is decoded with the browser's built-in `DecompressionStream`.
 - Parsing and classification run in a **Web Worker**, with a progress indicator.
 - Only the columns and feature types needed are kept. Attributes are parsed for the
   handful of keys used (`transcript_id`, `gene_type`, `transcript_type`, `tag`).
@@ -134,7 +175,7 @@ there is something to disagree with, not because it's right.
 | # | Question | Why it matters | Reference points | Suggested default |
 |---|---|---|---|---|
 | Q1 | **How big is a promoter?** | It is the single biggest driver of the "Promoter" bar. | ChIPseeker `annotatePeak`: `tssRegion = c(-3000, 3000)`. HOMER: TSS −1 kb to +100 bp. | User-settable; default ±1 kb, with the choice shown on the chart |
-| Q2 | **What is being counted?** (a) peaks, assigning each to its highest-priority overlapping category; (b) peaks, by the category at the peak **centre** or summit; (c) **base pairs**, as the fraction of total peak bp in each category | (a) and (b) can differ a lot for wide peaks. The reference data has peaks up to 93,567 bp, so a single peak can span five categories. | HOMER classifies by peak centre. ChIPseeker assigns each peak one category by priority. | (b), with (c) available as a toggle |
+| Q2 | **What is being counted?** (a) peaks, assigning each to its highest-priority overlapping category; (b) peaks, by the category at the peak **centre** or summit; (c) **base pairs**, as the fraction of total peak bp in each category | (a) and (b) can differ a lot for wide peaks. The Vahedi peaks run up to 93,567 bp, so a single peak can span five categories. In the other direction, the ENCODE H3K36me3 file breaks broad domains into tens of thousands of small pieces, so counting peaks weights long genes heavily. | HOMER classifies by peak centre. ChIPseeker assigns each peak one category by priority. | (b), with (c) available as a toggle |
 | Q3 | **Priority order** when categories overlap | It changes the answer for every ambiguous base. | ChIPseeker default: Promoter > 5′UTR > 3′UTR > Exon > Intron > Downstream > Intergenic. HOMER: TSS > TTS > CDS exon > 5′UTR > 3′UTR > … | ChIPseeker order |
 | Q4 | **Which transcripts count?** All in the file, `basic`-tagged only, protein-coding only, or one per gene | Every extra transcript adds promoters and removes introns. | GENCODE ships a separate `basic` file, which is already filtered. | Whatever is in the file, plus an optional protein-coding filter |
 | Q5 | **Chromosome handling:** chrM, unplaced scaffolds, sex chromosomes | They affect both matching and the genome background (Q9). | | Keep all; report unmatched |
@@ -143,31 +184,42 @@ there is something to disagree with, not because it's right.
 | Q8 | **Split Exon** into CDS vs non-coding exon? | Biologically meaningful, and costs one more colour. | HOMER separates CDS exons. | No |
 | Q9 | **Show a genome background bar?** This is the genome's own composition under the same rules. | Without it, "30% promoter" has nothing to compare against. | | Yes. It's what makes the chart interpretable. |
 | Q10 | **Multiple files:** how are they labelled and ordered, and is splitting one file by a column (e.g. `log2FoldChange > 0`) in scope? | Splitting the reference CSV is the natural demo. | | Label from filename, keep input order; splitting is a stretch goal |
-| Q11 | **GTF parser:** use `@gmod/gtf`, or write about 40 lines by hand? | See §8. The library is stale and streams via Node's stream API. | | Hand-written, with tests |
-| Q12 | **Wrong genome build.** mm10 peaks against an mm39 GTF will produce a chart, just a wrong one. | Nothing checks for it. | | Warn if the GTF header names a different assembly from one the user states |
+| Q11 | **Annotation formats and parser.** GFF3, GTF, or both? Library, or hand-written? | See §8. `@gmod/gff` needs 5.6 GB on the reference GFF3; `@gmod/gtf` is stale and built on Node streams. Both formats are nine tab-separated columns and differ only in attribute syntax. | | Both formats, one hand-written streaming parser, with tests |
+| Q12 | **Wrong genome build.** mm10 peaks against an mm39 annotation will produce a chart, just a wrong one. | Nothing checks for it. GENCODE M26 onward is mm39. | | Warn if the annotation header names a different assembly from one the user states |
 
 ## 7. Acceptance tests
 
 Each test must exist and pass before the work is called done.
 
-1. **Hand-built fixture.** A GTF with one `+` and one `−` strand transcript (two exons,
-   UTRs, one intron each) and a BED file with about 12 peaks placed deliberately: inside
-   the promoter window, straddling the window edge by 1 bp, on the exact first and last
-   base of an exon, entirely in an intron, spanning exon and intron, beyond the gene,
-   and on a chromosome absent from the GTF. **The expected category for every peak is
-   written down by a human before any code runs.**
-2. **Off-by-one test.** A peak at BED `[99, 100)` and an exon at GTF `100..200` must
-   overlap. A peak at `[200, 201)` must not.
+1. **Hand-built fixture.** One `+` and one `−` strand transcript (two exons, UTRs, one
+   intron each), written out **as both GFF3 and GTF**, and a BED file with about 12
+   peaks placed deliberately: inside the promoter window, straddling the window edge by
+   1 bp, on the exact first and last base of an exon, entirely in an intron, spanning
+   exon and intron, beyond the gene, and on a chromosome absent from the annotation.
+   **The expected category for every peak is written down by a human before any code
+   runs.** Both annotation formats must give identical results.
+2. **Off-by-one test.** A peak at BED `[99, 100)` and an exon at annotation `100..200`
+   must overlap. A peak at `[200, 201)` must not.
 3. **Strand test.** The promoter of the `−` strand transcript sits past its `end`, not
    before its `start`.
-4. **Name mismatch test.** Peaks named `1` against a GTF with `chr1` match after
+4. **Name mismatch test.** Peaks named `1` against an annotation with `chr1` match after
    normalisation. With normalisation disabled, the tool refuses to draw.
 5. **Bad row test.** A CSV fed to the BED path produces a clear error, not a chart.
-6. **Cross-check.** With settings matched to ChIPseeker (±3 kb, ChIPseeker priority,
-   same transcripts), the reference data should give proportions **close to**
-   ChIPseeker's. Where they disagree, the difference gets explained, not tuned away. This
-   test needs R and is run once, by hand, and recorded in the ledger.
+6. **Cross-check against an independent tool.** Run the same data through something
+   that isn't this code, with settings matched as closely as possible, and compare.
+   Where the numbers disagree, the difference gets explained, not tuned away. Run once,
+   by hand, and record it in the ledger. Two routes:
+   - **ChIPseeker** (R): set `tssRegion` and priority to match your decisions.
+   - **bedtools**: build promoter, exon and transcript BED files from the annotation,
+     `bedtools merge` each, then assign peak centres in priority order with repeated
+     `bedtools intersect -u` / `-v`. It's about fifteen lines of shell and matches
+     counting rule (b) directly.
 7. **Performance.** The reference files, timed in a browser, on the numbers in §5.
+8. **Biology sanity check.** Before running the ENCODE thymus files, write down which
+   bar should be the most promoter-heavy, which should have almost nothing intergenic,
+   and why. Then compare. A chart that contradicts well-established biology is a bug
+   until proven otherwise, and a chart that matches it is not proof of anything — but a
+   mismatch is the cheapest bug detector available.
 
 ## 8. Research findings
 
@@ -182,11 +234,11 @@ first draft, written from recall, got three things wrong:
 
 | Package | Version | Verdict |
 |---|---|---|
-| [`@gmod/gff`](https://github.com/GMOD/gff-js) | 2.1.0 | **GFF3 only; it does not read GTF.** Easy to get wrong, because GTF is often loosely called "GFF". |
+| [`@gmod/gff`](https://github.com/GMOD/gff-js) | 2.1.0 | **GFF3 only; it does not read GTF.** Easy to get wrong, because GTF is often loosely called "GFF". Maintained, no dependencies, and uses web `TransformStream`, so it runs in a browser. **But it can't stream GENCODE.** It builds parent–child trees and releases them only at a `###` sync mark, and GENCODE's GFF3 has none. Measured on the reference file, it emitted nothing for 12 s (the end of the file), and the Node heap peaked at **5.6 GB**, which is beyond what a browser tab gets. Fine for small files; wrong for this one. |
 | [`@gmod/gtf`](https://github.com/GMOD/gtf-js) | 0.0.9 | Reads GTF. Last release **2023-10**. Built on Node streams (it depends on `stream-browserify`). Its README says "for JBrowse, we generally encourage GFF3 over GTF". Usable, but a GTF line is nine tab-separated columns and a hand-written parser is small and easy to test. |
 | [`@gmod/bed`](https://github.com/GMOD/bed-js) | 2.3.0 | Good BED parser, actively maintained (August 2026). narrowPeak uses `new BED({ type: 'bigNarrowPeak' })`; `'narrowPeak'` throws "Type not found". **It does not validate:** `parseLine('chr1,100,200')` returns `chromStart: NaN` with no error. Lines must also be filtered for headers and comments first. |
 | [`@flatten-js/interval-tree`](https://github.com/alexbol99/flatten-interval-tree) | 2.0.3 | Straightforward 1-D interval tree. **Intervals are closed:** `[100,199]` and `[199,200]` overlap. Half-open BED intervals must be inserted as `[start, end − 1]`, or every boundary base is double-counted. |
-| [`flatbush`](https://github.com/mourner/flatbush) | 4.6.2 | Static, very fast packed spatial index. It is 2-D, so a 1-D use needs `y = 0`. Worth considering if the interval tree is too slow to build. The GTF index is built once and never modified, which suits a static index. |
+| [`flatbush`](https://github.com/mourner/flatbush) | 4.6.2 | Static, very fast packed spatial index. It is 2-D, so a 1-D use needs `y = 0`. Worth considering if the interval tree is too slow to build. The annotation index is built once and never modified, which suits a static index. |
 | [`@observablehq/plot`](https://observablehq.com/plot/) | 0.6.17 | One call renders a 100%-stacked bar chart: `Plot.barX(data, Plot.stackX({x: "n", y: "file", fill: "category", offset: "normalize"}))`. Vega-Lite 6.4.3 is the alternative if an interactive spec is wanted. |
 
 Prior art for the definitions, from primary sources:
@@ -210,7 +262,7 @@ test runner. Pages serves the repository root.
 
 ```
 index.html            page shell, file inputs, settings form
-src/gtf.js            GTF line parser → transcript models          (issue: GTF parser)
+src/annotation.js     GFF3/GTF line parser → flat features        (issue: annotation parser)
 src/peaks.js          BED/narrowPeak/CSV → validated intervals     (issue: peak parser)
 src/annotate.js       transcript models → category intervals       (issue: annotation model)
 src/classify.js       intervals + peaks → counts                   (issue: overlap engine)
@@ -224,7 +276,7 @@ test/*.test.js        node --test
 exports plain functions over plain objects:
 
 ```js
-// gtf.js       parseGtfLines(asyncIterable<string>) → AsyncIterable<{chrom, start, end, strand, type, transcriptId, attrs}>
+// annotation.js parseAnnotationLines(asyncIterable<string>, {format}) → AsyncIterable<{chrom, start, end, strand, type, transcriptId, attrs}>
 // peaks.js     parsePeaks(text, {format, zeroBased}) → {peaks: [{chrom, start, end, name}], rejected: [{line, reason}]}
 // annotate.js  buildCategoryIntervals(features, settings) → Map<chrom, [{start, end, category}]>
 // classify.js  classify(categoryIntervals, peaks, settings) → {counts: {category: n}, perPeak: [...], unmatchedChroms: [...]}
@@ -240,14 +292,14 @@ every module's tests assert it.
 |---|---|---|
 | Record decisions for Q1–Q12 in `adr/` | nothing | **First, and done by a human** |
 | Test fixture and expected answers (§7.1–7.3) | decisions | Human writes the expected answers; an agent may write the files |
-| GTF parser | interfaces | ✅ |
+| Annotation parser (GFF3 and GTF) | interfaces | ✅ |
 | Peak parser and validation | interfaces | ✅ |
 | Chart, table and downloads, using mock counts | interfaces | ✅ |
 | Page shell, file inputs and settings form | interfaces | ✅ |
-| Annotation model: derive promoter, UTR, intron and intergenic intervals | GTF parser, fixture | Single owner. This is where the bugs live. |
+| Annotation model: derive promoter, UTR, intron and intergenic intervals | annotation parser, fixture | Single owner. This is where the bugs live. |
 | Overlap engine and counting rule | annotation model, fixture | Single owner, same person as above |
 | Worker, streaming and progress | parsers | ✅ once the parsers merge |
-| ChIPseeker cross-check (§7.6) | everything | Human-run, recorded in the ledger |
+| Independent cross-check (§7.6) and biology check (§7.8) | everything | Human-run, recorded in the ledger |
 
 The four parallel issues touch different files, so they merge cleanly. The
 annotation-model and overlap-engine issues are kept serial and single-owner on purpose:
