@@ -141,15 +141,27 @@ touching each other's files.
 index.html            the page: layout, inputs, cards              (issue 1)
 style.css                                                           (issue 1)
 test.html             runs every file in tests/, shows results      (issue 1)
-tests/assert.js       tiny equal/deepEqual/throws helpers           (issue 1)
+tests/assert.js       PeakPeek.test() and PeakPeek.assert (below)   (issue 1)
 src/read.js           File or URL → text                            (issue 2)
 src/parse.js          text → peaks, skipped, rejected, format       (issue 3)
 src/stats.js          peaks → numbers                               (issue 4)
 src/charts.js         numbers → SVG strings                         (issue 5)
 src/app.js            wires it together; the only file that touches the page's elements  (issue 6)
-examples/fixture.bed  the hand-made test file (§7)
-examples/expected.json  its answers, written by a person
+tests/<name>.test.js  each issue's tests                            (issues 2–5)
+examples/fixture.bed  the hand-made test file (§7), for dropping into the page
+examples/fixture.js   the same text, and its answers written by a person, for test.html
 ```
+
+**Why the fixture is also a script.** A double-clicked page can't `fetch` the file next
+to it: Chrome blocks `file://` requests from a `file://` page, just as it blocks module
+imports. So `test.html` can't read `fixture.bed` or a JSON file of answers. It *can* load
+a script. `examples/fixture.js` sets `PeakPeek.FIXTURE` (the fixture's text, exactly as in
+§7) and `PeakPeek.EXPECTED` (its answers). Issue 7 checks that dropping `fixture.bed` into
+the page gives the same numbers, so the two copies can't drift unnoticed.
+
+**`test.html` loads, in order:** every `src/*.js` except `app.js`, then
+`examples/fixture.js`, `tests/assert.js`, and every `tests/*.test.js`. It lists them by
+name, because a page can't list a folder. Then it runs the tests and shows the results.
 
 ```js
 // read.js    PeakPeek.readFile(file: File) → Promise<string>
@@ -158,12 +170,16 @@ examples/expected.json  its answers, written by a person
 //            whose message says which of §5's failures happened.
 //
 // parse.js   PeakPeek.parsePeaks(text: string, {oneBased = false} = {}) →
-//              { format: "bed3" | "bed6" | "narrowPeak" | "broadPeak" | "csv" | "tsv",
+//              { format: "bed3" | "bed4" | "bed5" | "bed6" | "narrowPeak" | "broadPeak"
+//                        | "csv" | "tsv",       // from the accepted lines' column count
 //                peaks: [{chrom, start, end, name?, score?, signal?, p?, q?}],  // 0-based half-open
 //                skipped: number,
 //                rejected: [{line: number, text: string, reason: string}] }   // line is 1-based
 //
-// stats.js   PeakPeek.summarise(peaks) →
+// stats.js   PeakPeek.logBins(minWidth, maxWidth, n = 30) → number[]  // n + 1 edges
+//            PeakPeek.summarise(peaks, {bins} = {}) →   // bins: edges, so several files
+//                                                       // can share them (§3.3); default
+//                                                       // logBins over this file's widths
 //              { n, widths: {min, median, mean, max, sum}, mergedBp, duplicates,
 //                chromStyle: "chr" | "bare" | "mixed",
 //                perChrom: [{chrom, n}],            // natural order, then "other"
@@ -174,6 +190,14 @@ examples/expected.json  its answers, written by a person
 // charts.js  PeakPeek.histogramSVG(summaries: [{label, histogram}], {width}) → string
 //            PeakPeek.chromBarsSVG(summaries: [{label, perChrom}], {width}) → string
 //            Both return standalone SVG text, so "download SVG" is just saving the string.
+//
+// assert.js  PeakPeek.test(name: string, fn: () => void | Promise<void>)   // registers
+//            PeakPeek.assert.equal(actual, expected, message?)
+//            PeakPeek.assert.deepEqual(actual, expected, message?)
+//            PeakPeek.assert.near(actual, expected, tolerance, message?)
+//            PeakPeek.assert.throws(fn, pattern?: RegExp)    // pattern tested on the message
+//            PeakPeek.assert.rejects(promise, pattern?: RegExp)
+//            PeakPeek.runTests() → Promise<{passed, failed, results}>   // test.html calls it
 ```
 
 ## 5. The traps
@@ -219,7 +243,7 @@ defaults are **suggestions**.
 ## 7. Acceptance tests
 
 1. **The fixture.** `examples/fixture.bed` below, written by hand, with its answers in
-   `examples/expected.json`. **The answers are written by a person before any code
+   `examples/fixture.js`. **The answers are written by a person before any code
    exists, and never edited to make a test pass.**
 2. **Double-click.** Open `index.html` by double-clicking it. It loads with no console
    errors. So does `test.html`, and every test passes.
@@ -263,7 +287,7 @@ With the suggested defaults (Q1, Q3, Q4):
 
 | Answer | Value |
 |---|---|
-| Format | bed3 plus a name column (BED4) |
+| Format | `bed4`: BED3 plus a name column |
 | Accepted | 9: `a b c d e f g k a` |
 | Skipped | 4: lines 1, 2, 3 and 15 |
 | Rejected | 4: line 11 (zero width), 12 (end before start), 13 (start isn't a number), 17 (too few columns) |
@@ -283,10 +307,11 @@ The issues live **here, as checklists**, not on GitHub. Each one owns its files 
 touches nothing else, so issues 1–5 can be built **at the same time, by different agents,
 in the same folder**.
 
-**How to use them.** An agent building an issue ticks that issue's boxes as it goes, and
-changes nothing else in this file. It writes `Done — agent` on the *Status* line when it
-thinks it's finished. **You** change that to `Done — <your name>`, after checking it
-yourself, and add a ledger entry. An issue isn't done until a person says so.
+**How to use them.** An agent building an issue *reports* which boxes it believes are
+met, and the evidence. **You** tick them after checking, change *Status* to
+`Done — <your name>`, and add a ledger entry. Agents don't edit this file: several of
+them work in the folder at once, and two editing the same file at the same moment can
+silently undo each other's changes. An issue isn't done until a person says so.
 
 | # | Issue | Owns | Needs |
 |---|---|---|---|
@@ -306,8 +331,8 @@ Spec: §3.1, §4. **Status:** open
       results area, and loads every `src/*.js` with classic `<script>` tags
 - [ ] `test.html` loads the same scripts, then every `tests/*.test.js`, and shows each
       test's pass/fail on the page, with a total
-- [ ] `tests/assert.js` gives `equal`, `deepEqual` and `throws`, with messages that show
-      expected and actual
+- [ ] `tests/assert.js` gives §4's `PeakPeek.test`, `PeakPeek.assert` and
+      `PeakPeek.runTests`, with failure messages that show expected and actual
 - [ ] Both pages open by double-clicking, with no console errors
 - [ ] Works with only placeholder `src/` files, so issues 2–5 don't wait for it
 
@@ -334,7 +359,7 @@ Spec: §2, §5 (header lines onwards), §6 Q1–Q3, Q5. **Status:** open
 - [ ] Rejections carry the 1-based line number and a reason
 - [ ] `1e+03` is accepted and `1.5e2` rejected
 - [ ] The CSV `oneBased` setting shifts start by one; the default follows Q2
-- [ ] **The fixture's accepted, skipped and rejected lines match `examples/expected.json`**
+- [ ] **The fixture's accepted, skipped and rejected lines match `PeakPeek.EXPECTED`**
 
 ### Issue 4: Statistics
 
@@ -346,7 +371,8 @@ Spec: §3.2, §4 (`stats.js`), §6 Q3, Q4, Q6, Q11. **Status:** open
 - [ ] `PeakPeek.naturalChromOrder` puts `chr2` before `chr10`, and `chrX, chrY, chrM` after
       the numbers, with or without `chr`
 - [ ] narrowPeak `-1` values are left out of score ranges
-- [ ] **Every fixture number in `examples/expected.json` matches**
+- [ ] **Every fixture number in `PeakPeek.EXPECTED` matches**
+- [ ] `PeakPeek.logBins` gives n + 1 increasing edges; shared bins give comparable histograms
 - [ ] Timed on 100,000 random peaks: well under a second
 
 ### Issue 5: Charts
@@ -381,6 +407,7 @@ Spec: §7. Needs 6. **Status:** open
 - [ ] Test 5: a Zenodo URL gives the CORS message
 - [ ] Test 6: one file cross-checked with a tool that isn't the page
 - [ ] Test 7: the prediction was written in the ledger *before* loading
+- [ ] `examples/fixture.bed` dropped into the page gives the numbers in `PeakPeek.EXPECTED`
 
 ### Later, if you like
 
@@ -397,10 +424,10 @@ decided, who did what, and how it was checked.
 - [ ] `README.md`: what this is, how to open it, and what state it's in
 - [ ] `SPEC.md`: this file, or your version of it
 - [ ] `adr/`: one record per §6 question, plus a `template.md`
-- [ ] §8's issues ticked as they're built, and each one's *Status* signed off by a person
+- [ ] §8's issues ticked and signed off by a person, as each one is checked
 - [ ] `AGENTS.md` (or `CLAUDE.md`): only what an agent can't work out by reading the folder
 - [ ] `LEDGER.md`: one entry per issue: asked, did, checked how, confidently wrong, keep
-- [ ] `examples/fixture.bed` and `examples/expected.json`, written by a person
+- [ ] `examples/fixture.bed`, and its answers in `examples/fixture.js`, written by a person
 - [ ] `test.html` passes, and the ledger says who last saw it pass
 - [ ] Version history: `git`, if you have it (one commit per issue); if not, copy the
       folder to `snapshots/<date>-issue-N/` before each issue starts

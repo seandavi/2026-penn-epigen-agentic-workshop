@@ -94,9 +94,10 @@ can't work out by reading the folder:
 - No code before every question in SPEC.md §6 has a record in adr/.
 - Classic <script> tags only. The page must work when index.html is double-clicked.
 - Edit only the files your issue owns (SPEC.md §8). If you need another, stop and ask.
-- examples/expected.json was written by a person. Never edit it to make a test pass.
-- In SPEC.md, touch only your issue's checkboxes in §8, and its Status line up to
-  "Done — agent". Signing it off is mine.
+- The answers in examples/fixture.js were written by a person. Never edit them to make a
+  test pass.
+- Don't edit SPEC.md, even your issue's checkboxes: other agents work in this folder at
+  the same time. Report which boxes you believe are met; I tick them.
 - Add a LEDGER.md entry when you finish an issue.
 ```
 
@@ -115,11 +116,18 @@ the reason yourself.
 Q2 (0- or 1-based) and Q4 (what "coverage" means) matter most. Both change numbers without
 changing how the page looks.
 
-Then **write the fixture's answers yourself**, into `examples/expected.json`, before any
+Then **write the fixture's answers yourself**, into `examples/fixture.js`, before any
 code exists. SPEC.md §7 has the fixture and a table of answers for the suggested defaults.
 If your decisions differ, your answers will too. Work them out by hand. It takes ten
 minutes, and it's the only check in the project that doesn't depend on the agent being
 right.
+
+It's a script, not a JSON file, because a double-clicked page can't read the files next
+to it (SPEC.md §4). Let the agent make the empty shell, then fill in the answers yourself:
+
+> Create examples/fixture.bed from SPEC.md §7, and examples/fixture.js setting
+> PeakPeek.FIXTURE to the same text and PeakPeek.EXPECTED to an object with a field for
+> every answer in §7's table, all left as null. **Don't fill any in.**
 
 If you have `git`, now's the moment: `git init && git add -A && git commit -m "Spec, decisions, fixture"`.
 If not, copy the folder to `snapshots/decisions/`.
@@ -132,8 +140,8 @@ for each (separate terminal tabs, or separate windows) and give each the same in
 with its own number:
 
 > Build issue N from SPEC.md §8. Read SPEC.md, adr/ and AGENTS.md first. Edit only the files
-> the issue owns. Write tests in its tests/ file. When they pass in test.html, tick the
-> issue's boxes and tell me exactly what you checked.
+> the issue owns. Write tests in its tests/ file. When they pass in test.html, tell me
+> which of the issue's boxes you believe are met, and exactly what you checked.
 
 Some tools can do the fan-out for you: Claude Code can run sub-agents in parallel. Doing
 it by hand once is worth it: you see what the automation is hiding.
@@ -143,8 +151,8 @@ and pull requests would do on GitHub. **Check it held**: before you accept an is
 the agent which files it changed, and look at the folder's modification times yourself.
 
 Then **review each one**. Open `test.html` and see the tests pass *yourself*. Read the code
-the agent wrote for the parts you care about. Only then sign off its *Status* line in
-SPEC.md §8 with your name, and add a ledger entry for it.
+the agent wrote for the parts you care about. Only then tick its boxes in SPEC.md §8,
+sign off its *Status* line with your name, and add a ledger entry for it.
 
 Issue 6 comes after, **one agent, one session**: it wires everything into the page.
 
@@ -167,7 +175,7 @@ real bugs:
 
 - **Does `chr10` come after `chr2`?** Sorting as text puts it first. The chart still looks
   fine.
-- **The fixture.** Every mismatch with your `expected.json` is either a bug or a decision
+- **The fixture.** Every mismatch with your answers in `fixture.js` is either a bug or a decision
   you now disagree with. Both are worth knowing.
 - **A failing URL** (§7, test 5). A good error message is a feature. "Something went wrong"
   is a bug.
@@ -184,6 +192,42 @@ where someone else could see **what was decided, by whom, and how it was checked
 
 If you run out of time after step 3, you still have the most valuable part: a spec with
 every decision made, ready for any agent to build.
+
+## Second step, optional: put it on GitHub
+
+**Only if you have `git` and a GitHub account, and only once the page works.** Everything
+so far stayed on your laptop. This step publishes it: the code, the decisions, the
+ledger, and a live copy of the page at a public URL. That's outward-facing, so the
+prompt makes the agent show you everything before anything leaves your machine.
+
+> Help me publish this project on GitHub. **Before you run anything that touches
+> GitHub, show me the full plan and wait for my yes.**
+>
+> 1. If this folder isn't a git repository yet, make it one. If there are snapshot folders,
+>    fold them into the history as commits, oldest first. Add a .gitignore for data files
+>    and anything else that shouldn't be published. List every file that will be
+>    published, and flag anything that looks private: data, names, email addresses, keys.
+> 2. Add an MIT LICENSE, and a short README section on how to open the page.
+> 3. Create a repository on my account (ask me whether public or private) and push.
+> 4. Turn each issue in SPEC.md §8 into a GitHub issue with the same checkboxes: file the
+>    signed-off ones as closed, and link each one to the ledger entry that checked it.
+>    Leave the "Later, if you like" ideas as open issues.
+> 5. Publish the page with GitHub Pages, from the main branch. Then open the live URL,
+>    load one ENCODE file by URL, and tell me whether it worked.
+> 6. Add a ledger entry for all of this.
+
+What to notice:
+
+- **Did it actually wait?** Step 3 is the point of no return for a public repository.
+- **What did it want to publish?** A `data/` folder of downloaded peak files, a
+  snapshot with your name in a path, a ledger entry that quotes a colleague. Read the list.
+- **GitHub Pages is served over `https://`**, not `file://`. What changes? Loading your own
+  files keeps working, and so do the URLs, but the page is now reachable by anyone. Is
+  that what you want?
+- **After this, work changes shape.** Issues and pull requests replace the checklists,
+  and branches replace "edit only your files". The
+  [peak-overlap exercise](stretch-spec-then-build.md) and
+  [peakwhere](https://github.com/seandavi/peakwhere) show that version.
 
 ## The full-size version
 
