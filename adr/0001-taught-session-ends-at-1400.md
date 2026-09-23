@@ -1,7 +1,7 @@
 # ADR-0001 — The taught session ends at 14:00 and hands off
 
 **Date:** 2026-09-22 (recorded 2026-09-23, reconstructed from the day's discussion)
-**Status:** accepted
+**Status:** superseded by [ADR-0007](0007-talk-first-then-a-self-paced-book.md) (timetable only; the handover still holds)
 
 ## Context
 
