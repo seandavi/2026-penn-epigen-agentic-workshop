@@ -150,6 +150,10 @@ The instruction "edit only the files the issue owns" is doing all the work that 
 and pull requests would do on GitHub. **Check it held**: before you accept an issue, ask
 the agent which files it changed, and look at the folder's modification times yourself.
 
+If you use `git`, **commit named files only while agents are working**: `git commit -a`
+or `git add -A` sweeps up every agent's half-written code. (We did exactly that
+building our copy; an agent noticed.)
+
 Then **review each one**. Open `test.html` and see the tests pass *yourself*. Read the code
 the agent wrote for the parts you care about. Only then tick its boxes in SPEC.md §8,
 sign off its *Status* line with your name, and add a ledger entry for it.
