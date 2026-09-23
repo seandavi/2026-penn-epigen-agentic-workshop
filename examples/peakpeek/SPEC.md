@@ -1,4 +1,4 @@
-# Peek — a peak file at a glance: specification
+# PeakPeek — a peak file at a glance: specification
 
 **Status:** draft. Section 6 lists open questions; **no code gets written until each one
 has an answer recorded in `adr/`**.
@@ -122,7 +122,7 @@ not assumed:
 - **Classic scripts, not ES modules.** A page opened from a file has the origin `null`,
   and Chrome refuses to load `<script type="module">` imports from it. Plain
   `<script src="src/parse.js">` tags work. Each script adds its functions to one global
-  object, `window.Peek`.
+  object, `window.PeakPeek`.
 - **No build step and no packages.** The charts are hand-written SVG: a histogram and a
   bar chart are about 60 lines each. If you want a charting library anyway, that's a
   decision (Q9), not a default.
@@ -152,27 +152,27 @@ examples/expected.json  its answers, written by a person
 ```
 
 ```js
-// read.js    Peek.readFile(file: File) → Promise<string>
-//            Peek.readURL(url: string) → Promise<string>
+// read.js    PeakPeek.readFile(file: File) → Promise<string>
+//            PeakPeek.readURL(url: string) → Promise<string>
 //            Both gunzip if the first two bytes are 1f 8b. readURL throws an Error
 //            whose message says which of §5's failures happened.
 //
-// parse.js   Peek.parsePeaks(text: string, {oneBased = false} = {}) →
+// parse.js   PeakPeek.parsePeaks(text: string, {oneBased = false} = {}) →
 //              { format: "bed3" | "bed6" | "narrowPeak" | "broadPeak" | "csv" | "tsv",
 //                peaks: [{chrom, start, end, name?, score?, signal?, p?, q?}],  // 0-based half-open
 //                skipped: number,
 //                rejected: [{line: number, text: string, reason: string}] }   // line is 1-based
 //
-// stats.js   Peek.summarise(peaks) →
+// stats.js   PeakPeek.summarise(peaks) →
 //              { n, widths: {min, median, mean, max, sum}, mergedBp, duplicates,
 //                chromStyle: "chr" | "bare" | "mixed",
 //                perChrom: [{chrom, n}],            // natural order, then "other"
 //                histogram: [{from, to, n}],        // log-scaled bins
 //                scores?: {signal: [min, max], p: [min, max], q: [min, max]} }
-//            Peek.naturalChromOrder(a, b) → number  // for Array.prototype.sort
+//            PeakPeek.naturalChromOrder(a, b) → number  // for Array.prototype.sort
 //
-// charts.js  Peek.histogramSVG(summaries: [{label, histogram}], {width}) → string
-//            Peek.chromBarsSVG(summaries: [{label, perChrom}], {width}) → string
+// charts.js  PeakPeek.histogramSVG(summaries: [{label, histogram}], {width}) → string
+//            PeakPeek.chromBarsSVG(summaries: [{label, perChrom}], {width}) → string
 //            Both return standalone SVG text, so "download SVG" is just saving the string.
 ```
 
@@ -279,9 +279,14 @@ is there to catch.
 
 ## 8. Issues
 
-Written as a checklist in `ISSUES.md`, not on GitHub. Each issue owns its files and
+The issues live **here, as checklists**, not on GitHub. Each one owns its files and
 touches nothing else, so issues 1–5 can be built **at the same time, by different agents,
 in the same folder**.
+
+**How to use them.** An agent building an issue ticks that issue's boxes as it goes, and
+changes nothing else in this file. It writes `Done — agent` on the *Status* line when it
+thinks it's finished. **You** change that to `Done — <your name>`, after checking it
+yourself, and add a ledger entry. An issue isn't done until a person says so.
 
 | # | Issue | Owns | Needs |
 |---|---|---|---|
@@ -291,11 +296,91 @@ in the same folder**.
 | 4 | Statistics | `src/stats.js`, `tests/stats.test.js` | — |
 | 5 | Charts | `src/charts.js`, `tests/charts.test.js` | — |
 | 6 | Wiring it together | `src/app.js` | 1–5 |
-| 7 | Acceptance: §7 tests 3–7 | the ledger | 6 |
+| 7 | Acceptance | `LEDGER.md` | 6 |
 
-Each issue in `ISSUES.md` has: what to build, the spec sections that apply, the files it
-owns, and its acceptance checkboxes. An agent marks its own boxes; **you** mark the issue
-done.
+### Issue 1: Page shell and test page
+
+Spec: §3.1, §4. **Status:** open
+
+- [ ] `index.html` has the drop zone, file picker (several files), URL box and an empty
+      results area, and loads every `src/*.js` with classic `<script>` tags
+- [ ] `test.html` loads the same scripts, then every `tests/*.test.js`, and shows each
+      test's pass/fail on the page, with a total
+- [ ] `tests/assert.js` gives `equal`, `deepEqual` and `throws`, with messages that show
+      expected and actual
+- [ ] Both pages open by double-clicking, with no console errors
+- [ ] Works with only placeholder `src/` files, so issues 2–5 don't wait for it
+
+### Issue 2: Reading files and URLs
+
+Spec: §4 (`read.js`), §5 (the first five rows). **Status:** open
+
+- [ ] `PeakPeek.readFile` and `PeakPeek.readURL` return the file's text
+- [ ] Gzip detected by the bytes `1f 8b`, not the file name
+- [ ] Multi-member gzip (`bgzip`) gives an error saying so, never a partial file
+- [ ] A server that doesn't allow the fetch (CORS) gives §5's plain message
+- [ ] An HTML page instead of a peak file gives "this is a web page, not a peak file"
+- [ ] Tests for gzip, plain text, bgzip and HTML, built from bytes in the test (no network)
+- [ ] Checked by hand, in a real browser: one ENCODE URL and one raw GitHub URL load; a
+      Zenodo URL gives the CORS message. Record which browser
+
+### Issue 3: Parsing
+
+Spec: §2, §5 (header lines onwards), §6 Q1–Q3, Q5. **Status:** open
+
+- [ ] `PeakPeek.parsePeaks` returns the §4 shape, coordinates 0-based half-open
+- [ ] Format detected: BED3, BED6, narrowPeak, broadPeak, CSV, TSV
+- [ ] `track`, `browser`, `#` and blank lines are skipped and counted
+- [ ] Rejections carry the 1-based line number and a reason
+- [ ] `1e+03` is accepted and `1.5e2` rejected
+- [ ] The CSV `oneBased` setting shifts start by one; the default follows Q2
+- [ ] **The fixture's accepted, skipped and rejected lines match `examples/expected.json`**
+
+### Issue 4: Statistics
+
+Spec: §3.2, §4 (`stats.js`), §6 Q3, Q4, Q6, Q11. **Status:** open
+
+- [ ] `PeakPeek.summarise` returns the §4 shape
+- [ ] Median of an even count is the mean of the middle two
+- [ ] Merged bp merges overlapping *and* touching peaks, per chromosome
+- [ ] `PeakPeek.naturalChromOrder` puts `chr2` before `chr10`, and `chrX, chrY, chrM` after
+      the numbers, with or without `chr`
+- [ ] narrowPeak `-1` values are left out of score ranges
+- [ ] **Every fixture number in `examples/expected.json` matches**
+- [ ] Timed on 100,000 random peaks: well under a second
+
+### Issue 5: Charts
+
+Spec: §3.2, §3.3, §4 (`charts.js`), §6 Q6, Q9. **Status:** open
+
+- [ ] `PeakPeek.histogramSVG` and `PeakPeek.chromBarsSVG` return standalone SVG text
+- [ ] Several files share axes and have a legend
+- [ ] Axis labels say what's counted, and the width axis says it's log-scaled
+- [ ] Readable with colour blindness (for example, the Okabe–Ito palette)
+- [ ] Tests check the SVG parses, and that a file with one peak or one chromosome doesn't
+      break it
+- [ ] Looked at by eye, in `test.html` or a scratch page, with the fixture and one real file
+
+### Issue 6: Wiring it together
+
+Spec: §3, §6 Q7, Q8, Q10. Needs 1–5. **Status:** open
+
+- [ ] Dropping files and pasting URLs both produce a card per file, with progress
+- [ ] Labels are editable; the side-by-side view appears with two or more files
+- [ ] Errors from issue 2 appear on that file's card; other files still load
+- [ ] The summary CSV and each chart's SVG download
+- [ ] Still opens by double-clicking, with no console errors
+
+### Issue 7: Acceptance
+
+Spec: §7. Needs 6. **Status:** open
+
+- [ ] Test 2: double-click, both pages, all tests pass
+- [ ] Test 3: all five ENCODE files uploaded; every number matches §2
+- [ ] Test 4: the Vahedi CSV by URL, both coordinate settings, matches §2
+- [ ] Test 5: a Zenodo URL gives the CORS message
+- [ ] Test 6: one file cross-checked with a tool that isn't the page
+- [ ] Test 7: the prediction was written in the ledger *before* loading
 
 ### Later, if you like
 
@@ -312,7 +397,7 @@ decided, who did what, and how it was checked.
 - [ ] `README.md`: what this is, how to open it, and what state it's in
 - [ ] `SPEC.md`: this file, or your version of it
 - [ ] `adr/`: one record per §6 question, plus a `template.md`
-- [ ] `ISSUES.md`: the §8 issues as checklists
+- [ ] §8's issues ticked as they're built, and each one's *Status* signed off by a person
 - [ ] `AGENTS.md` (or `CLAUDE.md`): only what an agent can't work out by reading the folder
 - [ ] `LEDGER.md`: one entry per issue: asked, did, checked how, confidently wrong, keep
 - [ ] `examples/fixture.bed` and `examples/expected.json`, written by a person

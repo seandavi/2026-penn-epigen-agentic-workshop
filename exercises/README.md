@@ -13,7 +13,7 @@ specification to parallel agents. Neither is part of the taught session.
 
 | Stretch | Size | Needs |
 |---|---|---|
-| [Peek: a peak file at a glance](stretch-peek.md) | An afternoon | A browser. No GitHub, `git` or Node. |
+| [PeakPeek: a peak file at a glance](stretch-peakpeek.md) | An afternoon | A browser. No GitHub, `git` or Node. |
 | [Peak overlap](stretch-spec-then-build.md) | More than an afternoon | `git`, and GitHub if you want issues and pull requests |
 
 ## Bring your own work

@@ -313,19 +313,21 @@ would expose. Write the fixture to the standard, not to the example.
 
 ---
 
-## Entry 10 — A second, smaller stretch exercise: Peek
+## Entry 10 — A second, smaller stretch exercise: PeakPeek
 
 **Asked** — *SD*: the peak-overlap app is too big for an afternoon, and some attendees
 won't have `git` or GitHub. Write a smaller exercise, a peak-file summariser taking
 uploads or URLs, with the prompt to get the spec, the spec itself, a social-coding
 checklist and the likely problems. Keep development local.
 
-**Agent did** — Wrote `examples/peak-stats/SPEC.md` and `exercises/stretch-peek.md`. The
+**Agent did** — Wrote `examples/peakpeek/SPEC.md` and `exercises/stretch-peakpeek.md`. The
 design is one folder with `index.html` opened by double-clicking. It uses classic
 scripts, no packages or build step, and a `test.html` page instead of a test runner.
-Issues go in `ISSUES.md`, parallel agents share one folder on disjoint files, and
+Issues are checklists in the spec itself (§8): agents tick boxes, and only a person signs
+an issue off. Parallel agents share one folder on disjoint files, and
 history is `git` if available, otherwise folder snapshots. Indexed both from the READMEs,
-and pointed the peak-overlap exercise at Peek and peakwhere.
+and pointed the peak-overlap exercise at PeakPeek and peakwhere. *SD* chose the name
+PeakPeek, and chose checklists in the spec over a separate issues file.
 
 **Checked how** — *Agent*, all in Chrome 152 driven by `playwright-core`, because `curl`
 answers a different question:
