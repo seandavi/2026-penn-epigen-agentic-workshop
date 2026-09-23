@@ -43,7 +43,13 @@ carries on (@fig-mcp-flow).
 %%| fig-cap: "One question, answered through the PubMed MCP server. The agent chooses
 %%|   the tools and the search terms; the server turns each call into a query against
 %%|   PubMed and returns the records."
+%%| fig-alt: "A sequence diagram with four participants: You, Agent, PubMed MCP server
+%%|   and PubMed. You ask the agent for papers on TCF-1 and 3D genome. The agent calls
+%%|   search_articles on the server, which searches PubMed and returns matching PMIDs.
+%%|   The agent then calls get_article_metadata and gets titles, authors and journals,
+%%|   and answers you with three papers, their PMIDs and sources."
 sequenceDiagram
+  accDescr: A sequence diagram with four participants - You, Agent, PubMed MCP server
     participant You
     participant Agent
     participant Server as PubMed MCP server
@@ -89,22 +95,8 @@ Anthropic keeps a list of MCP servers and skills for life sciences in a public G
 repository, packaged as Claude Code **plugins** in a **marketplace**
 [@url:https://github.com/anthropics/life-sciences]. A plugin is a bundle; a marketplace
 is a list of plugins you can install by name. The servers themselves are run by the
-data providers, not by Anthropic. @tbl-mcp-servers lists the ones most useful to this
-room, and only claims what we checked on 23 September 2026.
-
-| Plugin | Reaches | Account | What we checked |
-|---|---|---|---|
-| `pubmed` | PubMed and PubMed Central (NLM) | None | Connected, listed 7 tools, answered real queries |
-| `open-targets` | Open Targets Platform: target–disease evidence | None found | Connected, answered a real query that matched the website's API |
-| `biorxiv` | bioRxiv and medRxiv preprints | Not stated | Not checked: refused our test request (403), which may be bot-blocking |
-| `chembl` | ChEMBL bioactive compounds | Not stated | Not checked, as above |
-| `clinical-trials` | ClinicalTrials.gov | Not stated | Not checked, as above |
-| `biorender`, `synapse`, `wiley-scholar-gateway`, `consensus` | Figures; Sage data; Wiley papers; paper search | Free account | Not checked; account needs from the repository's README |
-| `10x-genomics`, `cortellis`, `adisinsight` | 10x Cloud; drug regulation; drug pipelines | Paid or institutional | Not checked; from the README |
-
-: Some of the MCP servers in `anthropics/life-sciences`. The repository also carries
-skills (single-cell QC, nf-core pipelines, scvi-tools), which are the kind of thing you
-met in @sec-skills. {#tbl-mcp-servers}
+data providers, not by Anthropic. PubMed, which this chapter uses, is one of them;
+"Going further" lists some of the others (@tbl-mcp-servers).
 
 **PubMed is not in the official Anthropic marketplace** that Claude Code sets up for
 you. To install it as a plugin you add the life-sciences marketplace first. The simpler
@@ -170,8 +162,10 @@ part of the check that no tool does for you.
 
 ## Your turn
 
-You'll need about 20 minutes. Use your workshop folder from [Setup](00-setup.qmd), or make a new
-folder for this chapter.
+You'll need about 20 minutes. Inside your `agents-workshop` folder in Documents (from
+[Setup](00-setup.qmd)), make a new folder called `mcp`, and start a **new** session on it.
+Ask "what folder are you in?" to be sure. Everything in this chapter happens in
+`agents-workshop/mcp`, and its `LEDGER.md` lives there too (@sec-ledger).
 
 ::: {.callout-warning}
 ## What leaves your machine
@@ -189,12 +183,14 @@ a gene you study. Start a new session and ask:
 
 ```default
 Find three recent papers on <your topic>. For each give the first author, year,
-journal, title and PMID. Say where each fact came from. Don't search the web.
+journal, title and PMID. Say where each fact came from. Don't search the web, and
+don't use any PubMed or other database tools.
 ```
 
-"Don't search the web" matters: Claude Code can search the web, and today you want
-to see what it knows **without** a database. Copy the answer into your ledger
-(@sec-ledger) under *Asked*.
+The last sentence matters: Claude Code can search the web, and your account may already
+have a PubMed connection (see "Two PubMed servers?" below). Today you want to see what
+the agent knows **without** a database. Start a `LEDGER.md` entry in this folder: the
+prompt goes under *Asked*, and the agent's answer under *Agent did*.
 
 No topic in mind? Use ours: the question in the worked example. Or use genes from the
 Vahedi lab's RNA-seq data: the top hits in `differential_genes.tsv`, from their
@@ -209,7 +205,7 @@ the work, and it works in the desktop app and the command line alike.
 | Route | Best if you use | You type | Where it's saved |
 |---|---|---|---|
 | A. Ask the agent | Anything | A prompt | `.mcp.json` in this folder |
-| B. Command line | `claude` in a terminal | One command | `.mcp.json` in this folder |
+| B. Command line | The `claude` command in a terminal | One command | `.mcp.json` in this folder |
 | C. Plugin | Claude Code | Two commands, or the plugin browser | Your user settings: every folder |
 
 : Three ways to connect the same server. A and B only affect this folder, which is
@@ -229,17 +225,28 @@ Create a file called .mcp.json in this folder, containing exactly:
   }
 }
 
-Then tell me the full path of the file.
+Then create .claude/settings.local.json in this folder (make the .claude folder if
+needed; if the file exists, add the key and keep what's there), containing:
+
+{
+  "enabledMcpjsonServers": ["pubmed"]
+}
+
+Then tell me the full path of both files.
 ```
 
-This is the project-level MCP file Claude Code reads, in the documented format
+The first file is the project-level MCP file Claude Code reads, in the documented format
 [@url:https://code.claude.com/docs/en/mcp]. The desktop app's Code tab reads the same
-file. Then **start a new session in the same folder**: servers are loaded when a session
-starts. Claude Code asks you to approve a server from `.mcp.json` the first time it
-sees it. Approve it; you've read what's in it. (In the desktop app, check on the day
-exactly how that approval appears.)
+file. The second **approves** the server: Claude Code won't use a server from
+`.mcp.json` until you do, and `enabledMcpjsonServers` in `.claude/settings.local.json` is
+exactly what its approval dialog writes when you say yes
+[@url:https://code.claude.com/docs/en/settings-reference]. You're approving it by hand,
+having read what's in it, so it works whether you use the desktop app or the command
+line. Then **start a new session in the same folder**: servers are loaded when a
+session starts. If an approval prompt appears anyway, approve it.
 
-**Route B: the command line.** In a terminal, in your workshop folder:
+**Route B: the command line.** Only if you installed the `claude` command; the
+desktop app on its own doesn't give you one. In a terminal, in `agents-workshop/mcp`:
 
 ```bash
 claude mcp add --transport http pubmed --scope project https://pubmed.mcp.claude.com/mcp
@@ -261,8 +268,8 @@ this installs it for **you**, in every folder, not just this one. We tested the 
 steps from the shell (`claude plugin marketplace add …`, then `claude plugin install …`)
 and the server connected. In the desktop app, plugins live under the **+** button, then
 **Plugins**, then **Add plugin**, which browses the marketplaces you've already added.
-Whether you can add a *new* marketplace from there, check on the day. If not, use
-route A.
+We haven't confirmed that you can add a *new* marketplace from there, so if you use only
+the desktop app, route A is the safer choice.
 
 ::: {.callout-tip}
 ## Using Gemini CLI, Codex or Copilot?
@@ -279,7 +286,7 @@ file it names.
 - **Let the agent create `.mcp.json` (route A).** The name starts with a dot and File
   Explorer hides extensions by default, so a file made in Notepad can end up called
   `.mcp.json.txt` and be silently ignored.
-- Route B works in PowerShell or CMD once `claude` is installed.
+- Route B's command is for **PowerShell**, once `claude` is installed.
 - Plugins aren't available in WSL sessions. See @sec-windows.
 :::
 
@@ -310,13 +317,16 @@ listed, see "If it goes wrong" below.
 
 Servers added to your claude.ai account as **connectors** also appear in Claude Code
 when you're signed in with that account. On Team and Enterprise plans only admins can
-add them. So you may see a "claude.ai PubMed" as well as the one you just added. They
-reach the same database; either will do.
+add them, and an admin can switch on a PubMed connector **for everyone**. If yours has,
+your agent had PubMed before you added anything, which is why step 1 tells it not to use
+database tools. So you may see a "claude.ai PubMed" as well as the one you just added.
+They reach the same database; either will do.
 :::
 
 ### 4. Ask again, with the database
 
-Ask exactly the question from step 1, but take out "Don't search the web" and add:
+Ask exactly the question from step 1, but take out the last sentence ("Don't search
+the web …") and add:
 
 ```default
 Use PubMed. For each paper, say whether you read the abstract or chose it from the
@@ -339,15 +349,17 @@ This is the step that counts. For three of the papers, open
 3. **Does the abstract support what the agent said about it?** Read it. This is the
    check no tool can do for you.
 
-Then write a ledger entry. *Checked how* is the three PMIDs and what you found, and
-*Confidently wrong* is anything that didn't hold up.
+Then write a second ledger entry. *Asked* is the step 4 prompt; *Agent did* is how you
+connected PubMed and what the agent answered; *Checked how* is the three PMIDs and what
+you found; *Confidently wrong* is anything that didn't hold up; *Keep* is what you'd do
+the same way next time.
 
 ### If it goes wrong
 
 | What you see | What to try |
 |---|---|
 | PubMed isn't in the tool list | Start a **new** session in the same folder; servers load at start. |
-| "Pending approval" | Run `claude` in the folder and approve the server, or start a new desktop session there. |
+| "Pending approval", or PubMed listed but not connected | Check `.claude/settings.local.json` exists in this folder and names `pubmed` (route A's second file), then start a new session. With the `claude` command, you can instead run `claude` in the folder and approve it. |
 | The agent searches the web instead | Say "Use the PubMed tools, not web search." |
 | `.mcp.json` is somewhere else | Ask "What folder are you in?" The file must sit in the folder the session was started in. |
 | A plugin command is "unknown" | Update Claude Code, or use route A. |
@@ -416,5 +428,23 @@ code on your machine.
   wiring up a server, or having the agent write a small one around a public API such as
   Ensembl or GEO:
   [Pod 2, Connect to the outside world](https://github.com/golnazvahedi/epigenetics-agentic-workshop/blob/main/track-b/pod-2-mcp-connections.md).
-- **Undo it.** Delete `.mcp.json`, or run `claude mcp remove pubmed -s project`. A plugin
+- **Undo it.** Ask the agent to delete `.mcp.json` and `.claude/settings.local.json`, or
+  run `claude mcp remove pubmed -s project`. A plugin
   can be uninstalled from `/plugin`, or from **Manage plugins** in the desktop app.
+- **Other life-sciences servers.** Anthropic's marketplace
+  [@url:https://github.com/anthropics/life-sciences] lists more. @tbl-mcp-servers says
+  only what we checked on 23 September 2026.
+
+| Plugin | Reaches | Account | What we checked |
+|---|---|---|---|
+| `pubmed` | PubMed and PubMed Central (NLM) | None | Connected, listed 7 tools, answered real queries |
+| `open-targets` | Open Targets Platform: target–disease evidence | None found | Connected, answered a real query that matched the website's API |
+| `biorxiv` | bioRxiv and medRxiv preprints | Not stated | Not checked: refused our test request (403), which may be bot-blocking |
+| `chembl` | ChEMBL bioactive compounds | Not stated | Not checked, as above |
+| `clinical-trials` | ClinicalTrials.gov | Not stated | Not checked, as above |
+| `biorender`, `synapse`, `wiley-scholar-gateway`, `consensus` | Figures; Sage data; Wiley papers; paper search | Free account | Not checked; account needs from the repository's README |
+| `10x-genomics`, `cortellis`, `adisinsight` | 10x Cloud; drug regulation; drug pipelines | Paid or institutional | Not checked; from the README |
+
+: Some of the MCP servers in `anthropics/life-sciences`. The repository also carries
+skills (single-cell QC, nf-core pipelines, scvi-tools), which are the kind of thing you
+met in @sec-skills. {#tbl-mcp-servers}

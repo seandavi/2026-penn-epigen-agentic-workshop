@@ -22,6 +22,14 @@ A paper, your CV, a lab web page, an ORCID record, a GitHub profile. An agent wo
 from a source you can check against is doing a different, better job than an agent
 writing from memory. And you'll have something to check it against.
 
+::: {.callout-tip}
+## In the room?
+
+Read down to [What to build it from](#sec-website-sources), then skip to
+[Your turn](#sec-website-your-turn). Come back for the worked example later: it shows
+what one real run did, and what it got wrong.
+:::
+
 ## What you'll learn
 
 - Give an agent a goal and a source, and get back a file you can open.
@@ -43,6 +51,7 @@ then it reports. @fig-website-loop shows the loop for this chapter's task.
 %%| fig-cap: "What happens between your prompt and the agent's reply. Every arrow out of the agent is a tool it uses, and the ones that reach outside your folder, such as fetching a web page, may ask your permission first."
 %%| fig-alt: "Flow diagram. You give a goal and a source. The agent reads the source, writes index.html into your folder, tries to check the page, and fixes what it finds, looping back to writing. Then it reports to you, and you open the file and check it yourself."
 flowchart TD
+  accDescr: Flow diagram. You give a goal and a source. The agent reads the source, writes index.html into your folder, tries to check the page, and fixes what it finds, looping back to writing. Then it reports to you, and you open the file and check it yourself.
   you["You: a goal<br/>and a source"] --> read["Reads the source<br/>(web page, PDF, CV)"]
   read --> write["Writes the file<br/>into your folder"]
   write --> check["Tries to check it"]
@@ -65,19 +74,7 @@ permission first. When it can't look, a good agent says so. A careless one says
 page and read it against the source. That's what the rest of this book calls
 verifying, and it starts here.
 
-@tbl-website-chat-agent sets the two ways of working side by side for this task.
-
-| | Chatbot | Agent |
-|---|---|---|
-| Where the page ends up | In the chat, as text to copy | In a file in your folder |
-| Reading your source | Only what you paste in | Fetches the URL or reads the file itself |
-| Changing it | Paste, copy, save, repeat | "Make it shorter", and the file changes |
-| Checking it | You, entirely | It may try; you still check |
-| What can go wrong unseen | Copy-paste mistakes | Files you didn't ask for, claims it couldn't check |
-
-: The same task, done two ways. The agent removes the copying and pasting. It doesn't remove the checking. {#tbl-website-chat-agent}
-
-### What to build it from
+### What to build it from {#sec-website-sources}
 
 The source is what keeps the page honest. @tbl-website-sources lists what works well.
 Pick whichever you'd actually like a page about.
@@ -100,11 +97,9 @@ agent struggles, suggest it.
 :::
 
 **Nothing to hand?** Use the DESeq2 paper, as in the worked example below
-[@doi:10.1186/s13059-014-0550-8], or the open-access single-cell paper in the Vahedi
-lab's repository,
-[`scbasecount_paper.pdf`](https://github.com/golnazvahedi/epigenetics-agentic-workshop/raw/main/track-a/data/scbasecount_paper.pdf)
-(Youngblut et al., *Cell* 2026, CC BY 4.0). Download the PDF into your folder and point
-the agent at it.
+[@doi:10.1186/s13059-014-0550-8], or the open-access scBaseCount paper
+[@doi:10.1016/j.cell.2026.08.025] from the Vahedi lab's repository. Step 2 of
+[Your turn](#sec-website-your-turn) has a prompt that downloads it for you.
 
 ## Worked example
 
@@ -246,7 +241,10 @@ as authoritative as the correct parts, if nobody had asked.
 
 ### What we checked ourselves
 
-The agent never saw its page, so we did, in Chrome:
+The agent never saw its page, so we checked it outside that session, in Chrome. To be
+exact about "we": these checks were made by a second agent, the one writing this
+chapter, driving a real Chrome window, and Sean hasn't repeated them. Each one is
+something you can do by hand in a minute:
 
 - it opened from the file with **no errors** in the browser's console;
 - the replicates slider moved the diagram (the "weight on gene's own data" label went
@@ -261,9 +259,10 @@ whether the `lfcShrink()` line runs. The agent's list tells us exactly where to 
 if we wanted to publish this page. For a first run, knowing *where* it's weak is
 the result.
 
-## Your turn
+## Your turn {#sec-website-your-turn}
 
-Allow about 20 minutes. Make one page, change it twice, and ask the question.
+Allow about 20 minutes. Make one page, change it once (twice if you have time), and ask
+the question.
 
 ### 1. Make a folder and start a session there
 
@@ -283,6 +282,18 @@ Windows), stop and start the session again in the right folder.
 Pick one thing from @tbl-website-sources. If it's a file (a PDF of a paper, your CV),
 copy it into the `website` folder. If it's a URL, a DOI or an ORCID iD, just have it
 ready to paste.
+
+**Nothing to hand?** Paste the DESeq2 paper's DOI, `10.1186/s13059-014-0550-8`, into
+step 3's prompt. Or have the agent fetch the scBaseCount paper, a PDF, into your folder:
+
+```default
+Download this file into this folder, saved as scbasecount_paper.pdf:
+https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/scbasecount_paper.pdf
+Save the exact file (with curl, or Invoke-WebRequest on Windows); don't retype or
+summarise it. Then tell me its size.
+```
+
+It should be about 5.7 MB. Then use "the PDF in this folder" as the source in step 3.
 
 ::: {.callout-warning}
 ## Privacy: only what you'd put on a public page
@@ -325,15 +336,12 @@ Find `index.html` in your `website` folder and double-click it. It opens in your
 default browser.
 
 In the Claude desktop app you can also click the file's path where it appears in the
-chat, and it opens in the app's Browser pane
-[@url:https://code.claude.com/docs/en/desktop]. Or ask the agent to open it for you.
+chat, and it opens in the app's Browser pane. Or ask the agent to open it for you.
 
 ::: {.callout-note collapse="true"}
 ## On Windows
 
-- **You may see `index` rather than `index.html`**, because File Explorer hides file
-  extensions by default. It's the file with a browser icon. @sec-windows shows how to
-  turn extensions on, which is worth doing today.
+- **You may see `index` rather than `index.html`**: see @sec-windows.
 - **If it opens in a text editor or asks which app to use,** right-click it, choose
   **Open with**, and pick Edge or Chrome.
 - **Can't find the folder?** Ask the agent: *"Open this folder in File Explorer."*
@@ -343,9 +351,10 @@ Now read it against your source. Is everything on the page true? Is anything mis
 that you'd expect? Is there anything you didn't give it, such as a date, a claim, a
 co-author, an award?
 
-### 5. Change it twice
+### 5. Change it
 
-Say what you want, not how to do it. Ideas, if you need them:
+Make **one** change by asking. Say what you want, not how to do it. If you have time,
+make a second; it's optional. Ideas, if you need them:
 
 | If the page… | Try asking |
 |---|---|
@@ -358,7 +367,7 @@ Say what you want, not how to do it. Ideas, if you need them:
 
 : Things to ask for. One change per prompt makes it easier to see what each did. {#tbl-website-changes}
 
-After each change, reload the page in your browser (**Cmd+R** on a Mac, **Ctrl+R** or
+After a change, reload the page in your browser (**Cmd+R** on a Mac, **Ctrl+R** or
 **F5** on Windows) and look.
 
 ### 6. Ask the question
@@ -390,7 +399,7 @@ or what you know. Was the agent right to flag it?
 ## Check yourself
 
 - [ ] `index.html` is in your `website` folder, and it opens when you double-click it.
-- [ ] You've changed it twice, by asking, and seen both changes in the browser.
+- [ ] You've changed it at least once, by asking, and seen the change in the browser.
 - [ ] You asked what it couldn't have checked, and you checked one item yourself.
 - [ ] You can say one thing on the page that was wrong, invented or unsupported, or
       you looked hard and found nothing.
@@ -416,5 +425,3 @@ into a note now.
 - **Put it online?** Not yet. A public page is worth publishing only once you've
   checked every claim on it. @sec-project covers keeping a project like this under
   version control, and GitHub Pages is one free way to publish it.
-- The Claude desktop app's documentation covers the Browser pane, the file pane and
-  permission modes in detail [@url:https://code.claude.com/docs/en/desktop].

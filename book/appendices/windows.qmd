@@ -12,7 +12,7 @@ Windows differs, so chapters can point here instead of repeating themselves.
 | See folders like `.claude` | Turn on **Hidden items** | [Extensions](#win-extensions) |
 | Type a command | PowerShell, not CMD | [PowerShell](#win-powershell) |
 | Open a web page the agent made | Double-click it, or **Open with** | [Opening HTML](#win-html) |
-| Use `git` (@sec-project only) | Git for Windows, optional | [Git](#win-git) |
+| Use `git` (@sec-project only) | Git for Windows, optional; mind OneDrive | [Git](#win-git) |
 
 : Where Windows differs. {#tbl-windows-summary}
 
@@ -34,8 +34,14 @@ click once in the address bar at the top: it switches from a breadcrumb trail to
 path, which you can copy. You can also right-click a file or folder while holding
 **Shift** and choose **Copy as path**.
 
-The simplest check is the one from [Setup](../chapters/00-setup.qmd): ask the agent "What folder are you in?"
-It will print the full path.
+The simplest check is the one from [Setup](../chapters/00-setup.qmd): ask the agent
+"What folder are you in?" It will print the full path.
+
+In PowerShell, this goes to your workshop folder wherever Documents is, OneDrive or not:
+
+```powershell
+cd (Join-Path ([Environment]::GetFolderPath('MyDocuments')) agents-workshop)
+```
 
 ::: {.column-margin}
 Windows paths use backslashes (`C:\Users\...`); Macs use forward slashes. You don't need
@@ -66,7 +72,9 @@ With extensions hidden, a file you save as `notes.txt` from Notepad can end up a
 ## PowerShell versus CMD {#win-powershell}
 
 You only need a terminal if you use the `claude` command rather than the desktop app.
-Windows has two, and they take different commands:
+Windows has two, and they take different commands. **Use PowerShell for every command in
+this book**: the installer, `cd`, `claude`, `claude mcp add` in @sec-mcp, and `winget`.
+Commands shown in grey boxes for Windows are PowerShell commands.
 
 | | PowerShell | CMD (Command Prompt) |
 |---|---|---|
@@ -76,8 +84,8 @@ Windows has two, and they take different commands:
 
 : Telling PowerShell from CMD. {#tbl-windows-shells}
 
-The install command in [Setup](../chapters/00-setup.qmd), `irm https://claude.ai/install.ps1 | iex`, is for
-PowerShell. If you see `'irm' is not recognized`, you're in CMD: close it and open
+The install command in [Setup](../chapters/00-setup.qmd),
+`irm https://claude.ai/install.ps1 | iex`, is for PowerShell. If you see `'irm' is not recognized`, you're in CMD: close it and open
 PowerShell. If `claude` itself is "not recognized" after installing, the install folder
 isn't on your PATH yet; the fix is in
 [Claude Code's terminal guide](https://code.claude.com/docs/en/terminal-guide#windows-troubleshooting).
@@ -118,12 +126,14 @@ it, the agent uses **PowerShell**. Either works for this book, and you won't nee
 learn Git Bash yourself.
 
 To install it, either download the installer from
-[git-scm.com/downloads/win](https://git-scm.com/downloads/win) and accept the defaults on
-every screen, or, in PowerShell:
+[git-scm.com/install/windows](https://git-scm.com/install/windows) and accept the
+defaults on every screen, or, in PowerShell:
 
 ```powershell
-winget install --id Git.Git -e
+winget install --id Git.Git -e --source winget
 ```
+
+Then close and reopen the desktop app or PowerShell, so it finds `git`.
 
 Or let the agent do it:
 
@@ -134,6 +144,16 @@ on this computer, and wait for me to say go before running anything.
 
 On an institution-managed laptop, installing software may be blocked. That's fine: skip
 it, and use the no-git route in @sec-project.
+
+::: {.callout-warning}
+## Git and OneDrive don't mix well
+
+OneDrive syncs files while `git` is writing them, and the two can clash, leaving a
+project's history damaged. If your Documents is in OneDrive, either **pause OneDrive
+syncing** while you work (from the OneDrive icon in the taskbar), or keep the project
+in a folder outside OneDrive, such as `C:\Users\<you>\agents-workshop`, as @sec-project
+suggests.
+:::
 
 ::: {.column-margin}
 **Line endings.** Windows and Macs end lines in text files differently, and Git

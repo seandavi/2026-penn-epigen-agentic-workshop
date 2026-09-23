@@ -27,6 +27,12 @@ bold, `>` starts a quotation. Any text editor can open a `.md` file, and GitHub 
 formatted.
 :::
 
+::: {.callout-tip}
+## In the room?
+
+Skip to [Your turn](#ledger-your-turn) and come back to the reading later.
+:::
+
 ## What you'll learn
 
 - Why an agent's work needs a written record, and who reads it.
@@ -87,6 +93,7 @@ shortcut to avoid: copying the agent's summary of its own work straight into the
 %%|   check, you write a ledger entry, then the next task. A dashed shortcut goes from the
 %%|   agent's report straight to the ledger entry, labelled as the step to avoid."
 flowchart LR
+  accDescr: A loop - you ask, the agent acts, the agent says it is done and checked, you
   ask["You ask"] --> act["Agent acts"]
   act --> says["Agent says:<br/>done, all checked"]
   says --> check["You check"]
@@ -97,82 +104,112 @@ flowchart LR
 
 ## What real ledgers look like
 
-A ledger doesn't have to use these exact five headings. What matters is that it says
-what was done and what a person actually checked. Three real ones, all public:
-
-**This workshop's own.** The material you're reading was written with agents, and the
-repository keeps a
-[`LEDGER.md`](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/LEDGER.md)
-in the five-field format, with each entry saying whether a field was written by Sean or
-by the agent. The worked example below is taken from it.
-
-**PeakPeek.** The app in @sec-app was built by several agents at once, and its
-[`LEDGER.md`](https://github.com/seandavi/peakpeek/blob/main/LEDGER.md) records which
-agent did what, and which of their claims were re-run by another agent and which were
-taken on trust. Its first entry's **Confidently wrong** field is about the specification
-itself, which had been reviewed and was still wrong: it planned a test file that a
-double-clicked page can never read.
-
-**_AI in Medicine_.** Sean's course book for medical students has two pages worth reading
-side by side.
+A ledger doesn't need these exact headings. It needs to say what was done and what a
+person actually checked. Three public ones: this workshop's own
+[`LEDGER.md`](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/LEDGER.md),
+which marks each field as written by Sean or by the agent;
+[PeakPeek's](https://github.com/seandavi/peakpeek/blob/main/LEDGER.md), which records
+which agent's claims were re-run and which were taken on trust; and the
+[AI ledger](https://ai-in-medicine.seandavi.workers.dev/appendix/ai-ledger) of Sean's
+course book *AI in Medicine*, with its narrative companion,
 [How this book was made](https://ai-in-medicine.seandavi.workers.dev/appendix/about)
-is the narrative: the
-design constraints came first, one chapter was written by hand as the model, ten agents
-then drafted ten chapters in parallel, and every agent recorded what it had and had not
-been able to verify. The
-[AI ledger](https://ai-in-medicine.seandavi.workers.dev/appendix/ai-ledger) is the
-record, one row per change (@fig-ledger-aim)
+(@fig-ledger-aim)
 [@url:https://ai-in-medicine.seandavi.workers.dev/appendix/about;
 @url:https://ai-in-medicine.seandavi.workers.dev/appendix/ai-ledger].
 
 ![The top of *AI in Medicine*'s AI ledger. Its rule: "'Human review' says what a person
 actually did, not that review happened." Screenshot taken 23 September
 2026.](../images/ledger-ai-in-medicine.png){#fig-ledger-aim
-fig-alt="A web page headed Appendix C, AI ledger. A paragraph states the rule that any commit where an AI tool drafted or
+fig-alt="A web page headed Appendix C, AI ledger. A paragraph states the rule that any
+commit where an AI tool drafted or
 verified content adds a row, and that Human review says what a person actually did. A
 table of standing uses has columns What, Tool and Human review. Below it, a per-commit
 log table has columns Date, Artifact, What AI did and Human review."}
 
-Two things in that ledger are worth copying. First, the **Human review** column is held
-to the same standard as *Checked how*: it says what a person did ("Author to read the
-corrected sentences"), not that review happened. Second, some rows say the author *had
-not yet* read the chapters an agent drafted, and a note explains that those rows were
-left as written, "because they record what was true at that commit". **A ledger entry is
-never edited later to look better.** If something changes, add a new entry.
+Two things in that ledger are worth copying. Its **Human review** column is held to the
+same standard as *Checked how*: what a person did, not that review happened. And rows
+that turned out incomplete were left as written, "because they record what was true at
+that commit". **A ledger entry is never edited later to look better.** If something
+changes, add a new entry.
 
-## Worked example
+## Worked example {#ledger-worked-example}
 
-Here is a real entry from this workshop's ledger, written the day before the workshop.
-Sean had asked for the app-building exercise to be simplified, and the agent doing the
-work decided to test the simplified version before calling it done: it gave a fresh
-agent, in an empty folder, exactly the prompts you'll use in @sec-app.
+Here is the ledger entry for @sec-website's worked example, the one-page website about
+the DESeq2 paper, written from the record of that run. If you did chapter 1, you've
+seen every fact in it.
 
 ```markdown
-## Entry 13 — Dry run of the one-prompt exercise
+## Entry 1 — A one-page website about the DESeq2 paper
 
-**Asked** — *Agent*: check the simplified exercise end to end before calling it done.
+**Asked**
 
-**Agent did** — Gave a fresh agent, in an empty folder, exactly step 1's and step 2's prompts. Fixed the seven spec gaps it reported: […]
+> Make me a one-page website about this paper: https://doi.org/10.1186/s13059-014-0550-8
+>
+> It should be a single HTML file I can open by double-clicking. Write it for a
+> biologist who has heard of RNA-seq but never used DESeq2. When you're done, tell me
+> where the file is and what you checked.
 
-**Checked how** — *Agent*: the build took 13.1 minutes. Its `test.html` shows 56 passed, 0 failed in Chrome 152 (re-run by me). Its own report says every §2 number matches through the page, with Python and `bedtools` agreeing; that part is its claim.
+Then:
 
-**Confidently wrong** — *Agent*: "accept `1e+03`, reject `1.5e2`" was self-contradictory (1.5e2 is 150, a whole number) and would have rejected real R output. Also, applying these fixes, one replacement swallowed the sentence after it; caught on re-reading the diff.
+> It's too long for someone skimming. Cut it down so the main story fits on about two
+> screens: keep the one-sentence summary, the big idea with both diagrams, and
+> 'in practice'. Put everything else behind 'more detail' sections I can click open.
 
-**Keep** — Every fresh build finds something. Two builds from the same spec is cheap insurance before a room full of people tries it.
+> Add a dark mode that follows my computer's light/dark setting.
+
+> What did you put on this page that I didn't tell you and you couldn't have checked?
+> List it, most important first.
+
+**Agent did**
+
+Tried a PubMed tool (not allowed); the publisher's page redirected to a login three
+times; got the full text from Europe PMC instead. Wrote `deseq2.html` (one file, 29 KB)
+and a hidden helper script, `.check_html.py`. Tried to open the page and run the script:
+both refused. Shortened the page, with six click-to-open sections, and added an
+`lfcShrink()` line to the R code unasked. Added dark mode, moving the diagram colours
+into the style sheet. Said each time that it had not seen the page.
+
+**Checked how**
+
+*Agent, not a person:* a second agent, driving a real Chrome window, did these; nobody
+has repeated them by hand. Opened `deseq2.html` in Chrome: no errors in the console. Moved the replicates slider
+(label went from 28% to 72%) and pressed the shrinkage button: both diagrams redrew.
+Opened all six "more detail" sections. Clicked the three links (the DOI, two
+Bioconductor pages): all load. Title, authors, journal and year match the DOI's record
+at Crossref. Switched the computer to dark mode: the page followed.
+Not checked: the statistics on the page against the paper's text; whether the
+`lfcShrink()` line runs; the "since 2014" section.
+
+**Confidently wrong**
+
+Nothing caught that was plainly false. But asked what it couldn't have checked, it
+listed things the page presented as confidently as the checked parts: the `lfcShrink()`
+line is untested and may need the `apeglm` package; the "since 2014" section is from
+memory; the paper's facts came through a fetch tool that summarises pages; and the
+shrinkage diagram draws only well-measured genes as real effects, so shrinkage looks
+free. None of this was flagged on the page.
+
+**Keep**
+
+Before trusting a page, ask: "What did you put on this page that I didn't tell you and
+you couldn't have checked?"
 ```
 
 What makes this entry useful:
 
-- **Checked how splits what was re-run from what was taken on trust.** The test count
-  was re-run; the claim that every reference number matched was the second agent's, and
-  the entry says so: "that part is its claim". A reader knows exactly which sentence to
-  check if it matters.
-- **Confidently wrong includes the recorder's own mistake.** A search-and-replace had
-  deleted the sentence after the one it was fixing. It was caught by re-reading the
-  change, and recorded, because the next person doing the same kind of edit should know
-  it happens.
-- **It names numbers.** "13.1 minutes", "56 passed, 0 failed", "Chrome 152". Vague
-  entries ("tests pass") can't be checked later; specific ones can.
+- **Asked is pasted whole, follow-ups included.** Anyone can run the same prompts
+  again. "Asked for a website about DESeq2" would lose the reader, the one-file rule,
+  and the question that did the most work.
+- **Checked how says who checked.** The agent that built the page said it had checked
+  the paper's details against the full text; that's its claim, so it isn't here. The
+  checks that are here were made by a *second* agent in a real browser, and the entry
+  says so up front. Your own entry should hold what *you* did. Each of these is a
+  minute's work by hand, and has numbers in it (28% to 72%, six sections, three links);
+  the **Not checked** line names exactly where to look before publishing.
+- **Agent did records the surprises:** the refused steps, the hidden file, and the line
+  of R code nobody asked for. Those are what a reader would otherwise never know.
+- **Confidently wrong doesn't invent a failure.** Nothing false was caught, and it says
+  so, then records the unsupported claims that only surfaced when asked.
 - **Keep is one sentence**, and it's a practice, not a compliment.
 
 ::: {.callout-tip}
@@ -183,20 +220,25 @@ information: it tells a reader you looked. What isn't fine is making something u
 fill the box, or leaving it blank.
 :::
 
-## Your turn
+## Your turn {#ledger-your-turn}
 
-You'll use the website folder from @sec-website. If you didn't do that chapter, do its
-activity first. It takes about fifteen minutes and this chapter builds on it.
+You'll use the `agents-workshop/website` folder from @sec-website. If you didn't do that
+chapter, do its activity first: it takes about twenty minutes, and this chapter builds
+on it.
 
-Allow about 30 minutes.
+Allow about 20 minutes for steps 1 to 3. Steps 4 and 5 are for if you have time.
+
+**One `LEDGER.md` per folder.** This ledger is for the website and lives in its folder.
+Each later chapter works in its own folder inside `agents-workshop`, and starts its own
+`LEDGER.md` there.
 
 ### Step 1: put the template in your folder
 
-Open your agent in the website folder, as a new session or the one you were using, and
-paste:
+Start a **new** session with the `website` folder as its folder, as in
+[Setup](00-setup.qmd), and paste:
 
 ```default
-Download https://raw.githubusercontent.com/seandavi/2026-penn-epigen-agentic-workshop/main/exercises/LEDGER-template.md and save it in this folder as LEDGER.md, unchanged. Then tell me the full path of the file you saved.
+Download https://raw.githubusercontent.com/seandavi/2026-penn-epigen-agentic-workshop/main/exercises/LEDGER-template.md and save it in this folder as LEDGER.md. Save the exact file: download it with curl (or Invoke-WebRequest on Windows) rather than retyping it. Then tell me the full path of the file you saved.
 ```
 
 Check it's there: open the folder in Finder or File Explorer and look for `LEDGER.md`,
@@ -205,15 +247,8 @@ Notepad will do. In the Claude desktop app
 you can also click a file path in the chat to open it in the file pane, edit it and click
 **Save**
 [@url:https://code.claude.com/docs/en/desktop].
-
-::: {.callout-note collapse="true"}
-## On Windows
-
-File Explorer hides file extensions by default, so `LEDGER.md` may show as just
-`LEDGER`. If Windows asks which app to open it with, choose Notepad. After saving, check
-the file is still called `LEDGER.md` and hasn't become `LEDGER.md.txt`; with extensions
-hidden you can't tell. See @sec-windows for turning extensions on.
-:::
+On Windows, if `LEDGER.md` shows as just `LEDGER`, or you're not sure it hasn't become
+`LEDGER.md.txt`, turn on file extensions (@sec-windows).
 
 ### Step 2: write entry 1 yourself, for what you've already done
 
@@ -232,35 +267,8 @@ not the agent: the point is to notice what you do and don't know.
   couldn't have?
 - **Keep:** a prompt that worked, or nothing.
 
-Here is an illustrative entry, invented for this chapter, so you can see the size and
-tone to aim for:
-
-```markdown
-## Entry 1 — A one-page website about my 2024 paper
-
-**Asked**
-
-> make me a one page website about my paper, heres the abstract: [pasted abstract] and the DOI is 10.xxxx/xxxxx. something clean, one file I can double click
-
-Then: "make the title bigger and add a link to the journal"
-
-**Agent did**
-
-Wrote `index.html` (one file, styles inside it). Changed the title size and added a link on the second request. Ran no commands.
-
-**Checked how**
-
-Double-clicked `index.html`: it opens in Chrome. Read every sentence against the abstract. Clicked the journal link: it goes to the right paper.
-Not checked: how it looks on a phone; whether the colours work for colour-blind readers.
-
-**Confidently wrong**
-
-Gave the publication year as 2023 (it's 2024). Its summary said the page "displays correctly on mobile"; nothing in the session shows it opened the page at all.
-
-**Keep**
-
-Pasting the abstract, rather than just the DOI, kept it from inventing findings.
-```
+Use the [worked example](#ledger-worked-example) as your model for size and tone. Yours
+will be shorter: a few lines per field is plenty.
 
 ### Step 3: make one more change, and ledger it as you go
 
@@ -277,7 +285,7 @@ contact line. This time, **write the ledger entry while you work**, not afterwar
 You'll notice this is easier than step 2. Reconstructing an entry from memory is hard,
 even an hour later; writing it as you go takes a minute.
 
-### Step 4: ask the agent for its version, and compare
+### Step 4 (if you have time): ask the agent for its version, and compare
 
 Now see what the agent would have written. Paste:
 
@@ -311,7 +319,7 @@ collaborators' data, passwords or keys. Better still, don't paste those into an 
 in the first place.
 :::
 
-### Step 5: make it a habit the agent helps with
+### Step 5 (if you have time): make it a habit the agent helps with
 
 Writing every entry yourself is the best way to learn what a good one looks like. After
 a few, it's reasonable to have the agent draft them, *as long as you correct them*. Put
@@ -328,8 +336,9 @@ reads at the start of every session, so you don't have to paste them.
 
 - **Step 2 was harder than step 3.** Most people can't reconstruct what the agent did an
   hour later. That's the argument for writing it as you go.
-- **Your Checked how is shorter than the agent's**, and truer. An agent's account of its
-  own checking is a claim, like everything else it says. Treat it as one.
+- **If you did step 4: your Checked how is shorter than the agent's**, and truer. An
+  agent's account of its own checking is a claim, like everything else it says. Treat
+  it as one.
 - **"Not checked" felt uncomfortable to write.** Good. It's the most useful line in the
   file, because it tells the next reader exactly where to look.
 - **The ledger took minutes, not hours.** Terse is right. It's a lab notebook, not a
@@ -343,15 +352,15 @@ You're done when:
 - **Every Checked how field describes something you personally did**, or says
   "Not checked" plainly. None says "the agent verified" or "looks good".
 - Every **Confidently wrong** field has something in it, even if it's "Nothing caught".
-- You can point to at least one claim in the agent's own entry that nothing in the
-  session supports, or you checked and found none.
+- If you did step 4: you can point to at least one claim in the agent's own entry
+  that nothing in the session supports, or you checked and found none.
 
 ## Going further
 
 - **Why the ledger runs through the whole day:** the workshop's decision record,
   [ADR-0005](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/adr/0005-the-ledger-is-the-spine.md),
-  "The ledger is the spine of the day". Keep the same ledger going through the rest of
-  the book.
+  "The ledger is the spine of the day". Each later chapter starts a `LEDGER.md` in its
+  own folder, with the same five fields.
 - **Ledgers and decision records:** a ledger records *what happened*; a decision record
   records *what was decided and why*. @sec-project adds the second, for anything you'll
   come back to.

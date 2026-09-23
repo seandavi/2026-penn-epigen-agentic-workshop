@@ -67,6 +67,7 @@ filling the agent's memory: the instructions cost nothing until they're needed
 %%|   description; if your request matches one, it loads the full SKILL.md and any
 %%|   files the steps point to; if not, it answers without the skill."
 flowchart LR
+  accDescr: Flowchart - the session starts, the agent reads each skill's name and
   A["Session starts"] --> B["Agent reads every skill's<br/>name and description"]
   B --> C{"Does your request<br/>match a description?"}
   C -- "no" --> D["Answers without it<br/>(no warning)"]
@@ -133,9 +134,9 @@ work this out? If yes, the agent probably will too, and the skill adds little. I
 names break the join) it's worth a skill.
 
 Skills and the `AGENTS.md` file from @sec-teach do different jobs. `AGENTS.md` holds
-**facts** about a project, read at the start of every session. A skill holds a
-**procedure**, loaded only when needed. When a section of your `AGENTS.md` has turned
-into a list of steps, it wants to be a skill.
+the **rules** for one project, read at the start of every session there. A skill holds
+a **procedure**, loaded only when a task needs it, in whichever project you're in. When
+a section of your `AGENTS.md` has turned into a list of steps, it wants to be a skill.
 
 ## Worked example: `deseq2-triage`
 
@@ -272,6 +273,7 @@ then verify it. Budget 30–40 minutes. @fig-skills-loop shows who does what.
 %%|   and the words that should load it; if anything fails, the agent revises and you
 %%|   test again; if all pass, you keep it."
 flowchart TD
+  accDescr: Flowchart - you describe the file and its traps, the agent interviews you
   A["<b>You</b>: the file, what good looks like,<br/>the traps you've seen"] --> B["<b>Agent</b>: interviews you,<br/>drafts SKILL.md"]
   B --> C["<b>You</b>: read the draft; test it on a good file,<br/>a file with planted problems,<br/>and the words that should load it"]
   C -- "something failed" --> D["<b>Agent</b>: revises,<br/>from what you found"]
@@ -301,6 +303,16 @@ exercise that *cleans* this sheet. Here you're writing a skill that *checks* she
 like it and fixes nothing.) Or extend `deseq2-triage` with a trap from your own lab's
 pipeline.
 
+To use the fallback, once you've made the `skill` folder and started a session on it
+(step 2), ask the agent to fetch the exact file rather than retype it:
+
+```default
+Download this file into this folder, saving it byte for byte (curl on macOS,
+Invoke-WebRequest on Windows), not by retyping it:
+https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/sample_sheet_messy.csv
+Then tell me how many rows and columns it has.
+```
+
 ::: {.callout-warning}
 ## What you show the agent leaves your computer
 Anything the agent reads is sent to the model. Use a file you'd be allowed to email
@@ -311,8 +323,9 @@ and make a small fake example.
 
 ### 2. Have the agent interview you
 
-Start a new session in a fresh folder, put an example file in it, and paste this,
-filling in the angle brackets:
+Make a folder called `skill` inside `Documents/agents-workshop/`, put a copy of your
+example file in it (or fetch the fallback, above), and start a **new** session on that
+folder, as in [Setup](00-setup.qmd). Then paste this, filling in the angle brackets:
 
 ```default
 I want you to write a skill (a SKILL.md in the Agent Skills format) that checks

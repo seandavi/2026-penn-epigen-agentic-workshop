@@ -1,7 +1,8 @@
-# Stretch — PeakPeek: a page built in one prompt
+# PeakPeek: a page built in one prompt
 
-**An afternoon, not a slot.** This one is for after 14:00, or for anyone who finished the
-morning early.
+**The fallback for [Build an app](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/06-build-an-app.html)**, for anyone without
+an idea of their own yet, or short of time. Set up first, as in
+[Setup](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/00-setup.html).
 
 **PeakPeek is a page that tells you what's in a peak file.** Drop in a BED or narrowPeak
 file, or paste a URL, and it shows you how many peaks there are, how wide they are, which
@@ -9,27 +10,28 @@ chromosomes they're on, and what's wrong with the file. Give it several files an
 lines them up side by side.
 
 You hand your agent a finished spec and get the whole page back **in one prompt**. Then
-the afternoon is yours: try it, see what works and what doesn't, and change it into
+it's yours: try it, see what works and what doesn't, and change it into
 something you'd use. **Nothing here can break anything.** It's a folder on your laptop
 and a page you open by double-clicking.
 
 ## What you'll need
 
-- Your agent, as in the morning. The desktop app is fine.
+- Your agent, set up as in [Setup](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/00-setup.html). The desktop app is fine.
 - Chrome. The spec was checked in Chrome; other browsers will mostly work.
 
 ## 1. Make a folder, start a new session (5 minutes)
 
-1. Make a folder called `peakpeek` in **Documents**, in Finder or File Explorer. Not
-   inside either workshop folder.
-2. Start a **new** agent session on that folder. (A session left open from the morning
-   is still in the old folder.)
+1. Make a folder called `peakpeek` inside **Documents/agents-workshop**, in Finder or
+   File Explorer.
+2. Start a **new** agent session on that folder. (A session left open from another
+   chapter is still in the old folder.)
 3. Paste:
 
    > Download https://raw.githubusercontent.com/seandavi/2026-penn-epigen-agentic-workshop/main/examples/peakpeek/SPEC.md
    > and https://raw.githubusercontent.com/seandavi/2026-penn-epigen-agentic-workshop/main/exercises/LEDGER-template.md
-   > (save it as LEDGER.md) into this folder. Then tell me what folder you're in and
-   > what's in it.
+   > (save it as LEDGER.md) into this folder. Save the exact files, with curl, or
+   > Invoke-WebRequest on Windows; don't retype them. Then tell me what folder you're
+   > in and what's in it.
 
 The answer should end in `peakpeek` and list `SPEC.md` and `LEDGER.md`. If it doesn't,
 stop and sort that out first.
@@ -72,16 +74,16 @@ that reaches outside it.
 **You're done when** `test.html` shows every test passing, and `index.html` shows a place
 to drop files.
 
-Then ask the agent: *"Save a snapshot of this folder called first-build."* You'll want to
-get back here.
+Then ask the agent: *"Copy everything in this folder except snapshots/ into
+snapshots/first-build/."* You'll want to get back here.
 
 ## 3. Try it: what works, what doesn't (20 minutes)
 
 Open `test.html` and `index.html` in Chrome: right-click, then **Open With → Chrome**.
 Then try things:
 
-- Drop in **`examples/fixture.bed`**, the small test file. (Windows may hide the ending:
-  it's the one that isn't a script.)
+- Drop in **`examples/fixture.bed`**, the small test file. (Windows may hide file
+  endings; see [Windows notes](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/appendices/windows.html).)
 - Paste an ENCODE URL from SPEC.md §2 into the URL box. Then paste several.
 - Paste a URL whose server doesn't let web pages read it, and see what the page says:
   `https://zenodo.org/records/7879374/files/README.md?download=1`
@@ -91,14 +93,15 @@ Then try things:
 Then write a ledger entry with two lists: **what worked** and **what didn't**. "What
 didn't" includes "worked, but I don't like it". That list is step 4's to-do list.
 
-## 4. Make it yours (the rest of the afternoon)
+## 4. Make it yours (as long as you like)
 
 Hand the agent one item from "what didn't", or one of these, **one at a time**. After
 each: `test.html` still passes, and a ledger entry says what you asked for and how you
-checked it. Ask for a new snapshot when you're happy, so a bad idea costs nothing.
+checked it. Ask for a new snapshot (`snapshots/<name>/`) when you're happy, so a bad
+idea costs nothing.
 
 - **Your own peak files.** Dropping them into the page keeps them on your laptop; *showing
-  them to the agent* sends them to it, so the morning's rule about private data applies.
+  them to the agent* sends them to it, so the book's rule about private data applies.
 - **The side-by-side histograms look flat** for files with broad peaks. What would you
   rather see?
 - **A check that doesn't trust the page:** ask for a few lines of R you can run in RStudio
@@ -115,6 +118,9 @@ changed it.
 
 ## Where next
 
+- **Back to the book:** [Build an app](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/06-build-an-app.html) has a starter
+  prompt for an app of your own, and
+  [Work like a project](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/07-work-like-a-project.html) carries on from here.
 - [**PeakPeek, finished**](https://github.com/seandavi/peakpeek) ([live](https://seandavi.github.io/peakpeek/)):
   the same spec built with several agents in parallel, every step reviewed and on the
   record. Its [issues](https://github.com/seandavi/peakpeek/issues) include how to run a

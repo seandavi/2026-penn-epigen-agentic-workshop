@@ -59,7 +59,12 @@ Make the change. Check it. Write the ledger entry. Commit.
 %%| label: fig-project-loop
 %%| fig-cap: "One loop per change. The decision record comes first, when there is one,
 %%|   so the agent builds to it. Nothing is committed that hasn't been checked."
+%%| fig-alt: "A flow diagram. Next change leads to a question: awkward to reverse? If
+%%|   yes, write an ADR, then make the change; if no, make the change directly. Then check
+%%|   it. If broken, go back and make the change again. If it works, write a ledger entry,
+%%|   then commit or snapshot."
 flowchart LR
+  accDescr: One loop per change. Next change; if awkward to reverse, write an ADR first; make the change; check it; if broken, go back; if it works, ledger entry, then commit or snapshot.
   A[Next change] --> B{Awkward to<br/>reverse?}
   B -- yes --> C[Write an ADR]
   B -- no --> D[Make the change]
@@ -144,8 +149,9 @@ couldn't share, passwords, keys.
 ### No git? Snapshots
 
 Some laptops won't let you install anything, and some people would rather not today.
-Then ignore git entirely. Before each change, ask the agent to copy the whole folder
-into `snapshots/<date>-<name>/`. Going back means copying a snapshot back. You lose the
+Then ignore git entirely. Before each change, ask the agent: "Copy everything in this
+folder except snapshots/ into snapshots/<name>/", with a short name for what's about to
+change. Going back means copying a snapshot back. You lose the
 tidy history and the exact diffs, but you keep the part that matters most, which is a
 way back to something that worked. The ledger and the decision records work exactly the
 same without git.
@@ -234,8 +240,8 @@ PeakPeek's tests for this chapter; its ledger records how they were checked.
 
 ## Your turn
 
-You need the folder from @sec-app, with your app in it and, ideally, a `LEDGER.md` from
-@sec-ledger. No app? Use the PeakPeek exercise from @sec-app as your starting point, or
+You need the folder from @sec-app, `Documents/agents-workshop/my-app`, with your app in
+it and its `LEDGER.md`. No app? Use the PeakPeek exercise from @sec-app as your starting point, or
 any small folder you care about. Start a new session in that folder, and ask "What
 folder are you in?" before anything else.
 
@@ -248,7 +254,12 @@ mistake. With git, your history will end up looking something like
 %%| fig-cap: "Where this chapter's activity leaves you: a starting point, two changes
 %%|   (one with a decision record), a mistake and its revert, each with a ledger entry.
 %%|   The optional experiment branch is never merged here, so main never sees it."
+%%| fig-alt: "A git history diagram. On main: Starting point; ADR-0001 plus change 1,
+%%|   tagged Ledger 1; Change 2, tagged Ledger 2; Deliberate mistake; Revert mistake,
+%%|   tagged Ledger 3. A branch called try-idea leaves main after Change 2 and holds one
+%%|   commit, Experiment, which is never merged."
 gitGraph
+  accDescr: On main, a starting point, change 1 with an ADR, change 2, a deliberate mistake and its revert, with ledger entries. A try-idea branch holds one unmerged experiment.
   commit id: "Starting point"
   commit id: "ADR-0001 + change 1" tag: "Ledger 1"
   commit id: "Change 2" tag: "Ledger 2"
@@ -294,7 +305,14 @@ After installing Git for Windows, restart the Claude desktop app or your termina
 before asking again. The installer's defaults are fine. Claude Code on Windows uses git's
 bundled Git Bash to run commands when it's installed, and PowerShell when it isn't
 [@url:https://code.claude.com/docs/en/setup]; either works for this chapter. Folder paths
-will look like `snapshots\2026-09-24-start`. See @sec-windows for more.
+will look like `snapshots\start`.
+
+**OneDrive and git can clash.** If your Documents folder is synced to OneDrive, OneDrive
+may lock or re-sync files inside the hidden `.git` folder while git is writing them,
+and the repository can end up broken. Pause OneDrive syncing while you work, or keep the
+project in a folder outside OneDrive (for example `C:\Users\<you>\agents-workshop`).
+See @sec-windows for more.
+
 :::
 
 Then set up the records. **With git:**
@@ -302,11 +320,12 @@ Then set up the records. **With git:**
 ```default
 Set this folder up as a project I'll come back to.
 
-1. Make it a git repository. Before committing anything, show me the
-   list of files you would commit, and add a .gitignore for anything
-   that shouldn't be recorded (large data, anything private, system
-   files like .DS_Store). Wait for my OK. If git asks for a name and
-   email, ask me what to use.
+1. Make it a git repository. Before committing anything, add a
+   .gitignore that lists snapshots/ and anything else that shouldn't
+   be recorded (large data, anything private, system files like
+   .DS_Store). Then show me the list of files you would commit, and
+   wait for my OK. If git asks for a name and email, ask me what to
+   use.
 2. Create adr/ with a README.md index and a template.md: title, status
    (accepted, or superseded by ADR-NNNN), date, Context, Decision
    (written with "must" and "must not"), Consequences.
@@ -315,21 +334,24 @@ Set this folder up as a project I'll come back to.
 4. Add to AGENTS.md (create it if needed): read adr/ before changing
    how the app behaves; never edit an accepted ADR to reverse it,
    write a new one that supersedes it; every change gets a ledger
-   entry and a commit.
+   entry and a commit. If there's no CLAUDE.md, create one containing
+   the single line @AGENTS.md.
 5. Commit everything as the starting point, then show me the history.
 ```
 
 **Without git**, replace steps 1 and 5 with:
 
 ```default
-Instead of git, keep snapshots: before any change, copy everything in
-this folder except snapshots/ into
-snapshots/<today's date>-<short name>/. Make the first one now, called
+Instead of git, keep snapshots. A snapshot means: copy everything in
+this folder except snapshots/ into snapshots/<name>/. Make one before
+any change, named for the change. Make the first one now, called
 "start", and add the snapshot rule to AGENTS.md.
 ```
 
-Check that `adr/`, `LEDGER.md` and `AGENTS.md` exist, and open `AGENTS.md` to read the
-rules the agent wrote for itself. Are they what you asked for?
+Check that `adr/`, `LEDGER.md`, `AGENTS.md` and `CLAUDE.md` exist, and open `AGENTS.md`
+to read the rules the agent wrote for itself. Are they what you asked for? (`CLAUDE.md`
+holds only `@AGENTS.md`, so Claude Code reads the same rules as other agents; @sec-teach
+explains why.)
 
 ### Step 2: two changes, the full loop
 
@@ -383,7 +405,8 @@ went back, and how we checked.
 **Without git:**
 
 ```default
-For practice: make a snapshot, then make a deliberate mistake
+For practice: copy everything in this folder except snapshots/ into
+snapshots/before-mistake/. Then make a deliberate mistake
 (for example, <an idea>). When I've seen it, restore the app from that
 snapshot. Don't touch LEDGER.md or snapshots/ when restoring. Then
 write one ledger entry covering both.
@@ -417,7 +440,7 @@ main never saw the half-done version.
 
 - The history ("show me the history") has at least four commits: the starting point,
   two changes and the revert, each with a message that says why. Or, without git,
-  `snapshots/` has at least three dated folders.
+  `snapshots/` has at least three folders, each named for a change.
 - `adr/` has at least one record, in your words, with a Decision that uses *must* or
   *must not*.
 - `LEDGER.md` has an entry for each change, and every "Checked how" names something

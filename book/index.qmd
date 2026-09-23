@@ -32,6 +32,7 @@ anyone to ask.
 %%| fig-cap: "How the chapters build on each other. Solid arrows: you need the earlier chapter's folder. Dashed: helpful, not required."
 %%| fig-alt: "A flow diagram. Setup leads to Build a website, which leads to The ledger. Setup also leads to Teach the agent your project, which leads to Write a skill, Connect to a database, and Build an app. Build an app leads to Work like a project."
 flowchart LR
+  accDescr: A flow diagram. Setup leads to Build a website, which leads to The ledger. Setup also leads to Teach the agent your project, which leads to Write a skill, Connect to a database, and Build an app. Build an app leads to Work like a project.
   S[0 Setup] --> W[1 Website] --> L[2 Ledger]
   S --> T[3 Teach your agent]
   T -.-> K[4 Skill]

@@ -69,11 +69,12 @@ you're not on Claude Code.
 :::
 
 A good README helps the agent too. It's often the first file an agent opens, and in the
-worked example below it did most of the work. The advice for organising a computational
-project hasn't changed because agents arrived: keep raw data separate from results,
-record what you did, and make it possible for someone else to follow
-[@doi:10.1371/journal.pcbi.1000424; @doi:10.1371/journal.pcbi.1006561]. Agents are
-simply the most literal "someone else" you'll ever have.
+worked example below it did most of the work [@doi:10.1371/journal.pcbi.1006561]. The
+advice for organising a computational project hasn't changed because agents arrived:
+keep raw data separate from results, record what you did, and make it possible for
+someone else to follow [@doi:10.1371/journal.pcbi.1005510;
+@doi:10.1371/journal.pcbi.1000424]. Agents are simply the most literal "someone else"
+you'll ever have.
 
 ### How Claude Code finds the file
 
@@ -150,6 +151,7 @@ agents that links to the detailed documents, and a one-line `CLAUDE.md` that imp
 %%|   AGENTS.md links to data/README.md and docs/samples.md, read when needed, and
 %%|   sets rules for data/, scripts/ and results/. README.md is for people."
 flowchart LR
+  accDescr: Diagram. CLAUDE.md imports AGENTS.md, which is loaded every session.
   C["CLAUDE.md<br/>(one line: @AGENTS.md)"] ==>|import| A["AGENTS.md<br/>rules for agents"]
   R["README.md<br/>for people"]
   A -.->|link| DR["data/README.md<br/>what each file is"]
@@ -186,6 +188,7 @@ run will word things differently. The outputs below are real, lightly trimmed.
 %%|   AGENTS.md from the corrections, then test in a new session, then back to
 %%|   correcting."
 flowchart LR
+  accDescr: Cycle - explore and summarise, then correct what it got wrong, then write
   E["1. Explore<br/>and summarise"] --> K["2. Correct<br/>what it got wrong"]
   K --> W["3. Write AGENTS.md<br/>from the corrections"]
   W --> T["4. New session:<br/>does it hold?"]
@@ -319,16 +322,17 @@ you trust your rules.
 **Your own folder.** Start a new session with the analysis folder as its project folder,
 and check with *"What folder are you in?"*
 
-**The fallback.** Make an empty folder called `teach-demo` in your Documents folder,
-start a new session there, and paste this:
+**The fallback.** Inside `Documents/agents-workshop/`, make an empty folder called
+`teach-demo`, start a new session there ([Setup](00-setup.qmd)), and paste this:
 
 ```default
 In this folder, make two subfolders, data and scripts. Download these files from
 https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/
 into data/: README.md, differential_peaks.csv, differential_genes.tsv,
 counts_matrix.csv and sample_sheet_messy.csv. Download make_qc_report.py from the
-same place into scripts/. Don't clone the repository. Then list what you downloaded
-with each file's size.
+same place into scripts/. Save each file exactly as downloaded, with curl (or
+Invoke-WebRequest on Windows); don't retype or rewrite any of them. Don't clone the
+repository. Then list what you downloaded with each file's size.
 ```
 
 That's about 11.5 MB: the peak table is 6.7 MB, the gene table 3.5 MB, the counts
@@ -347,7 +351,8 @@ Now work through the loop in @fig-teach-loop.
    how to run it, who to ask.
 4. **Edit what it wrote.** Delete any line the agent could have worked out by reading.
    Reword any rule that's stricter or vaguer than you meant.
-5. **Test it.** Start a **new session** in the same folder (see below) and give it a
+5. **Test it.** Start a **new session** in the same folder ([Setup](00-setup.qmd)): it
+   begins with an empty conversation and reloads the instruction files. Give it a
    real next task, without repeating any rule. Watch whether the rules hold.
 6. **Ledger it.** One entry: what you had to tell it, and whether writing it down
    stopped you having to (@sec-ledger).
@@ -361,33 +366,11 @@ Now work through the loop in @fig-teach-loop.
 
 : Where each correction belongs. {#tbl-teach-where-it-goes}
 
-::: {.callout-note}
-## Starting a new session
-
-A new session starts with an empty conversation and reloads the instruction files. In
-the Claude desktop app, click **+ New session** in the sidebar and choose the same
-project folder. In the `claude` command-line tool, type `/exit` and run `claude` again
-in the folder. Other tools have an equivalent; a new chat in the same folder is what you
-want.
-:::
-
-::: {.callout-note collapse="true"}
-## On Windows
-
-- `AGENTS.md` and `CLAUDE.md` are ordinary text files. Let the agent create them. If you
-  make one yourself in Notepad, Windows may save it as `AGENTS.md.txt` while showing
-  `AGENTS.md`: turn on file name extensions in File Explorer to see the real name.
-- Names starting with a dot, such as a `.claude` folder, are hidden in File Explorer by
-  default. You don't need any for this chapter.
-- Don't make `CLAUDE.md` a symbolic link to `AGENTS.md`, a trick you may see online. On
-  Windows it needs administrator rights or Developer Mode, and it can arrive as a
-  one-line text file. The `@AGENTS.md` import does the same job everywhere.
-- The fallback's QC script needs Python with `pandas`. If you don't have it, that's
-  fine: the point is watching the rules, not running the script. The agent will tell
-  you what's missing; you decide whether to install anything.
-
-More in @sec-windows.
-:::
+**On Windows:** turn on file name extensions, or a file you save in Notepad may really be
+`AGENTS.md.txt`; names starting with a dot (a `.claude` folder) are hidden in File
+Explorer by default. See @sec-windows. And don't make `CLAUDE.md` a symbolic link to
+`AGENTS.md`, a trick you may see online: on Windows it needs extra rights and can arrive
+as a one-line text file. The `@AGENTS.md` import works everywhere.
 
 ## What to notice
 

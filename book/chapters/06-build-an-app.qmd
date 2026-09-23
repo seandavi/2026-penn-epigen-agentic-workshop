@@ -70,6 +70,7 @@ is built (@fig-app-loop).
 %%| fig-cap: "The starter prompt's four stages. Nothing is built until you approve the spec; when a check fails, the fix goes back into the spec or the code, never into the answers."
 %%| fig-alt: "A flowchart in two boxes. The first, Conversation: no code yet, runs 1 the idea, 2 your computer, 3 the spec, then a decision: you approve? Not yet loops back to the spec. Approved leads to the second box, Build and check: 4 build, then check against the hand-worked answers, with fails looping back to build."
 flowchart TD
+  accDescr: A flowchart in two boxes. The first, Conversation - no code yet, runs 1 the idea, 2 your computer, 3 the spec, then a decision - you approve? Not yet loops back to the spec. Approved leads to the second box, Build and check - 4 build, then check against the hand-worked answers, with fails looping back to build.
   subgraph talk ["Conversation: no code yet"]
     direction LR
     A["1. The idea<br/>what do you work on?"] --> B["2. Your computer<br/>what's installed?"]
@@ -202,10 +203,11 @@ short part.
 
 ### 1. Make a folder, start a new session
 
-Make a new folder in **Documents**, called something like `my-app`. Not inside your
-project from @sec-teach: the app is a new thing, and it gets its own folder. Start a
-**new** session on it, as in [Setup](00-setup.qmd) (in the Claude desktop app, choose the folder as
-the session's project folder), and check with "what folder are you in?"
+Make a new folder called `my-app` inside **Documents/agents-workshop**, next to the
+folders from earlier chapters. Not inside your project from @sec-teach: the app is a new
+thing, and it gets its own folder. Start a **new** session on it, as in
+[Setup](00-setup.qmd) (in the Claude desktop app, choose the folder as the session's
+project folder), and check with "what folder are you in?"
 
 If you did @sec-teach, have the path to that project folder to hand. The agent will ask.
 
@@ -256,7 +258,8 @@ answers as files, with a test I can run myself using only what's on my computer 
 web page, a test.html I double-click). Never change the answers to make a test pass: if
 the code disagrees, fix the code, or stop and tell me. If something needs more than the
 spec says, ask me first. Then add an entry to LEDGER.md (start one if there isn't one),
-and tell me how to open the app, what you checked and how, and what you couldn't check.
+with the headings Asked / Agent did / Checked how / Confidently wrong / Keep, and tell
+me how to open the app, what you checked and how, and what you couldn't check.
 ```
 
 ### 3. Have the conversation
@@ -297,8 +300,7 @@ A few things make it go well.
 
 - **Double-clicking `index.html`** opens it in your default browser, usually Edge. That's
   fine: Edge and Chrome behave the same here.
-- **File extensions are hidden** by default, so `index.html` may show as `index`, and
-  `test.html` as `test`. Turning extensions on makes this much less confusing; see
+- **File extensions are hidden** by default, so `index.html` may show as `index`; see
   @sec-windows.
 - **Checking what's installed**: the agent may run commands in PowerShell rather than a
   Unix shell, and ask permission for each. They only read version numbers; allowing them
@@ -317,14 +319,15 @@ that surprises you.
 ask:
 
 ```default
-Save a snapshot of this folder called first-build.
+Copy everything in this folder except snapshots/ into snapshots/first-build/.
 ```
 
 ::: {.callout-note}
 ## No idea, or no time?
 
 Build PeakPeek instead. The spec is finished, and one prompt builds it:
-[PeakPeek: a page built in one prompt](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/exercises/stretch-peakpeek.md).
+[PeakPeek: a page built in one
+prompt](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/exercises/stretch-peakpeek.md).
 Then come back and use the starter prompt on an idea of your own when one arrives.
 :::
 
@@ -349,7 +352,7 @@ Then come back and use the starter prompt on an idea of your own when one arrive
 - [ ] Its test passes, and you ran it yourself.
 - [ ] You tried it on a real file, and on one it should reject.
 - [ ] `LEDGER.md` says what was built and how it was checked, including what wasn't.
-- [ ] There's a snapshot called `first-build`.
+- [ ] There's a snapshot in `snapshots/first-build/`.
 
 ## Going further
 
