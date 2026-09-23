@@ -179,8 +179,16 @@ deck spends a slide warning about.
 
 **Asked** — *SD* wanted a full-size but quick application that would show off parallel
 agents, a GitHub project and issues. *SD* proposed the subject: a browser-only tool that
-plots how peaks overlap gene regions from a GTF. *SD* then asked for a specification
-with research findings and open questions, and an exercise that links to it.
+plots how peaks overlap gene regions from a GTF, and asked for libraries over
+hand-rolled interval code. *SD* then asked for a specification with research findings
+and open questions, and an exercise with a prompt paraphrase and setup steps. Midway,
+*SD* redirected: link to the spec rather than inlining it in the exercise.
+
+Along the way *SD* asked the agent to install `pi-web-agent` for its own use. No package
+by that exact name exists on npm; the nearest was `@demigodmode/pi-web-agent`, from a
+publisher the agent didn't recognise. The agent asked before installing, since a web
+extension runs with the agent's own permissions. *SD* redirected research to a Gemini
+sub-agent instead.
 
 **Agent did** — Suggested the libraries from recall, then checked every one on npm and
 ran the key ones before writing anything down. Wrote `examples/peak-overlap/SPEC.md`,
