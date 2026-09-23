@@ -8,6 +8,10 @@ Three exercises. Each takes about half an hour and produces something you keep.
 | 2 | [Go further, and stop repeating yourself](exercise-2-teach-the-agent.md) | What's worth writing down for next time — and what isn't | A memory file, or a good reason not to have one |
 | 3 | [Write one skill](exercise-3-write-a-skill.md) | Procedures written once, loaded on demand; why the description is the whole game | A skill |
 
+**For the afternoon, or if you finish early:** [Spec first, then build](stretch-spec-then-build.md)
+takes a real app from specification to parallel agents working on GitHub issues. It isn't
+part of the taught session.
+
 ## Bring your own work
 
 Every exercise is a menu, and the best choice is always **something you've been meaning to

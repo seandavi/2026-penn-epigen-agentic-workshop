@@ -12,7 +12,7 @@ The afternoon after 14:00 is self-directed and runs from the Vahedi lab's own re
 |---|---|
 | [`docs/`](docs/) | The attendee-facing workshop page (GitHub Pages) |
 | [`exercises/`](exercises/) | The three hands-on exercises and the ledger template |
-| [`examples/`](examples/) | A worked example skill, ready to drop into a lab repo |
+| [`examples/`](examples/) | A worked example skill, ready to drop into a lab repo, and the spec for the stretch exercise |
 | [`adr/`](adr/) | Decision records — why the workshop is shaped the way it is |
 | [`LEDGER.md`](LEDGER.md) | This repo's own work ledger, in the format the workshop teaches |
 

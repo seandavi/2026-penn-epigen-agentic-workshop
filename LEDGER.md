@@ -172,3 +172,141 @@ warned.
 summary hands over numbers, go to the primary source before putting them on a slide —
 the secondary write-ups here disagreed with each other, which is the same failure the
 deck spends a slide warning about.
+
+---
+
+## Entry 7 — Stretch exercise: a peak-overlap app, specified before built
+
+**Asked** — *SD* wanted a full-size but quick application that would show off parallel
+agents, a GitHub project and issues. *SD* proposed the subject: a browser-only tool that
+plots how peaks overlap gene regions from a GTF, and asked for libraries over
+hand-rolled interval code. *SD* then asked for a specification with research findings
+and open questions, and an exercise with a prompt paraphrase and setup steps. Midway,
+*SD* redirected: link to the spec rather than inlining it in the exercise.
+
+Along the way *SD* asked the agent to install `pi-web-agent` for its own use. No package
+by that exact name exists on npm; the nearest was `@demigodmode/pi-web-agent`, from a
+publisher the agent didn't recognise. The agent asked before installing, since a web
+extension runs with the agent's own permissions. *SD* redirected research to a Gemini
+sub-agent instead.
+
+**Agent did** — Suggested the libraries from recall, then checked every one on npm and
+ran the key ones before writing anything down. Wrote `examples/peak-overlap/SPEC.md`,
+with twelve open questions, acceptance tests and a parallel work breakdown, and
+`exercises/stretch-spec-then-build.md`. Placed the exercise outside the taught session
+as an afternoon stretch, consistent with ADR-0006.
+
+**Checked how** — *Agent*: `npm view` on every package named. Installed and ran
+`@flatten-js/interval-tree`, `@gmod/bed` and `@observablehq/plot`. Downloaded GENCODE
+vM25 basic and counted its feature types. Pulled `differential_peaks.csv` from the
+Vahedi repository and confirmed its chromosome names and width range. Read ChIPseeker's
+defaults from its source and HOMER's from its documentation.
+*SD*: not yet reviewed.
+
+**Confidently wrong** — *Agent*, in conversation: named `bed-utils` and
+`js-interval-tree`, **neither of which exists on npm**, and said `@gmod/gff` reads GTF,
+which it doesn't. The spec was also about to say `new BED({type: 'narrowPeak'})` would
+work; it throws, and the right type is `bigNarrowPeak`. Separately, the Gemini CLI that
+was meant to do the web research failed on authentication, because its free tier no
+longer supports that client. The research was done from primary sources instead.
+
+**Keep** — Invented package names are a supply-chain risk, not just a mistake: anyone
+can register one later. `npm view` before `npm install`, every time an agent names a
+package. And the peak CSV's `1` against GENCODE's `chr1` would have put every peak in
+"Intergenic" and still drawn a plausible chart.
+
+---
+
+## Entry 8 — Reference data for the stretch exercise: a GFF3 and five peak files
+
+**Asked** — *SD*: supply links to a GFF3 and three to five peak files, ideally from
+different types of experiment, so participants can try the app themselves. *SD* then
+authorised installing bedtools for checking.
+
+**Agent did** — Chose GENCODE M25 (the last mm10 release, to match the Vahedi peaks)
+and five ENCODE files from adult male mouse thymus: H3K4me3, H3K36me3, H3K27me3, CTCF
+and DNase-seq, plus H3K27ac as an optional sixth. Thymus was picked because it is mostly
+T cells, which suits the TCF-1 data, and because ENCODE has all five assay types for it.
+Added them to SPEC.md §2 and a download block to the exercise. Revised the spec to prefer
+GFF3 and added a biology-prediction test and a bedtools cross-check route.
+
+**Checked how** — *Agent*: downloaded every file and confirmed HTTP 200, a valid gzip,
+mm10, the peak counts, and chromosome names against the annotation. Ran the exercise's
+download block verbatim in a clean directory. Classified peak centres (promoter ±1 kb >
+exon > intron > intergenic) two independent ways: a Python script reading the GTF, and
+bedtools reading the GFF3. They agreed to within 0.1% on every file:
+
+| File | Promoter | Exon | Intron | Intergenic |
+|---|---|---|---|---|
+| H3K4me3 `ENCFF674JZY` | 68.9% | 4.1% | 15.7% | 11.2% |
+| H3K27ac `ENCFF974HMO` | 33.3% | 3.8% | 40.0% | 22.9% |
+| H3K36me3 `ENCFF853BYO` | 3.4% | 22.5% | 71.5% | 2.6% |
+| H3K27me3 `ENCFF478UYW` | 42.1% | 8.3% | 25.4% | 24.2% |
+| CTCF `ENCFF714WDP` | 45.5% | 6.1% | 25.7% | 22.8% |
+| DNase `ENCFF979ULB` | 36.8% | 4.5% | 32.2% | 26.5% |
+
+These are deliberately not in the spec, so nobody tunes to them. They are here as an
+instructor's reference for one set of settings only. Measured `@gmod/gff` streaming the
+GENCODE GFF3: 12 s before the first feature, and a 5.6 GB peak heap.
+*SD*: not yet reviewed.
+
+**Confidently wrong** — *Agent* was about to recommend `@gmod/gff` for GFF3 input
+because it is maintained and browser-compatible, both true. Measuring it showed it
+buffers the whole file, because GENCODE writes no `###` sync marks. Separately, the first
+ENCODE query used a wrong field name and returned **zero files without an error**. An
+empty result looked like "ENCODE has no mouse peaks" until the query was checked. And the
+first DNase pick was a 4-day-old hybrid mouse next to 2-month-old adults. It was caught
+by reading the experiment's biosample summary, not the file listing.
+
+**Keep** — An empty query result is not an answer; check the query before believing it.
+"Maintained and browser-compatible" says nothing about how a library behaves on *your*
+file. And the CTCF file's promoter fraction is high for CTCF and carries ENCODE's
+*extremely low read depth* audit. Kept on purpose, and labelled, because "the code is
+right but is the data?" is the next question the exercise should provoke.
+
+---
+
+## Entry 9 — Copilot review of PR #5: five findings, five fixes
+
+**Asked** — *SD* requested a lite Copilot review of PR #5 and asked the agent to watch
+for it.
+
+**Agent did** — Polled the PR until the review arrived, about ten minutes later. Assessed
+each of the five findings against the spec rather than accepting them wholesale. All five
+held up:
+
+1. **High.** The parser contract keyed transcripts on `transcript_id`, a GTF convention.
+   Standard GFF3 uses `ID` and `Parent`. GENCODE copies `transcript_id` into its GFF3,
+   so the gap would have passed every test on GENCODE and failed on any other GFF3. The
+   contract now normalises from `ID`/`Parent`, and the fixture's GFF3 omits
+   `transcript_id` so the test can catch it.
+2. **High.** The spec recommended Plot, forbade a build step, and forbade CDNs, so a
+   static page couldn't import it. Libraries are now bundled once into a checked-in
+   `vendor/` directory by one `npm run vendor` script.
+3. **Medium.** It never said whether unmatched peaks counted toward the 100%. They are
+   now excluded from the denominator and reported per file.
+4. **Medium.** The genome background needs chromosome lengths, which a GTF lacks. Lengths
+   now come from GFF3 `##sequence-region` lines or an optional chrom.sizes file, and the
+   bar is hidden otherwise.
+5. **Low.** "The workshop repository" was ambiguous with two repositories in play. The
+   exercise now names the Vahedi repository and gives copy and direct-download commands.
+
+**Checked how** — *Agent*: bundled Plot and the interval tree with esbuild, and
+confirmed the bundles have no remote imports and load and run as ES modules (394 KB and
+9 KB). Confirmed that GENCODE M25's GFF3 has `##sequence-region` lines for all 22
+chromosomes and its GTF has none. Confirmed that no GENCODE exon has multiple parents,
+that UCSC's `mm10.chrom.sizes` returns 200, and that the direct Vahedi CSV link returns
+200 with 49,782 lines.
+*SD*: not yet reviewed.
+
+**Confidently wrong** — *Agent* wrote a spec that contradicted itself (a recommended
+library it had also made impossible to load) and a parser contract that only worked
+because GENCODE is unusually generous with attributes. Neither was caught by the agent's
+own checks, which ran the libraries in Node, where bare imports resolve. It took a second
+reviewer reading the spec as a whole. Also, one verification command flooded the output
+by grepping minified code.
+
+**Keep** — A second reviewer, even a lite automated one, reads the document as a whole,
+not piece by piece. Testing in Node is not testing in a browser. And a reference file
+that is unusually complete, like GENCODE's GFF3, hides the bugs a less complete file
+would expose. Write the fixture to the standard, not to the example.
