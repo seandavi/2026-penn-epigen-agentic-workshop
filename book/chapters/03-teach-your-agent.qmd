@@ -6,12 +6,11 @@ also why it needs to know how *your* folder works.
 
 Imagine a folder you've worked in for a few months. **This one is hypothetical**: a
 made-up composite, not anyone's real project, though most of us have one like it. Say
-there's a
-`data/` folder, but is everything in it raw, or did someone save a filtered table there
-too? Say there are scripts called `qc.R`, `qc_v2.R` and `qc_final.R`: which one is current?
-A `results/` folder holds figures from last spring, and nothing says whether they came
-from the current script. The sample sheet has a column called `cond`, and only you know
-that `1` is the knockout.
+there's a `data/` folder, but is everything in it raw, or did someone save a filtered
+table there too? Say there are scripts called `qc.R`, `qc_v2.R` and `qc_final.R`: which
+one is current? A `results/` folder holds figures from last spring, and nothing says
+whether they came from the current script. The sample sheet has a column called `cond`,
+and only you know that `1` is the knockout.
 
 It needn't be an analysis. A grant folder has three drafts of the aims page and a
 budget spreadsheet only you know is out of date. A manuscript folder has figure files
