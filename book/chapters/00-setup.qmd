@@ -389,3 +389,5 @@ one laptop is a fine way to do this book.
   [Claude Code for first-time terminal users](https://code.claude.com/docs/en/terminal-guide)
   [@url:https://code.claude.com/docs/en/terminal-guide].
 - **On Windows:** @sec-windows.
+- **Have your agent teach you the book:** the [preface](../index.qmd#preface-tutor) has
+  the address to point it at, and a prompt to start with.

@@ -1,0 +1,276 @@
+# Setup
+
+Everything in this book happens in one place: a **session** with a coding agent, started in a folder on your own computer. This chapter gets you there. It is the least interesting chapter and the one most worth doing carefully, because every later chapter assumes three things are true: the agent is running, you’re signed in, and it is working in the folder you meant it to.
+
+The morning talk made the case that an agent differs from a chatbot because it acts: it reads your files, writes new ones and runs commands. That is exactly why the folder matters. A chatbot can only see what you paste into it. An agent can see, and change, whatever is in the folder you start it in, and it will ask before reaching further. So the first habit of the day is a small one: **make a folder for the work, start the agent there, and ask it where it is** before asking it to do anything.
+
+You don’t need to know how to code, and you don’t need a terminal if you use the desktop app. You also don’t need `git`, R, Python or anything else installed. Later chapters check what you have and work with it. Allow **15–20 minutes**.
+
+## What you’ll learn
+
+- Install and sign in to Claude Code, using the desktop app or the command line, on macOS or Windows.
+- Make a workshop folder and start a session in it.
+- Read a permission prompt and decide what’s safe to allow.
+- Start a new session, and know why you’d want to.
+
+## The pieces
+
+[Figure 1](#fig-setup-session) shows how the parts fit together. You type into a **session**. The session has a chat history, a model and a permission mode, and it works in one **folder**. Inside that folder the agent can read freely; changing things, or reaching outside, depends on what you allow.
+
+``` mermaid
+flowchart LR
+  accDescr: Diagram - You send prompts to a session, which has a chat history, a model and a permission mode. The session works in the agents-workshop folder and its files. Anything outside the folder needs your approval.
+  you([You]) -- prompts --> s["Session<br/>chat history · model · permission mode"]
+  s -- reads and writes --> f["agents-workshop/<br/>your files"]
+  s -. asks first .-> o["Anything outside<br/>the folder"]
+```
+
+Figure 1: You talk to a session; the session works in one folder. Reading inside the folder is free. Edits and commands follow the permission mode, and anything outside the folder asks first.
+
+There are several ways to run the same agent. They behave the same where it matters for this book: the prompts, the folder and the permission prompts.
+
+|  | Claude desktop app, **Code** | `claude` on the command line | Google Antigravity 2.0 |
+|----|----|----|----|
+| Who it suits | Most people. No terminal needed. | People who already live in a terminal. | People who’d rather use Google’s agent, with a personal Google account. |
+| How you pick the folder | **Local**, then **Select folder**, when starting a session | `cd` into the folder, then run `claude` | A **Project**: the folder icon with a “+” in the left sidebar, **New Project**, **Add Folder**, **Create** |
+| How you change permissions | The mode selector next to the send button | **Shift+Tab** cycles the modes | The project’s security preset, in its settings |
+| Supported in the room | Yes | Yes | Best effort |
+
+Table 1: Ways to run an agent for this book. Everything in later chapters works in all three, with small differences named where they matter.
+
+## Install and sign in
+
+The Institute has arranged **Claude Team seats** for the workshop. If the app asks you to upgrade, or you can’t see the Code tab, tell Sean or a helper straight away.
+
+### The desktop app (recommended)
+
+1.  Download the installer for your computer from [claude.com/download](https://claude.com/download) and run it. Windows on ARM (some Surface laptops) has a separate installer, linked from the [desktop quickstart](https://code.claude.com/docs/en/desktop-quickstart).
+2.  Open Claude from Applications (macOS) or the Start menu (Windows) and sign in.
+3.  Click **Code** at the top of the window.
+
+The app has two places to work, and only one of them is for this book:
+
+| Where | What it is | For this book? |
+|----|----|----|
+| **Home** | Chat and Cowork. A **Chat / Cowork** switch at the bottom left of the message box picks between a conversation (it can’t see your files) and Cowork, a background agent that works in its own sandbox. On some accounts there’s no switch: Claude picks for you. | No |
+| **Code** | An agent working directly on files in a folder you choose. | **Yes** |
+
+Table 2: The desktop app, as of September 2026.
+
+The app changes often. Older versions, and some of the documentation, show three tabs instead: **Chat**, **Cowork** and **Code** ([“Get Started with the Desktop App,” n.d.](#ref-url:https://code.claude.com/docs/en/desktop-quickstart)). Chat and Cowork now “share one home” ([“Use Claude Cowork on Web, Desktop, and Mobile Claude Help Center” 2026](#ref-url:https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile)). Whatever yours shows, you want **Code**.
+
+The desktop app includes Claude Code. You don’t need to install anything else.
+
+> **WARNING: If the Code tab won’t open**
+>
+> If it asks you to upgrade, shows an error, or isn’t there, don’t spend time on it: tell Sean or a helper straight away. Afterwards, the app’s troubleshooting guide covers sign-in and `Error 403` problems ([“Desktop Application,” n.d.](#ref-url:https://code.claude.com/docs/en/desktop)).
+
+### The command line (optional)
+
+If you’d rather use a terminal, install the `claude` command ([“Advanced Setup,” n.d.](#ref-url:https://code.claude.com/docs/en/setup)). On macOS, in Terminal:
+
+``` bash
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+On Windows, in **PowerShell** (not CMD; [Appendix A: Windows notes](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/appendices/windows.llms.md) explains the difference):
+
+``` powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+or, if you use `winget`:
+
+``` powershell
+winget install Anthropic.ClaudeCode
+```
+
+Then type `claude` and follow the sign-in prompts in your browser. You don’t need to run as Administrator.
+
+> **NOTE: On Windows**
+>
+> Claude Code runs natively on Windows 10 (version 1809 or later) and Windows 11. **Git for Windows is optional.** With it, the agent runs commands through Git Bash; without it, it uses PowerShell. Both work for this book, and you only need Git itself in [Chapter 7: Work like a project](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/07-work-like-a-project.llms.md), where the chapter offers a way round if you can’t install it. The Windows appendix, [Appendix A: Windows notes](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/appendices/windows.llms.md), covers PowerShell versus CMD, finding your Documents folder, showing file extensions, and what to do if `claude` is “not recognized”.
+
+### Google Antigravity (an alternative)
+
+Google’s agent, [Antigravity 2.0](https://antigravity.google/download), is a desktop app that works much like Claude’s Code pane ([“Getting Started,” n.d.](#ref-url:https://antigravity.google/docs/getting-started)). Download it for macOS, Windows or Linux, open it, and sign in with a Google account.
+
+- **Use a personal Google account** (an `@gmail.com` address). Antigravity’s FAQ says institutional Google Workspace accounts may not be able to sign in ([“FAQ,” n.d.](#ref-url:https://antigravity.google/docs/faq)).
+- Its agent works in a **Project**: one or more folders you add. By default it can only read and write inside those folders, and it asks before running terminal commands ([“Feature Overview,” n.d.](#ref-url:https://antigravity.google/docs/features)).
+- Where this book says `CLAUDE.md`, Antigravity reads `AGENTS.md` (and `GEMINI.md`); its project skills go in `.agents/skills/` and its MCP servers in `.agents/mcp_config.json` ([“Migration,” n.d.](#ref-url:https://antigravity.google/docs/cli/gcli-migration)).
+
+Gemini CLI, which earlier versions of this workshop mentioned, has been replaced by Antigravity’s CLI.
+
+> **TIP: Using Codex or GitHub Copilot?**
+>
+> Bring it. What this book teaches carries across: a folder per piece of work, prompts in plain English, a ledger of what you checked. What differs is detail: where a tool keeps its instructions file, how it asks permission, and how it adds skills and connections. Chapters name Claude Code where a step is specific to it. If yours differs, ask your agent: “This book says to do X in Claude Code. What’s the equivalent here?”
+
+## Make a workshop folder
+
+Make a new, empty folder called `agents-workshop` inside your **Documents** folder. The easiest place to do it is the agent app itself, as you start your first session (next section): the folder picker in Claude’s Code pane, and in Antigravity, opens on your files, and you can make a new folder there before selecting it.
+
+If you’d rather make it first:
+
+- **macOS:** in Finder, open Documents, then **File → New Folder**.
+- **Windows:** in File Explorer, open Documents, then right-click an empty space and choose **New → Folder**.
+
+Why a new, empty folder? So that everything the agent makes in this book is in one place you can find, and nothing else you own is in reach. Later chapters make their own sub-folders inside it.
+
+Keep the name exactly `agents-workshop`, with no spaces. Spaces in folder names work, but they trip up commands in small ways, and later chapters assume this name.
+
+> **NOTE: On Windows: is my Documents folder in OneDrive?**
+>
+> On many managed laptops, Documents lives inside OneDrive, so its full path is `C:\Users\<you>\OneDrive\Documents`, or `C:\Users\<you>\OneDrive - <institution>\Documents`, rather than `C:\Users\<you>\Documents`. Any of these is fine. When the agent tells you where it is, the path will show which you have. [Appendix A: Windows notes](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/appendices/windows.llms.md) shows how to see a folder’s full path.
+
+## Start a session in the folder
+
+This is the one place the book explains how to start a session. Every later chapter says “start a new session in ” and links back here; the steps are always these.
+
+**Desktop app.** In **Code**, choose **Local** as the environment and click **Select folder**. Go to Documents, make the `agents-workshop` folder there if you haven’t yet, and select it. Leave the model on its default. Then type your first prompt and press **Enter**.
+
+**Antigravity.** Click the folder icon with a “+” in the left sidebar, then **New Project**. Click **Add Folder**, go to Documents, make `agents-workshop` there if you haven’t yet, and select it. Click **Create**, then type your first prompt in the project.
+
+**Command line.** Open a terminal, move into the folder, and start the agent:
+
+``` bash
+cd ~/Documents/agents-workshop
+claude
+```
+
+On Windows, in PowerShell, use this instead. It finds your Documents folder wherever it is, including inside OneDrive:
+
+``` powershell
+cd (Join-Path ([Environment]::GetFolderPath('MyDocuments')) agents-workshop)
+claude
+```
+
+For a later chapter’s folder, add it to the end: `agents-workshop/website`, and so on.
+
+Now send your first prompt:
+
+``` default
+What folder are you in, and what's in it?
+```
+
+It should answer with the full path to `agents-workshop` and say the folder is empty (on a Mac it may mention a hidden `.DS_Store` file, which Finder makes; ignore it). That answer is worth reading properly. If it names a different folder, stop: every file it makes from here on would land in the wrong place. Start a new session and pick the folder again.
+
+Then ask it to make something, so you see an edit happen:
+
+``` default
+Make a file called hello.txt containing one line: "Setup worked on" followed by
+today's date. Then tell me the full path to the file.
+```
+
+Now go and find `hello.txt` yourself, in Finder or File Explorer, and open it. (On Windows, if it shows as just `hello`, turn on file extensions: see [Appendix A: Windows notes](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/appendices/windows.llms.md).) This is the first check of the day, and the pattern for all the rest: **the agent says it did something; you look.**
+
+## Permission prompts
+
+Depending on its **permission mode**, the agent will stop and ask before editing a file or running a command. These prompts are not errors. They are the safety catch working, and they are how you stay in charge of what happens on your computer.
+
+The desktop app has a mode selector next to the send button; on the command line, **Shift+Tab** cycles through the modes. The main ones ([“Choose a Permission Mode,” n.d.](#ref-url:https://code.claude.com/docs/en/permission-modes)):
+
+| Mode | What the agent does without asking | When to use it |
+|----|----|----|
+| **Manual** | Reads files. Asks before every edit and every command, showing you the change. | Your first session, so you see everything it does. |
+| **Accept edits** | Reads, and edits files in the folder. Still asks before other commands. | **Most of this book**, once you’re comfortable. |
+| **Plan** | Reads and explores, then proposes a plan without changing anything. | Before a big or unfamiliar task. |
+| **Auto** | Acts, with background safety checks that block risky actions. | If you see it offered, later, when you know what to expect. |
+
+Table 3: Permission modes in Claude Code. Your organisation may hide some of them. The desktop app remembers the mode you pick for each folder, except Plan.
+
+A fifth mode, **Bypass permissions**, turns off the prompts altogether. It is meant for throwaway sandboxes, not your laptop. Don’t use it.
+
+When a prompt does appear, three questions settle most of them ([Figure 2](#fig-setup-allow)). **Reading is fine.** Looking at files and listing folders can’t change anything, and the agent does most of it without asking at all. **Edits inside the workshop folder are fine**: that’s what the folder is for, and if an edit is wrong you can ask for it to be undone. **Read before allowing anything else**: a command that deletes or moves files, installs software, touches anything outside the folder, or sends data somewhere. Those are often fine too, but they’re the ones worth a second look.
+
+``` mermaid
+flowchart LR
+  accDescr: Decision diagram. Is it only reading? Allow. Is it editing files inside your workshop folder? Allow. Otherwise (it deletes, installs, reaches outside the folder or sends data out), read it first, and if unsure say no and ask why.
+  q1{"Only<br/>reading?"} -- yes --> a1([Allow])
+  q1 -- no --> q2{"Editing inside<br/>agents-workshop?"}
+  q2 -- yes --> a1
+  a2(["Read it first.<br/>Unsure? Say no,<br/>ask why."])
+  q2 -- "no: deletes, installs,<br/>goes outside, sends out" --> a2
+```
+
+Figure 2: Deciding on a permission prompt. When in doubt, say no and ask the agent what the command does and why it needs it.
+
+Saying no is always safe. The agent doesn’t sulk; it tries another way, or asks what you’d prefer. A good follow-up, in plain words:
+
+``` default
+Before you run that, explain what the command does, which files it touches,
+and why you need it.
+```
+
+> **NOTE: “Yes, and don’t ask again”**
+>
+> Some prompts offer to remember your answer for that kind of command in this folder. That’s handy for something harmless it runs often, such as listing files. Don’t use it for anything that deletes or installs.
+
+## Sessions: when to start a new one
+
+A session is one conversation: its own chat history, its own folder, its own permission mode. The agent remembers everything said earlier in the session, and nothing from other sessions, unless it’s written down in a file (that’s what [Chapter 3: Teach the agent your project](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/03-teach-your-agent.llms.md) is about).
+
+Start a **new session** for each chapter of this book, and whenever you change task. A long session drifts. It fills up with earlier detail, gets slower, and starts confusing old instructions with new ones, which is the context-window problem from this morning. A fresh session in the same folder costs nothing, because everything that matters is in the files.
+
+- **Desktop app:** **+ New session** in the sidebar (**Cmd+N** on macOS, **Ctrl+N** on Windows). Choose **Local** and **Select folder** again, as [above](#setup-start-session). Old sessions stay listed in the sidebar.
+- **Command line:** type `/exit`, then `cd` into the new folder if the chapter uses one, and run `claude` again. `claude -c` picks up the most recent conversation in the folder, if you want it back.
+
+Each later chapter works in its own folder inside `agents-workshop` (for example `agents-workshop/website` in [Chapter 1: Build a website](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/01-website.llms.md)). When a chapter says “start a new session in” a folder, it means these steps, with that folder picked. Then ask “What folder are you in?” before anything else.
+
+## Where the example data comes from
+
+The fallback data in later chapters is real data shared by the Vahedi lab, from their [workshop repository](https://github.com/golnazvahedi/epigenetics-agentic-workshop); there’s nothing to download now, and each chapter’s prompt has the agent fetch the one file it needs.
+
+> **IMPORTANT: Privacy: what not to give the agent**
+>
+> Don’t give the agent patient data, identifiable information, or unpublished data you aren’t allowed to share, in this book or anywhere else, until you know what your institution permits. Most of what’s worth trying today is public or de-identified material, and every chapter offers a public fallback.
+
+## What to notice
+
+- **It answered a question about your computer**, not about the world. A chatbot can’t tell you what’s in your Documents folder.
+- **It made a real file you could open without it.** That’s the difference the rest of the book builds on, and the reason for the folder.
+
+## Check yourself
+
+> **TIP: You’re done when**
+>
+> Claude (**Code**), `claude`, or Antigravity opens and you’re signed in.
+>
+> Asked “What folder are you in, and what’s in it?”, the agent names your `agents-workshop` folder.
+>
+> You found and opened `hello.txt` yourself, outside the agent.
+>
+> You know where the permission mode is, and have set it to **Manual** or **Accept edits**.
+>
+> You can start a new session.
+
+> **TIP: If it goes wrong**
+>
+> Paste the exact error message into a session and ask the agent what it means (it is surprisingly good at diagnosing its own setup), or pair with a neighbour. Two people at one laptop is a fine way to do this book.
+
+## Going further
+
+- **The desktop app in full:** the [quickstart](https://code.claude.com/docs/en/desktop-quickstart) and the [desktop guide](https://code.claude.com/docs/en/desktop).
+- **Every permission mode**, and what none of them will do without asking: [Choose a permission mode](https://code.claude.com/docs/en/permission-modes).
+- **New to the terminal?** [Claude Code for first-time terminal users](https://code.claude.com/docs/en/terminal-guide) ([“Terminal Guide for New Users,” n.d.](#ref-url:https://code.claude.com/docs/en/terminal-guide)).
+- **On Windows:** [Appendix A: Windows notes](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/appendices/windows.llms.md).
+- **Have your agent teach you the book:** the [preface](../index.llms.md#preface-tutor) has the address to point it at, and a prompt to start with.
+
+“Advanced Setup.” n.d. Accessed September 23, 2026. <https://code.claude.com/docs/en/setup>.
+
+“Choose a Permission Mode.” n.d. Accessed September 23, 2026. <https://code.claude.com/docs/en/permission-modes>.
+
+“Desktop Application.” n.d. Accessed September 23, 2026. <https://code.claude.com/docs/en/desktop>.
+
+“FAQ.” n.d. Accessed September 23, 2026. <https://antigravity.google/docs/faq/>.
+
+“Feature Overview.” n.d. Accessed September 23, 2026. <https://antigravity.google/docs/features/>.
+
+“Get Started with the Desktop App.” n.d. Accessed September 23, 2026. <https://code.claude.com/docs/en/desktop-quickstart>.
+
+“Getting Started.” n.d. Accessed September 23, 2026. <https://antigravity.google/docs/getting-started/>.
+
+“Migration.” n.d. Accessed September 23, 2026. <https://antigravity.google/docs/cli/gcli-migration/>.
+
+“Terminal Guide for New Users.” n.d. Accessed September 23, 2026. <https://code.claude.com/docs/en/terminal-guide>.
+
+“Use Claude Cowork on Web, Desktop, and Mobile Claude Help Center.” 2026. September 16. <https://support.claude.com/en/articles/15520349-use-claude-cowork-on-web-desktop-and-mobile>.
