@@ -8,12 +8,12 @@ Three exercises. Each takes about half an hour and produces something you keep.
 | 2 | [Go further, and stop repeating yourself](exercise-2-teach-the-agent.md) | What's worth writing down for next time — and what isn't | A memory file, or a good reason not to have one |
 | 3 | [Write one skill](exercise-3-write-a-skill.md) | Procedures written once, loaded on demand; why the description is the whole game | A skill |
 
-**For the afternoon, or if you finish early:** two stretch exercises take an app from
-specification to parallel agents. Neither is part of the taught session.
+**For the afternoon, or if you finish early:** two stretch exercises build an app from a
+specification. Neither is part of the taught session.
 
 | Stretch | Size | Needs |
 |---|---|---|
-| [PeakPeek: a peak file at a glance](stretch-peakpeek.md) | An afternoon | A browser. No GitHub, `git` or Node. |
+| [PeakPeek: a peak file at a glance](stretch-peakpeek.md) | One prompt to build, then the afternoon to check and change it | A browser. No GitHub, `git` or Node. |
 | [Peak overlap](stretch-spec-then-build.md) | More than an afternoon | `git`, and GitHub if you want issues and pull requests |
 
 ## Bring your own work

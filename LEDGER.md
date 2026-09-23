@@ -358,3 +358,39 @@ so it's truncated only if the error is ignored.
 concluding anything about the server. The test harness is part of the experiment. And
 this is exactly the trap an attendee's agent will fall into, so the exercise asks them to
 watch for it.
+
+---
+
+## Entry 11 — PeakPeek built twice: the long way, then in one prompt
+
+**Asked** — *SD*: build PeakPeek locally as an attendee would. Then, when the long way
+felt too slow: make the exercise basically a one-shot build, leaving the afternoon for
+iterating on ideas.
+
+**Agent did** — Built it the long way in `~/Documents/git/peakpeek`: decisions in `adr/`,
+five workers in parallel on issues 1–5 in one folder, then issue 6, reviewing and
+committing each. Then gave one fresh agent only the workshop's SPEC.md and the prompt
+now in step 3. Rewrote the exercise around that: set up, read the decisions, build in
+one prompt, check, then make it yours. The long way became "Going further".
+
+**Checked how** — *Agent*, in Chrome 152 via `file://`:
+- Long way: 77 tests pass; all five §2 ENCODE files and the Vahedi CSV at both
+  settings match §2 through the page; `bedtools merge` agrees on CTCF and DNase.
+- One-shot: 14.5 minutes from an empty folder. 62 tests pass. The fixture and CTCF
+  through its page match §2; the other files are its own claim, not re-checked.
+
+**Confidently wrong** — *Agent*, in SPEC.md, all found by building it:
+- `test.html` could never read `expected.json` from `file://`; the fixture and its
+  answers moved into a script.
+- "CTCF has an exact duplicate line." It doesn't: two lines share chromosome, start and
+  end, with different scores. The answer of 1 was right; the definition was wrong.
+  The one-shot agent found it.
+- "Overlapping peaks" and the side-by-side y-axis were never defined; the two builds
+  chose differently (1,763 vs 3,457 CTCF overlaps; counts vs share of each file).
+- *Agent*, while building: committed with `git commit -a` as workers were writing, sweeping
+  up their half-written code. A worker noticed; the commit was redone.
+
+**Keep** — With a spec this complete, a single agent built the page in a quarter of an
+hour. The building was never the slow part; writing the spec and checking the result
+were. So the exercise hands over the spec, and gives attendees the checking and the
+changing.
