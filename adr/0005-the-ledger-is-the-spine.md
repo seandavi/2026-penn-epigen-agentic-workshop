@@ -39,3 +39,14 @@ has to be introduced as the point rather than as admin.
 
 *Confidently wrong* must be framed so that "nothing caught" is a legitimate entry,
 otherwise diligent attendees will invent failures to fill the box.
+
+## Correction (2026-09-23)
+
+Two things this record left implicit, made explicit at SD's request:
+
+- **The agent writes the ledger**, when asked or, under a standing instruction, on its
+  own. The attendee must read each entry and correct *Checked how*; the attendee must
+  not accept the agent's account of its own checking as written.
+- **The ledger records what matters, not everything.** An entry covers a piece of work
+  someone may later need to know about, usually several prompts. Small tweaks must not
+  get entries of their own.

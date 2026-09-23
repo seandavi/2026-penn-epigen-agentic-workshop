@@ -549,7 +549,7 @@ Shan, Qiang, Xiang Li, Xia Chen, et al. 2021. <span>“Tcf1 and <span>Lef1</span
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Find three recent papers on &lt;your topic&gt;. For each give the first author, year,</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>journal, title and PMID. Say where each fact came from. Don't search the web, and</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>don't use any PubMed or other database tools.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The last sentence matters: Claude Code can search the web, and your account may already have a PubMed connection (see “Two PubMed servers?” below). Today you want to see what the agent knows <strong>without</strong> a database. Start a <code>LEDGER.md</code> entry in this folder: the prompt goes under <em>Asked</em>, and the agent’s answer under <em>Agent did</em>.</p>
+<p>The last sentence matters: Claude Code can search the web, and your account may already have a PubMed connection (see “Two PubMed servers?” below). Today you want to see what the agent knows <strong>without</strong> a database. Ask the agent to start <code>LEDGER.md</code> in this folder with an entry for this question: the prompt under <em>Asked</em>, its answer under <em>Agent did</em>.</p>
 <p>No topic in mind? Use ours: the question in the worked example. Or use genes from the Vahedi lab’s RNA-seq data: the top hits in <code>differential_genes.tsv</code>, from their repository’s <code>track-a/data/README.md</code>, are Jun, Myc, Irf4 and Ccr7, in B cells lacking a CTCF binding site (<a href="https://github.com/golnazvahedi/epigenetics-agentic-workshop">Vahedi lab repository</a>).</p>
 </section>
 <section id="connect-pubmed" class="level3 page-columns page-full" data-number="5.4.2">
@@ -711,7 +711,7 @@ Table&nbsp;5.3: Three ways to connect the same server. A and B only affect this 
 <li><strong>Is it about what you asked?</strong> Right organism, right assay, right gene? A search for “TCF” can find the wrong TCF.</li>
 <li><strong>Does the abstract support what the agent said about it?</strong> Read it. This is the check no tool can do for you.</li>
 </ol>
-<p>Then write a second ledger entry. <em>Asked</em> is the step 4 prompt; <em>Agent did</em> is how you connected PubMed and what the agent answered; <em>Checked how</em> is the three PMIDs and what you found; <em>Confidently wrong</em> is anything that didn’t hold up; <em>Keep</em> is what you’d do the same way next time.</p>
+<p>Then have the agent add a second ledger entry, and correct it (<a href="02-ledger.html" class="quarto-xref"><span>Chapter 2</span></a>). <em>Asked</em> is the step 4 prompt; <em>Agent did</em> is how you connected PubMed and what the agent answered; <em>Checked how</em> is the three PMIDs and what you found, in your words; <em>Confidently wrong</em> is anything that didn’t hold up; <em>Keep</em> is what you’d do the same way next time.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

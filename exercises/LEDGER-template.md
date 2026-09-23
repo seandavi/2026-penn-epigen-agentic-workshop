@@ -2,8 +2,9 @@
 
 A running record of what I asked an agent to do, what it did, and how I checked.
 
-One entry per task. Keep it terse — this is a lab notebook, not a report. The only
-field that must never be left blank is **Checked how**.
+One entry for each piece of work worth recording, not for every prompt. Usually the
+agent writes it; I read it and correct it. Keep it terse — this is a lab notebook, not a
+report. The only field that must never be left blank is **Checked how**.
 
 ---
 
@@ -20,7 +21,8 @@ of its summary.>
 
 **Checked how**
 
-<the verification you personally performed. "It said it was right" is not a check.>
+<the verification that actually happened: what I did, or what the agent did and can
+point to (the command, the file). "It said it was right" is not a check.>
 
 **Confidently wrong**
 

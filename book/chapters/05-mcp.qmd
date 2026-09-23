@@ -189,8 +189,9 @@ don't use any PubMed or other database tools.
 
 The last sentence matters: Claude Code can search the web, and your account may already
 have a PubMed connection (see "Two PubMed servers?" below). Today you want to see what
-the agent knows **without** a database. Start a `LEDGER.md` entry in this folder: the
-prompt goes under *Asked*, and the agent's answer under *Agent did*.
+the agent knows **without** a database. Ask the agent to start `LEDGER.md` in this
+folder with an entry for this question: the prompt under *Asked*, its answer under
+*Agent did*.
 
 No topic in mind? Use ours: the question in the worked example. Or use genes from the
 Vahedi lab's RNA-seq data: the top hits in `differential_genes.tsv`, from their
@@ -349,9 +350,9 @@ This is the step that counts. For three of the papers, open
 3. **Does the abstract support what the agent said about it?** Read it. This is the
    check no tool can do for you.
 
-Then write a second ledger entry. *Asked* is the step 4 prompt; *Agent did* is how you
-connected PubMed and what the agent answered; *Checked how* is the three PMIDs and what
-you found; *Confidently wrong* is anything that didn't hold up; *Keep* is what you'd do
+Then have the agent add a second ledger entry, and correct it (@sec-ledger). *Asked* is
+the step 4 prompt; *Agent did* is how you connected PubMed and what the agent answered;
+*Checked how* is the three PMIDs and what you found, in your words; *Confidently wrong* is anything that didn't hold up; *Keep* is what you'd do
 the same way next time.
 
 ::: {.callout-tip}

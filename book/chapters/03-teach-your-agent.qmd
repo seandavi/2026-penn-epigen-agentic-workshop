@@ -354,8 +354,9 @@ Now work through the loop in @fig-teach-loop.
 5. **Test it.** Start a **new session** in the same folder ([Setup](00-setup.qmd)): it
    begins with an empty conversation and reloads the instruction files. Give it a
    real next task, without repeating any rule. Watch whether the rules hold.
-6. **Ledger it.** One entry: what you had to tell it, and whether writing it down
-   stopped you having to (@sec-ledger).
+6. **Ledger it.** Ask the agent for one entry, and correct it (@sec-ledger): what you
+   had to tell it, and whether writing it down stopped you having to. If you gave
+   `AGENTS.md` the ledger rule from @sec-ledger, it may have written one already.
 
 | If the correction is… | It goes in… |
 |---|---|

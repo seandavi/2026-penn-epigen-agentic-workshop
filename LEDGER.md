@@ -526,3 +526,45 @@ picker's new-folder button, in either app.
 description, which is out of date.
 
 **Keep** — For UI, the Help Center and release notes move faster than the product docs.
+
+---
+
+## Entry 16 — The ledger: the agent writes it, and it records what matters
+
+**Asked** (SD)
+
+> I'd make it clear in Chapter 2 that the ledger is something that the agent writes,
+> sometimes at our behest, but often on its own. I'd also stress that the ledger is not
+> about everything we did; it is a record of the important things we did.
+
+**Agent did**
+
+Reframed chapter 2. The opening now says the agent writes the ledger and that it isn't a
+record of everything. New sections: *Who writes it*, with a table of the three ways an
+entry gets written, and *What earns an entry*, with a table of what's worth one. The
+loop diagram was redrawn so the agent writes the entry and the person corrects *Checked
+how*. It also fixes a Mermaid `accDescr` that had been cut off mid-sentence. *Your
+turn* was rewritten: the agent writes entry 1 and the attendee corrects it; then a
+standing instruction, one change that matters and one that doesn't, to see whether it
+records the first and skips the second. Follow-on edits: `exercises/LEDGER-template.md`,
+chapter 3 step 6, chapter 5's two ledger steps, chapter 7's table ("for each piece of
+work worth recording"). ADR-0005 gets a Correction section.
+
+**Checked how**
+
+*Agent:* full render with no warnings. In Chrome: no unresolved `?@` references in
+chapters 2, 3, 5 and 7, the diagrams render, and the new tables and diagram in chapter 2
+were looked at in a screenshot. "Sixteen entries for about forty commits" was counted
+from this file and `git log`. Not checked: the new *Your turn* prompts have not been
+run with an agent. Nobody has checked whether an agent given the standing instruction
+actually records the real change and skips the colour change. Not checked either: what
+a new session writes when it can't see chapter 1.
+
+**Confidently wrong**
+
+Nothing caught.
+
+**Keep**
+
+The honest version of "the agent does it on its own" is "it does it because a standing
+instruction tells it to". The book says so.

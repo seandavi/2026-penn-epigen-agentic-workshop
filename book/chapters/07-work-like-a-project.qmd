@@ -44,7 +44,7 @@ written once and kept. A commit is the exact change to the files, with a way bac
 
 | | Answers | Write one | Who reads it | Changed later? |
 |---|---|---|---|---|
-| **Ledger entry** | What did I ask, what happened, how did I check? | For every task | You, a reviewer, your PI | No: add a new entry |
+| **Ledger entry** | What did I ask, what happened, how did I check? | For each piece of work worth recording | You, a reviewer, your PI | No: add a new entry |
 | **Decision record** | Why is it this way? What must not change? | Only for choices awkward to reverse | The next person, and the agent before it edits | No: a new record supersedes it |
 | **Commit** | What exactly changed, and when? | For every change that works | git, and anyone going back | No: history is kept |
 | **Snapshot** (no git) | How do I get back? | Before every change | You, when something breaks | No: make a new one |
