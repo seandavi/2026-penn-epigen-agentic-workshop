@@ -13,6 +13,11 @@ uploaded.
 The point is not the chart. It's that **the spec is where the work actually happens**, and
 the agent can't do that part for you.
 
+**This is the big one.** For an afternoon, start with [PeakPeek](stretch-peakpeek.md): a
+smaller app, built from a finished spec in one prompt, with no GitHub needed. To see this spec built end to end by
+agents, with every decision and review on the record, look at
+[peakwhere](https://github.com/seandavi/peakwhere).
+
 ## What you'll need
 
 - Your agent, as in the morning
