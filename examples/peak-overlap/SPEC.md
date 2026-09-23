@@ -171,8 +171,14 @@ Each test must exist and pass before the work is called done.
 
 ## 8. Research findings
 
-Checked on 2026-09-23 by installing the packages and running them, not from memory. Two
-of the recollections this section replaced were wrong.
+Checked on 2026-09-23 by installing the packages and running them, not from memory. The
+first draft, written from recall, got three things wrong:
+
+- It named `bed-utils` and `js-interval-tree`. **Neither package exists on npm.** An
+  invented package name is worse than a mistake, because anyone can register the name
+  later and fill it with whatever they like. Check that a package exists, and who
+  publishes it, before installing anything an agent names.
+- It said `@gmod/gff` parses GTF. It doesn't (see below).
 
 | Package | Version | Verdict |
 |---|---|---|
