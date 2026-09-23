@@ -206,3 +206,52 @@ longer supports that client. The research was done from primary sources instead.
 can register one later. `npm view` before `npm install`, every time an agent names a
 package. And the peak CSV's `1` against GENCODE's `chr1` would have put every peak in
 "Intergenic" and still drawn a plausible chart.
+
+---
+
+## Entry 8 — Reference data for the stretch exercise: a GFF3 and five peak files
+
+**Asked** — *SD*: supply links to a GFF3 and three to five peak files, ideally from
+different types of experiment, so participants can try the app themselves. *SD* then
+authorised installing bedtools for checking.
+
+**Agent did** — Chose GENCODE M25 (the last mm10 release, to match the Vahedi peaks)
+and five ENCODE files from adult male mouse thymus: H3K4me3, H3K36me3, H3K27me3, CTCF
+and DNase-seq, plus H3K27ac as an optional sixth. Thymus was picked because it is mostly
+T cells, which suits the TCF-1 data, and because ENCODE has all five assay types for it.
+Added them to SPEC.md §2 and a download block to the exercise. Revised the spec to prefer
+GFF3 and added a biology-prediction test and a bedtools cross-check route.
+
+**Checked how** — *Agent*: downloaded every file and confirmed HTTP 200, a valid gzip,
+mm10, the peak counts, and chromosome names against the annotation. Ran the exercise's
+download block verbatim in a clean directory. Classified peak centres (promoter ±1 kb >
+exon > intron > intergenic) two independent ways: a Python script reading the GTF, and
+bedtools reading the GFF3. They agreed to within 0.1% on every file:
+
+| File | Promoter | Exon | Intron | Intergenic |
+|---|---|---|---|---|
+| H3K4me3 `ENCFF674JZY` | 68.9% | 4.1% | 15.7% | 11.2% |
+| H3K27ac `ENCFF974HMO` | 33.3% | 3.8% | 40.0% | 22.9% |
+| H3K36me3 `ENCFF853BYO` | 3.4% | 22.5% | 71.5% | 2.6% |
+| H3K27me3 `ENCFF478UYW` | 42.1% | 8.3% | 25.4% | 24.2% |
+| CTCF `ENCFF714WDP` | 45.5% | 6.1% | 25.7% | 22.8% |
+| DNase `ENCFF979ULB` | 36.8% | 4.5% | 32.2% | 26.5% |
+
+These are deliberately not in the spec, so nobody tunes to them. They are here as an
+instructor's reference for one set of settings only. Measured `@gmod/gff` streaming the
+GENCODE GFF3: 12 s before the first feature, and a 5.6 GB peak heap.
+*SD*: not yet reviewed.
+
+**Confidently wrong** — *Agent* was about to recommend `@gmod/gff` for GFF3 input
+because it is maintained and browser-compatible, both true. Measuring it showed it
+buffers the whole file, because GENCODE writes no `###` sync marks. Separately, the first
+ENCODE query used a wrong field name and returned **zero files without an error**. An
+empty result looked like "ENCODE has no mouse peaks" until the query was checked. And the
+first DNase pick was a 4-day-old hybrid mouse next to 2-month-old adults. It was caught
+by reading the experiment's biosample summary, not the file listing.
+
+**Keep** — An empty query result is not an answer; check the query before believing it.
+"Maintained and browser-compatible" says nothing about how a library behaves on *your*
+file. And the CTCF file's promoter fraction is high for CTCF and carries ENCODE's
+*extremely low read depth* audit. Kept on purpose, and labelled, because "the code is
+right but is the data?" is the next question the exercise should provoke.
