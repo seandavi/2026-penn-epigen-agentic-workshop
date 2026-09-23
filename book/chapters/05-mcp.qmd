@@ -167,8 +167,8 @@ You'll need about 20 minutes. Inside your `agents-workshop` folder in Documents 
 Ask "what folder are you in?" to be sure. Everything in this chapter happens in
 `agents-workshop/mcp`, and its `LEDGER.md` lives there too (@sec-ledger).
 
-::: {.callout-warning}
-## What leaves your machine
+::: {.callout-important}
+## Privacy: what leaves your machine
 
 Every tool call sends the agent's query to the server's operator. For PubMed that means
 your search terms: a topic, gene names, a disease. That is usually fine. Don't put
@@ -354,7 +354,8 @@ connected PubMed and what the agent answered; *Checked how* is the three PMIDs a
 you found; *Confidently wrong* is anything that didn't hold up; *Keep* is what you'd do
 the same way next time.
 
-### If it goes wrong
+::: {.callout-tip}
+## If it goes wrong
 
 | What you see | What to try |
 |---|---|
@@ -365,6 +366,7 @@ the same way next time.
 | A plugin command is "unknown" | Update Claude Code, or use route A. |
 
 : Common problems when connecting a server. {#tbl-mcp-troubleshoot}
+:::
 
 ## What to notice
 
@@ -383,13 +385,15 @@ the same way next time.
 
 ## Check yourself
 
-You're done when:
+::: {.callout-tip}
+## You're done when
 
-- [ ] the agent lists the PubMed server and its tools;
-- [ ] you have two answers to the same question, one from memory and one from PubMed;
-- [ ] you have opened three PMIDs on the PubMed website and checked them against what
-  the agent said;
-- [ ] your ledger has an entry saying what you checked and what you found.
+- [ ] The agent lists the PubMed server and its tools.
+- [ ] You have two answers to the same question, one from memory and one from PubMed.
+- [ ] You have opened three PMIDs on the PubMed website and checked them against what
+      the agent said.
+- [ ] Your ledger has an entry saying what you checked and what you found.
+:::
 
 ::: {.callout-warning}
 ## Which servers to trust

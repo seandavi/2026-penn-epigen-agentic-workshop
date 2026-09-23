@@ -311,7 +311,7 @@ About 30 minutes. You need a folder with some history: **several scripts, some d
 some results**. A single notebook is too simple to show much.
 
 ::: {.callout-important}
-## Privacy, and a copy
+## Privacy: work on a copy
 
 The agent will read every file in the folder. Use data you're allowed to share with the
 tool you're using: nothing identifiable, no patient data, nothing unpublished you
@@ -389,12 +389,18 @@ as a one-line text file. The `@AGENTS.md` import works everywhere.
 
 ## Check yourself
 
-- Open a new session and ask *"What rules apply in this folder?"* Does its answer match
-  your file, and nothing more?
-- Is every line in `AGENTS.md` something the agent couldn't have discovered by reading?
-- Does anything appear in both the README and `AGENTS.md`? Replace one with a link.
-- Did the new session follow the rules without you repeating them? If one slipped,
-  was the rule unclear, or wasn't the file loaded?
+::: {.callout-tip}
+## You're done when
+
+- [ ] In a new session, *"What rules apply in this folder?"* gets an answer that
+      matches your file, and nothing more.
+- [ ] Every line in `AGENTS.md` is something the agent couldn't have discovered by
+      reading.
+- [ ] Nothing appears in both the README and `AGENTS.md`; where it did, one is now a
+      link.
+- [ ] The new session followed the rules without you repeating them. (If one slipped:
+      was the rule unclear, or wasn't the file loaded?)
+:::
 
 ::: {.callout-warning}
 ## Instruction files go stale

@@ -279,7 +279,7 @@ anything identifiable, or any password or key, move it out, or have it listed in
 copies too: the same care applies.
 :::
 
-### Step 1: set up
+### 1. Set up
 
 First, find out whether you have git. Paste this:
 
@@ -353,7 +353,7 @@ to read the rules the agent wrote for itself. Are they what you asked for? (`CLA
 holds only `@AGENTS.md`, so Claude Code reads the same rules as other agents; @sec-teach
 explains why.)
 
-### Step 2: two changes, the full loop
+### 2. Two changes, the full loop
 
 Pick two improvements to your app. Try to make one of them a real decision: something
 with more than one sensible answer, where you'd want to remember why you chose. Examples:
@@ -382,7 +382,7 @@ Do the hand check yourself before you let it commit. If the agent's ADR doesn't 
 what you'd decide, say so: the ADR records **your** decision, not the agent's
 suggestion.
 
-### Step 3: break something, then go back
+### 3. Break something, then go back
 
 Now make a mistake on purpose, so you've seen the way back work before you need it.
 Choose something whose effect you'll notice: a label, a calculation, a colour.
@@ -438,16 +438,20 @@ main never saw the half-done version.
 
 ## Check yourself
 
-- The history ("show me the history") has at least four commits: the starting point,
-  two changes and the revert, each with a message that says why. Or, without git,
-  `snapshots/` has at least three folders, each named for a change.
-- `adr/` has at least one record, in your words, with a Decision that uses *must* or
-  *must not*.
-- `LEDGER.md` has an entry for each change, and every "Checked how" names something
-  that was actually run or looked at.
-- You went back once, and the app works again.
-- In a **new** session, ask "Why does this app …?" about the thing your ADR decided.
-  The agent should find the ADR and answer from it.
+::: {.callout-tip}
+## You're done when
+
+- [ ] The history ("show me the history") has at least four commits: the starting
+      point, two changes and the revert, each with a message that says why. Or,
+      without git, `snapshots/` has at least three folders, each named for a change.
+- [ ] `adr/` has at least one record, in your words, with a Decision that uses *must*
+      or *must not*.
+- [ ] `LEDGER.md` has an entry for each change, and every "Checked how" names
+      something that was actually run or looked at.
+- [ ] You went back once, and the app works again.
+- [ ] In a **new** session, "Why does this app …?", asked about the thing your ADR
+      decided, gets an answer from the ADR.
+:::
 
 ## Going further
 

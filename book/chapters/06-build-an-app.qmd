@@ -212,7 +212,7 @@ project folder), and check with "what folder are you in?"
 If you did @sec-teach, have the path to that project folder to hand. The agent will ask.
 
 ::: {.callout-important}
-## Your data and the agent
+## Privacy: your data and the agent
 
 The app itself can keep your data on your laptop: a page opened by double-clicking reads
 files without sending them anywhere. **The conversation doesn't.** Anything the agent
@@ -346,6 +346,9 @@ Then come back and use the starter prompt on an idea of your own when one arrive
 
 ## Check yourself
 
+::: {.callout-tip}
+## You're done when
+
 - [ ] Your folder has a `SPEC.md` you've read, with a test case whose answers you worked
       out yourself.
 - [ ] The app opens by double-clicking, with nothing installed for it.
@@ -353,6 +356,7 @@ Then come back and use the starter prompt on an idea of your own when one arrive
 - [ ] You tried it on a real file, and on one it should reject.
 - [ ] `LEDGER.md` says what was built and how it was checked, including what wasn't.
 - [ ] There's a snapshot in `snapshots/first-build/`.
+:::
 
 ## Going further
 

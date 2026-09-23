@@ -304,7 +304,6 @@ div.csl-indent {
   <li><a href="#check-what-the-agent-can-now-do" id="toc-check-what-the-agent-can-now-do" class="nav-link" data-scroll-target="#check-what-the-agent-can-now-do"><span class="header-section-number">5.4.3</span> 3. Check what the agent can now do</a></li>
   <li><a href="#ask-again-with-the-database" id="toc-ask-again-with-the-database" class="nav-link" data-scroll-target="#ask-again-with-the-database"><span class="header-section-number">5.4.4</span> 4. Ask again, with the database</a></li>
   <li><a href="#check-three-pmids-by-hand" id="toc-check-three-pmids-by-hand" class="nav-link" data-scroll-target="#check-three-pmids-by-hand"><span class="header-section-number">5.4.5</span> 5. Check three PMIDs by hand</a></li>
-  <li><a href="#if-it-goes-wrong" id="toc-if-it-goes-wrong" class="nav-link" data-scroll-target="#if-it-goes-wrong"><span class="header-section-number">5.4.6</span> If it goes wrong</a></li>
   </ul></li>
   <li><a href="#what-to-notice" id="toc-what-to-notice" class="nav-link" data-scroll-target="#what-to-notice"><span class="header-section-number">5.5</span> What to notice</a></li>
   <li><a href="#check-yourself" id="toc-check-yourself" class="nav-link" data-scroll-target="#check-yourself"><span class="header-section-number">5.6</span> Check yourself</a></li>
@@ -531,13 +530,13 @@ Shan, Qiang, Xiang Li, Xia Chen, et al. 2021. <span>“Tcf1 and <span>Lef1</span
 <section id="your-turn" class="level2 page-columns page-full" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">5.4</span> Your turn</h2>
 <p>You’ll need about 20 minutes. Inside your <code>agents-workshop</code> folder in Documents (from <a href="../chapters/00-setup.html">Setup</a>), make a new folder called <code>mcp</code>, and start a <strong>new</strong> session on it. Ask “what folder are you in?” to be sure. Everything in this chapter happens in <code>agents-workshop/mcp</code>, and its <code>LEDGER.md</code> lives there too (<a href="02-ledger.html" class="quarto-xref"><span>Chapter 2</span></a>).</p>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>What leaves your machine
+<span class="screen-reader-only">Important</span>Privacy: what leaves your machine
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -704,7 +703,7 @@ Table&nbsp;5.3: Three ways to connect the same server. A and B only affect this 
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>title alone.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Put the two answers side by side. What’s different: the papers, the PMIDs, how sure the agent sounds, what it says about where each fact came from?</p>
 </section>
-<section id="check-three-pmids-by-hand" class="level3" data-number="5.4.5">
+<section id="check-three-pmids-by-hand" class="level3 page-columns page-full" data-number="5.4.5">
 <h3 data-number="5.4.5" class="anchored" data-anchor-id="check-three-pmids-by-hand"><span class="header-section-number">5.4.5</span> 5. Check three PMIDs by hand</h3>
 <p>This is the step that counts. For three of the papers, open <code>https://pubmed.ncbi.nlm.nih.gov/&lt;PMID&gt;/</code> in your browser, putting the PMID in place of <code>&lt;PMID&gt;</code>, and check:</p>
 <ol type="1">
@@ -713,11 +712,18 @@ Table&nbsp;5.3: Three ways to connect the same server. A and B only affect this 
 <li><strong>Does the abstract support what the agent said about it?</strong> Read it. This is the check no tool can do for you.</li>
 </ol>
 <p>Then write a second ledger entry. <em>Asked</em> is the step 4 prompt; <em>Agent did</em> is how you connected PubMed and what the agent answered; <em>Checked how</em> is the three PMIDs and what you found; <em>Confidently wrong</em> is anything that didn’t hold up; <em>Keep</em> is what you’d do the same way next time.</p>
-</section>
-<section id="if-it-goes-wrong" class="level3 page-columns page-full" data-number="5.4.6">
-<h3 data-number="5.4.6" class="anchored" data-anchor-id="if-it-goes-wrong"><span class="header-section-number">5.4.6</span> If it goes wrong</h3>
-<div id="tbl-mcp-troubleshoot" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>If it goes wrong
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div id="tbl-mcp-troubleshoot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure" aria-labelledby="tbl-mcp-troubleshoot-caption">
 <div aria-describedby="tbl-mcp-troubleshoot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <colgroup>
@@ -754,12 +760,14 @@ Table&nbsp;5.3: Three ways to connect the same server. A and B only affect this 
 </tbody>
 </table>
 </div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-mcp-troubleshoot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5.4: Common problems when connecting a server.
-</figcaption>
+
 </figure>
 </div>
-</section>
+</div>
+</div>
+<div id="tbl-mcp-troubleshoot-caption" class="margin-figure-caption column-margin callout-margin-content">
+Table&nbsp;5.4: Common problems when connecting a server.
+</div></section>
 </section>
 <section id="what-to-notice" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="what-to-notice"><span class="header-section-number">5.5</span> What to notice</h2>
@@ -772,13 +780,24 @@ Table&nbsp;5.4: Common problems when connecting a server.
 </section>
 <section id="check-yourself" class="level2 page-columns page-full" data-number="5.6">
 <h2 data-number="5.6" class="anchored" data-anchor-id="check-yourself"><span class="header-section-number">5.6</span> Check yourself</h2>
-<p>You’re done when:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>You’re done when
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul class="task-list">
-<li><label><input type="checkbox">the agent lists the PubMed server and its tools;</label></li>
-<li><label><input type="checkbox">you have two answers to the same question, one from memory and one from PubMed;</label></li>
-<li><label><input type="checkbox">you have opened three PMIDs on the PubMed website and checked them against what the agent said;</label></li>
-<li><label><input type="checkbox">your ledger has an entry saying what you checked and what you found.</label></li>
+<li><label><input type="checkbox">The agent lists the PubMed server and its tools.</label></li>
+<li><label><input type="checkbox">You have two answers to the same question, one from memory and one from PubMed.</label></li>
+<li><label><input type="checkbox">You have opened three PMIDs on the PubMed website and checked them against what the agent said.</label></li>
+<li><label><input type="checkbox">Your ledger has an entry saying what you checked and what you found.</label></li>
 </ul>
+</div>
+</div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

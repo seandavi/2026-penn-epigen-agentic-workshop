@@ -313,8 +313,8 @@ https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main
 Then tell me how many rows and columns it has.
 ```
 
-::: {.callout-warning}
-## What you show the agent leaves your computer
+::: {.callout-important}
+## Privacy: what you show the agent leaves your computer
 Anything the agent reads is sent to the model. Use a file you'd be allowed to email
 to a collaborator: no patient data, nothing identifiable, and nothing unpublished
 that your lab's rules keep in-house. For a sensitive file type, describe it in words
@@ -423,16 +423,18 @@ both. You can always run a skill directly by typing `/` and its name.
 
 ## Check yourself
 
-You're done when:
+::: {.callout-tip}
+## You're done when
 
-- [ ] your skill is at `.claude/skills/<name>/SKILL.md` in your project folder;
-- [ ] on your good file, it reported nothing false;
-- [ ] on your broken file, it found everything you planted, or you've changed it so it
-  does;
-- [ ] it loaded for a phrasing that isn't copied from its description, and didn't
-  load for a neighbouring request;
-- [ ] you've added a ledger entry (@sec-ledger) saying what you tested it on and what
-  it missed.
+- [ ] Your skill is at `.claude/skills/<name>/SKILL.md` in your project folder.
+- [ ] On your good file, it reported nothing false.
+- [ ] On your broken file, it found everything you planted, or you've changed it so it
+      does.
+- [ ] It loaded for a phrasing that isn't copied from its description, and didn't load
+      for a neighbouring request.
+- [ ] You've added a ledger entry (@sec-ledger) saying what you tested it on and what
+      it missed.
+:::
 
 ## Going further
 

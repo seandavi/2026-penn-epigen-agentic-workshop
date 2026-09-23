@@ -341,7 +341,7 @@ there's nothing to download now, and each chapter's prompt has the agent fetch t
 file it needs.
 
 ::: {.callout-important}
-## Privacy
+## Privacy: what not to give the agent
 
 Don't give the agent patient data, identifiable information, or unpublished data you
 aren't allowed to share, in this book or anywhere else, until you know what your
@@ -351,8 +351,10 @@ material, and every chapter offers a public fallback.
 
 ## What to notice
 
-The agent answered a question about your computer, not about the world, and made a real
-file you could open without it. A chatbot couldn't do either.
+- **It answered a question about your computer**, not about the world. A chatbot
+  can't tell you what's in your Documents folder.
+- **It made a real file you could open without it.** That's the difference the rest of
+  the book builds on, and the reason for the folder.
 
 ## Check yourself
 
@@ -366,18 +368,24 @@ file you could open without it. A chatbot couldn't do either.
 - [ ] You know where the permission mode is, and have set it to **Manual** or
       **Accept edits**.
 - [ ] You can start a new session.
+:::
 
-**If it goes wrong:** paste the exact error message into a session and ask the agent
-what it means (it is surprisingly good at diagnosing its own setup), or pair with a
-neighbour. Two people at one laptop is a fine way to do this book.
+::: {.callout-tip}
+## If it goes wrong
+
+Paste the exact error message into a session and ask the agent what it means (it is
+surprisingly good at diagnosing its own setup), or pair with a neighbour. Two people at
+one laptop is a fine way to do this book.
 :::
 
 ## Going further
 
-- [Get started with the desktop app](https://code.claude.com/docs/en/desktop-quickstart)
-  and the fuller [desktop guide](https://code.claude.com/docs/en/desktop).
-- [Choose a permission mode](https://code.claude.com/docs/en/permission-modes): every
-  mode, and what none of them will do without asking.
-- [Claude Code for first-time terminal users](https://code.claude.com/docs/en/terminal-guide)
+- **The desktop app in full:** the
+  [quickstart](https://code.claude.com/docs/en/desktop-quickstart) and the
+  [desktop guide](https://code.claude.com/docs/en/desktop).
+- **Every permission mode**, and what none of them will do without asking:
+  [Choose a permission mode](https://code.claude.com/docs/en/permission-modes).
+- **New to the terminal?**
+  [Claude Code for first-time terminal users](https://code.claude.com/docs/en/terminal-guide)
   [@url:https://code.claude.com/docs/en/terminal-guide].
-- On Windows: @sec-windows.
+- **On Windows:** @sec-windows.

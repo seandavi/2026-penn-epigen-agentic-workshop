@@ -232,7 +232,7 @@ Allow about 20 minutes for steps 1 to 3. Steps 4 and 5 are for if you have time.
 Each later chapter works in its own folder inside `agents-workshop`, and starts its own
 `LEDGER.md` there.
 
-### Step 1: put the template in your folder
+### 1. Put the template in your folder
 
 Start a **new** session with the `website` folder as its folder, as in
 [Setup](00-setup.qmd), and paste:
@@ -250,7 +250,7 @@ you can also click a file path in the chat to open it in the file pane, edit it 
 On Windows, if `LEDGER.md` shows as just `LEDGER`, or you're not sure it hasn't become
 `LEDGER.md.txt`, turn on file extensions (@sec-windows).
 
-### Step 2: write entry 1 yourself, for what you've already done
+### 2. Write entry 1 yourself, for what you've already done
 
 Write an honest entry for the website you built in @sec-website. Write it yourself,
 not the agent: the point is to notice what you do and don't know.
@@ -270,7 +270,7 @@ not the agent: the point is to notice what you do and don't know.
 Use the [worked example](#ledger-worked-example) as your model for size and tone. Yours
 will be shorter: a few lines per field is plenty.
 
-### Step 3: make one more change, and ledger it as you go
+### 3. Make one more change, and ledger it as you go
 
 Pick a change: add a figure from your paper, a section about your methods, a photo, a
 contact line. This time, **write the ledger entry while you work**, not afterwards:
@@ -285,7 +285,7 @@ contact line. This time, **write the ledger entry while you work**, not afterwar
 You'll notice this is easier than step 2. Reconstructing an entry from memory is hard,
 even an hour later; writing it as you go takes a minute.
 
-### Step 4 (if you have time): ask the agent for its version, and compare
+### 4. Ask the agent for its version, and compare (if you have time)
 
 Now see what the agent would have written. Paste:
 
@@ -309,8 +309,8 @@ Keep your own entry in `LEDGER.md`. If the agent's version reminded you of somet
 true that you'd left out, add it. Then delete `agent-entry.md`, or keep it for
 comparison.
 
-::: {.callout-warning}
-## What goes in a ledger can be read by others
+::: {.callout-important}
+## Privacy: what goes in a ledger can be read by others
 
 Your ledger holds your prompts, pasted exactly. If you pasted anything into a prompt, it
 is now in `LEDGER.md` too. Before you share a ledger or put it on GitHub, read it for
@@ -319,7 +319,7 @@ collaborators' data, passwords or keys. Better still, don't paste those into an 
 in the first place.
 :::
 
-### Step 5 (if you have time): make it a habit the agent helps with
+### 5. Make it a habit the agent helps with (if you have time)
 
 Writing every entry yourself is the best way to learn what a good one looks like. After
 a few, it's reasonable to have the agent draft them, *as long as you correct them*. Put
@@ -346,14 +346,17 @@ reads at the start of every session, so you don't have to paste them.
 
 ## Check yourself
 
-You're done when:
+::: {.callout-tip}
+## You're done when
 
-- `LEDGER.md` is in your website folder and has **two entries**.
-- **Every Checked how field describes something you personally did**, or says
-  "Not checked" plainly. None says "the agent verified" or "looks good".
-- Every **Confidently wrong** field has something in it, even if it's "Nothing caught".
-- If you did step 4: you can point to at least one claim in the agent's own entry
-  that nothing in the session supports, or you checked and found none.
+- [ ] `LEDGER.md` is in your website folder and has **two entries**.
+- [ ] **Every Checked how field describes something you personally did**, or says
+      "Not checked" plainly. None says "the agent verified" or "looks good".
+- [ ] Every **Confidently wrong** field has something in it, even if it's "Nothing
+      caught".
+- [ ] If you did step 4: you can point to at least one claim in the agent's own entry
+      that nothing in the session supports, or you checked and found none.
+:::
 
 ## Going further
 
