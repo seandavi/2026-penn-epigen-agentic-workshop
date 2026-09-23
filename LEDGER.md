@@ -172,3 +172,37 @@ warned.
 summary hands over numbers, go to the primary source before putting them on a slide —
 the secondary write-ups here disagreed with each other, which is the same failure the
 deck spends a slide warning about.
+
+---
+
+## Entry 7 — Stretch exercise: a peak-overlap app, specified before built
+
+**Asked** — *SD* wanted a full-size but quick application that would show off parallel
+agents, a GitHub project and issues. *SD* proposed the subject: a browser-only tool that
+plots how peaks overlap gene regions from a GTF. *SD* then asked for a specification
+with research findings and open questions, and an exercise that links to it.
+
+**Agent did** — Suggested the libraries from recall, then checked every one on npm and
+ran the key ones before writing anything down. Wrote `examples/peak-overlap/SPEC.md`,
+with twelve open questions, acceptance tests and a parallel work breakdown, and
+`exercises/stretch-spec-then-build.md`. Placed the exercise outside the taught session
+as an afternoon stretch, consistent with ADR-0006.
+
+**Checked how** — *Agent*: `npm view` on every package named. Installed and ran
+`@flatten-js/interval-tree`, `@gmod/bed` and `@observablehq/plot`. Downloaded GENCODE
+vM25 basic and counted its feature types. Pulled `differential_peaks.csv` from the
+Vahedi repository and confirmed its chromosome names and width range. Read ChIPseeker's
+defaults from its source and HOMER's from its documentation.
+*SD*: not yet reviewed.
+
+**Confidently wrong** — *Agent*, in conversation: named `bed-utils` and
+`js-interval-tree`, **neither of which exists on npm**, and said `@gmod/gff` reads GTF,
+which it doesn't. The spec was also about to say `new BED({type: 'narrowPeak'})` would
+work; it throws, and the right type is `bigNarrowPeak`. Separately, the Gemini CLI that
+was meant to do the web research failed on authentication, because its free tier no
+longer supports that client. The research was done from primary sources instead.
+
+**Keep** — Invented package names are a supply-chain risk, not just a mistake: anyone
+can register one later. `npm view` before `npm install`, every time an agent names a
+package. And the peak CSV's `1` against GENCODE's `chr1` would have put every peak in
+"Intergenic" and still drawn a plausible chart.
