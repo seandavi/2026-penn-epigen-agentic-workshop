@@ -8,7 +8,7 @@ It needn’t be an analysis. A grant folder has three drafts of the aims page an
 
 An agent opening a folder like that is the stranger. It reads quickly and well: files, code, headers, any README it finds. What it can’t read is **what’s only in your head**. Which files it must never touch. Where new output goes. The convention that looks like a mistake and isn’t. What “done” means to you. So it guesses, reasonably, and some of its guesses are wrong *for you*. You correct it. Next session it has forgotten, and you correct it again.
 
-This morning’s talk made the fix sound simple: write it down once, in a file the agent reads at the start of every session. It is simple, but there are two traps. The first is writing too much: a long file that restates what the agent could have read for itself, which costs context on every turn and buries the few lines that matter. The second is copying: pasting the sample-sheet description into the agent’s file as well as the README, so there are now two versions to keep in step, and one of them will drift.
+This morning’s talk made the fix sound simple: write it down once, in a file the agent reads at the start of every session. You’ve done a small version already: the `readiness.md` from [Setup](../chapters/00-setup.llms.md#setup-readiness) is something one session found out and wrote down, so later sessions don’t have to find it out again. It is simple, but there are two traps. The first is writing too much: a long file that restates what the agent could have read for itself, which costs context on every turn and buries the few lines that matter. The second is copying: pasting the sample-sheet description into the agent’s file as well as the README, so there are now two versions to keep in step, and one of them will drift.
 
 This chapter is about writing the short file, and pointing to everything else.
 
@@ -214,9 +214,9 @@ In this folder, make two subfolders, data and scripts. Download these files from
 https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/
 into data/: README.md, differential_peaks.csv, differential_genes.tsv,
 counts_matrix.csv and sample_sheet_messy.csv. Download make_qc_report.py from the
-same place into scripts/. Save each file exactly as downloaded, with curl (or
-Invoke-WebRequest on Windows); don't retype or rewrite any of them. Don't clone the
-repository. Then list what you downloaded with each file's size.
+same place into scripts/. Save each file exactly as published, with a download
+command, not your web-reading tool; don't retype or rewrite any of them. Don't clone
+the repository. Then list what you downloaded with each file's size.
 ```
 
 That’s about 11.5 MB: the peak table is 6.7 MB, the gene table 3.5 MB, the counts 1.3 MB, and the rest a few KB each. These are real data from the Vahedi lab, shared for the workshop: don’t redistribute them.

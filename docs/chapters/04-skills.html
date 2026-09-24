@@ -494,6 +494,37 @@ Table&nbsp;4.1: Where Claude Code looks for skills. Start with the project folde
 <h3 data-number="4.2.3" class="anchored" data-anchor-id="what-makes-a-good-skill"><span class="header-section-number">4.2.3</span> What makes a good skill</h3>
 <p>The best skills encode knowledge that <strong>isn’t in the data</strong>. An agent can read a table perfectly well; what it can’t know is the thing your lab learned the hard way. Ask of any candidate procedure: would a careful newcomer, with the file in front of them, work this out? If yes, the agent probably will too, and the skill adds little. If no (which group is the reference, which instrument column is unreliable, which sample names break the join) it’s worth a skill.</p>
 <p>Skills and the <code>AGENTS.md</code> file from <a href="03-teach-your-agent.html" class="quarto-xref"><span>Chapter 3</span></a> do different jobs. <code>AGENTS.md</code> holds the <strong>rules</strong> for one project, read at the start of every session there. A skill holds a <strong>procedure</strong>, loaded only when a task needs it, in whichever project you’re in. When a section of your <code>AGENTS.md</code> has turned into a list of steps, it wants to be a skill.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>A small one to try: fetching a chapter of this book
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If you’re <a href="../index.html#preface-tutor">learning this book with your agent</a>, you paste the same instructions at the start of every chapter: find it in the index, save it exactly with a download command, check it arrived. That repetition is what a skill is for, and the one thing it knows that the agent doesn’t is <strong>don’t use the web-reading tool</strong>, because that tool may hand back a summary. Put it in your home folder (<code>~/.claude/skills/book-chapter/SKILL.md</code>) so it works in every chapter’s folder:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">name:</span><span class="co"> book-chapter</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> Fetch a chapter of the Penn agentic-workshop book into this folder.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  Use when I ask to start, read or work through a chapter of "the book" or "the</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  workshop".</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Read https://seandavi.github.io/2026-penn-epigen-agentic-workshop/llms.txt and</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>   find the chapter I named. If it's ambiguous, ask.</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Save that chapter's .llms.md file into this folder with a download command</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>   (curl, or Invoke-WebRequest on Windows). Never use your web-reading tool for</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>   the chapter itself: it may summarise, and the chapter's prompts must be exact.</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Tell me the file's size and its first heading.</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Teach from the saved file, not from memory.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then “let’s do the skills chapter” is enough. It’s also a quick way to try step 5 of Your turn below, testing the description: does it load when you say “chapter”, and stay quiet when you don’t?</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="sec-skills-library" class="level2 page-columns page-full" data-number="4.3">
@@ -653,8 +684,8 @@ Table&nbsp;4.3: The parts of <code>deseq2-triage/SKILL.md</code>. The <a href="h
 <section id="running-it" class="level3 page-columns page-full" data-number="4.4.2">
 <h3 data-number="4.4.2" class="anchored" data-anchor-id="running-it"><span class="header-section-number">4.4.2</span> Running it</h3>
 <p>We ran it on 23 September 2026. We made an empty folder, copied the skill into <code>.claude/skills/deseq2-triage/</code>, downloaded the two tables, and asked Claude Code (Claude Opus 5.5) about each file in a fresh session. The prompt deliberately doesn’t name the skill:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>I've been handed differential_peaks.csv by a collaborator. Can I trust it?</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Sanity-check it before I use it.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>I've been handed differential_peaks.csv by a collaborator. Can I trust it?</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Sanity-check it before I use it.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Both times, the agent loaded <code>deseq2-triage</code> on its own: “sanity-check” and “can I trust it” are in the description. Here is the start of its report on the peaks file, unedited apart from shortening:</p>
 <blockquote class="blockquote">
 <p><strong>Blocking</strong></p>
@@ -829,10 +860,10 @@ Table&nbsp;4.5: Candidate files for a checking skill.
 </div>
 <p><strong>No file of your own to hand?</strong> Use the Vahedi lab’s <a href="https://github.com/golnazvahedi/epigenetics-agentic-workshop/blob/main/track-a/data/sample_sheet_messy.csv"><code>sample_sheet_messy.csv</code></a>, a simulated RNA-seq submission sheet with known problems. (Their afternoon has an exercise that <em>cleans</em> this sheet. Here you’re writing a skill that <em>checks</em> sheets like it and fixes nothing.) Or extend <code>deseq2-triage</code> with a trap from your own lab’s pipeline.</p>
 <p>To use the fallback, once you’ve made the <code>skill</code> folder and started a session on it (step 2), ask the agent to fetch the exact file rather than retype it:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Download this file into this folder, saving it byte for byte (curl on macOS,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Invoke-WebRequest on Windows), not by retyping it:</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/sample_sheet_messy.csv</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>Then tell me how many rows and columns it has.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Download this file into this folder, saving it byte for byte with a download</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>command, not your web-reading tool, and not by retyping it:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/sample_sheet_messy.csv</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Then tell me how many rows and columns it has.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -850,20 +881,20 @@ Table&nbsp;4.5: Candidate files for a checking skill.
 <section id="have-the-agent-interview-you" class="level3" data-number="4.5.2">
 <h3 data-number="4.5.2" class="anchored" data-anchor-id="have-the-agent-interview-you"><span class="header-section-number">4.5.2</span> 2. Have the agent interview you</h3>
 <p>Make a folder called <code>skill</code> inside <code>Documents/agents-workshop/</code>, put a copy of your example file in it (or fetch the fallback, above), and start a <strong>new</strong> session on that folder, as in <a href="../chapters/00-setup.html">Setup</a>. Then paste this, filling in the angle brackets:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>I want you to write a skill (a SKILL.md in the Agent Skills format) that checks</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>&lt;a kind of file, e.g. "the sample sheets we send to our sequencing core"&gt; before</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>anyone uses it. There's an example in this folder: &lt;file name&gt;.</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Don't write anything yet. First interview me, one question at a time, about:</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>- where these files come from, and what a good one looks like;</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>- the problems I've actually seen in them, and which would lead to a wrong result;</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>- anything that can't be checked from the file alone and must be asked of a person;</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>- what the skill must never do (for example, change the file);</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>- the words I'd use when asking for this check.</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>Then show me a draft. The skill must report problems, not fix them, and must say</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plainly when something can't be checked from the file. Save it to</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>.claude/skills/&lt;short-name&gt;/SKILL.md in this folder only when I say it's right.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>I want you to write a skill (a SKILL.md in the Agent Skills format) that checks</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>&lt;a kind of file, e.g. "the sample sheets we send to our sequencing core"&gt; before</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>anyone uses it. There's an example in this folder: &lt;file name&gt;.</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Don't write anything yet. First interview me, one question at a time, about:</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>- where these files come from, and what a good one looks like;</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>- the problems I've actually seen in them, and which would lead to a wrong result;</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>- anything that can't be checked from the file alone and must be asked of a person;</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>- what the skill must never do (for example, change the file);</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>- the words I'd use when asking for this check.</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>Then show me a draft. The skill must report problems, not fix them, and must say</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plainly when something can't be checked from the file. Save it to</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>.claude/skills/&lt;short-name&gt;/SKILL.md in this folder only when I say it's right.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Answer from experience. The most useful answers are specific: not “check the dates” but “we’ve had three date formats in one sheet, and <code>3/2/26</code> means 3 February to our UK collaborators”.</p>
 </section>
 <section id="read-the-draft-before-you-accept-it" class="level3" data-number="4.5.3">
@@ -886,7 +917,7 @@ Table&nbsp;4.5: Candidate files for a checking skill.
 <li><strong>A bad file.</strong> Copy the good one and break it yourself: add a duplicate row, delete a value, change one date format, misspell a sample name. <strong>Write down what you broke before you run the check.</strong> Then you know exactly what it should find.</li>
 </ol>
 <p>Run each in a <strong>new session</strong>, so the agent that wrote the skill can’t answer from memory, with a prompt that doesn’t name the skill:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>I've just been sent &lt;file name&gt;. Is it OK to use?</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>I've just been sent &lt;file name&gt;. Is it OK to use?</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Compare what it reports with your list. Anything missed means the instructions need work. Anything it invented is worse: tell the agent exactly what it claimed, and ask it to change the skill so that can’t happen again.</p>
 </section>
 <section id="test-the-description" class="level3 page-columns page-full" data-number="4.5.5">
@@ -982,7 +1013,7 @@ Table&nbsp;4.6: An example should/shouldn’t pair for a sample-sheet checker.
 <ol class="example" type="1">
 <li>in a project, read its <code>SKILL.md</code> on GitHub first, then ask:</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Download only the pydeseq2 skill from https://github.com/K-Dense-AI/scientific-agent-skills (the folder skills/pydeseq2, with everything in it) into .claude/skills/pydeseq2 in this folder. Don't install anything else, and don't run any of its scripts. If git isn't available, download the files one by one. Then list the files you saved and show me the header of its SKILL.md.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Download only the pydeseq2 skill from https://github.com/K-Dense-AI/scientific-agent-skills (the folder skills/pydeseq2, with everything in it) into .claude/skills/pydeseq2 in this folder. Don't install anything else, and don't run any of its scripts. If git isn't available, download the files one by one. Then list the files you saved and show me the header of its SKILL.md.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 The repository’s README describes installers for the whole collection. Its own security advice is not to install everything at once.</li>
 <li><strong>Share it with your lab.</strong> A skill in a project’s <code>.claude/skills/</code> travels with the project. Put it in a shared lab folder or repository (<a href="07-work-like-a-project.html" class="quarto-xref"><span>Chapter 7</span></a>), and every trainee who starts there gets your checks without having to know they exist.</li>
 <li><strong>Measure it.</strong> The <code>skill-creator</code> plugin for Claude Code runs a skill against test prompts with and without it, and suggests description changes. See “Evaluate and iterate on a skill” in the skills documentation <span class="citation" data-cites="url:https://code.claude.com/docs/en/skills">(<a href="../appendices/references.html#ref-url:https://code.claude.com/docs/en/skills" role="doc-biblioref"><span>“Extend <span>Claude</span> with Skills,”</span> n.d.</a>)</span>.</li>

@@ -71,6 +71,29 @@ The best skills encode knowledge that **isn’t in the data**. An agent can read
 
 Skills and the `AGENTS.md` file from [Chapter 3: Teach the agent your project](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/03-teach-your-agent.llms.md) do different jobs. `AGENTS.md` holds the **rules** for one project, read at the start of every session there. A skill holds a **procedure**, loaded only when a task needs it, in whichever project you’re in. When a section of your `AGENTS.md` has turned into a list of steps, it wants to be a skill.
 
+> **TIP: A small one to try: fetching a chapter of this book**
+>
+> If you’re [learning this book with your agent](../index.llms.md#preface-tutor), you paste the same instructions at the start of every chapter: find it in the index, save it exactly with a download command, check it arrived. That repetition is what a skill is for, and the one thing it knows that the agent doesn’t is **don’t use the web-reading tool**, because that tool may hand back a summary. Put it in your home folder (`~/.claude/skills/book-chapter/SKILL.md`) so it works in every chapter’s folder:
+>
+> ``` markdown
+> ---
+> name: book-chapter
+> description: Fetch a chapter of the Penn agentic-workshop book into this folder.
+>   Use when I ask to start, read or work through a chapter of "the book" or "the
+>   workshop".
+> ---
+>
+> 1. Read https://seandavi.github.io/2026-penn-epigen-agentic-workshop/llms.txt and
+>    find the chapter I named. If it's ambiguous, ask.
+> 2. Save that chapter's .llms.md file into this folder with a download command
+>    (curl, or Invoke-WebRequest on Windows). Never use your web-reading tool for
+>    the chapter itself: it may summarise, and the chapter's prompts must be exact.
+> 3. Tell me the file's size and its first heading.
+> 4. Teach from the saved file, not from memory.
+> ```
+>
+> Then “let’s do the skills chapter” is enough. It’s also a quick way to try step 5 of Your turn below, testing the description: does it load when you say “chapter”, and stay quiet when you don’t?
+
 ## 4.3 Skills someone else wrote
 
 You don’t have to write every skill yourself. One large open collection for science is [Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills), from the company K-Dense: 166 skills when we looked on 23 September 2026, MIT-licensed, covering genomics, single-cell, cheminformatics, imaging, statistics, study design and scientific writing. It uses the same open format as this chapter, so its skills work in Claude Code, Antigravity, Codex and others. Several sit close to this chapter’s worked example: `pydeseq2` (running a DESeq2 analysis in Python), `bulk-rnaseq` (from reads to differential expression), `experimental-design` and `statistical-analysis`.
@@ -208,8 +231,8 @@ Table 4.5: Candidate files for a checking skill.
 To use the fallback, once you’ve made the `skill` folder and started a session on it (step 2), ask the agent to fetch the exact file rather than retype it:
 
 ``` default
-Download this file into this folder, saving it byte for byte (curl on macOS,
-Invoke-WebRequest on Windows), not by retyping it:
+Download this file into this folder, saving it byte for byte with a download
+command, not your web-reading tool, and not by retyping it:
 https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/sample_sheet_messy.csv
 Then tell me how many rows and columns it has.
 ```

@@ -91,9 +91,9 @@ should. Then paste this, changing the chapter number:
 I'm working through the book whose index is at
 https://seandavi.github.io/2026-penn-epigen-agentic-workshop/llms.txt
 
-Read the index. Then download chapter 2 into this folder with curl (or
-Invoke-WebRequest on Windows) and read it from the file, so you have the exact text
-rather than a summary.
+Read the index. Then save chapter 2 into this folder exactly as published, using a
+download command rather than your web-reading tool, and read it from the file. Tell me
+the file's size and its first heading, so I know it arrived whole.
 
 I'd like to work on chapter 2 now. Can you teach me the material and then work
 through the material and exercises with me? Challenge me with questions about my
@@ -105,6 +105,7 @@ summarises it (@sec-website's worked example ran into this), and a summarised pr
 isn't the prompt the chapter tested. In a chat without file access, such as claude.ai,
 open the chapter's `.llms.md` address in your browser and paste the text in instead.
 With file access, the agent leaves a copy of the chapter in your folder; that's fine.
+Once you're tired of pasting this, @sec-skills has a small skill that does it for you.
 
 ::: {.callout-warning}
 ## Your tutor is an agent too

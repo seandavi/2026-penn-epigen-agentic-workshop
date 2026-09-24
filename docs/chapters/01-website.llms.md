@@ -199,8 +199,8 @@ Pick one thing from [Table 1.1](#tbl-website-sources). If it’s a file (a PDF o
 ``` default
 Download this file into this folder, saved as scbasecount_paper.pdf:
 https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/scbasecount_paper.pdf
-Save the exact file (with curl, or Invoke-WebRequest on Windows); don't retype or
-summarise it. Then tell me its size.
+Save the exact file with a download command, not your web-reading tool; don't
+retype or summarise it. Then tell me its size.
 ```
 
 It should be about 5.7 MB. Then use “the PDF in this folder” as the source in step 3.
