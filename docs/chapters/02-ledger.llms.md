@@ -186,7 +186,7 @@ Allow about 20 minutes for steps 1 to 4. Step 5 is for if you have time.
 Go back to your chapter 1 session if it’s still there: in the desktop app, old sessions are listed in the sidebar; with the command line, run `claude -c` in the `website` folder. If you can’t find it, start a **new** session with the `website` folder as its folder, as in [Setup](../chapters/00-setup.llms.md). Then paste:
 
 ``` default
-Download https://raw.githubusercontent.com/seandavi/2026-penn-epigen-agentic-workshop/main/exercises/LEDGER-template.md and save it in this folder as LEDGER.md. Save the exact file: download it with curl (or Invoke-WebRequest on Windows) rather than retyping it. Then tell me the full path of the file you saved.
+Download https://raw.githubusercontent.com/seandavi/2026-penn-epigen-agentic-workshop/main/exercises/LEDGER-template.md and save it in this folder as LEDGER.md. Save the exact file with a download command, not your web-reading tool; don't retype it. Then tell me the full path of the file you saved.
 ```
 
 Check it’s there: open the folder in Finder or File Explorer and look for `LEDGER.md`, then open it. On a Mac, right-click it and choose **Open With → TextEdit**; on Windows, Notepad will do. In the Claude desktop app you can also click a file path in the chat to open it in the file pane, edit it and click **Save** ([“Desktop Application,” n.d.](#ref-url:https://code.claude.com/docs/en/desktop)). On Windows, if `LEDGER.md` shows as just `LEDGER`, or you’re not sure it hasn’t become `LEDGER.md.txt`, turn on file extensions ([Appendix A: Windows notes](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/appendices/windows.llms.md)).

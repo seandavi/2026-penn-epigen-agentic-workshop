@@ -214,9 +214,9 @@ In this folder, make two subfolders, data and scripts. Download these files from
 https://raw.githubusercontent.com/golnazvahedi/epigenetics-agentic-workshop/main/track-a/data/
 into data/: README.md, differential_peaks.csv, differential_genes.tsv,
 counts_matrix.csv and sample_sheet_messy.csv. Download make_qc_report.py from the
-same place into scripts/. Save each file exactly as downloaded, with curl (or
-Invoke-WebRequest on Windows); don't retype or rewrite any of them. Don't clone the
-repository. Then list what you downloaded with each file's size.
+same place into scripts/. Save each file exactly as published, with a download
+command, not your web-reading tool; don't retype or rewrite any of them. Don't clone
+the repository. Then list what you downloaded with each file's size.
 ```
 
 That’s about 11.5 MB: the peak table is 6.7 MB, the gene table 3.5 MB, the counts 1.3 MB, and the rest a few KB each. These are real data from the Vahedi lab, shared for the workshop: don’t redistribute them.

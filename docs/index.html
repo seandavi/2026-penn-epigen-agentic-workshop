@@ -530,14 +530,14 @@ Table&nbsp;3: The book, in the form an agent reads.
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>I'm working through the book whose index is at</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>https://seandavi.github.io/2026-penn-epigen-agentic-workshop/llms.txt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Read the index. Then download chapter 2 into this folder with curl (or</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Invoke-WebRequest on Windows) and read it from the file, so you have the exact text</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>rather than a summary.</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Read the index. Then save chapter 2 into this folder exactly as published, using a</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>download command rather than your web-reading tool, and read it from the file. Tell me</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>the file's size and its first heading, so I know it arrived whole.</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>I'd like to work on chapter 2 now. Can you teach me the material and then work</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>through the material and exercises with me? Challenge me with questions about my</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>understanding along the way.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The download matters. Some agents’ web tools pass a page through a smaller model that summarises it (<a href="chapters/01-website.html" class="quarto-xref"><span>1&nbsp; Build a website</span></a>’s worked example ran into this), and a summarised prompt isn’t the prompt the chapter tested. In a chat without file access, such as claude.ai, open the chapter’s <code>.llms.md</code> address in your browser and paste the text in instead. With file access, the agent leaves a copy of the chapter in your folder; that’s fine.</p>
+<p>The download matters. Some agents’ web tools pass a page through a smaller model that summarises it (<a href="chapters/01-website.html" class="quarto-xref"><span>1&nbsp; Build a website</span></a>’s worked example ran into this), and a summarised prompt isn’t the prompt the chapter tested. In a chat without file access, such as claude.ai, open the chapter’s <code>.llms.md</code> address in your browser and paste the text in instead. With file access, the agent leaves a copy of the chapter in your folder; that’s fine. Once you’re tired of pasting this, <a href="chapters/04-skills.html" class="quarto-xref"><span>4&nbsp; Write a skill</span></a> has a small skill that does it for you.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
