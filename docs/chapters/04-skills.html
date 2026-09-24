@@ -509,19 +509,23 @@ Table&nbsp;4.1: Where Claude Code looks for skills. Start with the project folde
 <p>If you’re <a href="../index.html#preface-tutor">learning this book with your agent</a>, you paste the same instructions at the start of every chapter: find it in the index, save it exactly with a download command, check it arrived. That repetition is what a skill is for, and the one thing it knows that the agent doesn’t is <strong>don’t use the web-reading tool</strong>, because that tool may hand back a summary. Put it in your home folder (<code>~/.claude/skills/book-chapter/SKILL.md</code>) so it works in every chapter’s folder:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">name:</span><span class="co"> book-chapter</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> Fetch a chapter of the Penn agentic-workshop book into this folder.</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  Use when I ask to start, read or work through a chapter of "the book" or "the</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  workshop".</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Read https://seandavi.github.io/2026-penn-epigen-agentic-workshop/llms.txt and</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>   find the chapter I named. If it's ambiguous, ask.</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Save that chapter's .llms.md file into this folder with a download command</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>   (curl, or Invoke-WebRequest on Windows). Never use your web-reading tool for</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>   the chapter itself: it may summarise, and the chapter's prompts must be exact.</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Tell me the file's size and its first heading.</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Teach from the saved file, not from memory.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Then “let’s do the skills chapter” is enough. It’s also a quick way to try step 5 of Your turn below, testing the description: does it load when you say “chapter”, and stay quiet when you don’t?</p>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> Fetch one chapter of the book "Agents for bench scientists" (the Penn</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  agentic AI workshop) into this folder and teach it. Use when I name a chapter of</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  that book, by number or title: "let's do chapter 4", "start the skills chapter",</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  "teach me the ledger chapter". Don't use for other books or general questions.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Read the index at</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>   https://seandavi.github.io/2026-penn-epigen-agentic-workshop/llms.txt and find</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>   the chapter I named. If it's not clear which one I mean, ask.</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Save that chapter's .llms.md file into this folder, under its own name, with a</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>   download command (curl, or Invoke-WebRequest on Windows). Never use your</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>   web-reading tool for the chapter: it may summarise, and the chapter's prompts</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>   must be exact.</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Tell me the file's size and its first heading, so I know it arrived whole.</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Teach from the saved file, following the index's instructions for agents: explain,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>   have me do each step myself, and ask me questions as we go.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The description does most of the work here, as the next section explains. It names the book, gives the phrases you’d actually type, and says when <em>not</em> to load. Then “let’s do chapter 4” is enough. It’s also a quick way to try step 5 of Your turn below, testing the description: does it load when you name a chapter, and stay quiet when you ask about some other book?</p>
 </div>
 </div>
 </div>
