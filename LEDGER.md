@@ -622,3 +622,64 @@ for chapter 2. The test run caught it.
 
 Quarto's llms.txt output has to be checked like any other generated thing; it looked
 fine until the callouts were read.
+
+---
+
+## Entry 18 — Skills chapter: the Scientific Agent Skills library and its paper
+
+**Asked** (SD)
+
+> Can we highlight this skill collection https://github.com/K-Dense-AI/scientific-agent-skills
+> in the skills page? And the arxiv paper (perhaps worth a small screenshot in the paper)
+> https://arxiv.org/abs/2609.00065. This is an amazing set! Might even be worth a
+> discussion based on the paper itself.
+
+**Agent did**
+
+Read the repository's README (including its install and security sections), the
+`pydeseq2` and `bulk-rnaseq` skills, and the paper's full text (v2), which is CC BY 4.0.
+Added a section to chapter 4, "Skills someone else wrote", before the worked example.
+It contains:
+- the library and the skills near the chapter's example;
+- the paper's opening examples, including the `experimental-design` quote;
+- a margin screenshot of the paper's first page (`book/images/skills-ksk-paper.png`),
+  cropped from the arXiv PDF at 200 dpi;
+- a table setting the paper's stated limitations against the chapter's points;
+- a paragraph on what a library can't hold;
+- a "For discussion" callout with five questions.
+
+Also added a "What you'll learn" bullet, and a Going further item with a prompt that
+installs one skill.
+
+**Checked how**
+
+*Agent:*
+- Every quotation was compared with `pdftotext` output from the paper, or with the
+  repository's `gh repo view` description. Two were corrected: the installation-count
+  sentence was cut short, and "weren't written by the team" became "don't list the team
+  as author".
+- The 166 count, and the existence of `pydeseq2`, `bulk-rnaseq`, `experimental-design`
+  and `statistical-analysis`, come from the GitHub API on 23 September.
+- Both citations resolve with quartobot. The chapter renders clean in Chrome, and the
+  screenshot was looked at.
+- The one-skill prompt was run with `claude -p` (Claude Code 2.1.280) in an empty
+  folder. It saved exactly the six files in `skills/pydeseq2`, identical byte for byte
+  to `main`, and ran no scripts. It used a sparse `git` clone in a temporary folder
+  outside the project, then deleted it, so the prompt now says files can be fetched one
+  by one without git.
+
+Not checked:
+- whether any K-Dense skill improves an agent's work (the paper says it doesn't show
+  this either);
+- the `experimental-design` quote against the current skill file; it's quoted from the
+  paper, which describes v2.65.0.
+
+**Confidently wrong**
+
+The agent's first draft called it "the largest open collection for science",
+unverified. It now reads "one large open collection".
+
+**Keep**
+
+A paper that lists its own limitations clearly makes better teaching material than one
+that doesn't.

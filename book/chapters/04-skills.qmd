@@ -27,6 +27,8 @@ know the answer. This chapter is about that division of labour.
 ## What you'll learn
 
 - What a skill is, where it lives, and how an agent decides to load one.
+- What a published library of scientific skills offers, and what its own authors say
+  it doesn't show.
 - How to read a real skill, `deseq2-triage`, and why each part of it is there.
 - What a skill changes, by comparing the same request with it and without it.
 - How to direct an agent to write a skill for a file *you* check often.
@@ -168,6 +170,78 @@ description: Fetch a chapter of the Penn agentic-workshop book into this folder.
 Then "let's do the skills chapter" is enough. It's also a quick way to try step 5 of Your
 turn below, testing the description: does it load when you say "chapter", and stay quiet
 when you don't?
+:::
+
+## Skills someone else wrote {#sec-skills-library}
+
+You don't have to write every skill yourself. One large open collection for science is
+[Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills),
+from the company K-Dense: 166 skills when we looked on 23 September 2026, MIT-licensed,
+covering genomics, single-cell, cheminformatics, imaging, statistics, study design and
+scientific writing. It uses the same open format as this chapter, so its skills work in
+Claude Code, Antigravity, Codex and others. Several sit close to this chapter's worked
+example: `pydeseq2` (running a DESeq2 analysis in Python), `bulk-rnaseq` (from reads to
+differential expression), `experimental-design` and `statistical-analysis`.
+
+The team also wrote a paper about it [@doi:10.48550/arXiv.2609.00065]
+(@fig-skills-ksk-paper), and it's worth reading for two reasons. The first is its
+opening, which lists the mistakes an agent makes when it writes code that runs but an
+analysis that isn't defensible: no multiple-testing correction, a hundred cells from
+each of three mice counted as three hundred replicates, a BED file's zero-based start
+read as one-based. Each is answered by a rule in one of the skills. The
+`experimental-design` skill, for instance, says that "3 mice with 100 cells each is
+n = 3 (mice), not n = 300 (cells)". That's what a good skill holds: a procedural fact
+the field agrees on and an agent won't reliably apply unprompted.
+
+::: {.column-margin}
+![The first page of the paper: sixteen areas of practice, and what's inside a skill's
+folder. CC BY 4.0, Kassis et al.
+(2026).](../images/skills-ksk-paper.png){#fig-skills-ksk-paper fig-alt="First page of
+the arXiv paper 'Scientific Agent Skills: A Library of Procedural Knowledge for Research
+Agents' by Kassis, Agarwal, He, Patel and Brueckner of K-Dense. A figure shows sixteen
+tiles for areas of scientific practice, such as genomics, single-cell omics and
+statistics and study design, next to a diagram of a skill directory: instruction file,
+reference documents, executable scripts, static assets and versioned metadata. The
+abstract is below."}
+:::
+
+The second reason is rarer: the paper is candid about what it hasn't shown. Its
+abstract says: "We report no task-level evaluation and no host selection rate." Its
+limitations section is, in effect, a list of this chapter's warnings, measured on a
+library of 163 skills (@tbl-skills-paper).
+
+| The paper reports | This chapter's point |
+|---|---|
+| No test of whether the skills improve an agent's work: "Skills structure scientific judgment; they do not replace expert review" | A skill is a claim until you've tested it on a file where you know the answer |
+| No measure of how often an agent picks the right skill. They could only compare descriptions' wording; the closest pair is two chemistry toolkits | The description decides everything, and a skill that never loads fails silently |
+| "A selected skill can still fail scientifically": the agent may skip steps or load only part of it | Check the output, not just that the skill loaded |
+| The descriptions of all 163 skills take up 7.1% of a 200,000-token context window before any of them is used. They recommend installing only what a project needs | Every installed skill costs context in every session |
+| 32 of 163 skills don't list the team as author, and community skills may get less review. Skills can run code | Read a `SKILL.md` before you install it |
+
+: What the Scientific Agent Skills paper says about itself, and the matching point in
+this chapter. The paper describes release v2.65.0. {#tbl-skills-paper}
+
+A library can't hold your lab's knowledge. The `pydeseq2` skill knows how to *run*
+DESeq2, carefully. It can't know that the two Vahedi lab tables in the worked example
+below use opposite fold-change conventions, because that isn't a fact about DESeq2;
+it's a fact about these files. Use a library for the procedures a whole field shares,
+and write your own for what only your lab knows.
+
+::: {.callout-note}
+## For discussion
+
+1. The authors say they haven't tested whether the skills help. Would you install one
+   anyway? What would you want to see first, and could you run that test yourself, on
+   one skill, in an afternoon?
+2. Would your agent get "3 mice with 100 cells each is n = 3" right *without* the skill?
+   How would you find out? (The paper warns that if a strong model already gets a task
+   right, a test can't show a skill helping.)
+3. The repository describes itself as "used by 190,000+ scientists worldwide". The paper
+   says its installation estimate "counts clients that fetch the library, not scientists
+   or sessions in which an agent used a skill", and that "Reach is not use". Which statement would you quote in a grant?
+4. How many skills would you install before the standing cost outweighed the benefit?
+   Who in your lab would review a skill before everyone uses it?
+5. Which of your lab's checks will never be in a public library?
 :::
 
 ## Worked example: `deseq2-triage`
@@ -477,6 +551,15 @@ both. You can always run a skill directly by typing `/` and its name.
   a `SKILL.md` that runs Python scripts from `scripts/` and reads scverse QC guidance
   from `references/` only when needed. It's the same format you just used, grown
   larger.
+- **Try a library skill, one at a time.** To try one skill from Scientific Agent Skills
+  (@sec-skills-library) in a project, read its `SKILL.md` on GitHub first, then ask:
+
+  ```default
+  Download only the pydeseq2 skill from https://github.com/K-Dense-AI/scientific-agent-skills (the folder skills/pydeseq2, with everything in it) into .claude/skills/pydeseq2 in this folder. Don't install anything else, and don't run any of its scripts. If git isn't available, download the files one by one. Then list the files you saved and show me the header of its SKILL.md.
+  ```
+
+  The repository's README describes installers for the whole collection. Its own
+  security advice is not to install everything at once.
 - **Share it with your lab.** A skill in a project's `.claude/skills/` travels with
   the project. Put it in a shared lab folder or repository (@sec-project), and every
   trainee who starts there gets your checks without having to know they exist.

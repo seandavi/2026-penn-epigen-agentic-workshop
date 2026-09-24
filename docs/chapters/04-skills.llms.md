@@ -9,6 +9,7 @@ The part people don’t expect is who does the writing. **You don’t write the 
 ## 4.1 What you’ll learn
 
 - What a skill is, where it lives, and how an agent decides to load one.
+- What a published library of scientific skills offers, and what its own authors say it doesn’t show.
 - How to read a real skill, `deseq2-triage`, and why each part of it is there.
 - What a skill changes, by comparing the same request with it and without it.
 - How to direct an agent to write a skill for a file *you* check often.
@@ -93,13 +94,45 @@ Skills and the `AGENTS.md` file from [Chapter 3: Teach the agent your project](h
 >
 > Then “let’s do the skills chapter” is enough. It’s also a quick way to try step 5 of Your turn below, testing the description: does it load when you say “chapter”, and stay quiet when you don’t?
 
-## 4.3 Worked example: `deseq2-triage`
+## 4.3 Skills someone else wrote
+
+You don’t have to write every skill yourself. One large open collection for science is [Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills), from the company K-Dense: 166 skills when we looked on 23 September 2026, MIT-licensed, covering genomics, single-cell, cheminformatics, imaging, statistics, study design and scientific writing. It uses the same open format as this chapter, so its skills work in Claude Code, Antigravity, Codex and others. Several sit close to this chapter’s worked example: `pydeseq2` (running a DESeq2 analysis in Python), `bulk-rnaseq` (from reads to differential expression), `experimental-design` and `statistical-analysis`.
+
+The team also wrote a paper about it ([Kassis et al. 2026](#ref-doi:10.48550/arXiv.2609.00065)) ([Figure 4.3](#fig-skills-ksk-paper)), and it’s worth reading for two reasons. The first is its opening, which lists the mistakes an agent makes when it writes code that runs but an analysis that isn’t defensible: no multiple-testing correction, a hundred cells from each of three mice counted as three hundred replicates, a BED file’s zero-based start read as one-based. Each is answered by a rule in one of the skills. The `experimental-design` skill, for instance, says that “3 mice with 100 cells each is n = 3 (mice), not n = 300 (cells)”. That’s what a good skill holds: a procedural fact the field agrees on and an agent won’t reliably apply unprompted.
+
+[![First page of the arXiv paper 'Scientific Agent Skills: A Library of Procedural Knowledge for Research Agents' by Kassis, Agarwal, He, Patel and Brueckner of K-Dense. A figure shows sixteen tiles for areas of scientific practice, such as genomics, single-cell omics and statistics and study design, next to a diagram of a skill directory: instruction file, reference documents, executable scripts, static assets and versioned metadata. The abstract is below.](../images/skills-ksk-paper.png)](../images/skills-ksk-paper.png "Figure 4.3: The first page of the paper: sixteen areas of practice, and what’s inside a skill’s folder. CC BY 4.0, Kassis et al. (2026).")
+
+Figure 4.3: The first page of the paper: sixteen areas of practice, and what’s inside a skill’s folder. CC BY 4.0, Kassis et al. (2026).
+
+The second reason is rarer: the paper is candid about what it hasn’t shown. Its abstract says: “We report no task-level evaluation and no host selection rate.” Its limitations section is, in effect, a list of this chapter’s warnings, measured on a library of 163 skills ([Table 4.2](#tbl-skills-paper)).
+
+| The paper reports | This chapter’s point |
+|----|----|
+| No test of whether the skills improve an agent’s work: “Skills structure scientific judgment; they do not replace expert review” | A skill is a claim until you’ve tested it on a file where you know the answer |
+| No measure of how often an agent picks the right skill. They could only compare descriptions’ wording; the closest pair is two chemistry toolkits | The description decides everything, and a skill that never loads fails silently |
+| “A selected skill can still fail scientifically”: the agent may skip steps or load only part of it | Check the output, not just that the skill loaded |
+| The descriptions of all 163 skills take up 7.1% of a 200,000-token context window before any of them is used. They recommend installing only what a project needs | Every installed skill costs context in every session |
+| 32 of 163 skills don’t list the team as author, and community skills may get less review. Skills can run code | Read a `SKILL.md` before you install it |
+
+Table 4.2: What the Scientific Agent Skills paper says about itself, and the matching point in this chapter. The paper describes release v2.65.0.
+
+A library can’t hold your lab’s knowledge. The `pydeseq2` skill knows how to *run* DESeq2, carefully. It can’t know that the two Vahedi lab tables in the worked example below use opposite fold-change conventions, because that isn’t a fact about DESeq2; it’s a fact about these files. Use a library for the procedures a whole field shares, and write your own for what only your lab knows.
+
+> **NOTE: For discussion**
+>
+> 1.  The authors say they haven’t tested whether the skills help. Would you install one anyway? What would you want to see first, and could you run that test yourself, on one skill, in an afternoon?
+> 2.  Would your agent get “3 mice with 100 cells each is n = 3” right *without* the skill? How would you find out? (The paper warns that if a strong model already gets a task right, a test can’t show a skill helping.)
+> 3.  The repository describes itself as “used by 190,000+ scientists worldwide”. The paper says its installation estimate “counts clients that fetch the library, not scientists or sessions in which an agent used a skill”, and that “Reach is not use”. Which statement would you quote in a grant?
+> 4.  How many skills would you install before the standing cost outweighed the benefit? Who in your lab would review a skill before everyone uses it?
+> 5.  Which of your lab’s checks will never be in a public library?
+
+## 4.4 Worked example: `deseq2-triage`
 
 This workshop’s repository includes a skill, [`deseq2-triage`](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/tree/main/examples/skills/deseq2-triage), written for the two DESeq2 results tables in the [Vahedi lab’s workshop repository](https://github.com/golnazvahedi/epigenetics-agentic-workshop) (`track-a/data/`). DESeq2 ([Love et al. 2014](#ref-doi:10.1186/s13059-014-0550-8)) results tables arrive without the facts you need to read them: the genome build, the coordinate convention, which group is the reference, and what was filtered before export. The numbers are fine. The context is missing.
 
 The two tables make the point sharply. The data README says that in `differential_genes.tsv` a positive fold change means *higher in wild type* (lower in the knockout), while in `differential_peaks.csv` it means *more H3K27ac in the knockout*. The two files use opposite conventions, and neither says so.
 
-### 4.3.1 Reading the skill, part by part
+### 4.4.1 Reading the skill, part by part
 
 Open [`SKILL.md`](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/examples/skills/deseq2-triage/SKILL.md) alongside this table. Each part is there for a reason.
 
@@ -113,11 +146,11 @@ Open [`SKILL.md`](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/
 | Step 7, report | Three sections: **Blocking**, **Worth knowing**, **Checked and fine**, then the four facts to ask for | A fixed shape makes reports comparable from one file to the next, and puts what stops you first. |
 | Constraints | Report only; don’t write a cleaned copy; don’t state a direction you haven’t shown from counts; stop | Agents are helpful. Without these, it may “fix” the table and carry on to a volcano plot. |
 
-Table 4.2: The parts of `deseq2-triage/SKILL.md`. The [README](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/examples/skills/deseq2-triage/README.md) beside it is for people: why the skill exists, and how to install it. The agent doesn’t need it.
+Table 4.3: The parts of `deseq2-triage/SKILL.md`. The [README](https://github.com/seandavi/2026-penn-epigen-agentic-workshop/blob/main/examples/skills/deseq2-triage/README.md) beside it is for people: why the skill exists, and how to install it. The agent doesn’t need it.
 
 Two lessons carry over to any skill you write. First, **the “don’t” lines matter as much as the steps**: each one closes off a helpful-looking move that would destroy the point of the check. Second, **say why**. “Count rows where `padj` is missing” gets you a number; adding “a naive `padj < 0.05` filter silently discards those rows” gets you a warning a person will act on.
 
-### 4.3.2 Running it
+### 4.4.2 Running it
 
 We ran it on 23 September 2026. We made an empty folder, copied the skill into `.claude/skills/deseq2-triage/`, downloaded the two tables, and asked Claude Code (Claude Opus 5.5) about each file in a fresh session. The prompt deliberately doesn’t name the skill:
 
@@ -142,9 +175,9 @@ On the genes file, it worked the direction out from the counts: “positive `log
 
 **We didn’t take the report on trust.** We recounted every number in it with a short script (rows, missing `padj`, zero p-values, the 60/60 direction check, the 16 duplicated gene symbols, the widths from 180 to 93,567 bp) and compared the findings with the quirks listed in the Vahedi lab’s [data README](https://github.com/golnazvahedi/epigenetics-agentic-workshop/blob/main/track-a/data/README.md). All matched.
 
-### 4.3.3 The same question, without the skill
+### 4.4.3 The same question, without the skill
 
-A skill is only worth having if it changes something. So we asked the same question, about the same files, in a folder with no skill ([Table 4.3](#tbl-skills-compare)).
+A skill is only worth having if it changes something. So we asked the same question, about the same files, in a folder with no skill ([Table 4.4](#tbl-skills-compare)).
 
 | Known problem (from the data README) | File | With the skill | Without it |
 |:---|:---|:---|:---|
@@ -157,15 +190,15 @@ A skill is only worth having if it changes something. So we asked the same quest
 | Widths up to 93,567 bp | peaks | Worth knowing | “Minor” |
 | Time taken | both | 48 s and 43 s | 91 s and 90 s |
 
-Table 4.3: One run of each, same model, same prompt, on 23 September 2026. Agents vary from run to run, so treat this as an illustration, not a benchmark.
+Table 4.4: One run of each, same model, same prompt, on 23 September 2026. Agents vary from run to run, so treat this as an illustration, not a benchmark.
 
 The agent without the skill wasn’t careless. It did a lot: it reported recomputing the p-values and the Benjamini–Hochberg adjustment (we didn’t check that), and it noticed that three peaks on chromosome Y are strongly up. (We checked: they are.) But it chose its own checks, so it skipped one the lab knows matters (underflow). It buried the one that matters most for the peaks file (direction). And its explanation for the Y peaks, that “the two groups contain different numbers of males”, can’t be right as stated: the data README says these samples come from a **cell line**. The agent didn’t know that, because the file doesn’t say.
 
 That’s the case for a skill in one table. **Without it, you get a thoughtful answer that varies with the agent’s choices. With it, you get your lab’s checks, every time, in the same order, and it stops when it’s done.**
 
-## 4.4 Your turn: create your own
+## 4.5 Your turn: create your own
 
-You’ll direct an agent to write a skill that checks a kind of file you handle often, then verify it. Budget 30–40 minutes. [Figure 4.3](#fig-skills-loop) shows who does what.
+You’ll direct an agent to write a skill that checks a kind of file you handle often, then verify it. Budget 30–40 minutes. [Figure 4.4](#fig-skills-loop) shows who does what.
 
 ``` mermaid
 flowchart TD
@@ -177,11 +210,11 @@ flowchart TD
   C -- "all passed" --> E["Keep it"]
 ```
 
-Figure 4.3: Writing a skill with an agent. You supply what the agent can’t know, and you do the testing; the agent does the writing.
+Figure 4.4: Writing a skill with an agent. You supply what the agent can’t know, and you do the testing; the agent does the writing.
 
-### 4.4.1 1. Pick a file you check by hand
+### 4.5.1 1. Pick a file you check by hand
 
-Your own material first. Good candidates are files that arrive from somewhere else and have burned you before ([Table 4.4](#tbl-skills-ideas)).
+Your own material first. Good candidates are files that arrive from somewhere else and have burned you before ([Table 4.5](#tbl-skills-ideas)).
 
 | File | The checks you might already do in your head |
 |:---|:---|
@@ -191,7 +224,7 @@ Your own material first. Good candidates are files that arrive from somewhere el
 | A FastQC or MultiQC summary | Failed modules that matter for your assay versus ones that don’t |
 | A flow cytometry or plate-reader export | Units, blank wells, saturated values, the plate layout |
 
-Table 4.4: Candidate files for a checking skill.
+Table 4.5: Candidate files for a checking skill.
 
 **No file of your own to hand?** Use the Vahedi lab’s [`sample_sheet_messy.csv`](https://github.com/golnazvahedi/epigenetics-agentic-workshop/blob/main/track-a/data/sample_sheet_messy.csv), a simulated RNA-seq submission sheet with known problems. (Their afternoon has an exercise that *cleans* this sheet. Here you’re writing a skill that *checks* sheets like it and fixes nothing.) Or extend `deseq2-triage` with a trap from your own lab’s pipeline.
 
@@ -208,7 +241,7 @@ Then tell me how many rows and columns it has.
 >
 > Anything the agent reads is sent to the model. Use a file you’d be allowed to email to a collaborator: no patient data, nothing identifiable, and nothing unpublished that your lab’s rules keep in-house. For a sensitive file type, describe it in words and make a small fake example.
 
-### 4.4.2 2. Have the agent interview you
+### 4.5.2 2. Have the agent interview you
 
 Make a folder called `skill` inside `Documents/agents-workshop/`, put a copy of your example file in it (or fetch the fallback, above), and start a **new** session on that folder, as in [Setup](../chapters/00-setup.llms.md). Then paste this, filling in the angle brackets:
 
@@ -231,7 +264,7 @@ plainly when something can't be checked from the file. Save it to
 
 Answer from experience. The most useful answers are specific: not “check the dates” but “we’ve had three date formats in one sheet, and `3/2/26` means 3 February to our UK collaborators”.
 
-### 4.4.3 3. Read the draft before you accept it
+### 4.5.3 3. Read the draft before you accept it
 
 It’s short; read all of it. Check that:
 
@@ -243,7 +276,7 @@ It’s short; read all of it. Check that:
 
 Ask for changes in plain language. Then let it save the file.
 
-### 4.4.4 4. Test it on a file where you know the answer
+### 4.5.4 4. Test it on a file where you know the answer
 
 Testing is your job, not the agent’s. It needs two files.
 
@@ -258,7 +291,7 @@ I've just been sent <file name>. Is it OK to use?
 
 Compare what it reports with your list. Anything missed means the instructions need work. Anything it invented is worse: tell the agent exactly what it claimed, and ask it to change the skill so that can’t happen again.
 
-### 4.4.5 5. Test the description
+### 4.5.5 5. Test the description
 
 Now test the part that decides whether the skill ever runs. Write three requests that **should** load it and three neighbouring ones that **shouldn’t**. Use how you’d really ask, not how you’d describe the skill.
 
@@ -268,7 +301,7 @@ Now test the part that decides whether the skill ever runs. Write three requests
 | “Is this ready to send to the core?” | “What does the core charge per lane?” |
 | “Anything wrong with tconv_batch2.csv?” | “Plot the harvest dates in this sheet” |
 
-Table 4.5: An example should/shouldn’t pair for a sample-sheet checker.
+Table 4.6: An example should/shouldn’t pair for a sample-sheet checker.
 
 Try each in a new session. If you can’t tell from the transcript whether the skill was used, ask “Did you use a skill for that?”. When a phrasing you’d genuinely use doesn’t load it, tell the agent the phrase and ask it to revise the description, then test again. The usual failure is a skill that loads too rarely, not too often, so lean towards a description with more of your everyday words in it.
 
@@ -276,14 +309,14 @@ Try each in a new session. If you can’t tell from the transcript whether the s
 >
 > Ask “What skills are available?”. If yours isn’t listed, the folder is in the wrong place, or the header between the `---` lines is malformed. Ask the agent to check both. You can always run a skill directly by typing `/` and its name.
 
-## 4.5 What to notice
+## 4.6 What to notice
 
 - **You wrote almost none of it,** and it still encodes exactly what you know. The value was in your answers and your tests, not the typing.
 - **The “do not” lines did real work.** Without them, a checking skill drifts into a fixing skill, and a fixed file hides the problem you most needed to see.
 - **The agent can’t verify its own skill.** It can check that the file is well formed. Only a file where you know the answer tells you whether the checks are right.
 - **The description is an interface.** It failed silently or it worked; there was no error message either way.
 
-## 4.6 Check yourself
+## 4.7 Check yourself
 
 > **TIP: You’re done when**
 >
@@ -297,9 +330,17 @@ Try each in a new session. If you can’t tell from the transcript whether the s
 >
 > You’ve added a ledger entry ([Chapter 2: The ledger](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/02-ledger.llms.md)) saying what you tested it on and what it missed.
 
-## 4.7 Going further
+## 4.8 Going further
 
 - **Real examples.** Anthropic’s [life-sciences](https://github.com/anthropics/life-sciences) repository publishes skills for scientific work. Read [`single-cell-rna-qc`](https://github.com/anthropics/life-sciences/tree/main/single-cell-rna-qc): a `SKILL.md` that runs Python scripts from `scripts/` and reads scverse QC guidance from `references/` only when needed. It’s the same format you just used, grown larger.
+- **Try a library skill, one at a time.** To try one skill from Scientific Agent Skills
+  1.  in a project, read its `SKILL.md` on GitHub first, then ask:
+
+  ``` default
+  Download only the pydeseq2 skill from https://github.com/K-Dense-AI/scientific-agent-skills (the folder skills/pydeseq2, with everything in it) into .claude/skills/pydeseq2 in this folder. Don't install anything else, and don't run any of its scripts. If git isn't available, download the files one by one. Then list the files you saved and show me the header of its SKILL.md.
+  ```
+
+  The repository’s README describes installers for the whole collection. Its own security advice is not to install everything at once.
 - **Share it with your lab.** A skill in a project’s `.claude/skills/` travels with the project. Put it in a shared lab folder or repository ([Chapter 7: Work like a project](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/07-work-like-a-project.llms.md)), and every trainee who starts there gets your checks without having to know they exist.
 - **Measure it.** The `skill-creator` plugin for Claude Code runs a skill against test prompts with and without it, and suggests description changes. See “Evaluate and iterate on a skill” in the skills documentation ([“Extend Claude with Skills,” n.d.](#ref-url:https://code.claude.com/docs/en/skills)).
 - **Connect it to data.** Skills tell an agent *how*; MCP servers ([Chapter 5: Connect to a database (MCP)](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/05-mcp.llms.md)) give it access to databases it can’t otherwise reach. The two combine.
@@ -309,5 +350,7 @@ Try each in a new session. If you can’t tell from the transcript whether the s
 Bourgon, Richard, Robert Gentleman, and Wolfgang Huber. 2010. “Independent Filtering Increases Detection Power for High-Throughput Experiments.” *Proceedings of the National Academy of Sciences* 107 (21): 9546–51. <https://doi.org/10.1073/pnas.0914005107>.
 
 “Extend Claude with Skills.” n.d. Accessed September 23, 2026. <https://code.claude.com/docs/en/skills>.
+
+Kassis, Timothy, Vinayak Agarwal, Yuhuan He, Darshil Patel, and Aubrey M. Brueckner. 2026. *Scientific Agent Skills: A Library of Procedural Knowledge for Research Agents*. Version 2. arXiv. <https://doi.org/10.48550/arxiv.2609.00065>.
 
 Love, Michael I, Wolfgang Huber, and Simon Anders. 2014. “Moderated Estimation of Fold Change and Dispersion for RNA-seq Data with DESeq2.” *Genome Biology* 15 (12). <https://doi.org/10.1186/s13059-014-0550-8>.
