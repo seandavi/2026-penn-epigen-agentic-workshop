@@ -566,6 +566,13 @@ both. You can always run a skill directly by typing `/` and its name.
 
   The repository's README describes installers for the whole collection. Its own
   security advice is not to install everything at once.
+- **A skill for writing, not science.** [humanizer](https://github.com/blader/humanizer)
+  (MIT licence) edits a draft to remove the habits that make text read as
+  machine-written: stock phrases, em dashes, lists of three, praise nobody asked for.
+  Its checklist comes from Wikipedia's "Signs of AI writing" guide. It's a good skill to
+  read before you install, because the skill itself is one `SKILL.md` in plain English.
+  It's also a good one to test: give it a paragraph you wrote yourself, and see what it
+  wants to change. The speaker notes for this workshop's talk were edited with it.
 - **Share it with your lab.** A skill in a project's `.claude/skills/` travels with
   the project. Put it in a shared lab folder or repository (@sec-project), and every
   trainee who starts there gets your checks without having to know they exist.

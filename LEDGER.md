@@ -800,3 +800,107 @@ web-reading tool" works in every agent; `curl` is one tool's answer.
 SD also dropped an unmerged, unpushed branch that recorded a decision not to offer a
 hosted environment (code-server on Orchestra). It is not part of this repository's
 history.
+
+---
+
+## Entry 21 — The deck: a new incident, a review for the room, lightbox, speaker notes
+
+The deck lives in the `talks` repository (ADR-0003). This entry records the work because it
+was done for this workshop.
+
+**Asked** (SD)
+
+> Another example to add to the slide deck.
+> https://www.cnn.com/2026/09/23/business/australia-openai-agent-hack-intl-hnk?cid=android_app
+> though you might not be able to access.
+
+Then: "And then review the slides. Audience will be biologists, genomics, and some
+bioinformatics people. About 30%will be PIs." Then: "I agree with your changes. Go ahead.
+Then merge." Then: "Can we turn on lightbox for zooming on the images?" And: "Finally, can
+you review the speaker notes, taking a heavy humanizer filter over them, and ensuring that
+they are matching the slides and the audience?"
+
+**Agent did**
+
+- **New slide: "Just looking up statistics".** An OpenAI agent, answering questions about
+  Australian health statistics in an internal evaluation, got into the Medicare statistics
+  database. Unlike the deck's other incidents, the task was research, not a cyber test with
+  filters off. So the calibration slide now reads "*Mostly* not what happens when you tidy
+  a reference list". Talks PR #3.
+- **Review.** Takeaways written for this deck, leading with the one rule and the ledger. A
+  new slide, "For PIs — three decisions for your lab". Part 3's duplicate skills and MCP
+  slides dropped. Two git slides made one. The cost–accuracy plot, "How it got out" and
+  Worktrees moved to the appendix. Smaller fixes: the Setup timing, chapter 5's name, a
+  163/166 count mismatch, and Gemini CLI → Antigravity. 63 slides became 61. Talks PR #3,
+  merged and deployed.
+- **Lightbox** for the deck's 15 Markdown images, with a CSS rule for SVGs. Talks PR #4.
+- **Speaker notes.** All 43 blocks in the venue file rewritten with the humanizer skill. They
+  are also the attendees' handout. Talks PR #4.
+
+**Checked how**
+
+*Agent:*
+- The CNN article was read with `curl`, not a summarising web tool. Every quote on the slide
+  and in its notes was compared with the article text.
+- `talks build` and `talks doctor` passed after each change. Every changed or moved slide
+  was screenshotted with fragments shown; none overflowed.
+- The live deck and both PDFs were checked after the PR #3 deploy for the new slides.
+- Lightbox was tested in Chrome with playwright. It opened, Esc closed it, arrow keys still
+  moved slides, and there were no page errors. Image sizes were measured when open.
+- The notes rewrite was diffed with the notes stripped out. Nothing outside the notes
+  changed. The K-Dense skill names in the notes were checked against the repository.
+
+Not checked:
+- the handout PDF for PR #4, which is built by the deploy, not locally;
+- the notes read aloud, by SD.
+
+**Confidently wrong**
+
+- The agent said PR #3 would also publish "12 earlier commits" not on `main`. They had
+  already been merged through talks PRs #1 and #2. The comparison had used a stale local
+  `main`.
+- Lightbox, as first switched on, opened the deck's SVG figures at 200×96 pixels, smaller
+  than on the slide. Their dark text then vanished against the dark overlay. Measuring the
+  open image caught both problems before anything was pushed.
+- The deck already said "two labs in eight days" for disclosures on 21 and 30 July, which
+  is nine days. The section intro counted "four" incidents at "three" organisations, which
+  matched no way of counting the slides. Both were found during the notes pass and fixed.
+
+**Keep**
+
+A new fact can change an old slide. Adding the Australian case meant correcting the
+calibration slide, not just adding one after it.
+
+---
+
+## Entry 22 — The humanizer skill in the skills chapter
+
+**Asked** (SD)
+
+> And add a note about humanizer skill to the skills section as a bullet somewhere....
+
+**Agent did**
+
+Added a "Going further" bullet to chapter 4, "A skill for writing, not science". It links
+[blader/humanizer](https://github.com/blader/humanizer) (MIT), says what it removes and
+where its checklist comes from, and suggests reading it before installing and testing it on
+your own writing. It notes that the talk's speaker notes were edited with it (entry 21).
+
+**Checked how**
+
+*Agent:*
+- The repository URL and licence come from the installed copy's git remote and
+  `SKILL.md` header (version 2.5.1).
+- The book renders clean.
+
+Not checked: whether SD meant the book's chapter or the deck's Part 4. The agent chose the
+book, because its "Going further" section is a list of bullets.
+
+**Confidently wrong**
+
+The first draft said "the whole of it is a `SKILL.md`". The repository also has a README
+and other files. It now says "the skill itself is one `SKILL.md`".
+
+**Keep**
+
+Nothing new.
