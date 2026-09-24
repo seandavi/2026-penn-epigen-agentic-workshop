@@ -683,3 +683,120 @@ unverified. It now reads "one large open collection".
 
 A paper that lists its own limitations clearly makes better teaching material than one
 that doesn't.
+
+---
+
+## Entry 19 — A readiness check in Setup
+
+**Asked** (SD)
+
+> How would you suggest we use the agent to determine the readiness for the workshop?
+> perhaps a prompt to generate a small report of available tools and ability to
+> install new ones? Should we have that be part of setup?
+
+Then: "Yep. Do it. And potentially link to the future chapters just to point out that
+we'll discuss memory and installation later."
+
+**Agent did**
+
+Recommended a check that looks and doesn't install. Testing whether installs *work*
+means installing something, which is slow, runs into IT policy on managed laptops, and
+contradicts Setup's own advice on permission prompts. SD agreed. Added "Check your
+computer is ready" to Setup, after Permission prompts. It has a prompt that writes
+`readiness.md` with these rows:
+- OS and shell;
+- git, Python, R, RStudio and Node;
+- how software could be installed, and whether admin rights look needed;
+- internet reach;
+- likely trouble, such as OneDrive.
+
+It ends with a verdict for each chapter that needs a tool. A margin note points ahead to
+chapter 3 (the agent's memory is what you wrote down). A closing paragraph points to
+chapters 6 and 7 for installing. Chapters 3, 6 and 7 point back to `readiness.md`.
+Chapter 6's tested starter prompt was left unchanged: the reader is told to add a line
+at Stage 2 instead. Merged as PR #12.
+
+**Checked how**
+
+*Agent:*
+- The book renders with no broken cross-references, and the new text is in the live
+  `.llms.md` pages.
+- The prompt, taken from the chapter source, was run with `claude -p` (Claude Code
+  2.1.281) in an empty folder on SD's Mac. It took 40 seconds and four commands. It
+  installed nothing and was denied nothing. It wrote only `readiness.md`, and the file
+  was read. The table was correct against this machine. It also found a problem nobody
+  had asked about: the disk was 99% full.
+
+Not checked:
+- Windows. That's the likelier place for trouble: PowerShell, R not on the path,
+  OneDrive.
+- The Claude desktop app, where each command is a visible permission prompt.
+
+**Confidently wrong**
+
+The first draft told readers most prompts would be "commands like `git --version`". In
+the test, the agent bundled every check into one long command. The text now says to
+expect that, and to look for `install`, `rm`, `mv` or `sudo`.
+
+**Keep**
+
+A check that only reports is safe to run first thing. Deciding whether to install
+belongs to the chapter that needs the tool.
+
+---
+
+## Entry 20 — Download prompts say why; a skill that fetches a chapter
+
+**Asked** (SD)
+
+> By the way, is there explicit download instructions for the chapters? Do we actually
+> need that? The agent should take care of accessing the content?
+
+This was about the preface's "Learn it with your agent". Then: "We could also make a
+small call-out in the skills chapter about the possibility of a small skill to download
+a chapter.... Your call...." And later: "clarify the skill."
+
+**Agent did**
+
+Advised keeping the download step. Claude Code's web-fetch tool passes a page through a
+smaller model and returns its answer, and a chapter's prompts have to be exact. What
+changed is the wording. The preface and every "save the exact file" prompt in chapters
+1–4 now say "with a download command, not your web-reading tool". Before, they named
+curl and Invoke-WebRequest. The preface prompt also asks for the file's size and first
+heading. Added a collapsed tip to chapter 4, at the end of "What makes a good skill",
+with a personal `book-chapter` skill that does the preface's fetch. The preface links
+to it. Merged as PR #12.
+
+Later, clarified the skill. The description now names the book, gives the phrases a
+reader would type and says when *not* to load. The steps save the file under its own
+name, and teach by the index's instructions for agents.
+
+**Checked how**
+
+*Agent:*
+- The skill was installed as a project skill in three empty folders, and each got a
+  fresh `claude -p` session (Claude Code 2.1.281).
+- "Let's do chapter 4 of the workshop book." loaded it. The session fetched the chapter
+  with `curl`, and the saved file was identical byte for byte to the live page. It
+  reported the size and first heading.
+- "Can you recommend a good book on epigenetics…" didn't load it, and nor did "What did
+  the workshop say about ADRs?".
+
+Not checked:
+- the skill from the home folder, where the tip says to put it;
+- the skill in any tool other than Claude Code.
+
+**Confidently wrong**
+
+Nothing in the book. In the repository, the first commit of this work was described
+only as the rewording. It also contained the skill tip. The commit was redone before it
+was pushed.
+
+**Keep**
+
+A prompt should say why a step matters and let the agent pick the command. "Not your
+web-reading tool" works in every agent; `curl` is one tool's answer.
+
+SD also dropped an unmerged, unpushed branch that recorded a decision not to offer a
+hosted environment (code-server on Orchestra). It is not part of this repository's
+history.

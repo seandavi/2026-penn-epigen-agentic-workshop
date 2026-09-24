@@ -228,7 +228,7 @@ agent your project", git for "Work like a project"): ready, or what's
 missing and the workaround.
 ```
 
-This is your first run of real permission prompts. Most of them will be commands like `git --version` or `python3 --version`. They only print a version number, so allowing them is safe. If it proposes to install something, say no: that’s not what you asked for.
+This is your first run of real permission prompts. The agent may bundle all its checks into one long command, a screenful of `git --version`, `command -v python3` and the like. You don’t need to follow every line. Look for words that change things: `install`, `rm`, `mv`, `sudo`. If there are none, it’s only reading, and allowing it is safe. If it proposes to install something, say no: that’s not what you asked for. On a Mac we tested, the whole check took under a minute.
 
 Open `readiness.md` and read the last lines. **Missing tools are fine.** Every chapter has a way to manage without them, and none needs anything installed before it starts. If the agent says it can’t reach the internet, tell Sean or a helper: [Chapter 5: Connect to a database (MCP)](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/05-mcp.llms.md) and the example data both need it.
 
