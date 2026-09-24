@@ -153,23 +153,29 @@ tool**, because that tool may hand back a summary. Put it in your home folder
 ```markdown
 ---
 name: book-chapter
-description: Fetch a chapter of the Penn agentic-workshop book into this folder.
-  Use when I ask to start, read or work through a chapter of "the book" or "the
-  workshop".
+description: Fetch one chapter of the book "Agents for bench scientists" (the Penn
+  agentic AI workshop) into this folder and teach it. Use when I name a chapter of
+  that book, by number or title: "let's do chapter 4", "start the skills chapter",
+  "teach me the ledger chapter". Don't use for other books or general questions.
 ---
 
-1. Read https://seandavi.github.io/2026-penn-epigen-agentic-workshop/llms.txt and
-   find the chapter I named. If it's ambiguous, ask.
-2. Save that chapter's .llms.md file into this folder with a download command
-   (curl, or Invoke-WebRequest on Windows). Never use your web-reading tool for
-   the chapter itself: it may summarise, and the chapter's prompts must be exact.
-3. Tell me the file's size and its first heading.
-4. Teach from the saved file, not from memory.
+1. Read the index at
+   https://seandavi.github.io/2026-penn-epigen-agentic-workshop/llms.txt and find
+   the chapter I named. If it's not clear which one I mean, ask.
+2. Save that chapter's .llms.md file into this folder, under its own name, with a
+   download command (curl, or Invoke-WebRequest on Windows). Never use your
+   web-reading tool for the chapter: it may summarise, and the chapter's prompts
+   must be exact.
+3. Tell me the file's size and its first heading, so I know it arrived whole.
+4. Teach from the saved file, following the index's instructions for agents: explain,
+   have me do each step myself, and ask me questions as we go.
 ```
 
-Then "let's do the skills chapter" is enough. It's also a quick way to try step 5 of Your
-turn below, testing the description: does it load when you say "chapter", and stay quiet
-when you don't?
+The description does most of the work here, as the next section explains. It names the
+book, gives the phrases you'd actually type, and says when *not* to load. Then "let's do
+chapter 4" is enough. It's also a quick way to try step 5 of Your turn below, testing
+the description: does it load when you name a chapter, and stay quiet when you ask
+about some other book?
 :::
 
 ## Skills someone else wrote {#sec-skills-library}
