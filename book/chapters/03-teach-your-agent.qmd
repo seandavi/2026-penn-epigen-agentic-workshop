@@ -26,7 +26,10 @@ guesses are wrong *for you*. You correct it. Next session it has forgotten, and 
 correct it again.
 
 This morning's talk made the fix sound simple: write it down once, in a file the agent
-reads at the start of every session. It is simple, but there are two traps. The first is
+reads at the start of every session. You've done a small version already: the
+`readiness.md` from [Setup](00-setup.qmd#setup-readiness) is something one session found
+out and wrote down, so later sessions don't have to find it out again. It is simple, but
+there are two traps. The first is
 writing too much: a long file that restates what the agent could have read for itself,
 which costs context on every turn and buries the few lines that matter. The second is
 copying: pasting the sample-sheet description into the agent's file as well as the
