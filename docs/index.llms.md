@@ -84,16 +84,16 @@ Start a session in the folder the chapter’s *Your turn* works in (chapter 2, f
 I'm working through the book whose index is at
 https://seandavi.github.io/2026-penn-epigen-agentic-workshop/llms.txt
 
-Read the index. Then download chapter 2 into this folder with curl (or
-Invoke-WebRequest on Windows) and read it from the file, so you have the exact text
-rather than a summary.
+Read the index. Then save chapter 2 into this folder exactly as published, using a
+download command rather than your web-reading tool, and read it from the file. Tell me
+the file's size and its first heading, so I know it arrived whole.
 
 I'd like to work on chapter 2 now. Can you teach me the material and then work
 through the material and exercises with me? Challenge me with questions about my
 understanding along the way.
 ```
 
-The download matters. Some agents’ web tools pass a page through a smaller model that summarises it ([Chapter 1: Build a website](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/01-website.llms.md)’s worked example ran into this), and a summarised prompt isn’t the prompt the chapter tested. In a chat without file access, such as claude.ai, open the chapter’s `.llms.md` address in your browser and paste the text in instead. With file access, the agent leaves a copy of the chapter in your folder; that’s fine.
+The download matters. Some agents’ web tools pass a page through a smaller model that summarises it ([Chapter 1: Build a website](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/01-website.llms.md)’s worked example ran into this), and a summarised prompt isn’t the prompt the chapter tested. In a chat without file access, such as claude.ai, open the chapter’s `.llms.md` address in your browser and paste the text in instead. With file access, the agent leaves a copy of the chapter in your folder; that’s fine. Once you’re tired of pasting this, [Chapter 4: Write a skill](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/04-skills.llms.md) has a small skill that does it for you.
 
 > **WARNING: Your tutor is an agent too**
 >

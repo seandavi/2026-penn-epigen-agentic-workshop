@@ -156,7 +156,7 @@ Figure 7.4: Where this chapter’s activity leaves you: a starting point, two c
 
 ### 7.4.1 1. Set up
 
-First, find out whether you have git. Paste this:
+First, find out whether you have git. Your `readiness.md` from [Setup](../chapters/00-setup.llms.md#setup-readiness) has the answer as of this morning, but ask again: you may have installed it since, and the check takes a second. Paste this:
 
 ``` default
 Is git installed on this computer? Just check, and tell me the version

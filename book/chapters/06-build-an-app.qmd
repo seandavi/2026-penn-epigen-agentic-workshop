@@ -211,6 +211,11 @@ project folder), and check with "what folder are you in?"
 
 If you did @sec-teach, have the path to that project folder to hand. The agent will ask.
 
+If you did the [readiness check](00-setup.qmd#setup-readiness) in Setup, the answer to
+Stage 2 is already written down, in `agents-workshop/readiness.md`. When the agent gets to
+Stage 2, tell it: "Read ../readiness.md first, and only check what it doesn't cover." It
+will ask permission to read outside `my-app`. That's fine: it's one file, one folder up.
+
 ::: {.callout-important}
 ## Privacy: your data and the agent
 

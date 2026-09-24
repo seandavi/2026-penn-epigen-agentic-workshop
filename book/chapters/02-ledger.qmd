@@ -300,7 +300,7 @@ folder. If you can't find it, start a **new** session with the `website` folder 
 folder, as in [Setup](00-setup.qmd). Then paste:
 
 ```default
-Download https://raw.githubusercontent.com/seandavi/2026-penn-epigen-agentic-workshop/main/exercises/LEDGER-template.md and save it in this folder as LEDGER.md. Save the exact file: download it with curl (or Invoke-WebRequest on Windows) rather than retyping it. Then tell me the full path of the file you saved.
+Download https://raw.githubusercontent.com/seandavi/2026-penn-epigen-agentic-workshop/main/exercises/LEDGER-template.md and save it in this folder as LEDGER.md. Save the exact file with a download command, not your web-reading tool; don't retype it. Then tell me the full path of the file you saved.
 ```
 
 Check it's there: open the folder in Finder or File Explorer and look for `LEDGER.md`,

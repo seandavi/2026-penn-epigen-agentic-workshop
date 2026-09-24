@@ -316,6 +316,7 @@ gtag('config', 'G-KLLV1GCF4E', { 'anonymize_ip': true});
   <li><a href="#make-a-workshop-folder" id="toc-make-a-workshop-folder" class="nav-link" data-scroll-target="#make-a-workshop-folder">Make a workshop folder</a></li>
   <li><a href="#setup-start-session" id="toc-setup-start-session" class="nav-link" data-scroll-target="#setup-start-session">Start a session in the folder</a></li>
   <li><a href="#permission-prompts" id="toc-permission-prompts" class="nav-link" data-scroll-target="#permission-prompts">Permission prompts</a></li>
+  <li><a href="#setup-readiness" id="toc-setup-readiness" class="nav-link" data-scroll-target="#setup-readiness">Check your computer is ready</a></li>
   <li><a href="#sessions-when-to-start-a-new-one" id="toc-sessions-when-to-start-a-new-one" class="nav-link" data-scroll-target="#sessions-when-to-start-a-new-one">Sessions: when to start a new one</a></li>
   <li><a href="#where-the-example-data-comes-from" id="toc-where-the-example-data-comes-from" class="nav-link" data-scroll-target="#where-the-example-data-comes-from">Where the example data comes from</a></li>
   <li><a href="#what-to-notice" id="toc-what-to-notice" class="nav-link" data-scroll-target="#what-to-notice">What to notice</a></li>
@@ -348,13 +349,14 @@ gtag('config', 'G-KLLV1GCF4E', { 'anonymize_ip': true});
 
 <p>Everything in this book happens in one place: a <strong>session</strong> with a coding agent, started in a folder on your own computer. This chapter gets you there. It is the least interesting chapter and the one most worth doing carefully, because every later chapter assumes three things are true: the agent is running, you’re signed in, and it is working in the folder you meant it to.</p>
 <p>The morning talk made the case that an agent differs from a chatbot because it acts: it reads your files, writes new ones and runs commands. That is exactly why the folder matters. A chatbot can only see what you paste into it. An agent can see, and change, whatever is in the folder you start it in, and it will ask before reaching further. So the first habit of the day is a small one: <strong>make a folder for the work, start the agent there, and ask it where it is</strong> before asking it to do anything.</p>
-<p>You don’t need to know how to code, and you don’t need a terminal if you use the desktop app. You also don’t need <code>git</code>, R, Python or anything else installed. Later chapters check what you have and work with it. Allow <strong>15–20 minutes</strong>.</p>
+<p>You don’t need to know how to code, and you don’t need a terminal if you use the desktop app. You also don’t need <code>git</code>, R, Python or anything else installed. At the end of this chapter the agent checks what you have and writes it down, and later chapters work with that. Allow <strong>20–25 minutes</strong>.</p>
 <section id="what-youll-learn" class="level2">
 <h2 class="anchored" data-anchor-id="what-youll-learn">What you’ll learn</h2>
 <ul>
 <li>Install and sign in to Claude Code, using the desktop app or the command line, on macOS or Windows.</li>
 <li>Make a workshop folder and start a session in it.</li>
 <li>Read a permission prompt and decide what’s safe to allow.</li>
+<li>Have the agent check your computer is ready, and save the answer in a file.</li>
 <li>Start a new session, and know why you’d want to.</li>
 </ul>
 </section>
@@ -707,6 +709,31 @@ Figure&nbsp;2: Deciding on a permission prompt. When in doubt, say no and ask th
 </div>
 </div>
 </section>
+<section id="setup-readiness" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="setup-readiness">Check your computer is ready</h2>
+<p>Later chapters use tools you may or may not have: Python in <a href="03-teach-your-agent.html" class="quarto-xref"><span>3&nbsp; Teach the agent your project</span></a>, whatever your app needs in <a href="06-build-an-app.html" class="quarto-xref"><span>6&nbsp; Build an app</span></a>, git in <a href="07-work-like-a-project.html" class="quarto-xref"><span>7&nbsp; Work like a project</span></a>. Better to find out now than halfway through the afternoon, especially on a laptop your institution manages, where you may not be allowed to install anything. Have the agent look, with the permission mode still on <strong>Manual</strong> so you see each command before it runs:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Check whether this computer is ready for today's workshop. Only look:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>don't install or change anything except the one file below.</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>Write readiness.md in this folder with a short table:</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>- Operating system and version, and the shell you run commands in</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>- Whether git, Python, R, RStudio and Node are installed, with versions</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  (R and RStudio may be installed but not on the path; look for them)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>- How software could be installed here (winget, Homebrew, neither), and</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  whether it looks like administrator rights would be needed</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>- Whether you can reach the internet: fetch</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  https://github.com/golnazvahedi/epigenetics-agentic-workshop and say if it worked</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>- Anything likely to cause trouble, such as Documents synced to OneDrive</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>End with one line per chapter that needs something (Python for "Teach the</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>agent your project", git for "Work like a project"): ready, or what's</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>missing and the workaround.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This is your first run of real permission prompts. Most of them will be commands like <code>git --version</code> or <code>python3 --version</code>. They only print a version number, so allowing them is safe. If it proposes to install something, say no: that’s not what you asked for.</p>
+<p>Open <code>readiness.md</code> and read the last lines. <strong>Missing tools are fine.</strong> Every chapter has a way to manage without them, and none needs anything installed before it starts. If the agent says it can’t reach the internet, tell Sean or a helper: <a href="05-mcp.html" class="quarto-xref"><span>5&nbsp; Connect to a database (MCP)</span></a> and the example data both need it.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Why write it to a file, and not just ask? Because the agent forgets it the moment the session ends. A file stays, so a later session can read it and doesn’t have to ask again. That idea, that <strong>the agent’s memory is whatever you wrote down</strong>, is what <a href="03-teach-your-agent.html" class="quarto-xref"><span>3&nbsp; Teach the agent your project</span></a> is about.</p>
+</div></div><p>The check is only a report. Installing things, and deciding whether you should, comes later, in the chapter that needs each tool: <a href="06-build-an-app.html" class="quarto-xref"><span>6&nbsp; Build an app</span></a> picks a way to build that needs nothing new, and <a href="07-work-like-a-project.html" class="quarto-xref"><span>7&nbsp; Work like a project</span></a> walks through installing git, or managing without it.</p>
+</section>
 <section id="sessions-when-to-start-a-new-one" class="level2">
 <h2 class="anchored" data-anchor-id="sessions-when-to-start-a-new-one">Sessions: when to start a new one</h2>
 <p>A session is one conversation: its own chat history, its own folder, its own permission mode. The agent remembers everything said earlier in the session, and nothing from other sessions, unless it’s written down in a file (that’s what <a href="03-teach-your-agent.html" class="quarto-xref"><span>3&nbsp; Teach the agent your project</span></a> is about).</p>
@@ -758,6 +785,7 @@ Figure&nbsp;2: Deciding on a permission prompt. When in doubt, say no and ask th
 <li><label><input type="checkbox">Asked “What folder are you in, and what’s in it?”, the agent names your <code>agents-workshop</code> folder.</label></li>
 <li><label><input type="checkbox">You found and opened <code>hello.txt</code> yourself, outside the agent.</label></li>
 <li><label><input type="checkbox">You know where the permission mode is, and have set it to <strong>Manual</strong> or <strong>Accept edits</strong>.</label></li>
+<li><label><input type="checkbox"><code>readiness.md</code> is in your <code>agents-workshop</code> folder, and you’ve read its last lines.</label></li>
 <li><label><input type="checkbox">You can start a new session.</label></li>
 </ul>
 </div>

@@ -111,6 +111,8 @@ Make a new folder called `my-app` inside **Documents/agents-workshop**, next to 
 
 If you did [Chapter 3: Teach the agent your project](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/03-teach-your-agent.llms.md), have the path to that project folder to hand. The agent will ask.
 
+If you did the [readiness check](../chapters/00-setup.llms.md#setup-readiness) in Setup, the answer to Stage 2 is already written down, in `agents-workshop/readiness.md`. When the agent gets to Stage 2, tell it: “Read ../readiness.md first, and only check what it doesn’t cover.” It will ask permission to read outside `my-app`. That’s fine: it’s one file, one folder up.
+
 > **IMPORTANT: Privacy: your data and the agent**
 >
 > The app itself can keep your data on your laptop: a page opened by double-clicking reads files without sending them anywhere. **The conversation doesn’t.** Anything the agent reads, including “the first few lines of the data file”, is sent to the model. The morning’s rule applies: nothing identifiable, no patient data, nothing unpublished you aren’t allowed to share. If in doubt, ask the agent to invent a small example in the same format, and try your real file only in the finished app.

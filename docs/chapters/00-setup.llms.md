@@ -4,13 +4,14 @@ Everything in this book happens in one place: a **session** with a coding agent,
 
 The morning talk made the case that an agent differs from a chatbot because it acts: it reads your files, writes new ones and runs commands. That is exactly why the folder matters. A chatbot can only see what you paste into it. An agent can see, and change, whatever is in the folder you start it in, and it will ask before reaching further. So the first habit of the day is a small one: **make a folder for the work, start the agent there, and ask it where it is** before asking it to do anything.
 
-You don’t need to know how to code, and you don’t need a terminal if you use the desktop app. You also don’t need `git`, R, Python or anything else installed. Later chapters check what you have and work with it. Allow **15–20 minutes**.
+You don’t need to know how to code, and you don’t need a terminal if you use the desktop app. You also don’t need `git`, R, Python or anything else installed. At the end of this chapter the agent checks what you have and writes it down, and later chapters work with that. Allow **20–25 minutes**.
 
 ## What you’ll learn
 
 - Install and sign in to Claude Code, using the desktop app or the command line, on macOS or Windows.
 - Make a workshop folder and start a session in it.
 - Read a permission prompt and decide what’s safe to allow.
+- Have the agent check your computer is ready, and save the answer in a file.
 - Start a new session, and know why you’d want to.
 
 ## The pieces
@@ -205,6 +206,36 @@ and why you need it.
 >
 > Some prompts offer to remember your answer for that kind of command in this folder. That’s handy for something harmless it runs often, such as listing files. Don’t use it for anything that deletes or installs.
 
+## Check your computer is ready
+
+Later chapters use tools you may or may not have: Python in [Chapter 3: Teach the agent your project](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/03-teach-your-agent.llms.md), whatever your app needs in [Chapter 6: Build an app](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/06-build-an-app.llms.md), git in [Chapter 7: Work like a project](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/07-work-like-a-project.llms.md). Better to find out now than halfway through the afternoon, especially on a laptop your institution manages, where you may not be allowed to install anything. Have the agent look, with the permission mode still on **Manual** so you see each command before it runs:
+
+``` default
+Check whether this computer is ready for today's workshop. Only look:
+don't install or change anything except the one file below.
+
+Write readiness.md in this folder with a short table:
+- Operating system and version, and the shell you run commands in
+- Whether git, Python, R, RStudio and Node are installed, with versions
+  (R and RStudio may be installed but not on the path; look for them)
+- How software could be installed here (winget, Homebrew, neither), and
+  whether it looks like administrator rights would be needed
+- Whether you can reach the internet: fetch
+  https://github.com/golnazvahedi/epigenetics-agentic-workshop and say if it worked
+- Anything likely to cause trouble, such as Documents synced to OneDrive
+End with one line per chapter that needs something (Python for "Teach the
+agent your project", git for "Work like a project"): ready, or what's
+missing and the workaround.
+```
+
+This is your first run of real permission prompts. Most of them will be commands like `git --version` or `python3 --version`. They only print a version number, so allowing them is safe. If it proposes to install something, say no: that’s not what you asked for.
+
+Open `readiness.md` and read the last lines. **Missing tools are fine.** Every chapter has a way to manage without them, and none needs anything installed before it starts. If the agent says it can’t reach the internet, tell Sean or a helper: [Chapter 5: Connect to a database (MCP)](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/05-mcp.llms.md) and the example data both need it.
+
+Why write it to a file, and not just ask? Because the agent forgets it the moment the session ends. A file stays, so a later session can read it and doesn’t have to ask again. That idea, that **the agent’s memory is whatever you wrote down**, is what [Chapter 3: Teach the agent your project](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/03-teach-your-agent.llms.md) is about.
+
+The check is only a report. Installing things, and deciding whether you should, comes later, in the chapter that needs each tool: [Chapter 6: Build an app](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/06-build-an-app.llms.md) picks a way to build that needs nothing new, and [Chapter 7: Work like a project](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/07-work-like-a-project.llms.md) walks through installing git, or managing without it.
+
 ## Sessions: when to start a new one
 
 A session is one conversation: its own chat history, its own folder, its own permission mode. The agent remembers everything said earlier in the session, and nothing from other sessions, unless it’s written down in a file (that’s what [Chapter 3: Teach the agent your project](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/03-teach-your-agent.llms.md) is about).
@@ -240,6 +271,8 @@ The fallback data in later chapters is real data shared by the Vahedi lab, from 
 > You found and opened `hello.txt` yourself, outside the agent.
 >
 > You know where the permission mode is, and have set it to **Manual** or **Accept edits**.
+>
+> `readiness.md` is in your `agents-workshop` folder, and you’ve read its last lines.
 >
 > You can start a new session.
 
