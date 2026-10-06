@@ -58,4 +58,5 @@ In the book: [Setup](https://seandavi.github.io/2026-penn-epigen-agentic-worksho
 
 ## License
 
-The book, exercises and examples are released under [CC BY 4.0](LICENSE).
+Copyright (c) 2026 Sean Davis. The book, exercises and examples are released under the
+[Creative Commons Attribution 4.0 International license (CC BY 4.0)](LICENSE).
