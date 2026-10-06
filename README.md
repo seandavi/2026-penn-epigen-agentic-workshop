@@ -55,3 +55,7 @@ while still giving everyone a guaranteed dataset.
 ## Attendee setup
 
 In the book: [Setup](https://seandavi.github.io/2026-penn-epigen-agentic-workshop/chapters/00-setup.html).
+
+## License
+
+The book, exercises and examples are released under [CC BY 4.0](LICENSE).
